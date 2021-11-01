@@ -42,6 +42,7 @@ public class Restaurant {
         for (Table t: tableList){
             if (t.getTableStatus()== Table.Level.FREE){
                 System.out.println(t.getTableNum());
+                
             }
         }
     }
