@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Restaurant { 
@@ -47,6 +48,37 @@ public class Restaurant {
               //smth
             }
         }
+    }
+    public ArrayList<Integer> getAvailableTables(int pax){
+        ArrayList<Integer> availableTables= new ArrayList<Integer>();
+        for (Table t: tableList){
+            if (t.getTableStatus()== Table.Level.FREE && tableList.t()>=pax){
+                availableTables.add(t.getTableNum());
+            }
+        }
+        return availableTables;
+    }
+
+    public ArrayList<Integer> getReservedTables(int pax) {
+        ArrayList<Integer> reservedTables= new ArrayList<Integer>();
+        for (Table t: tableList){
+            if (t.getTableStatus()== Table.Level.RESERVED){
+                reservedTables.add(t.getTableNum());
+            }
+        }
+        return reservedTables;
+
+    }
+
+    public ArrayList<Integer> getOccupiedTables(int pax) {
+        ArrayList<Integer> occupiedTables= new ArrayList<Integer>();
+        for (Table t: tableList){
+            if (t.getTableStatus()== Table.Level.OCCUPIED){
+                occupiedTables.add(t.getTableNum());
+            }
+        }
+        return occupiedTables;
+
     }
 }
 

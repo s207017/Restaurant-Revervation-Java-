@@ -2,6 +2,8 @@ package Restaurant;
 
 import java.util.Scanner;
 
+import javax.crypto.BadPaddingException;
+
 public class Main{
 
     Menu menu = new Menu();
@@ -14,6 +16,7 @@ public class Main{
         //getStaffID asks the user for StaffID input and store it so that once keyed in during initialisation, the
         //waiter does not need to key in again.
         getStaffID();
+        printAppOptions();
         int option = 1;
         while (option < 13){ //TO BE UPDATED AS WHEN AND WHEN NEW SWITCH is added
             switch(option){
@@ -30,7 +33,7 @@ public class Main{
                         opt = sc.nextInt();
                         System.out.println("Input should be either 1, 2 or 3!");
                     }
-                    switch (opt){
+                    switch (opt){ //the 3 functions below need some error handling
                         case 1:
                             createMenuItem();
                             break;
@@ -43,11 +46,13 @@ public class Main{
                         default:
                             break;
                     }
-                    createMenuItem(); //create case
                     break;
+
 
                 case 2: // Create/update/remove set packages
                     clearScreen();
+
+
 
                 case 3:
                     clearScreen();
@@ -113,6 +118,7 @@ public class Main{
     }
 
     public static void createMenuItem() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("What type of menu item is your new menu?");
         printMenuTypes();
         System.out.print("Your input: ");
@@ -169,6 +175,7 @@ public class Main{
                 }
 
                 break;
+
             case 2:
                 constant = 201;
                 menu.printSides();
@@ -203,9 +210,9 @@ public class Main{
                             break;
                     }
                 }
-
-
                 break;
+
+
             case 3:
                 constant = 301;
                 menu.printDrinks();
@@ -284,9 +291,37 @@ public class Main{
     }
 
     public static void removeMenuItem(){
-
+        Scanner sc = new Scanner(System.in);
+        int ID;
+        System.out.println("What type of menu item would you like to remove?");
+        printMenuTypes();
+        System.out.print("Your input: ");
+        int menuType = sc.nextInt();
+        switch(menuType){
+            case 1:
+                menu.printMainCourse();
+                break;
+            case 2:
+                menu.printSide();
+                break;
+            case 3:
+                menu.printDrink();
+                break;
+            case 4:
+                menu.printDesert();
+                break;
+            default:
+                ID = 0; //this possible error should be handled better.
+                break;
+        }
+        System.out.print("What is the menu item ID you would like to delete?");
+        ID = sc.nextInt();
+        menu.removeMenuItem(menuType, ID);
     }
 
+    public static void createSetPackages(){
+
+    }
 
     public static void printChangeTypes(){
         System.out.println("|        1. Price        |");
@@ -302,6 +337,7 @@ public class Main{
         System.out.println("|       4. Desserts       |");
     }
 
+
     public static int getIntegerInput(){
         //this function is to return int after getting a user input using scanner
         //MUST DO exception handling
@@ -313,5 +349,10 @@ public class Main{
     public static int getDoubleInput(){
         //this function is to return double after getting a user input using scanner
         //MUST DO exception handling
+    }
+
+    public static void printAppOptions(){
+        System.out.println("1. Create/Update/Remove menu items from the menu");
+        System.out.println("2. Create/Update/Remove set packages");
     }
 }
