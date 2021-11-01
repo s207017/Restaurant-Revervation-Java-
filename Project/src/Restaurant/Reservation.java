@@ -19,43 +19,15 @@ public class Reservation {
         this.contactNumber = contactNumber;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
+    //The following overloaded methods for changes in reservation details
+    //#######################################################################
+    public void changeReservation(Date date, LocalTime time){
         this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
         this.time = time;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public int getPax() {
-        return pax;
-    }
-
-    public void setPax(int pax) {
-        this.pax = pax;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
+    public void changeReservation(String contactNumber){
         this.contactNumber = contactNumber;
     }
+
 }
