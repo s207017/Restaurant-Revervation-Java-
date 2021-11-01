@@ -13,18 +13,25 @@ public class SalesRevenueReport {
         this.startDate = startDate;
         this.endDate = endDate;
         paymentList = new ArrayList<>();
-        for(Payment p: restaurant.getTransactionHistory){
-            if(p.getTables().get(0).getOrder().getDate().compareTo(startDate) >0 ){
-                
+        for(Payment p: restaurant.getTransactionHistory()){
+            if(p.getTables().get(0).getOrder().getDate().compareTo(startDate) > 0){
+                paymentList.add(p);
+            }
+            if(p.getTables().get(0).getOrder().getDate().compareTo(endDate) > 0){
+                break;
             }
         }
 
     }
-    public void printReport(){
+    public void printReport(Menu menu){
+        System.out.println("Period: " + startDate + " to " + endDate);
+        System.out.println("-".repeat(90));
         for(Payment p: paymentList){
-            System.out.println("Period: " + startDate + " to " + endDate);
-            System.out.println("-".repeat(90));
-            for()
+            for(Table t: p.getTables()){
+                for(OrderItem o: t.getOrder().getOrderItemList()){
+                    for(MenuItem m: menu.)
+                }
+            }
         }
     }
 }

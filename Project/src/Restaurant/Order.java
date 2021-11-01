@@ -110,4 +110,7 @@ public class Order {
     public Date getDate(){
         return date;
     }
+    public ArrayList<OrderItem> getOrderItemList(){
+        return this.orderList;
+    }
 }
