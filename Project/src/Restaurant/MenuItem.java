@@ -9,7 +9,6 @@ public class MenuItem {
         this.itemID = itemID;
         this.price = price;
     }
-
 }
 
 class Drink extends MenuItem {
