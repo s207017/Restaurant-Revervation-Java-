@@ -1,6 +1,5 @@
 package Restaurant;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Restaurant {
@@ -51,15 +50,7 @@ public class Restaurant {
     public void addEntry(Payment payment){
         transactionHistory.add(payment);
     }
-    public void get
-    class TransactionHistory {
-        private ArrayList<Payment> payments;
-        public TransactionHistory(){
-            payments = new ArrayList<>();
-        }
 
-        public void addEntry(Payment payment){
-            payments.add(payment);
-        }
-    }
+
 }
+
