@@ -35,7 +35,7 @@ public class Order {
         return -1;
     }
     public void addOrderItems(Menu menu){
-        menu.printMenu;
+        menu.printMenu();
         Scanner sc = new Scanner(System.in);
         MenuItem temp;
         int choice = 0, quantity = 0;
@@ -50,7 +50,7 @@ public class Order {
             }
             System.out.print("Enter quantity of items to be ordered: ");
             quantity = sc.nextInt();
-            int index = checkItemExistence(choice,menu)
+            int index = checkItemExistence(choice,menu);
             if(index < 0) {//Item does not exist in order yet; create new orderitem
                 orderList.add(new OrderItem(temp, quantity));
             }else{//Item already exists in order; update the quantity
@@ -60,7 +60,7 @@ public class Order {
         }
     }
     public void removeOrderItems(Menu menu){
-        menu.printMenu;
+        menu.printMenu();
         MenuItem temp;
         Scanner sc = new Scanner(System.in);
         int choice = 0,quantity = 0;

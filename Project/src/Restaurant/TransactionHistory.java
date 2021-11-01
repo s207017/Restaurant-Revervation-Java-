@@ -11,4 +11,7 @@ public class TransactionHistory {
     public void addEntry(Payment payment){
         payments.add(payment);
     }
+    public ArrayList<Payment> getArrayList(){
+        return this.payments;
+    }
 }
