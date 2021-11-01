@@ -17,5 +17,8 @@ public class Order {
         this.tableNum = tableNum;
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     }
+    public double getTotal(){
+        return this.total;
+    }
 
 }
