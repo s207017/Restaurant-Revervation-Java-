@@ -20,7 +20,11 @@ public class Main{
                 case 1: // Create/update/remove menu item
                     clearScreen();
                     createUpdateRemoveMenuItem();
+<<<<<<< Updated upstream
                     break;
+=======
+
+>>>>>>> Stashed changes
 
                 case 2: // Create/update/remove set packages
                     clearScreen();
@@ -59,6 +63,7 @@ public class Main{
                 case 11:
                     clearScreen();
 
+<<<<<<< Updated upstream
 
                 case 12:
                     clearScreen();
@@ -69,6 +74,18 @@ public class Main{
 
         }
 
+=======
+
+                case 12:
+                    clearScreen();
+
+
+                default:
+            }
+
+        }
+
+>>>>>>> Stashed changes
 
     }
 
@@ -104,7 +121,14 @@ public class Main{
         switch(option){
             case 1:
                 System.out.println("What type of menu item is your new menu?");
+<<<<<<< Updated upstream
                 printMenuTypes();
+=======
+                System.out.println("|     1. Main Course     ");
+                System.out.println("|        2. Sides        ");
+                System.out.println("|        3. Drinks       ");
+                System.out.println("|       4. Desserts      ");
+>>>>>>> Stashed changes
                 System.out.print("Your input: ");
                 int menuTypeInt = sc.nextInt();
                 System.out.print("Enter the name of the new menu item: ");
@@ -113,6 +137,7 @@ public class Main{
                 double price = sc.nextDouble();
                 System.out.println("Enter the description of the new menu item in one line: ");
                 String desc = sc.nextLine();
+<<<<<<< Updated upstream
                 menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
 
                 break;
@@ -196,6 +221,13 @@ public class Main{
 
 
 
+=======
+                menu.createNewMenuItem(menuName, menuTypeInt, price, desc);ß
+
+
+
+            case 2:
+>>>>>>> Stashed changes
 
             case 3:
 
@@ -203,6 +235,7 @@ public class Main{
         }
 
     }
+<<<<<<< Updated upstream
 
     public static void printChangeTypes(){
         System.out.println("|        1. Price        |");
@@ -218,6 +251,8 @@ public class Main{
         System.out.println("|       4. Desserts       |");
     }
 
+=======
+>>>>>>> Stashed changes
     public static int getIntegerInput(){
         //this function is to return int after getting a user input using scanner
         //MUST DO exception handling
