@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 
 
@@ -23,15 +24,11 @@ public class Payment {
         this.tax = this.subtotal * 1.177;
         return this.tax;
     }
-    public abstract void makePayment();
-}
-
-public class CashPayment extends Payment{
-
 }
 
 class CashPayment extends Payment {
-    private double cashPaid;
+    private double cashPaid = 0;
+    Scanner sc = new Scanner(System.in);
 
     public void setCashPaid(double cashPaid) {
         this.cashPaid = cashPaid;
@@ -46,7 +43,17 @@ class CashPayment extends Payment {
     }
 
     public void makePayment() {
-        System.out.println("Payment by cash \nTotal:")
+        System.out.println("Payment by cash \nTotal: " + this.total);
+        while (cashPaid < this.total){
+            System.out.println("Cash received: ");
+            cashPaid += sc.nextDouble();
+            if (cashPaid < this.total){
+                System.out.println("")
+            }
+        }
+
+
+
     }
 }
 
