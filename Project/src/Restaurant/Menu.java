@@ -266,7 +266,7 @@ public class Menu {
                 toUpdateID = menuItemID-501; //the item after the item that was removed
                 for(int i=toUpdateID;i< setPackageItems.size();i++){
                     setPackageItems.get(i).setItemID(501+i);
-                }   
+                }     
                 break;
         }
     }
