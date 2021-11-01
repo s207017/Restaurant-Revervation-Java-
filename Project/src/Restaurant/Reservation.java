@@ -3,6 +3,7 @@ package Restaurant;
 import java.time.*;
 import java.util.Date;
 import java.time.*;
+import java.util.Scanner;
 
 public class Reservation {
     private Date date;
@@ -18,7 +19,6 @@ public class Reservation {
         this.pax = pax;
         this.contactNumber = contactNumber;
     }
-
 
     //setter for customerName is not included because there won't be an instance where the customer will change his name.
 
@@ -57,5 +57,9 @@ public class Reservation {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public void printReservationDetails(){
+        System.out.println(this.getCustomerName() + " " + this.getContactNumber() + " " + this.getPax() + " " + this.getDate() + " " + this.getTime());
     }
 }

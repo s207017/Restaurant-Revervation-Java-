@@ -6,6 +6,7 @@ public class Restaurant {
     private ArrayList<Table> tableList = new ArrayList<Table>();
     private ArrayList<Payment> transactionHistory = new ArrayList<Payment>();
 
+
     public Restaurant(){
         tableList.add(new Table(1,2,0));
         tableList.add(new Table(2,2,0));
@@ -39,16 +40,16 @@ public class Restaurant {
 
     //prints the available tables
     public void getAvailableTables(){
-        for (Table t: tableList){
-            if (t.getTableStatus()== Table.Level.FREE){
-                System.out.println(t.getTableNum());
-                
+        for (Table table: tables){
+            if (table.getTableStatus()== Table.Level.FREE){
+              //smth
             }
         }
     }
-
-
-
+    private ArrayList<Payment> transactionHistory = new ArrayList<Payment>();
+    public void addEntry(Payment payment){
+        transactionHistory.add(payment);
+    }
 
 
 }
