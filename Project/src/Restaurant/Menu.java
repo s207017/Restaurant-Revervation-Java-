@@ -230,5 +230,44 @@ public class Menu {
 
     //updating of menuItems done directly in the application!
 
-
+    public void removeMenuItem(int menuItemType, int menuItemID){
+        int toUpdateID;
+        switch(menuItemType){
+            case 1:
+                mainCourseItems.remove(menuItemID-101);
+                toUpdateID = menuItemID-101; //the item after the item that was removed
+                for(int i=toUpdateID;i< mainCourseItems.size();i++){
+                    mainCourseItems.get(i).setItemID(100+i-1);
+                }
+                break;
+            case 2:
+                sideItems.remove(menuItemID-201);
+                toUpdateID = menuItemID-201; //the item after the item that was removed
+                for(int i=toUpdateID;i< sideItems.size();i++){
+                    sideItems.get(i).setItemID(200+i-1);
+                }
+                break;
+            case 3:
+                drinkItems.remove(menuItemID-301);
+                toUpdateID = menuItemID-301; //the item after the item that was removed
+                for(int i=toUpdateID;i< drinkItems.size();i++){
+                    drinkItems.get(i).setItemID(300+i-1);
+                }
+                break;
+            case 4:
+                dessertItems.remove(menuItemID-401);
+                toUpdateID = menuItemID-401; //the item after the item that was removed
+                for(int i=toUpdateID;i< dessertItems.size();i++){
+                    dessertItems.get(i).setItemID(400+i-1);
+                }
+                break;
+            case 5:
+                setPackageItems.remove(menuItemID-501);
+                toUpdateID = menuItemID-501; //the item after the item that was removed
+                for(int i=toUpdateID;i< setPackageItems.size();i++){
+                    setPackageItems.get(i).setItemID(500+i-1);
+                }
+                break;
+        }
+    }
 }

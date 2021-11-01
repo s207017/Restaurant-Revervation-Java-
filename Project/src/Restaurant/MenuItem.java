@@ -13,13 +13,19 @@ public class MenuItem {
         this.price = price;
         this.description = description;
     }
-
+    public void setItemID(int ID){
+        this.itemID = ID;
+    }
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getPrice() {
