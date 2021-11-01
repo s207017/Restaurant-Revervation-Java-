@@ -116,7 +116,7 @@ public class Main{
                 double price = sc.nextDouble();
                 System.out.println("Enter the description of the new menu item in one line: ");
                 String desc = sc.nextLine();
-                menu.createNewMenuItem(menuName, menuTypeInt, price, desc);ß
+                menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
 
 
 
