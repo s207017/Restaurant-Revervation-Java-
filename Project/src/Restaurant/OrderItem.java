@@ -11,6 +11,9 @@ public class OrderItem {
         this.quantityOrdered = quantityOrdered;
     }
 
+    public MenuItem getItem() {
+        return item;
+    }
 
     public int getQuantityOrdered(){
         return quantityOrdered;
