@@ -9,6 +9,7 @@ public class Order {
     private int tableNum;
     //orderItems
     private Timestamp timestamp;
+    private double total;
 
     public Order(int orderID, int staffID, int tableNum) {
         this.orderID = orderID;
