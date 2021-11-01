@@ -114,6 +114,7 @@ public class Main{
                 System.out.println("Enter the description of the new menu item in one line: ");
                 String desc = sc.nextLine();
                 menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
+
                 break;
 
             case 2:
