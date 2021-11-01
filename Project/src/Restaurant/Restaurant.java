@@ -34,4 +34,16 @@ public class Restaurant {
             }
         }
     }
+
+    public void getReservations(){
+        for (Table table: tables) {
+            if (table.getReservations() != null){
+                System.out.println(table.getTableNum());
+                for (Reservation res: table.getReservations()){
+                    res.printReservationDetails();
+                }
+              
+            }
+        }
+    }
 }
