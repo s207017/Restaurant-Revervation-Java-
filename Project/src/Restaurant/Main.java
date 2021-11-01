@@ -20,7 +20,7 @@ public class Main{
                 case 1: // Create/update/remove menu item
                     clearScreen();
                     createUpdateRemoveMenuItem();
-
+                    break;
 
                 case 2: // Create/update/remove set packages
                     clearScreen();
@@ -104,10 +104,7 @@ public class Main{
         switch(option){
             case 1:
                 System.out.println("What type of menu item is your new menu?");
-                System.out.println("|     1. Main Course     ");
-                System.out.println("|        2. Sides        ");
-                System.out.println("|        3. Drinks       ");
-                System.out.println("|       4. Desserts      ");
+                printMenuTypes();
                 System.out.print("Your input: ");
                 int menuTypeInt = sc.nextInt();
                 System.out.print("Enter the name of the new menu item: ");
@@ -118,9 +115,87 @@ public class Main{
                 String desc = sc.nextLine();
                 menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
 
-
+                break;
 
             case 2:
+                System.out.println("What type of menu item would you like to update?");
+                printMenuTypes();
+                int option1 = sc.nextInt();
+                switch(option1) {
+                    case 1:
+                        menu.printMainCourse();
+                        break;
+                    case 2:
+                        menu.printSides();
+                        break;
+                    case 3:
+                        menu.printDrinks();
+                        break;
+                    case 4:
+                        menu.printDesserts();
+                        break;
+                    default:
+                        break;
+                }
+                System.out.println("Enter the menu ID which you want to modify: ");
+                int ID = sc.nextInt();
+                int constant = 0;
+                switch(option1){
+                    case 1:
+                        constant = 101;
+                        break;
+                    case 2:
+                        constant = 201;
+                        break;
+                    case 3:
+                        constant = 301;
+                        break;
+                    case 4:
+                        constant = 401;
+                        break;
+                    default:
+                        break;
+                }
+                int option2 = 1;
+                while (option2 != 4){
+                    System.out.println("What do you want to change?");
+                    printChangeTypes();
+                        System.out.println("Enter your option: ");
+                        option2 = sc.nextInt();
+                        switch(option2){
+                            case 1:
+                                System.out.println("What is the new price?");
+                                double newPrice = sc.nextDouble();
+                                (menu.mainCourseItems.get(ID-101)).setprice(newPrice);
+                                break;
+                            case 2:
+                                System.out.println("What is the new name?");
+                                String newName = sc.nextLine();
+                                (menu.mainCourseItems.get(ID-101)).setItemName(newName);
+                                break;
+                            case 3:
+                                System.out.println("What is the new description?");
+                                String newDesc = sc.nextLine();
+                                (menu.mainCourseItems.get(ID-101)).setDescription(newDesc);
+                                break;
+                            case 4:
+                                option2 = 4;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                    case 2: //201
+
+                        break;
+                    case 3: //301
+                        menu.printDrinks();
+                    case 4: //401
+                        menu.printDesserts();
+
+
+
 
             case 3:
 
@@ -128,6 +203,21 @@ public class Main{
         }
 
     }
+
+    public static void printChangeTypes(){
+        System.out.println("|        1. Price        |");
+        System.out.println("|        2. Name         |");
+        System.out.println("|     3. Description     |");
+        System.out.println("|        4. Quit         |");
+    }
+
+    public static void printMenuTypes(){
+        System.out.println("|     1. Main Course      |");
+        System.out.println("|        2. Sides         |");
+        System.out.println("|        3. Drinks        |");
+        System.out.println("|       4. Desserts       |");
+    }
+
     public static int getIntegerInput(){
         //this function is to return int after getting a user input using scanner
         //MUST DO exception handling
