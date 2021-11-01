@@ -22,9 +22,6 @@ public class Reservation {
 
     //setter for customerName is not included because there won't be an instance where the customer will change his name.
 
-    public String getCustomerName() {
-        return customerName;
-    }
 
     public Date getDate() {
         return date;
@@ -42,6 +39,10 @@ public class Reservation {
         this.time = time;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
     public int getPax() {
         return pax;
     }
@@ -56,5 +57,9 @@ public class Reservation {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public void printReservationDetails(){
+        System.out.println(this.getCustomerName() + " " + this.getContactNumber() + " " + this.getPax() + " " + this.getDate() + " " + this.getTime());
     }
 }
