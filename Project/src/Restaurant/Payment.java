@@ -93,7 +93,7 @@ class CashPayment extends Payment {
                         case "Y":
                         case "y":
                             System.out.print("Enter customer's mobile number");
-                            membership.addMember(sc.next());
+                            membership.addMember(new Member(sc.next()));
                             this.applyDiscount();
                             System.out.println("Customer is now a member, discount applied");
                             break;
@@ -110,7 +110,7 @@ class CashPayment extends Payment {
                     case "Y":
                     case "y":
                         System.out.print("Enter customer's mobile number");
-                        membership.addMember(sc.next());
+                        membership.addMember(new Member(sc.next()));
                         this.applyDiscount();
                         System.out.println("Customer is now a member, discount applied");
                         break;
@@ -155,7 +155,7 @@ class CardPayment extends Payment{
                         case "Y":
                         case "y":
                             System.out.print("Enter customer's mobile number");
-                            membership.addMember(sc.next());
+                            membership.addMember(new Member(sc.next()));
                             this.applyDiscount();
                             System.out.println("Customer is now a member, discount applied");
                             break;
@@ -172,7 +172,7 @@ class CardPayment extends Payment{
                     case "Y":
                     case "y":
                         System.out.print("Enter customer's mobile number");
-                        membership.addMember(sc.next());
+                        membership.addMember(new Member(sc.next()));
                         this.applyDiscount();
                         System.out.println("Customer is now a member, discount applied");
                         break;
