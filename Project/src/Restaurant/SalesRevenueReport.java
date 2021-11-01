@@ -20,4 +20,11 @@ public class SalesRevenueReport {
         }
 
     }
+    public void printReport(){
+        for(Payment p: paymentList){
+            System.out.println("Period: " + startDate + " to " + endDate);
+            System.out.println("-".repeat(90));
+            for()
+        }
+    }
 }
