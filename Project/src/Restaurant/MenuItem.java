@@ -2,13 +2,15 @@ package Restaurant;
 import java.util.ArrayList;
 
 public class MenuItem {
-    private String itemName;
     private int itemID;
+    private String itemName;
     private double price;
-    public MenuItem(String itemName,int itemID, double price){
-        this.itemName = itemName;
+    private String description;
+    public MenuItem(String itemName,int itemID, double price,String description){
         this.itemID = itemID;
+        this.itemName = itemName;
         this.price = price;
+        this.description = description;
     }
 
     public void setItemName(String itemName) {
@@ -34,12 +36,13 @@ public class MenuItem {
 }
 
 class Drink extends MenuItem {
-    public Drink(String itemName,int itemID, double price){
-        super(itemName,itemID,price);
+    public Drink(String itemName,int itemID, double price,String description){
+        super(itemName,itemID,price,description);
     }
 }
 
 class SetPackage extends MenuItem {
+<<<<<<< Updated upstream
     ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
     int numMainCourse = 1;
     int numDrink = 1;
@@ -81,26 +84,27 @@ class SetPackage extends MenuItem {
         }else{
             System.out.println("Error, reached maximum number of side(s).");
         }
+=======
+    public SetPackage(String itemName,int itemID, double price,String description){
+        super(itemName,itemID,price,description);
+>>>>>>> Stashed changes
     }
 }
 
 class MainCourse extends MenuItem {
-    public MainCourse(String itemName,int itemID, double price){
-        super(itemName,itemID,price);
+    public MainCourse(String itemName,int itemID, double price,String description){
+        super(itemName,itemID,price,description);
     }
 }
 
 class Side extends MenuItem {
-    public Side(String itemName,int itemID, double price){
-        super(itemName,itemID,price);
+    public Side(String itemName,int itemID, double price,String description){
+        super(itemName,itemID,price,description);
     }
 }
 
 class Desert extends MenuItem {
-    public Desert(String itemName,int itemID, double price){
-        super(itemName,itemID,price);
+    public Desert(String itemName,int itemID, double price,String description){
+        super(itemName,itemID,price,description);
     }
 }
-// - Pizza          8.00
-// - Set A:         15.00
-//   - Green Tea    0.00
