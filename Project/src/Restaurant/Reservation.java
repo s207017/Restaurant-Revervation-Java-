@@ -58,4 +58,8 @@ public class Reservation {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
+
+    public void printReservationDetails(){
+        System.out.println(this.getCustomerName() + " " + this.getContactNumber() + " " + this.getPax() + " " + this.getDate() + " " + this.getTime());
+    }
 }
