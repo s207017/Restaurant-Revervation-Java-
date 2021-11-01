@@ -55,6 +55,10 @@ class CashPayment extends Payment {
     private double cashPaid = 0;
     Scanner sc = new Scanner(System.in);
 
+    public CashPayment(Membership membership) {
+        super(membership);
+    }
+
     public void setCashPaid(double cashPaid) {
         this.cashPaid = cashPaid;
     }
@@ -124,6 +128,10 @@ class CashPayment extends Payment {
 
 class CardPayment extends Payment{
     Scanner sc = new Scanner(System.in);
+
+    public CardPayment(Membership membership) {
+        super(membership);
+    }
 
     public void makePayment() {
         // System.out.print("Select table(s): "); should be done in the app class -> insert table to arraylist //
