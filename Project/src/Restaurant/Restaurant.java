@@ -6,6 +6,18 @@ public class Restaurant {
     private int numTable;
     private ArrayList<Table> tables = new ArrayList<Table>();
 
+
+    public Restaurant(){
+        tables.add(new Table(1,2,0));
+        tables.add(new Table(2,2,0));
+        tables.add(new Table(3,4,0));
+        tables.add(new Table(4,4,0));
+        tables.add(new Table(5,4,0));
+        tables.add(new Table(6,6,0));
+        tables.add(new Table(7,8,0));
+        tables.add(new Table(7,10,0));
+    }
+
     public void setNumTable(int numTable) {
         this.numTable = numTable;
     }
@@ -30,19 +42,15 @@ public class Restaurant {
     public void getAvailableTables(){
         for (Table table: tables){
             if (table.getTableStatus()== Table.Level.FREE){
-                System.out.println(table.getTableNum() + ": " + table.getTableCap());
+              //smth
             }
         }
+    }
+    private ArrayList<Payment> transactionHistory = new ArrayList<Payment>();
+    public void addEntry(Payment payment){
+        transactionHistory.add(payment);
     }
 
-    public void getReservations(){
-        for (Table table: tables) {
-            if (table.getReservations() != null){
-                System.out.println(table.getTableNum());
-                for (Reservation res: table.getReservations()){
-                    res.printReservationDetails();
-                }
-            }
-        }
-    }
+
 }
+
