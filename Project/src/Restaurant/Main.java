@@ -117,6 +117,7 @@ public class Main{
     }
 
     public static void createMenuItem() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("What type of menu item is your new menu?");
         printMenuTypes();
         System.out.print("Your input: ");
