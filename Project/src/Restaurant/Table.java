@@ -32,7 +32,7 @@ public class Table {
         return tableStatus;
     }
 
-    //reserve table
+    //reserve table: waiter keys in the table number and the pax
     public void reserveTable(int pax){
         if(pax<=tableCap){
             this.pax = pax;
