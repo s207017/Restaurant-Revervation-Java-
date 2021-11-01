@@ -201,25 +201,25 @@ public class Menu {
                 break;
             case 2: //side
                 for (Side m: sideItems){
-                    ID=m.getItemID()
+                    ID=m.getItemID();
                 }
                 Side side = new Side(name, ID+1, price, description);
                 break;
             case 3:
                 for (Drink m: drinkItems){
-                    ID=m.getItemID()
+                    ID=m.getItemID();
                 }
                 Drink drink = new Drink(name, ID+1, price, description);
                 break;
             case 4:
                 for (Desert m: dessertItems){
-                    ID=m.getItemID()
+                    ID=m.getItemID();
                 }
                 Desert desert = new Desert(name, ID+1, price, description);
                 break;
             case 5:
                 for (SetPackage m: setPackageItems){
-                    ID=m.getItemID()
+                    ID=m.getItemID();
                 }
                 SetPackage setPackage = new SetPackage(name, ID+1, price, description);
                 break;
@@ -237,36 +237,36 @@ public class Menu {
                 mainCourseItems.remove(menuItemID-101);
                 toUpdateID = menuItemID-101; //the item after the item that was removed
                 for(int i=toUpdateID;i< mainCourseItems.size();i++){
-                    mainCourseItems.get(i).setItemID(100+i-1);
+                    mainCourseItems.get(i).setItemID(101+i);
                 }
                 break;
             case 2:
                 sideItems.remove(menuItemID-201);
                 toUpdateID = menuItemID-201; //the item after the item that was removed
                 for(int i=toUpdateID;i< sideItems.size();i++){
-                    sideItems.get(i).setItemID(200+i-1);
+                    sideItems.get(i).setItemID(201+i);
                 }
                 break;
             case 3:
                 drinkItems.remove(menuItemID-301);
                 toUpdateID = menuItemID-301; //the item after the item that was removed
                 for(int i=toUpdateID;i< drinkItems.size();i++){
-                    drinkItems.get(i).setItemID(300+i-1);
+                    drinkItems.get(i).setItemID(301+i);
                 }
                 break;
             case 4:
                 dessertItems.remove(menuItemID-401);
                 toUpdateID = menuItemID-401; //the item after the item that was removed
                 for(int i=toUpdateID;i< dessertItems.size();i++){
-                    dessertItems.get(i).setItemID(400+i-1);
+                    dessertItems.get(i).setItemID(401+i);
                 }
                 break;
             case 5:
                 setPackageItems.remove(menuItemID-501);
                 toUpdateID = menuItemID-501; //the item after the item that was removed
                 for(int i=toUpdateID;i< setPackageItems.size();i++){
-                    setPackageItems.get(i).setItemID(500+i-1);
-                }
+                    setPackageItems.get(i).setItemID(501+i);
+                }     
                 break;
         }
     }
