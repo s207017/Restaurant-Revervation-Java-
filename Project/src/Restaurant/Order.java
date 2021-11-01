@@ -107,5 +107,7 @@ public class Order {
     public int getTableNum(){
         return this.tableNum;
     }
-
+    public Date getDate(){
+        return date;
+    }
 }
