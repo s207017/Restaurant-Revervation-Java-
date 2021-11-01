@@ -19,9 +19,18 @@ public class Reservation {
         this.contactNumber = contactNumber;
     }
 
-    //The following overloaded methods for changes in reservation details
-    //#######################################################################
-    public void changeReservation(Date date){
+
+    //setter for customerName is not included because there won't be an instance where the customer will change his name.
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -29,11 +38,19 @@ public class Reservation {
         this.time = time;
     }
 
-    public void changeReservation(String customerName){
-        this.customerName = customerName;
+    public int getPax() {
+        return pax;
     }
 
-    public void changeReservation(String contactNumber){
+    public void setPax(int pax) {
+        this.pax = pax;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 }
