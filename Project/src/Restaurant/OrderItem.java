@@ -11,6 +11,7 @@ public class OrderItem {
         this.quantityOrdered = quantityOrdered;
     }
 
+
     public MenuItem getItem() {
         return item;
     }
@@ -32,9 +33,12 @@ public class OrderItem {
     }
 
     //adds quantity of orders added to quantityOrdered
-    public void setQuantityOrdered(int qty){
+    public void addQuantityOrdered(int qty){
         this.quantityOrdered=this.quantityOrdered+qty;
     }
+
+    //subtracts quantity of orders for this order item
+    public void subtractQuantityOrdered(int qty) {this.quantityOrdered = this.quantityOrdered - qty;}
 
     //adds quantity of orders completed to quantityCompleted
     public void setQuantityCompleted(int qty){

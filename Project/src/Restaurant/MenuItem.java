@@ -1,4 +1,5 @@
 package Restaurant;
+package attempt;
 import java.util.ArrayList;
 
 public class MenuItem {
@@ -12,13 +13,19 @@ public class MenuItem {
         this.price = price;
         this.description = description;
     }
-
+    public void setItemID(int ID){
+        this.itemID = ID;
+    }
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getPrice() {
@@ -33,22 +40,25 @@ public class MenuItem {
         return itemID;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
 }
 
 class Drink extends MenuItem {
-    public Drink(String itemName,int itemID, double price,String description){
+    public Drink(String itemName,int itemID, double price, String description){
         super(itemName,itemID,price,description);
     }
 }
 
 class SetPackage extends MenuItem {
-<<<<<<< Updated upstream
     ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
     int numMainCourse = 1;
     int numDrink = 1;
     int numSide = 1;
-    public SetPackage(String itemName,int itemID, double price/*, int numMainCourse, int numDrink, int numSide*/){
-        super(itemName,itemID,price);
+    public SetPackage(String itemName,int itemID, double price, String description/*, int numMainCourse, int numDrink, int numSide*/){
+        super(itemName,itemID,price, description);
 //        this.numMainCourse = numMainCourse;
 //        this.numDrink = numDrink;
 //        this.numSide = numSide;
@@ -77,17 +87,13 @@ class SetPackage extends MenuItem {
         }
     }
 
-    public void addSide(Side side){
-        if (numDrink >0) {
+    public void addSide(Side side) {
+        if (numDrink > 0) {
             setItems.add(side);
             numSide--;
-        }else{
+        } else {
             System.out.println("Error, reached maximum number of side(s).");
         }
-=======
-    public SetPackage(String itemName,int itemID, double price,String description){
-        super(itemName,itemID,price,description);
->>>>>>> Stashed changes
     }
 }
 
