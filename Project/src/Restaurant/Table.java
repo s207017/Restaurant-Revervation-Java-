@@ -20,18 +20,19 @@ public class Table {
         this.pax = pax;
         this.tableStatus = Level.FREE;
     }
+
+    //getters
     public int getTableNum(){
         return tableNum;
     }
-
     public int getTableCap(){
         return tableCap;
     }
-
     public Level getTableStatus(){
         return tableStatus;
     }
 
+    //reserve table
     public void reserveTable(int pax){
         if(pax<=tableCap){
             this.pax = pax;
@@ -39,7 +40,8 @@ public class Table {
         }
     }
 
-    public void occupyTable(int pax){
+    //occupy table
+    public void occupyTable(){
         if(pax<=tableCap){
             this.pax = pax;
             this.tableStatus = Level.OCCUPIED;
