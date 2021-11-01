@@ -11,9 +11,11 @@ public class OrderItem {
         this.quantityOrdered = quantityOrdered;
     }
 
-    public MenuItem getMenuItem(){
-        return this.item;
+
+    public MenuItem getItem() {
+        return item;
     }
+
     public int getQuantityOrdered(){
         return quantityOrdered;
     }

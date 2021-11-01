@@ -21,7 +21,7 @@ public class Receipt {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date(); // to get current date and time
-        
+
         // Print address?
         // System.out.println("Server: " +) STAFFID
         System.out.println(String.format("Date/Time: " + dateFormat.format(date)));
@@ -40,7 +40,7 @@ public class Receipt {
 
         for (Table table: this.payment.getTables()) {
             for (OrderItem o: table.getOrder().getOrderList()){
-                System.out.printf("%2d %35s $%-10f\n", o.getQuantityOrdered(),o.getMenuItem().getItemName(),o.getQuantityOrdered()*o.getMenuItem().getPrice());
+                System.out.printf("%2d %35s $%-10f\n", o.getQuantityOrdered(),o.getItem().getItemName(),o.getQuantityOrdered()*o.getMenuItem().getPrice());
             }
         }
 
