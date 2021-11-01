@@ -2,7 +2,7 @@ package Restaurant;
 
 import java.util.ArrayList;
 
-public class Restaurant {
+public class Restaurant { 
     private ArrayList<Table> tableList = new ArrayList<Table>();
     private ArrayList<Payment> transactionHistory = new ArrayList<Payment>();
 
