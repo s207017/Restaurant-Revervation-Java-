@@ -19,7 +19,31 @@ public class Main{
             switch(option){
                 case 1: // Create/update/remove menu item
                     clearScreen();
-                    createUpdateRemoveMenuItem();
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("What would you like to do? ");
+                    System.out.println("|     1. Create menu item     |");
+                    System.out.println("|     2. Update menu item     |");
+                    System.out.println("|     3. Remove menu item     |");
+                    System.out.print("Your option: ");
+                    int opt = sc.nextInt();
+                    while (opt < 1 && opt > 3) {
+                        opt = sc.nextInt();
+                        System.out.println("Input should be either 1, 2 or 3!");
+                    }
+                    switch (opt){
+                        case 1:
+                            createMenuItem();
+                            break;
+                        case 2:
+                            updateMenuItem();
+                            break;
+                        case 3:
+                            removeMenuItem();
+                            break;
+                        default:
+                            break;
+                    }
+                    createMenuItem(); //create case
                     break;
 
                 case 2: // Create/update/remove set packages
@@ -86,123 +110,183 @@ public class Main{
         //if employee class added, pls update this part
         String staffId = scanner.next();
         return staffId;
-
     }
 
-    public static void createUpdateRemoveMenuItem(){
+    public static void createMenuItem() {
+        System.out.println("What type of menu item is your new menu?");
+        printMenuTypes();
+        System.out.print("Your input: ");
+        int menuTypeInt = sc.nextInt();
+        System.out.print("Enter the name of the new menu item: ");
+        String menuName = sc.next();
+        System.out.print("Enter the price of the new menu item: ");
+        double price = sc.nextDouble();
+        System.out.println("Enter the description of the new menu item in one line: ");
+        String desc = sc.nextLine();
+        menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
+    }
+
+    public static void updateMenuItem(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("What would you like to do? ");
-        System.out.println("|     1. Create menu item     |");
-        System.out.println("|     2. Update menu item     |");
-        System.out.println("|     3. Remove menu item     |");
-        System.out.print("Your option: ");
-        int option = sc.nextInt();
-        while (option < 1 && option > 3){
-            option = sc.nextInt();
-            System.out.println("Input should be either 1, 2 or 3!");
-        }
-        switch(option){
+        int constant, ID, changeOption, opt;
+        System.out.println("What type of menu item would you like to update?");
+        printMenuTypes();
+        int menuType = sc.nextInt();
+        switch(menuType){
             case 1:
-                System.out.println("What type of menu item is your new menu?");
-                printMenuTypes();
-                System.out.print("Your input: ");
-                int menuTypeInt = sc.nextInt();
-                System.out.print("Enter the name of the new menu item: ");
-                String menuName = sc.next();
-                System.out.print("Enter the price of the new menu item: ");
-                double price = sc.nextDouble();
-                System.out.println("Enter the description of the new menu item in one line: ");
-                String desc = sc.nextLine();
-                menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
-
-                break;
-
-            case 2:
-                System.out.println("What type of menu item would you like to update?");
-                printMenuTypes();
-                int option1 = sc.nextInt();
-                switch(option1) {
-                    case 1:
-                        menu.printMainCourse();
-                        break;
-                    case 2:
-                        menu.printSides();
-                        break;
-                    case 3:
-                        menu.printDrinks();
-                        break;
-                    case 4:
-                        menu.printDesserts();
-                        break;
-                    default:
-                        break;
-                }
+                constant = 101;
+                menu.printMainCourse();
                 System.out.println("Enter the menu ID which you want to modify: ");
-                int ID = sc.nextInt();
-                int constant = 0;
-                switch(option1){
-                    case 1:
-                        constant = 101;
-                        break;
-                    case 2:
-                        constant = 201;
-                        break;
-                    case 3:
-                        constant = 301;
-                        break;
-                    case 4:
-                        constant = 401;
-                        break;
-                    default:
-                        break;
-                }
-                int option2 = 1;
-                while (option2 != 4){
+                ID = sc.nextInt();
+                opt = 1;
+                while (opt != 4) {
                     System.out.println("What do you want to change?");
                     printChangeTypes();
-                        System.out.println("Enter your option: ");
-                        option2 = sc.nextInt();
-                        switch(option2){
-                            case 1:
-                                System.out.println("What is the new price?");
-                                double newPrice = sc.nextDouble();
-                                (menu.mainCourseItems.get(ID-101)).setprice(newPrice);
-                                break;
-                            case 2:
-                                System.out.println("What is the new name?");
-                                String newName = sc.nextLine();
-                                (menu.mainCourseItems.get(ID-101)).setItemName(newName);
-                                break;
-                            case 3:
-                                System.out.println("What is the new description?");
-                                String newDesc = sc.nextLine();
-                                (menu.mainCourseItems.get(ID-101)).setDescription(newDesc);
-                                break;
-                            case 4:
-                                option2 = 4;
-                                break;
-                            default:
-                                break;
-                        }
+                    System.out.println("Enter your option: ");
+                    changeOption = sc.nextInt();
+                    switch (changeOption) {
+                        case 1:
+                            System.out.println("What is the new price?");
+                            double newPrice = sc.nextDouble();
+                            (menu.mainCourseItems.get(ID - constant)).setprice(newPrice);
+                            break;
+                        case 2:
+                            System.out.println("What is the new name?");
+                            String newName = sc.nextLine();
+                            (menu.mainCourseItems.get(ID - constant)).setItemName(newName);
+                            break;
+                        case 3:
+                            System.out.println("What is the new description?");
+                            String newDesc = sc.nextLine();
+                            (menu.mainCourseItems.get(ID - constant)).setDescription(newDesc);
+                            break;
+                        case 4:
+                            opt = 4;
+                            break;
+                        default:
+                            break;
                     }
-                    break;
-                    case 2: //201
+                }
 
-                        break;
-                    case 3: //301
-                        menu.printDrinks();
-                    case 4: //401
-                        menu.printDesserts();
+                break;
+            case 2:
+                constant = 201;
+                menu.printSides();
+                System.out.println("Enter the menu ID which you want to modify: ");
+                ID = sc.nextInt();
+                opt = 1;
+                while (opt != 4) {
+                    System.out.println("What do you want to change?");
+                    printChangeTypes();
+                    System.out.println("Enter your option: ");
+                    changeOption = sc.nextInt();
+                    switch (changeOption) {
+                        case 1:
+                            System.out.println("What is the new price?");
+                            double newPrice = sc.nextDouble();
+                            (menu.sideItems.get(ID - constant)).setprice(newPrice);
+                            break;
+                        case 2:
+                            System.out.println("What is the new name?");
+                            String newName = sc.nextLine();
+                            (menu.sideItems.get(ID - constant)).setItemName(newName);
+                            break;
+                        case 3:
+                            System.out.println("What is the new description?");
+                            String newDesc = sc.nextLine();
+                            (menu.sideItems.get(ID - constant)).setDescription(newDesc);
+                            break;
+                        case 4:
+                            opt = 4;
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
 
-
-
+                break;
             case 3:
+                constant = 301;
+                menu.printDrinks();
+                System.out.println("Enter the menu ID which you want to modify: ");
+                ID = sc.nextInt();
+                opt = 1;
+                while (opt != 4) {
+                    System.out.println("What do you want to change?");
+                    printChangeTypes();
+                    System.out.println("Enter your option: ");
+                    changeOption = sc.nextInt();
+                    switch (changeOption) {
+                        case 1:
+                            System.out.println("What is the new price?");
+                            double newPrice = sc.nextDouble();
+                            (menu.drinkItems.get(ID - constant)).setprice(newPrice);
+                            break;
+                        case 2:
+                            System.out.println("What is the new name?");
+                            String newName = sc.nextLine();
+                            (menu.drinkItems.get(ID - constant)).setItemName(newName);
+                            break;
+                        case 3:
+                            System.out.println("What is the new description?");
+                            String newDesc = sc.nextLine();
+                            (menu.drinkItems.get(ID - constant)).setDescription(newDesc);
+                            break;
+                        case 4:
+                            opt = 4;
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
+                break;
+            case 4:
+                constant = 401;
+                menu.printDesserts();
+                System.out.println("Enter the menu ID which you want to modify: ");
+                ID = sc.nextInt();
+                opt = 1;
+                while (opt != 4) {
+                    System.out.println("What do you want to change?");
+                    printChangeTypes();
+                    System.out.println("Enter your option: ");
+                    changeOption = sc.nextInt();
+                    switch (changeOption) {
+                        case 1:
+                            System.out.println("What is the new price?");
+                            double newPrice = sc.nextDouble();
+                            (menu.dessertItems.get(ID - constant)).setprice(newPrice);
+                            break;
+                        case 2:
+                            System.out.println("What is the new name?");
+                            String newName = sc.nextLine();
+                            (menu.dessertItems.get(ID - constant)).setItemName(newName);
+                            break;
+                        case 3:
+                            System.out.println("What is the new description?");
+                            String newDesc = sc.nextLine();
+                            (menu.dessertItems.get(ID - constant)).setDescription(newDesc);
+                            break;
+                        case 4:
+                            opt = 4;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                break;
             default:
+                break;
         }
+    }
+
+    public static void removeMenuItem(){
 
     }
+
 
     public static void printChangeTypes(){
         System.out.println("|        1. Price        |");
