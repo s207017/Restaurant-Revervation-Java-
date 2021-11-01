@@ -2,10 +2,11 @@ package Restaurant;
 
 import java.util.ArrayList;
 
-public abstract class Payment {
-    private ArrayList<Table> tables;
-    private double subtotal;
-    private double tax;
+
+public class Payment {
+    protected ArrayList<Table> tables;
+    protected double total;
+    protected double tax;
     public Payment(){
         this.tables = new ArrayList<>();
         this.subtotal = 0;
@@ -29,4 +30,23 @@ public class CashPayment extends Payment{
 
 }
 
+class CashPayment extends Payment {
+    private double cashPaid;
+
+    public void setCashPaid(double cashPaid) {
+        this.cashPaid = cashPaid;
+    }
+
+    public double getCashPaid() {
+        return cashPaid;
+    }
+
+    public double getchange() {
+        return this.cashPaid-this.total;
+    }
+
+    public void makePayment() {
+        System.out.println("Payment by cash \nTotal:")
+    }
+}
 
