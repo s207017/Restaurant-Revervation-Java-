@@ -21,11 +21,10 @@ public class Receipt {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date(); // to get current date and time
-
-        System.out.println(String.format("Date/Time: " + dateFormat.format(date)));
-
+        
         // Print address?
         // System.out.println("Server: " +) STAFFID
+        System.out.println(String.format("Date/Time: " + dateFormat.format(date)));
         System.out.println();
         System.out.println();
 
