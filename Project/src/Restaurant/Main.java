@@ -21,7 +21,6 @@ public class Main{
             switch(option){
                 case 1: // Create/update/remove menu item
                     clearScreen();
-                    createUpdateRemoveMenuItem();
                     Scanner sc = new Scanner(System.in);
                     System.out.println("What would you like to do? ");
                     System.out.println("|     1. Create menu item     |");
@@ -46,12 +45,12 @@ public class Main{
                         default:
                             break;
                     }
-                    createMenuItem(); //create case
                     break;
 
 
                 case 2: // Create/update/remove set packages
                     clearScreen();
+                    
 
                 case 3:
                     clearScreen();
