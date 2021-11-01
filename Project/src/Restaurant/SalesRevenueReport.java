@@ -14,7 +14,9 @@ public class SalesRevenueReport {
         this.endDate = endDate;
         paymentList = new ArrayList<>();
         for(Payment p: TransHist.getArrayList()){
-
+            if(p.getTables().get(0).getOrder().getDate().compareTo(startDate) >0 ){
+                
+            }
         }
 
     }
