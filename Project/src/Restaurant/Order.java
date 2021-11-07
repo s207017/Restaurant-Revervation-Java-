@@ -28,7 +28,7 @@ public class Order {
     public int checkItemExistence(int itemID,Menu menu){
         MenuItem temp;
         for(int i = 0;i<orderList.size();i++){
-            if(orderList.get(i).getMenuItem() == menu.getMenuItemFromID(itemID)){
+            if(orderList.get(i).getItem() == menu.getMenuItemFromID(itemID)){
                 return i;
             }
         }
@@ -83,7 +83,7 @@ public class Order {
             while(quantity > orderList.get(index).getQuantityOrdered()){// Quantity to be removed too high
                 System.out.printf("Only %d orders of %s exist.\n",
                         orderList.get(index).getQuantityOrdered(),
-                        orderList.get(index).getMenuItem().getItemName());
+                        orderList.get(index).getItem().getItemName());
                 System.out.print("Enter quantity to be removed: ");
                 quantity = sc.nextInt();
             }

@@ -1,8 +1,9 @@
 package Restaurant;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.time.Date;
+import java.util.Date;
 
 public class Receipt {
     private Payment payment;
@@ -39,8 +40,8 @@ public class Receipt {
         System.out.printf("%50s\n", "=".repeat(50));
 
         for (Table table: this.payment.getTables()) {
-            for (OrderItem o: table.getOrder().getOrderList()){
-                System.out.printf("%2d %35s $%-10f\n", o.getQuantityOrdered(),o.getItem().getItemName(),o.getQuantityOrdered()*o.getMenuItem().getPrice());
+            for (OrderItem o: table.getOrder().getOrderItemList()){
+                System.out.printf("%2d %35s $%-10f\n", o.getQuantityOrdered(),o.getItem().getItemName(),o.getQuantityOrdered()*o.getItem().getPrice());
             }
         }
 
