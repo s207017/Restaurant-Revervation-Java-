@@ -2,10 +2,10 @@ package Restaurant;
 import java.util.ArrayList;
 
 public class MenuItem {
-    private int itemID;
-    private String itemName;
-    private double price;
-    private String description;
+    protected int itemID;
+    protected String itemName;
+    protected double price;
+    protected String description;
     public MenuItem(String itemName,int itemID, double price,String description){
         this.itemID = itemID;
         this.itemName = itemName;

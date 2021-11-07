@@ -2,13 +2,14 @@ package Restaurant;
 
 public class OrderItem {
     private MenuItem item;
-    private int quantityOrdered=0;
-    private int quantityCompleted=0;
+    private int quantityOrdered;
+    private int quantityCompleted;
 
     //constructor. assigns item to item and quantityOrdered to quantityOrdered
-    public OrderItem(MenuItem _item, int quantityOrdered) {
-        item = _item;
+    public OrderItem(MenuItem item, int quantityOrdered) {
+        this.item = item;
         this.quantityOrdered = quantityOrdered;
+        this.quantityCompleted = 0;
     }
 
 
@@ -42,6 +43,6 @@ public class OrderItem {
 
     //adds quantity of orders completed to quantityCompleted
     public void setQuantityCompleted(int qty){
-        this.quantityCompleted=this.quantityCompleted+qty;
+        this.quantityCompleted += qty;
     }
 }
