@@ -2,13 +2,12 @@ package Restaurant;
 
 import java.time.*;
 import java.util.Date;
-import java.time.*;
 import java.util.Scanner;
 
 public class Reservation {
     private Date date;
     private LocalTime time;
-    private String customerName;
+    private final String customerName;
     private int pax;
     private String contactNumber;
 
