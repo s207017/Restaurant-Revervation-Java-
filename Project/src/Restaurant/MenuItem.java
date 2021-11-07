@@ -1,5 +1,4 @@
 package Restaurant;
-package attempt;
 import java.util.ArrayList;
 
 public class MenuItem {
@@ -46,12 +45,6 @@ public class MenuItem {
 
 }
 
-class Drink extends MenuItem {
-    public Drink(String itemName,int itemID, double price, String description){
-        super(itemName,itemID,price,description);
-    }
-}
-
 class SetPackage extends MenuItem {
     ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
     int numMainCourse = 1;
@@ -69,7 +62,7 @@ class SetPackage extends MenuItem {
     // ^ student_meal will be shown on the menu but when the customer orders this, create another object (shown below)
     // SetPackage set1 = new SetPackage(student_meal.getItemName(), student_meal.getItemID(),student_meal.getPrice());
     // selection of menuitems done by the customers.
-    public void addMainCourse(MainCourse mainCourse){
+    public void addMainCourse(MenuItem mainCourse){
         if (numMainCourse > 0) {
             setItems.add(mainCourse);
             numMainCourse--;
@@ -78,7 +71,7 @@ class SetPackage extends MenuItem {
         }
     }
 
-    public void addDrink(Drink drink){
+    public void addDrink(MenuItem drink){
         if (numDrink > 0){
             setItems.add(drink);
             numDrink--;
@@ -87,30 +80,12 @@ class SetPackage extends MenuItem {
         }
     }
 
-    public void addSide(Side side) {
+    public void addSide(MenuItem side) {
         if (numDrink > 0) {
             setItems.add(side);
             numSide--;
         } else {
             System.out.println("Error, reached maximum number of side(s).");
         }
-    }
-}
-
-class MainCourse extends MenuItem {
-    public MainCourse(String itemName,int itemID, double price,String description){
-        super(itemName,itemID,price,description);
-    }
-}
-
-class Side extends MenuItem {
-    public Side(String itemName,int itemID, double price,String description){
-        super(itemName,itemID,price,description);
-    }
-}
-
-class Desert extends MenuItem {
-    public Desert(String itemName,int itemID, double price,String description){
-        super(itemName,itemID,price,description);
     }
 }
