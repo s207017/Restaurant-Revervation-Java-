@@ -9,12 +9,13 @@ public class Payment {
     protected double subtotal;
     protected double tax;
     protected Membership membership;
+    protected boolean paymentComplete;
     public Payment(Membership membership){
         this.tables = new ArrayList<>();
         this.subtotal = 0;
         this.membership = membership;
+        this.paymentComplete = false;
     }
-
 
     public void calculateSubTotal(){
         int sum = 0;
@@ -48,6 +49,24 @@ public class Payment {
 
     public ArrayList<Table> getTables() {
         return tables;
+    }
+    public boolean checkPaymentComplete(){
+        return this.paymentComplete;
+    }
+    public void pushItemsToHistory(ArrayList<TransHistDay> TransHist){
+        if(this.tables.get(0).getOrder().getDate() != TransHist.get(TransHist.size()-1).getDate()){//Check if day exists
+            TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
+        }
+        for(Table t: tables){
+            for(OrderItem o: t.getOrder().getOrderItemList()){
+                TransHistItem temp = TransHist.get(TransHist.size()).findTransHist(o.getItem().getItemName(),o.getItem().getPrice());
+                if(temp == null){
+                    TransHist.get(TransHist.size()-1).getTransList().add(new TransHistItem(o.getItem().getItemName(),o.getQuantityOrdered(),o.getItem().getPrice()));
+                }else{
+                    temp.setQuantity(o.getQuantityOrdered());
+                }
+            }
+        }
     }
 }
 

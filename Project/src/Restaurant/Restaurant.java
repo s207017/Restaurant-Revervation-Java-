@@ -41,18 +41,11 @@ public class Restaurant {
         tableList.add(new Table(tableList.size()+1,tableCapacity,0));
     }
 
-    //prints the available tables
-    public void getAvailableTables(){
-        for (Table table: tableList){
-            if (table.getTableStatus()== Table.Level.FREE){
-              //smth
-            }
-        }
-    }
-    public ArrayList<Integer> getAvailableTables(int pax){
+
+    public ArrayList<Integer> getAvailableTables(){
         ArrayList<Integer> availableTables= new ArrayList<Integer>();
         for (Table t: tableList){
-            if (t.getTableStatus()== Table.Level.FREE && tableList.t()>=pax){
+            if (t.getTableStatus()== Table.Level.FREE){
                 availableTables.add(t.getTableNum());
             }
         }
