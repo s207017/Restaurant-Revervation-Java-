@@ -13,13 +13,14 @@ public class Order {
     private Date date;
     private double total;
     private ArrayList<OrderItem> orderList;
+    private static int orderNum = 1;
 
-    public Order(int orderID, int staffID, int tableNum) {
-        this.orderID = orderID;
+    public Order(int staffID, int tableNum) {
+        this.orderID = orderNum++;
         this.staffID = staffID;
         this.tableNum = tableNum;
         this.timestamp = new Timestamp(System.currentTimeMillis());
-        this.date = new Timestamp(date.getTime());
+        this.date = new Date();
         this.orderList = new ArrayList<>();
     }
     public double getTotal(){
@@ -50,6 +51,10 @@ public class Order {
             }
             System.out.print("Enter quantity of items to be ordered: ");
             quantity = sc.nextInt();
+            while(quantity<=0){
+                System.out.print("Invalid quantity! Please enter valid entry: ");
+                quantity = sc.nextInt();
+            }
             int index = checkItemExistence(choice,menu);
             if(index < 0) {//Item does not exist in order yet; create new orderitem
                 orderList.add(new OrderItem(temp, quantity));
@@ -60,7 +65,7 @@ public class Order {
         }
     }
     public void removeOrderItems(Menu menu){
-        menu.printMenu();
+        printOrder();
         MenuItem temp;
         Scanner sc = new Scanner(System.in);
         int choice = 0,quantity = 0;
@@ -80,6 +85,10 @@ public class Order {
             }
             System.out.print("Enter quantity to be removed: ");
             quantity = sc.nextInt();
+            while(quantity <=0){
+                System.out.print("Please enter a valid quantity: ");
+                quantity = sc.nextInt();
+            }
             while(quantity > orderList.get(index).getQuantityOrdered()){// Quantity to be removed too high
                 System.out.printf("Only %d orders of %s exist.\n",
                         orderList.get(index).getQuantityOrdered(),
@@ -112,5 +121,13 @@ public class Order {
     }
     public ArrayList<OrderItem> getOrderItemList(){
         return this.orderList;
+    }
+
+    public void printOrder(){
+        System.out.printf("Order: %d for Table Number: %d\n",this.orderID,this.tableNum);
+        System.out.println("ID | Item Name | Quantity ");
+        for(OrderItem o: this.orderList){
+            System.out.printf("%d | %s | %d\n",o.getItem().getItemID(),o.getItem().getItemName(),o.getQuantityOrdered());
+        }
     }
 }

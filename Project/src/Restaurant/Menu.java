@@ -140,28 +140,28 @@ public class Menu {
                 }
             }
         }
-        else if (200<ID && ID<=300+sideItems.size()){
+        else if (200<ID && ID<=200+sideItems.size()){
             for (MenuItem m: sideItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
                 }
             }
         }
-        else if (300<ID && ID<=400+ drinkItems.size()){
+        else if (300<ID && ID<=300+ drinkItems.size()){
             for (MenuItem m: drinkItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
                 }
             }
         }
-        else if (400<ID && ID<=500+ dessertItems.size()){
+        else if (400<ID && ID<=400+ dessertItems.size()){
             for (MenuItem m: dessertItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
                 }
             }
         }
-        else if (500<ID && ID<=600+ setPackageItems.size()){
+        else if (500<ID && ID<=500+ setPackageItems.size()){
             for (SetPackage m: setPackageItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
@@ -172,10 +172,10 @@ public class Menu {
     }
     public boolean IDExists(int ID){
         if ((100<ID && ID<=100+ mainCourseItems.size()) ||
-                (200<ID && ID<=300+sideItems.size()) ||
-                (300<ID && ID<=400+ drinkItems.size()) ||
-                (400<ID && ID<=500+ dessertItems.size()) ||
-                (500<ID && ID<=600+ setPackageItems.size())){
+                (200<ID && ID<=200+sideItems.size()) ||
+                (300<ID && ID<=300+ drinkItems.size()) ||
+                (400<ID && ID<=400+ dessertItems.size()) ||
+                (500<ID && ID<=500+ setPackageItems.size())){
             return true;
         }
         else return false;
@@ -183,11 +183,11 @@ public class Menu {
 
 
     public void createNewMenuItem(String name, int menuItemType, double price, String description){
-        int ID;
+        int ID = 0;
         switch (menuItemType){
             case 1: //maincourse
                 for (MenuItem m: mainCourseItems){ //gets the last itemID in the arraylist
-                    ID=m.getItemID()
+                    ID=m.getItemID();
                 }
                 MenuItem mainCourse = new MenuItem(name, ID+1, price, description); //ID+1 is to add the item at the next point
                 break;

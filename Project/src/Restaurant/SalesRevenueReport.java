@@ -23,15 +23,17 @@ public class SalesRevenueReport {
         }
 
     }
-    public void printReport(Menu menu){
+    /*public void printReport(Menu menu){
         System.out.println("Period: " + startDate + " to " + endDate);
         System.out.println("-".repeat(90));
         for(Payment p: paymentList){
             for(Table t: p.getTables()){
                 for(OrderItem o: t.getOrder().getOrderItemList()){
-                    for(MenuItem m: menu.)
+                    for(MenuItem m: menu){
+
+                    }
                 }
             }
         }
-    }
+    }*/
 }
