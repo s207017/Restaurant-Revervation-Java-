@@ -14,7 +14,7 @@ public class MenuInterface {
     public void createNewMenuItemInterface(){
         Scanner sc = new Scanner(System.in);
         System.out.println("What type of menu item is your new menu?");
-        menu.printMenuTypes();
+        this.printMenuTypes();
         System.out.print("Your input: ");
         int menuTypeInt = sc.nextInt();
         System.out.print("Enter the name of the new menu item: ");
@@ -29,7 +29,7 @@ public class MenuInterface {
     public void removeMenuItemInterface(){
         Scanner sc = new Scanner(System.in);
         int ID;
-        menu.printMenuTypes();
+        this.printMenuTypes();
         System.out.println("What type of menu item would you like to remove?");
         System.out.print("Your input: ");
         int menuType = sc.nextInt();
@@ -110,7 +110,7 @@ public class MenuInterface {
 
     public void createSetPackageInterface(){
         double initialPrice = 0;
-        ArrayList<Menuitem> menuID = new ArrayList();
+        ArrayList<MenuItem> menuID = new ArrayList<MenuItem>();
         Scanner sc = new Scanner(System.in);
         System.out.println("You are now creating a set package");
         System.out.print("Enter the name of the set package: ");
@@ -119,14 +119,7 @@ public class MenuInterface {
         String desc = sc.next();
 
         System.out.print("Enter the menu ID of the main course item.");
-        System.out.print("Number of side menu idems: ");
-        int noOfSides = sc.nextInt();
-        for (int i = 1; i < noOfSides + 1; i++){
-            System.out.print("%d: Input the side menu ID: ", i);
-            int id = sc.nextInt();
-            menuID.add(id);
-        }
-        for (int i = 0; i < menuID.size; i++){
+        for (int i = 0; i < menuID.size(); i++){
             (menuID.get(i)).get
         }
         System.out.println("");

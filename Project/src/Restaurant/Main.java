@@ -11,7 +11,6 @@ public class Main{
     Staff staff = new Staff();
     Scanner scanner = new Scanner(System.in);
     public static GetInput gi = new GetInput();
-    MenuInterface menu = new MenuInterface();
     // made public class not static bc there was static error
     public void main(String[] arg){
         //WRITE function init data to load text file data to the programme
