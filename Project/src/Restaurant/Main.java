@@ -43,13 +43,14 @@ public class Main{
                             menuInterface.createNewMenuItemInterface();
                             break;
                         case 2:
-                            menu.updateMenuItem();
+                            menuInterface.updateMenuItemInterface();
                             break;
                         case 3:
                             menuInterface.removeMenuItemInterface();
                             break;
                         case 4:
-                            menu.createNewMenuItemInterface();
+                            System.out.println("Exiting...");
+                            break;
                         default:
                             break;
                     }
