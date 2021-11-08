@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList; // import the ArrayList class
 
@@ -11,22 +12,25 @@ public class MenuInterface {
         this.menu = menu;
     }
 
-    public void createNewMenuItemInterface(){
+    public void createNewMenuItemInterface() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("What type of menu item is your new menu?");
         this.printMenuTypes();
+        //menu.printMenuTypes();
         System.out.print("Your input: ");
         int menuTypeInt = sc.nextInt();
         System.out.print("Enter the name of the new menu item: ");
-        String menuName = sc.next();
+        sc.nextLine();
+        String menuName = sc.nextLine();
         System.out.print("Enter the price of the new menu item: ");
         double price = sc.nextDouble();
         System.out.println("Enter the description of the new menu item in one line: ");
+        sc.nextLine();
         String desc = sc.nextLine();
         menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
     }
 
-    public void removeMenuItemInterface(){
+    public void removeMenuItemInterface() throws IOException {
         Scanner sc = new Scanner(System.in);
         int ID;
         this.printMenuTypes();
@@ -76,7 +80,7 @@ public class MenuInterface {
         System.out.println("REMOVE MENU ITEM END");
     }
 
-    public void updateMenuItemInterface(){
+    public void updateMenuItemInterface() throws IOException {
         Scanner sc = new Scanner(System.in);
         int ID, changeOption;
         menu.printMenu();
