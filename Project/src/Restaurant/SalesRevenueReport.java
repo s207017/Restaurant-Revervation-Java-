@@ -1,26 +1,22 @@
 package Restaurant;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
+// When you want a report you will create a new object of this class
 public class SalesRevenueReport {
-    private Date startDate;
-    private Date endDate;
-    private ArrayList<Payment> paymentList;
-    public SalesRevenueReport(Date startDate,Date endDate,Restaurant restaurant){
-        this.startDate = startDate;
-        this.endDate = endDate;
-        paymentList = new ArrayList<>();
-        for(Payment p: restaurant.getTransactionHistory()){
-            if(p.getTables().get(0).getOrder().getDate().compareTo(startDate) > 0){
-                paymentList.add(p);
-            }
-            if(p.getTables().get(0).getOrder().getDate().compareTo(endDate) > 0){
-                break;
-            }
-        }
+    Scanner sc = new Scanner(System.in);
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private ArrayList<TransHistDay> transHist;
+    public SalesRevenueReport(TransactionHistory transactionHistory){
+        do {
+            this.startDate = PeriodGetter.getDate();
+            this.endDate = PeriodGetter.getDate();
+        }while(endDate.isBefore(startDate));
+    }
+    public void generateReport(){
 
     }
     /*public void printReport(Menu menu){
