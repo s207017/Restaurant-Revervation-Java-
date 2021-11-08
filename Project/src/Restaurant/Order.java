@@ -49,6 +49,20 @@ public class Order {
                 System.out.println("Item does not exist, please enter valid ID.");
                 continue;
             }
+            if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
+                MenuItem set = temp;
+                SetPackage tempSetPackage = new SetPackage(set.getItemName(),set.getItemID(),set.getPrice(),set.getDescription());
+                menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice()); 
+                System.out.print("Please select drink: ");
+                int drinkID = sc.nextInt();
+                while (300>=drinkID && drinkID>300+ menu.getDrinkItems().size()){
+                    System.out.print("Invalid ID, please try again: ");
+                    drinkID = sc.nextInt();
+                }
+                // add drink item to items array in setpackage
+                tempSetPackage.addSide(menu.getMenuItemFromID(drinkID));
+                temp = tempSetPackage; //upcasting
+            }
             System.out.print("Enter quantity of items to be ordered: ");
             quantity = sc.nextInt();
             while(quantity<=0){

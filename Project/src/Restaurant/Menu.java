@@ -252,6 +252,11 @@ public class Menu {
 
                 // add side item to items array in setpackage
                 setPackage.addSide(getMenuItemFromID(sideID));
+
+                // set max drink price
+                System.out.print("Set maximum drink price: ");
+                setPackage.setMaxDrinkPrice(sc.nextDouble());
+                System.out.println("Adding of set package " + setPackage.getItemName() +" completed.");
                 break;
             default:
                 System.out.println("Wrong input into createNewMenuItem.");

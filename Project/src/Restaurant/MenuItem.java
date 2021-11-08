@@ -45,12 +45,22 @@ public class MenuItem {
 
 }
 
-class SetPackage extends MenuItem {
+class  SetPackage extends MenuItem {
     ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
+    double maxDrinkPrice;
     int numMainCourse = 1;
     int numDrink = 1;
     int numSide = 1;
-    public SetPackage(String itemName,int itemID, double price, String description/*, int numMainCourse, int numDrink, int numSide*/){
+
+    public void setMaxDrinkPrice(double maxDrinkPrice) {
+        this.maxDrinkPrice = maxDrinkPrice;
+    }
+
+    public double getMaxDrinkPrice() {
+        return maxDrinkPrice;
+    }
+
+    public SetPackage(String itemName, int itemID, double price, String description/*, int numMainCourse, int numDrink, int numSide*/){
         super(itemName,itemID,price, description);
 //        this.numMainCourse = numMainCourse;
 //        this.numDrink = numDrink;
