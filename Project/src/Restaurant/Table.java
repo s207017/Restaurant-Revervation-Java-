@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Table {
-    private int id;
+    private int tableNum;
     private int capacity;
     private int pax; //once occupied, update this
     private Order order;
@@ -22,8 +22,8 @@ public class Table {
     private Map<LocalDateTime, Reservation> reservations;
 
 
-    public Table(int id, int capacity){
-        this.id = id;
+    public Table(int tableNum, int capacity){
+        this.tableNum = tableNum;
         this.capacity = capacity;
         this.pax = 0; //when initialising the table it should be 0 ppl sitting
         this.tableStatus = Level.FREE;
@@ -120,7 +120,7 @@ public class Table {
     }
 
     //getters
-    public int getId(){ return id;}
+    public int getTableNum(){ return tableNum;}
     public int getCapacity() {
         return capacity;
     }
