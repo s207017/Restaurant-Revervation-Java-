@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 
 public class Payment {
-    protected ArrayList<Table> tables;
+    protected ArrayList<TableOld> tableOlds;
     protected double subtotal;
     protected double tax;
     protected Membership membership;
     public Payment(Membership membership){
-        this.tables = new ArrayList<>();
+        this.tableOlds = new ArrayList<>();
         this.subtotal = 0;
         this.membership = membership;
     }
@@ -18,8 +18,8 @@ public class Payment {
 
     public void calculateSubTotal(){
         int sum = 0;
-        for(int i = 0; i < tables.size();i++){
-            sum += tables.get(i).getOrder().getTotal();
+        for(int i = 0; i < tableOlds.size(); i++){
+            sum += tableOlds.get(i).getOrder().getTotal();
         }
         this.subtotal = sum;
     }
@@ -42,12 +42,12 @@ public class Payment {
         this.tax = 0.9 * this.tax;
     }
 
-    public void addTable(Table table){
-        this.tables.add(table);
+    public void addTable(TableOld tableOld){
+        this.tableOlds.add(tableOld);
     }
 
-    public ArrayList<Table> getTables() {
-        return tables;
+    public ArrayList<TableOld> getTables() {
+        return tableOlds;
     }
 }
 
