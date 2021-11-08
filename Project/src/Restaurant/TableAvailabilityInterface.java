@@ -8,7 +8,4 @@ public class TableAvailabilityInterface {
     public void printTableAvailability(){
         System.out.print(r.toString());
     }
-
-
-
 }
