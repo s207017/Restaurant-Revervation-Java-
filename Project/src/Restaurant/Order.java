@@ -1,7 +1,7 @@
 package Restaurant;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.sql.Timestamp;
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public class Order {
     private int staffID;
     private int tableNum;
     private Timestamp timestamp;
-    private Date date;
+    private LocalDateTime date;
     private double total;
     private ArrayList<OrderItem> orderList;
     private static int orderNum = 1;
@@ -20,7 +20,7 @@ public class Order {
         this.staffID = staffID;
         this.tableNum = tableNum;
         this.timestamp = new Timestamp(System.currentTimeMillis());
-        this.date = new Date();
+        this.date = LocalDateTime.now();
         this.orderList = new ArrayList<>();
     }
     public double getTotal(){
@@ -137,7 +137,7 @@ public class Order {
     public int getTableNum(){
         return this.tableNum;
     }
-    public Date getDate(){
+    public LocalDateTime getDate(){
         return date;
     }
     public ArrayList<OrderItem> getOrderItemList(){
