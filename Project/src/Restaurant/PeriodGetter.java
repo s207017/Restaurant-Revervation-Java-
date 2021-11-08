@@ -2,6 +2,7 @@ package Restaurant;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class PeriodGetter {
@@ -53,17 +54,20 @@ public class PeriodGetter {
         finalDate = LocalDateTime.parse(temp);
         return finalDate;
     }
+
+
+
     public static LocalDateTime getDateAndTime(){
         int yearInt;
         int monthInt;
         int dateInt;
         int hourInt;
-        int minuteInt;
+        //int minuteInt;
         String year;
         String month;
         String date;
         String hour;
-        String minute;
+        //String minute;
         String temp;
         LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDateTime finalDateTime;
@@ -72,6 +76,12 @@ public class PeriodGetter {
         //ASKING FOR STUFF FIRST
         //----------------------
         //chose year
+
+
+
+
+
+
         do {
             System.out.print("Please enter year:");
             yearInt = sc.nextInt();
@@ -97,12 +107,12 @@ public class PeriodGetter {
                 System.out.print("Please enter an hour within opening hours");
                 hourInt = sc.nextInt();
             }
-            System.out.print("Enter minutes: ");
+            /*System.out.print("Enter minutes: ");
             minuteInt = sc.nextInt();
             while (minuteInt < 0 || minuteInt > 59) {
                 System.out.print("Please enter a valid minute value (1-59): ");
                 minuteInt = sc.nextInt();
-            }
+            }*/
             //--------------------------------------
             //convert to format: 2007-12-03T10:15:30
             //--------------------------------------
@@ -118,12 +128,12 @@ public class PeriodGetter {
                 date = '0' + Integer.toString(dateInt);
             }
             hour = Integer.toString(hourInt);
-            if (minuteInt > 9) {
+            /*if (minuteInt > 9) {
                 minute = Integer.toString(minuteInt);
             } else {
                 minute = '0' + Integer.toString(minuteInt);
-            }
-            temp = year + '-' + month + '-' + date + 'T' + hour + ':' + minute + ':' + "00";
+            }*/
+            temp = year + '-' + month + '-' + date + 'T' + hour + ":00:00";
             finalDateTime = LocalDateTime.parse(temp);
             if(finalDateTime.isBefore(currentDateTime)){
                 System.out.printf("Intended date (%s) is before current date, please try again\n",finalDateTime);

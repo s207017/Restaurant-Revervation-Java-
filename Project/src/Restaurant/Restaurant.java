@@ -40,15 +40,12 @@ public class Restaurant {
      * Returns the table id for date & time entered.
      * Returns -1 if no table is found.
      *
-     * @param dateString the date and time of the request in the format "dd/MM/yyyy HH"
      * @param pax the number of guests. table capacity should be greater than or equal to this.
      * @param name the name of the customer making reservation
      * @param tel the phone number of the customer
      * @return returns first available table, doesnt iterate through all unless no table. -1 if no table is found.
      */
-    public int reserveTable(String dateString, int pax, String name, String tel) {
-        LocalDateTime arrivalDateTime = PeriodGetter.getDate();
-        //returns date in dateTime format where the minutes are 00
+    public int reserveTable(LocalDateTime arrivalDateTime, int pax, String name, String tel) {
 
         // get first available table
         for (Table table : tableList) {
@@ -105,7 +102,7 @@ public class Restaurant {
                 occupied++;
             }
             else{
-                sb.append(String.format("Table : %d - Capacity: %d - Status: Reserved\n"), t.getTableNum(), t.getCapacity());
+                sb.append(String.format("Table : %d - Capacity: %d - Status: Reserved\n", t.getTableNum(), t.getCapacity()));
                 reserved++;
             }
         }
