@@ -42,21 +42,19 @@ public class Order {
             System.out.print("Enter ID of intended item to be ordered (-1 to end): ");
             choice = sc.nextInt();
             if(choice == -1) break;
-            temp = menu.getMenuItemFromID(choice);
+            //set temp to be the menuItem/setPackage item
+            if(choice>500 || choice <=500+menu.getSetPackageItems().size()) {
+                temp = menu.getSetPackageItemFromID(choice);
+            }
+            else{
+                temp = menu.getMenuItemFromID(choice);
+            }
             if(temp == null){
                 System.out.println("Item does not exist, please enter valid ID.");
                 continue;
-            }else if(temp.getItemID() > 500){
-                menu.printDrink();
-                while(choice <=500 || choice > 600){
-                    System.out.print("Enter of drink (ID more than 500): ");
-                    choice = sc.nextInt();
-                }
-                ((SetPackage) temp).addDrink(menu.getMenuItemFromID(choice));
             }
             if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
-                MenuItem set = temp;
-                SetPackage tempSetPackage = new SetPackage(set.getItemName(),set.getItemID(),set.getPrice(),set.getDescription());
+                SetPackage tempSetPackage = new SetPackage(temp.getItemName(),temp.getItemID(),temp.getPrice(),temp.getDescription());
                 menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice()); 
                 System.out.print("Please select drink: ");
                 int drinkID = sc.nextInt();

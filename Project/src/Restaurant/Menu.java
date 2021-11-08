@@ -246,15 +246,20 @@ public class Menu {
                 }
             }
         }
-        else if (500<ID && ID<=500+ setPackageItems.size()){
+        return null; //this would only happen if the ID is invalid, which it wont be because of the IDexists function
+    }
+
+    public SetPackage getSetPackageItemFromID(int ID){
+        if (500<ID && ID<=500 + setPackageItems.size()){
             for (SetPackage m: setPackageItems){
                 if (m.getItemID()==ID){
-                    return m; //returns menuitem of maincourse
+                    return m;
                 }
             }
         }
-        return null; //this would only happen if the ID is invalid, which it wont be because of the IDexists function
+        return null; //not found
     }
+
     public boolean IDExists(int ID){
         if ((100<ID && ID<=100+ mainCourseItems.size()) ||
                 (200<ID && ID<=200+sideItems.size()) ||
