@@ -4,12 +4,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GetInput {
-    int inputI;
-    String inputS;
-    double inputD;
-    Scanner sc = new Scanner(System.in);
+    static int inputI;
+    static String inputS;
+    static double inputD;
+    static Scanner sc = new Scanner(System.in);
 
-    public int getInt(){
+    public static int getInt(){
         boolean isValid = false;
         while(!isValid) {
             try {
@@ -23,7 +23,7 @@ public class GetInput {
         return inputI;
     }
 
-    public String getString(){
+    public static String getString(){
         boolean isValid = false;
         while(!isValid) {
             try {
@@ -32,13 +32,13 @@ public class GetInput {
                 isValid = true;
             } catch (InputMismatchException e) {
                 System.out.print("Please enter a valid string input: ");
-                sc.nextLine();
+                sc.next();
             }
         }
         return inputS;
     }
 
-    public double getDouble(){
+    public static double getDouble(){
         boolean isValid = false;
         while(!isValid) {
             try {
@@ -51,6 +51,4 @@ public class GetInput {
         }
         return inputD;
     }
-
-
 }

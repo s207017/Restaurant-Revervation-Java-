@@ -1,22 +1,21 @@
 package Restaurant;
 
 public class testGetInput {
-    private static GetInput i = new GetInput();
     private static int a;
     private static String s;
     private static double d;
 
     public static void main(String[] args){
         System.out.print("Enter integer input: ");
-        a = i.getInt();
+        a = GetInput.getInt();
         System.out.println(a);
 
         System.out.print("Enter string input: ");
-        s = i.getString();
+        s = GetInput.getString();
         System.out.println(s);
 
         System.out.print("Enter double input: ");
-        d = i.getDouble();
+        d = GetInput.getDouble();
         System.out.println(d);
     }
 }
