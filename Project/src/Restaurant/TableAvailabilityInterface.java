@@ -5,7 +5,6 @@ public class TableAvailabilityInterface {
     public TableAvailabilityInterface(Restaurant r){
         this.r = r;
     }
-
     public void printTableAvailability(){
         System.out.print(r.toString());
     }

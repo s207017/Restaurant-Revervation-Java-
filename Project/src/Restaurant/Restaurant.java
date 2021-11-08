@@ -97,11 +97,11 @@ public class Restaurant {
             //updates levels free & reserved
             t.updateLevel(currentDateTime);
             if (t.getTableStatus()== Table.Level.FREE){
-                sb.append("Table: %d - Capacity: %d - Status: Available\n", t.getTableNum(), t.getCapacity());
+                sb.append(String.format("Table: %d - Capacity: %d - Status: Available\n", t.getTableNum(), t.getCapacity()));
                 free++;
             }
             else if (t.getTableStatus()==Table.Level.OCCUPIED) {
-                sb.append("Table: " + t.getTableNum() + " - Capacity: " + t.getCapacity() + " - Status: Occupied - People Seated: " + t.getPax() + "\n");
+                sb.append(String.format("Table: %d - Capacity: %d - Status: Available - People Seated: \n", t.getTableNum(), t.getCapacity()));
                 occupied++;
             }
             else{
