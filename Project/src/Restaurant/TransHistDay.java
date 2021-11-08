@@ -1,16 +1,17 @@
 package Restaurant;
 
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class TransHistDay {
-    private Date date;
+    private LocalDateTime date;
     private ArrayList<TransHistItem> transList;
-    public TransHistDay(Date date){
+    public TransHistDay(LocalDateTime date){
         this.date = date;
         this.transList  = new ArrayList<TransHistItem>();
     }
-    public Date getDate(){
+    public LocalDateTime getDate(){
         return this.date;
     }
     public ArrayList<TransHistItem> getTransList(){

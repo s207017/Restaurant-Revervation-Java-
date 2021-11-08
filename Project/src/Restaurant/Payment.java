@@ -60,9 +60,9 @@ public class Payment {
         for(Table t: tables){
             for(OrderItem o: t.getOrder().getOrderItemList()){
                 TransHistItem temp = TransHist.get(TransHist.size()).findTransHist(o.getItem().getItemName(),o.getItem().getPrice());
-                if(temp == null){
+                if(temp == null){//If item does not exist yet, create a new slot for the item
                     TransHist.get(TransHist.size()-1).getTransList().add(new TransHistItem(o.getItem().getItemName(),o.getQuantityOrdered(),o.getItem().getPrice()));
-                }else{
+                }else{//Item already exists, can just add to the existing slot
                     temp.setQuantity(o.getQuantityOrdered());
                 }
             }

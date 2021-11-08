@@ -1,64 +1,18 @@
 package Restaurant;
 
-import java.time.*;
-import java.util.Date;
-import java.util.Scanner;
-
 public class Reservation {
-    private Date date;
-    private LocalTime time;
-    private final String customerName;
+    private String name;
     private int pax;
-    private String contactNumber;
+    private String tel;
 
-    public Reservation(Date date, LocalTime time, String customerName, int pax, String contactNumber) {
-        this.date = date;
-        this.time = time;
-        this.customerName = customerName;
-        this.pax = pax;
-        this.contactNumber = contactNumber;
-    }
-
-    //setter for customerName is not included because there won't be an instance where the customer will change his name.
-
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public int getPax() {
-        return pax;
-    }
-
-    public void setPax(int pax) {
+    Reservation(String name, int pax, String tel) {
+        this.name = name;
+        this.tel = tel;
         this.pax = pax;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public void printReservationDetails(){
-        System.out.println(this.getCustomerName() + " " + this.getContactNumber() + " " + this.getPax() + " " + this.getDate() + " " + this.getTime());
+    //when you call reservation.toString() --> prints the information
+    public String toString() {
+        return String.format("%d persons at name: %s, telephone: %s", pax, name, tel);
     }
 }
