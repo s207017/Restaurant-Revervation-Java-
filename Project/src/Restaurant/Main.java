@@ -1,78 +1,87 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.crypto.BadPaddingException;
 
 public class Main{
-    public static void main(String[] arg){
+
+    Menu menu = new Menu();
+    MenuInterface menuInterface = new MenuInterface(menu);
+    Staff staff = new Staff();
+    Scanner scanner = new Scanner(System.in);
+    public static GetInput gi = new GetInput();
+
+    public Main() throws IOException {
+    }
+
+    // made public class not static bc there was static error
+    public static void main(String[] arg) throws IOException {
+
         Menu menu = new Menu();
         MenuInterface menuInterface = new MenuInterface(menu);
         Staff staff = new Staff();
         Scanner scanner = new Scanner(System.in);
-        public static GetInput gi = new GetInput();
-        MenuInterface menu = new MenuInterface();
-        // made public class not static bc there was static error
-        public void main(String[] arg){
-            //WRITE function init data to load text file data to the programme
+        //public static GetInput gi = new GetInput();
+        MenuInterface menuInt = new MenuInterface(menu);
+        //WRITE function init data to load text file data to the programme
 
-            //Clears the CMD prompt
-            clearScreen();
-            //getStaffID asks the user for StaffID input and store it so that once keyed in during initialisation, the
-            //waiter does not need to key in again.
-            staff.setStaffID();
-            printAppOptions();
-            int option = 1;
-            while (option < 13){ //TO BE UPDATED AS WHEN AND WHEN NEW SWITCH is added
-                switch(option){
-                    case 1: // Create/update/remove menu item
-                        clearScreen();
-                        Scanner sc = new Scanner(System.in);
-                        System.out.println("What would you like to do? ");
-                        System.out.println("|     1. Create menu item     |");
-                        System.out.println("|     2. Update menu item     |");
-                        System.out.println("|     3. Remove menu item     |");
-                        System.out.print("Your option: ");
-                        int opt = sc.nextInt();
-                        while (opt < 1 && opt > 3) {
-                            opt = sc.nextInt();
-                            System.out.println("Input should be either 1, 2 or 3!");
-                        }
-                        switch (opt){ //the 3 functions below need some error handling
-                            case 1:
-                                menuInterface.createNewMenuItemInterface();
-                                break;
-                            case 2:
-                                menuInterface.updateMenuItemInterface();
-                                break;
-                            case 3:
-                                menuInterface.removeMenuItemInterface();
-                                break;
-                            case 4:
-                                System.out.println("Exiting...");
-                                break;
-                            default:
-                                break;
-                        }
-                        break;
-
-
-                    case 2: // Create/update/remove set packages
-                        clearScreen();
-                        Scanner sc = new Scanner(System.in);
-                        GetInput gi = new GetInput();
-                        System.out.println("Would you like to ");
-                        System.out.println("1. Create");
-                        System.out.println("2. Update");
-                        System.out.println("3. Remove a set package?");
-                        int input = 0;
-                        while (input < 1 && input > 3){
-                            input = gi.getInput();
-                        }
-                        while (1){
+        //Clears the CMD prompt
+        clearScreen();
+        //getStaffID asks the user for StaffID input and store it so that once keyed in during initialisation, the
+        //waiter does not need to key in again.
+        staff.setStaffID();
+        printAppOptions();
+        int option = 1;
+        while (option < 13) { //TO BE UPDATED AS WHEN AND WHEN NEW SWITCH is added
+            switch (option) {
+                case 1: // Create/update/remove menu item
+                    clearScreen();
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("What would you like to do? ");
+                    System.out.println("|     1. Create menu item     |");
+                    System.out.println("|     2. Update menu item     |");
+                    System.out.println("|     3. Remove menu item     |");
+                    System.out.print("Your option: ");
+                    int opt = sc.nextInt();
+                    while (opt < 1 && opt > 3) {
+                        opt = sc.nextInt();
+                        System.out.println("Input should be either 1, 2 or 3!");
+                    }
+                    switch (opt) { //the 3 functions below need some error handling
+                        case 1:
+                            menuInterface.createNewMenuItemInterface();
+                            break;
+                        case 2:
+                            menuInterface.updateMenuItemInterface();
+                            break;
+                        case 3:
+                            menuInterface.removeMenuItemInterface();
+                            break;
+                        case 4:
+                            System.out.println("Exiting...");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 2: // Create/update/remove set packages
+                    clearScreen();
+                    //Scanner sc = new Scanner(System.in);
+                    GetInput gi = new GetInput();
+                    System.out.println("Would you like to ");
+                    System.out.println("1. Create");
+                    System.out.println("2. Update");
+                    System.out.println("3. Remove a set package?");
+                    int input = 0;
+                    while (input < 1 && input > 3){
+                        //input = gi.getInput();
+                    }
+                    while (true){
                             switch(input){
                                 case 1:
-                                    menu.create
+                                    //menu.create
 
                             }
                         }
@@ -367,14 +376,17 @@ public class Main{
     public static int getIntegerInput(){
         //this function is to return int after getting a user input using scanner
         //MUST DO exception handling
+        return 1;
     }
     public static int getStringInput(){
         //this function is to return String after getting a user input using scanner
         //MUST DO exception handling
+        return 1;
     }
     public static int getDoubleInput(){
         //this function is to return double after getting a user input using scanner
         //MUST DO exception handling
+        return 1;
     }
 
     public static void printAppOptions(){
