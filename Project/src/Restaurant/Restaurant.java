@@ -54,7 +54,7 @@ public class Restaurant {
         for (Table table : tableList) {
             if (table.getCapacity() >= pax && table.isFree(arrivalDateTime)) {
                 table.reserve(arrivalDateTime, pax, name, tel);
-                return table.getId();
+                return table.getTableNum();
             }
         }
         return -1;
@@ -97,21 +97,30 @@ public class Restaurant {
             //updates levels free & reserved
             t.updateLevel(currentDateTime);
             if (t.getTableStatus()== Table.Level.FREE){
-                sb.append("Table: %d - Capacity: %d - Status: Available\n", t.getId(), t.getCapacity());
+                sb.append("Table: %d - Capacity: %d - Status: Available\n", t.getTableNum(), t.getCapacity());
                 free++;
             }
             else if (t.getTableStatus()==Table.Level.OCCUPIED) {
-                sb.append("Table: " + t.getId() + " - Capacity: " + t.getCapacity() + " - Status: Occupied - People Seated: " + t.getPax() + "\n");
+                sb.append("Table: " + t.getTableNum() + " - Capacity: " + t.getCapacity() + " - Status: Occupied - People Seated: " + t.getPax() + "\n");
                 occupied++;
             }
             else{
-                sb.append(String.format("Table : %d - Capacity: %d - Status: Reserved\n"), t.getId(), t.getCapacity());
+                sb.append(String.format("Table : %d - Capacity: %d - Status: Reserved\n"), t.getTableNum(), t.getCapacity());
                 reserved++;
             }
         }
         sb.append(String.format("Tables Available: %d - Tables Occupied: %d - Tables Reserved: %d\n", free, occupied, reserved));
         return sb.toString();
 
+    }
+
+    public Table getTableFromTableNum(int tableNum){
+        for (Table t: tableList){
+            if (t.getTableNum()==tableNum){
+                return t;
+            }
+        }
+        return null;
     }
 }
 
