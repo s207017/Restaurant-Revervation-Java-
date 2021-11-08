@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Restaurant {
     private ArrayList<Table> tableList = new ArrayList<Table>();
-    private ArrayList<Payment> transactionHistory = new ArrayList<Payment>();
+    private ArrayList<TransHistDay> transactionHistory = new ArrayList<TransHistDay>();
 
     public Restaurant(){
         tableList.add(new Table(1,2));
@@ -18,10 +18,8 @@ public class Restaurant {
         tableList.add(new Table(7,8));
         tableList.add(new Table(8,10));
     }
-    public void addEntry(Payment payment){
-        transactionHistory.add(payment);
-    }
-    public ArrayList<Payment> getTransactionHistory(){
+
+    public ArrayList<TransHistDay> getTransactionHistory(){
         return transactionHistory;
     }
 
