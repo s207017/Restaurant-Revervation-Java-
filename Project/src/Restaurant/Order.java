@@ -9,7 +9,6 @@ public class Order {
     private int orderID;
     private int staffID;
     private int tableNum;
-    private Timestamp timestamp;
     private LocalDateTime date;
     private double total;
     private ArrayList<OrderItem> orderList;
@@ -19,7 +18,6 @@ public class Order {
         this.orderID = orderNum++;
         this.staffID = staffID;
         this.tableNum = tableNum;
-        this.timestamp = new Timestamp(System.currentTimeMillis());
         this.date = LocalDateTime.now();
         this.orderList = new ArrayList<>();
     }
