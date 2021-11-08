@@ -12,6 +12,10 @@ public class Main{
     Staff staff = new Staff();
     Scanner scanner = new Scanner(System.in);
     public static GetInput gi = new GetInput();
+
+    public Main() throws IOException {
+    }
+
     // made public class not static bc there was static error
     public static void main(String[] arg) throws IOException {
 

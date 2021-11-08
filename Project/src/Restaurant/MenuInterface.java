@@ -126,7 +126,7 @@ public class MenuInterface {
 
         System.out.print("Enter the menu ID of the main course item.");
         for (int i = 0; i < menuID.size(); i++){
-            (menuID.get(i)).get
+            (menuID.get(i)).getItemID();
         }
         System.out.println("");
 
