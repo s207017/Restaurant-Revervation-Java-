@@ -13,7 +13,11 @@ public class OrderInterfaceUI {
     public void addOrCreateOrder(){
         System.out.print("Enter table number: ");
         int TableNum = GetInput.getInt();
-        if(this.restaurant.ge)
+        while(this.restaurant.getTableList().get(TableNum-1).getTableStatus() != Table.Level.OCCUPIED){
+            System.out.print("No one at the table! Enter again");
+            TableNum = GetInput.getInt();
+        }
+        
 
 
     }
