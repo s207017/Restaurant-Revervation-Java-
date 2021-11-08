@@ -23,7 +23,7 @@ public class Menu {
         dessertItems.add(new MenuItem("Ice Cream",401,4.50,"A yummy ice cold refresher"));
 
         setPackageItems.add(new SetPackage("Set Meal A",501,13.40,"Tonkotsu Ramen + Ebi Fry + Drink"));
-        setPackageItems.add(new SetPackage("Set Meal B",501,13.70,"Tonkotsu Ramen + Gyoza + Drink"));
+        setPackageItems.add(new SetPackage("Set Meal B",502,13.70,"Tonkotsu Ramen + Gyoza + Drink"));
     }
 
     public ArrayList<MenuItem> getMainCourseItems() {
@@ -108,6 +108,17 @@ public class Menu {
         for(MenuItem d : drinkItems){
             System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
             System.out.printf("     %s\n", d.getDescription());
+        }
+        System.out.println("-".repeat(100));
+    }
+    public void printDrinkLTEPrice(double price){
+        System.out.println("-".repeat(100));
+        System.out.println("Drinks:");
+        for(MenuItem d : drinkItems){
+            if(d.getPrice() <= price) {
+                System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
+                System.out.printf("     %s\n", d.getDescription());
+            }
         }
         System.out.println("-".repeat(100));
     }
