@@ -264,7 +264,6 @@ public class Menu {
     }
 
     //updating of menuItems done directly in the application!
-
     public void removeMenuItem(int menuItemType, int menuItemID){
         int toUpdateID;
         switch(menuItemType){
@@ -304,5 +303,122 @@ public class Menu {
                 }     
                 break;
         }
+    }
+
+    public void createNewMenuItemInterface(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What type of menu item is your new menu?");
+        printMenuTypes();
+        System.out.print("Your input: ");
+        int menuTypeInt = sc.nextInt();
+        System.out.print("Enter the name of the new menu item: ");
+        String menuName = sc.next();
+        System.out.print("Enter the price of the new menu item: ");
+        double price = sc.nextDouble();
+        System.out.println("Enter the description of the new menu item in one line: ");
+        String desc = sc.nextLine();
+        createNewMenuItem(menuName, menuTypeInt, price, desc);
+    }
+
+    public void updateMenuItem(){
+        Scanner sc = new Scanner(System.in);
+        int ID, changeOption;
+        printMenu();
+        System.out.println("Enter the menu ID which you want to modify: ");
+        ID = sc.nextInt();
+        changeOption = 1;
+        while (changeOption != 4) {
+            System.out.println("What do you want to change?");
+            printChangeTypes();
+            System.out.println("Enter your option: ");
+            changeOption = sc.nextInt();
+            switch (changeOption) {
+                case 1:
+                    System.out.println("What is the new price?");
+                    double newPrice = sc.nextDouble();
+                    getMenuItemFromID(ID).setPrice(newPrice);
+                    break;
+                case 2:
+                    System.out.println("What is the new name?");
+                    String newName = sc.nextLine();
+                    getMenuItemFromID(ID).setItemName(newName);
+                    break;
+                case 3:
+                    System.out.println("What is the new description?");
+                    String newDesc = sc.nextLine();
+                    getMenuItemFromID(ID).setDescription(newDesc);
+                    break;
+                case 4:
+                    System.out.println("Exiting update of menu...");
+                    break;
+                default:
+                    break;
+            }
+        }
+        System.out.println("UPDATE MENU ITEM END");
+    }
+
+    public void removeMenuItemInterface(){
+        Scanner sc = new Scanner(System.in);
+        int ID;
+        printMenuTypes();
+        System.out.println("What type of menu item would you like to remove?");
+        System.out.print("Your input: ");
+        int menuType = sc.nextInt();
+        switch(menuType){
+            case 1:
+                printMainCourse();
+                break;
+            case 2:
+                printSide();
+                break;
+            case 3:
+                printDrink();
+                break;
+            case 4:
+                printDesert();
+                break;
+            case -1:
+                break;
+            default:
+                System.out.println("Please enter values 1-4, enter -1 to exit.");
+        }
+        System.out.print("What is the menu item ID you would like to delete?");
+        ID = sc.nextInt();
+        removeMenuItem(menuType, ID);
+        System.out.println("Updated: ");
+        switch(menuType){
+            case 1:
+                printMainCourse();
+                break;
+            case 2:
+                printSide();
+                break;
+            case 3:
+                printDrink();
+                break;
+            case 4:
+                printDesert();
+                break;
+            case -1:
+                break;
+            default:
+                System.out.println("Please enter values 1-4, enter -1 to exit.");
+        }
+        System.out.println("REMOVE MENU ITEM END");
+    }
+
+    public void printChangeTypes(){
+        System.out.println("|        1. Price        |");
+        System.out.println("|        2. Name         |");
+        System.out.println("|     3. Description     |");
+        System.out.println("|        4. Quit         |");
+    }
+
+    public void printMenuTypes(){
+        System.out.println("|     1. Main Course      |");
+        System.out.println("|        2. Sides         |");
+        System.out.println("|        3. Drinks        |");
+        System.out.println("|       4. Desserts       |");
     }
 }
