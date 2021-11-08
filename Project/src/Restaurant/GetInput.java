@@ -17,29 +17,37 @@ public class GetInput {
                 isValid = true;
             } catch (InputMismatchException e) {
                 System.out.print("Please enter a valid integer input: ");
+                sc.next();
             }
         }
         return inputI;
     }
 
     public String getString(){
-        try{
-            inputS = sc.next();
-        }
-        catch(InputMismatchException e){
-            System.out.print("Please enter a valid string input: ");
-            inputS = sc.next();
+        boolean isValid = false;
+        while(!isValid) {
+            try {
+                inputS = sc.next();
+                inputS += sc.nextLine();
+                isValid = true;
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a valid string input: ");
+                sc.nextLine();
+            }
         }
         return inputS;
     }
 
     public double getDouble(){
-        try{
-            inputD = sc.nextDouble();
-        }
-        catch(InputMismatchException e){
-            System.out.print("Please enter a valid double input: ");
-            inputD = sc.nextDouble();
+        boolean isValid = false;
+        while(!isValid) {
+            try {
+                inputD = sc.nextInt();
+                isValid = true;
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a valid double input: ");
+                sc.next();
+            }
         }
         return inputD;
     }
