@@ -48,6 +48,13 @@ public class Order {
             if(temp == null){
                 System.out.println("Item does not exist, please enter valid ID.");
                 continue;
+            }else if(temp.getItemID() > 500){
+                menu.printDrink();
+                while(choice <=500 || choice > 600){
+                    System.out.print("Enter of drink (ID more than 500): ");
+                    choice = sc.nextInt();
+                }
+                ((SetPackage) temp).addDrink(menu.getMenuItemFromID(choice));
             }
             if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
                 MenuItem set = temp;
