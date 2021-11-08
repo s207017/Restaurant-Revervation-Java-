@@ -67,7 +67,8 @@ class  SetPackage extends MenuItem {
 //        this.numSide = numSide;
         // ^ if wanna have different combinations
     }
-    public SetPackage(String itemName, int itemID, double price, String)
+
+
     // when customer selects set package from the menu, create another instance of set package to be put into orderitems.
     // SetPackage student_meal = new SetPackage("student meal", 10, 10);
     // ^ student_meal will be shown on the menu but when the customer orders this, create another object (shown below)
