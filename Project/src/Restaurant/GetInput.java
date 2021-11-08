@@ -42,7 +42,7 @@ public class GetInput {
         boolean isValid = false;
         while(!isValid) {
             try {
-                inputD = sc.nextInt();
+                inputD = sc.nextDouble();
                 isValid = true;
             } catch (InputMismatchException e) {
                 System.out.print("Please enter a valid double input: ");
