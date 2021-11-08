@@ -68,7 +68,6 @@ class  SetPackage extends MenuItem {
         // ^ if wanna have different combinations
     }
 
-
     // when customer selects set package from the menu, create another instance of set package to be put into orderitems.
     // SetPackage student_meal = new SetPackage("student meal", 10, 10);
     // ^ student_meal will be shown on the menu but when the customer orders this, create another object (shown below)
