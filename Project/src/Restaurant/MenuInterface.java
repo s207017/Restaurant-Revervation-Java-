@@ -15,6 +15,7 @@ public class MenuInterface {
     public void createNewMenuItemInterface() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("What type of menu item is your new menu?");
+        this.printMenuTypes();
         //menu.printMenuTypes();
         System.out.print("Your input: ");
         int menuTypeInt = sc.nextInt();
@@ -32,7 +33,7 @@ public class MenuInterface {
     public void removeMenuItemInterface() throws IOException {
         Scanner sc = new Scanner(System.in);
         int ID;
-        //menu.printMenuTypes();
+        this.printMenuTypes();
         System.out.println("What type of menu item would you like to remove?");
         System.out.print("Your input: ");
         int menuType = sc.nextInt();
@@ -111,28 +112,24 @@ public class MenuInterface {
         System.out.println("|       4. Desserts       |");
     }
 
-//    public void createSetPackageInterface(){
-//        double initialPrice = 0;
-//        ArrayList<MenuItem> menuID = new ArrayList();
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("You are now creating a set package");
-//        System.out.print("Enter the name of the set package: ");
-//        String name = sc.next();
-//        System.out.println("Enter the description of the set package:");
-//        String desc = sc.next();
-//
-//        System.out.print("Enter the menu ID of the main course item.");
-//        System.out.print("Number of side menu idems: ");
-//        int noOfSides = sc.nextInt();
-//        for (int i = 1; i < noOfSides + 1; i++){
-//            System.out.printf("%d: Input the side menu ID: ", i);
-//            int id = sc.nextInt();
-//            menuID.add(id);
-//        }
-//        for (int i = 0; i < menuID.size; i++){
-//            //(menuID.get(i)).get
-//        }
-//        System.out.println("");
-//
-//    }
+
+
+    public void createSetPackageInterface(){
+        double initialPrice = 0;
+        ArrayList<MenuItem> menuID = new ArrayList<MenuItem>();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("You are now creating a set package");
+        System.out.print("Enter the name of the set package: ");
+        String name = sc.next();
+        System.out.println("Enter the description of the set package:");
+        String desc = sc.next();
+
+        System.out.print("Enter the menu ID of the main course item.");
+        for (int i = 0; i < menuID.size(); i++){
+            (menuID.get(i)).get
+        }
+        System.out.println("");
+
+    }
+
 }

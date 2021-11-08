@@ -7,13 +7,11 @@ import javax.crypto.BadPaddingException;
 
 public class Main{
 
-
-
-
-    public Main() throws IOException {
-    }
-
-
+    Menu menu = new Menu();
+    MenuInterface menuInterface = new MenuInterface(menu);
+    Staff staff = new Staff();
+    Scanner scanner = new Scanner(System.in);
+    public static GetInput gi = new GetInput();
     // made public class not static bc there was static error
     public static void main(String[] arg) throws IOException {
 
