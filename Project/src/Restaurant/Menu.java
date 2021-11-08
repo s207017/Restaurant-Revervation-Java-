@@ -305,23 +305,7 @@ public class Menu {
         }
     }
 
-    public void updateMenuItemInterface(){
-        Scanner sc = new Scanner(System.in);
-        int ID, changeOption;
-        printMenu();
-        System.out.println("Enter the menu ID which you want to modify: ");
-        ID = sc.nextInt();
-        changeOption = 1;
-        while (changeOption != 4) {
-            System.out.println("What do you want to change?");
-            printChangeTypes();
-            System.out.println("Enter your option: ");
-            changeOption = sc.nextInt();
-            this.updateMenuItem(ID, changeOption);
-        }
-        System.out.println("UPDATE MENU ITEM END");
 
-    }
 
     public void updateMenuItem(int ID, int changeOption){
         Scanner sc = new Scanner(System.in);
