@@ -10,6 +10,7 @@ public class Main{
     MenuInterface menuInterface = new MenuInterface(menu);
     Staff staff = new Staff();
     Scanner scanner = new Scanner(System.in);
+    public static GetInput gi = new GetInput();
     // made public class not static bc there was static error
     public void main(String[] arg){
         //WRITE function init data to load text file data to the programme
@@ -46,6 +47,8 @@ public class Main{
                         case 3:
                             menuInterface.removeMenuItemInterface();
                             break;
+                        case 4:
+                            menu.createNewMenuItemInterface();
                         default:
                             break;
                     }
@@ -54,6 +57,23 @@ public class Main{
 
                 case 2: // Create/update/remove set packages
                     clearScreen();
+                    Scanner sc = new Scanner(System.in);
+                    GetInput gi = new GetInput();
+                    System.out.println("Would you like to ");
+                    System.out.println("1. Create");
+                    System.out.println("2. Update");
+                    System.out.println("3. Remove a set package?");
+                    int input = 0;
+                    while (input < 1 && input > 3){
+                        input = gi.getInput();
+                    }
+                    while (1){
+                        switch(input){
+                            case 1:
+                                menu.create
+
+                        }
+                    }
 
 
 
