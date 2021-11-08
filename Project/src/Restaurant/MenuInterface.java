@@ -111,28 +111,28 @@ public class MenuInterface {
         System.out.println("|       4. Desserts       |");
     }
 
-    public void createSetPackageInterface(){
-        double initialPrice = 0;
-        ArrayList<Menuitem> menuID = new ArrayList();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("You are now creating a set package");
-        System.out.print("Enter the name of the set package: ");
-        String name = sc.next();
-        System.out.println("Enter the description of the set package:");
-        String desc = sc.next();
-
-        System.out.print("Enter the menu ID of the main course item.");
-        System.out.print("Number of side menu idems: ");
-        int noOfSides = sc.nextInt();
-        for (int i = 1; i < noOfSides + 1; i++){
-            System.out.print("%d: Input the side menu ID: ", i);
-            int id = sc.nextInt();
-            menuID.add(id);
-        }
-        for (int i = 0; i < menuID.size; i++){
-            (menuID.get(i)).get
-        }
-        System.out.println("");
-
-    }
+//    public void createSetPackageInterface(){
+//        double initialPrice = 0;
+//        ArrayList<MenuItem> menuID = new ArrayList();
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("You are now creating a set package");
+//        System.out.print("Enter the name of the set package: ");
+//        String name = sc.next();
+//        System.out.println("Enter the description of the set package:");
+//        String desc = sc.next();
+//
+//        System.out.print("Enter the menu ID of the main course item.");
+//        System.out.print("Number of side menu idems: ");
+//        int noOfSides = sc.nextInt();
+//        for (int i = 1; i < noOfSides + 1; i++){
+//            System.out.printf("%d: Input the side menu ID: ", i);
+//            int id = sc.nextInt();
+//            menuID.add(id);
+//        }
+//        for (int i = 0; i < menuID.size; i++){
+//            //(menuID.get(i)).get
+//        }
+//        System.out.println("");
+//
+//    }
 }
