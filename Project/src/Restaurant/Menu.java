@@ -1,5 +1,6 @@
 package Restaurant;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Menu {
     private ArrayList<MenuItem> mainCourseItems = new ArrayList<MenuItem>();
@@ -225,6 +226,32 @@ public class Menu {
                     ID=m.getItemID();
                 }
                 SetPackage setPackage = new SetPackage(name, ID+1, price, description);
+                Scanner sc = new Scanner(System.in);
+                // print -> which main course + print maincourse list
+                printMainCourse();
+                System.out.print("Select the main course for this set package: ");
+                // scan -> must get correct ID (maincourseID)
+                int mainCourseID = sc.nextInt();
+                while (100>=mainCourseID && mainCourseID>100+ mainCourseItems.size()){
+                    System.out.print("Invalid ID, please try again: ");
+                    mainCourseID = sc.nextInt();
+                }
+
+                // add maincourse item to items array in setpackage
+                setPackage.addMainCourse(getMenuItemFromID(mainCourseID));
+
+                // print -> which main course + print side list
+                printSide();
+                System.out.print("Select the side for this set package: ");
+                // scan -> must get correct ID (sideID)
+                int sideID = sc.nextInt();
+                while (200>=sideID && sideID>200+ mainCourseItems.size()){
+                    System.out.print("Invalid ID, please try again: ");
+                    sideID = sc.nextInt();
+                }
+
+                // add side item to items array in setpackage
+                setPackage.addSide(getMenuItemFromID(sideID));
                 break;
             default:
                 System.out.println("Wrong input into createNewMenuItem.");
