@@ -7,6 +7,7 @@ import javax.crypto.BadPaddingException;
 public class Main{
 
     Menu menu = new Menu();
+    MenuInterface menuInterface = new MenuInterface(menu);
     Staff staff = new Staff();
     Scanner scanner = new Scanner(System.in);
     // made public class not static bc there was static error
@@ -37,13 +38,13 @@ public class Main{
                     }
                     switch (opt){ //the 3 functions below need some error handling
                         case 1:
-                            menu.createNewMenuItemInterface();
+                            menuInterface.createNewMenuItemInterface();
                             break;
                         case 2:
                             menu.updateMenuItem();
                             break;
                         case 3:
-                            menu.removeMenuItemInterface();
+                            menuInterface.removeMenuItemInterface();
                             break;
                         default:
                             break;
