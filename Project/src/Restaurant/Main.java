@@ -11,7 +11,7 @@ public class Main{
 
     Menu menu = new Menu();
     MenuInterface menuInterface = new MenuInterface(menu);
-    Staff staff = new Staff();
+    Staff staff;
     public static GetInput gi = new GetInput();
 
     public Main() throws IOException {
@@ -24,7 +24,7 @@ public class Main{
         MenuInterface menuInterface = new MenuInterface(menu);
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
-        Staff staff = new Staff();
+        Staff staff;
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
         Membership membership = new Membership();

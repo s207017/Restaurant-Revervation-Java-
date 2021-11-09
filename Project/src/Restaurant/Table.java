@@ -163,7 +163,7 @@ public class Table {
      * arrayList(i-1).assignTable(pax) called in main()
      * @param pax number of people to be seated. stored here to be retrieved during payment
      */
-    public void assignTable(int pax){
+    public void occupyTable(int pax){
         this.pax = pax;
         this.tableStatus = Level.OCCUPIED;
     }

@@ -84,6 +84,8 @@ public class Restaurant {
         return availableTables;
     }
 
+    //public void checkReservation
+
 
     /**
      * @return returns string that contains each table and its respective status and capacity
