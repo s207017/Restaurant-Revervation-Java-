@@ -210,12 +210,7 @@ public class Main{
 
                 case 8:
                     clearScreen();
-                    int pax;
-                    System.out.println("You are now assigning a table to customer(s)");
-                    pax = tableAvailabilityInterface.askForPax();
-                    tableAvailabilityInterface.printTableAvailability();
-
-
+                    tableAvailabilityInterface.assignTable();
                     break;
 
 
