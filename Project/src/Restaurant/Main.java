@@ -216,10 +216,10 @@ public class Main{
                         }
                         switch (opt){
                             case 1:
-                                //reservationInterface.
+                                reservationInterface.checkReservationBooking();
                                 break;
                             case 2:
-                                //reservationInterface.
+                                reservationInterface.removeReservationBooking();
                                 break;
                             case 3:
                                 System.out.println("Exiting..");
