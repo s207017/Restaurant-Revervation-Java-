@@ -18,7 +18,7 @@ public class Receipt {
     }
 
     public void printReceipt(){
-        SetPackage s;
+        SetPackage s=null;
         String orderIdList = ""; // to get the list of order ids to be printed later
         String tableList = ""; // to get the list of tables to be printed later
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -44,9 +44,9 @@ public class Receipt {
                 if(o.getItem() instanceof SetPackage){
                     s = (SetPackage)o.getItem();
                     System.out.printf("%35s %-10f\n",s.getItemName(),s.getPrice());
-                    for(MenuItem m: s.getSetItems()){
-                        System.out.printf("\t- %35s\n",m.getItemName());
-                    }
+//                    for(MenuItem m: s.getSetItems()){
+//                        System.out.printf("\t- %35s\n",m.getItemName());
+//                    }
                 }else {
                     System.out.printf("%2d %35s $%-10f\n", o.getQuantityOrdered(), o.getItem().getItemName(), o.getQuantityOrdered() * o.getItem().getPrice());
                 }

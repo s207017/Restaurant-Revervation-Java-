@@ -20,28 +20,27 @@ public class Main{
         MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
-        Staff staff;
-        staff = restaurant.getStaffFromID(GetInput.getInt());
+        //Staff staff;
+        //staff = restaurant.getStaffFromID(GetInput.getInt());
         SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
 
         //public static GetInputGetInput = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
         MembershipInterface membershipInterface = new MembershipInterface(membership);
-        //WRITE function init data to load text file data to the programme
 
         //Clears the CMD prompt
-        //clearScreen();
+        ////clearScreen();
         //getStaffID asks the user for StaffID input and store it so that once keyed in during initialisation, the
         //waiter does not need to key in again.
-        staff.setStaffID();
+        //staff.setStaffID();
         printAppOptions();
-        int option = 1;
+        int option = 2;
         int opt;
         while (option < 13 && option >= 1) { //TO BE UPDATED AS WHEN AND WHEN NEW SWITCH is added
             switch (option) {
                 case 1: // Create/update/remove menu item
-                    clearScreen();
+                    //clearScreen();
                     opt = 1;
                     while (opt != -1 ){
                         menuInterface.printOptionsMenuItems();
@@ -70,7 +69,7 @@ public class Main{
                     }
                     break;
                 case 2: // Create/update/remove set packages
-                    clearScreen();
+                    //clearScreen();
                     opt = 1;
                     while (opt != -1) {
                         menuInterface.printOptionsSetPackages();
@@ -105,12 +104,12 @@ public class Main{
                     break;
 
                 case 3:
-                    clearScreen();
+                    //clearScreen();
                     orderInterface.addItemsToOrder();
                     break;
 
                 case 4:
-                    clearScreen();
+                    //clearScreen();
                     opt = 1;
                     while (opt != -1){
                         orderInterface.viewOrder();
@@ -120,7 +119,7 @@ public class Main{
                     break;
 
                 case 5:
-                    clearScreen();
+                    //clearScreen();
                     opt = 1;
                     while (opt != -1) {
                         orderInterface.printAddRemove();
@@ -153,7 +152,7 @@ public class Main{
                     break;
 
                 case 6:
-                    clearScreen();
+                    //clearScreen();
                     opt = 1;
                     while (opt != -1){
                         System.out.println("1. Create new reservation");
@@ -170,7 +169,7 @@ public class Main{
                         }
                         switch (opt){
                             case 1:
-                                reservationInterface.createReservationBooking();
+                                reservationInterface.checkReservationBooking();
                                 break;
                             case 2:
                                 System.out.println("Exiting");
@@ -181,7 +180,7 @@ public class Main{
                     break;
 
                 case 7:
-                    clearScreen();
+                    //clearScreen();
                     opt = 1;
                     while (opt != 1){
                         opt =GetInput.getInt();
@@ -212,30 +211,30 @@ public class Main{
                     break;
 
                 case 8:
-                    clearScreen();
+                    //clearScreen();
                     tableAvailabilityInterface.assignTable();
                     break;
 
                 case 9:
-                    clearScreen();
+                    //clearScreen();
                     System.out.println(restaurant.toString());
                     break;
 
                 case 10:
-                    clearScreen();
+                    //clearScreen();
                     membershipInterface.AddMember();
                     break;
 
 
                 case 11:
-                    clearScreen();
+                    //clearScreen();
                     //PaymentInterface paymentInterface = new PaymentInterface(restaurant, membership)
                     //PaymentInterface.
                     break;
 
 
                 case 12:
-                    clearScreen();
+                    //clearScreen();
                     salesRevenueReportInterface.printSalesRevenueReport();
                     break;
 
@@ -246,13 +245,13 @@ public class Main{
         }
     }
 
-        public static void clearScreen(){
-            try {
-                new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-            } catch (Exception E) {
-                System.out.println(E);
-            }
-    }
+//        public static void //clearScreen(){
+//            try {
+//                new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+//            } catch (Exception E) {
+//                System.out.println(E);
+//            }
+//    }
 
 
 

@@ -5,7 +5,7 @@ public class Reservation {
     private int pax;
     private String tel =null;
 
-    Reservation(String name, int pax, String tel) {
+    public Reservation(String name, int pax, String tel) {
         this.name = name;
         this.tel = tel;
         this.pax = pax;

@@ -150,6 +150,7 @@ public class MenuInterface {
         menuID.add(menu.getMenuItemFromID(sideMenuID));
         System.out.print("Enter the maximum price of drink: ");
         maxPrice = sc.nextDouble();
+        System.out.println(mainMenuID+sideMenuID);
         double tempTotalPrice = menu.getMenuItemFromID(mainMenuID).getPrice() +
                 menu.getMenuItemFromID(sideMenuID).getPrice() + maxPrice;
         System.out.println("The total price of the current combination, with the maximum drink price is :" +
@@ -162,6 +163,8 @@ public class MenuInterface {
                 if (discountRate <= 0 || discountRate >= 100){
                     System.out.println("Invalid input! Please try again");
                     continue;
+                } else {
+                    break;
                 }
             }
             finalPrice = tempTotalPrice * ((100 - discountRate)/100);
