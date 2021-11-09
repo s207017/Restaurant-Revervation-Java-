@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Staff{
     private int staffID;
 
-    public Staff() {
-        staffID = 0;
+    public Staff(int ID) {
+        this.staffID = ID;
     }
 
     // getter

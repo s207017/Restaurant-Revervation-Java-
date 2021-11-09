@@ -11,6 +11,7 @@ public class SalesRevenueReport {
     private LocalDateTime endDate;
     private ArrayList<TransHistDay> transHist;
     private ArrayList<TransHistItem> summaryList;
+
     public SalesRevenueReport(ArrayList<TransHistDay> transHistAll, int choice){
         transHist = new ArrayList<TransHistDay>();
         summaryList = new ArrayList<TransHistItem>();
@@ -38,12 +39,16 @@ public class SalesRevenueReport {
         generateReport();
     }
 
+    /**
+     *
+     * @param choice 1 and 2 indicate period and daily summary respectively
+     */
     public void printReport(int choice){
         double tempSum;
         double fullSum = 0;
         switch(choice) {
             case 1:
-                System.out.printf("Summary of sales on %s: \n", startDate);
+                System.out.printf("Summary of sales between %s and %s: \n", startDate);
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
@@ -53,7 +58,7 @@ public class SalesRevenueReport {
                 System.out.printf("Total revenue: %f\n", fullSum);
                 break;
             case 2:
-                System.out.printf("Summary of sales between %s and %s: \n", startDate, endDate);
+                System.out.printf("Summary of sales on %s: \n", startDate, endDate);
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
@@ -65,6 +70,12 @@ public class SalesRevenueReport {
         }
     }
 
+    /**
+     * This method is only used in the generate() method of this class
+     * @param name Name of item to be checked in summaryList of salesRevenueReport
+     * @param price Price of item to be checked in summaryList of salesRevenueReport
+     * @return
+     */
     public TransHistItem itemExists(String name, double price){
         for(TransHistItem x: this.summaryList){
             if(x.getItem() == name && x.getPrice() == price){
