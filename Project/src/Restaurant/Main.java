@@ -78,58 +78,58 @@ public class Main{
                             case 3:
                                 menuInterface.removeSetPackageInterface();
                                 break;
+                            default:
+                                System.out.println("Invalid input!");
+                                continue;
                         }
                     }
 
-
-
-
-                    case 3:
+                case 3:
                         clearScreen();
 
-                    case 4:
+                case 4:
                         clearScreen();
 
 
-                    case 5:
+                case 5:
                         clearScreen();
 
 
-                    case 6:
+                case 6:
                         clearScreen();
 
 
-                    case 7:
-                        clearScreen();
+                case 7:
+                    clearScreen();
 
 
-                    case 8:
-                        clearScreen();
+                case 8:
+                    clearScreen();
 
 
-                    case 9:
-                        clearScreen();
+                case 9:
+                    clearScreen();
 
 
-                    case 10:
-                        clearScreen();
+                case 10:
+                    clearScreen();
 
 
-                    case 11:
-                        clearScreen();
+                case 11:
+                    clearScreen();
 
 
-                    case 12:
-                        clearScreen();
+                case 12:
+                    clearScreen();
 
 
-                    default:
-                }
-
+                default:
             }
 
-
         }
+
+
+    }
 
         public static void clearScreen(){
             try {
