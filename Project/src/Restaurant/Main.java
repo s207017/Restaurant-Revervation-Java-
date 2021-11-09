@@ -1,5 +1,7 @@
 package Restaurant;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -21,6 +23,7 @@ public class Main{
         Menu menu = new Menu();
         Restaurant restaurant = new Restaurant();
         MenuInterface menuInterface = new MenuInterface(menu);
+        ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         Staff staff = new Staff();
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
@@ -46,7 +49,7 @@ public class Main{
                             opt = gi.getInt();
                             System.out.println("Input should be either 1, 2 or 3!");
                         }
-                        switch (opt) { //the 3 functions below need some error handling
+                        switch (opt) {
                             case 1:
                                 menuInterface.createNewMenuItemInterface();
                                 break;
@@ -68,11 +71,19 @@ public class Main{
                 case 2: // Create/update/remove set packages
                     clearScreen();
                     opt = 1;
-                    menuInterface.printOptionsSetPackages();
-                    while (opt >= 1 && opt <=3){
-                        System.out.print("Enter your option: ");
-                        opt = gi.getInt();
-                        switch(opt){
+                    while (opt != -1) {
+                        menuInterface.printOptionsSetPackages();
+                        while (opt < 1 || opt > 3) {
+                            System.out.print("Enter your option: ");
+                            opt = gi.getInt();
+                            if (opt < 1 || opt > 3){
+                                System.out.println("Invalid input! Try again");
+                                continue;
+                            } else {
+                                break;
+                            }
+                        }
+                        switch (opt) {
                             case 1:
                                 menuInterface.createSetPackageInterface();
                                 break;
@@ -83,35 +94,43 @@ public class Main{
                                 menuInterface.removeSetPackageInterface();
                                 break;
                             case 4:
-                                opt = 4;
+                                System.out.println("Exiting..");
+                                opt = -1;
                                 break;
                             default:
-                                System.out.println("Invalid input!");
-                                opt = 1;
-                                continue;
+                                break;
                         }
                     }
                     break;
 
                 case 3:
                     clearScreen();
-                    orderInterface.createOrder();
+                    //orderInterface.createOrder();
                     break;
 
                 case 4:
                     clearScreen();
-                    orderInterface.viewOrder();
+                    //orderInterface.viewOrder();
                     break;
 
                 case 5:
                     clearScreen();
                     opt = 1;
-                    System.out.println("1. Add item(s) to an existing order");
-                    System.out.println("2. Remove item(s) from an existing order");
-                    System.out.println("3. Return to the main menu");
-                    while (opt == 1 || opt == 2) {
+                    while (opt != -1) {
+                        System.out.println("1. Add item(s) to an existing order");
+                        System.out.println("2. Remove item(s) from an existing order");
+                        System.out.println("3. Return to the main menu");
                         System.out.print("Input your option: ");
-                        opt = gi.getInt();
+                        while (opt < 1 || opt > 3) {
+                            System.out.print("Enter your option: ");
+                            opt = gi.getInt();
+                            if (opt < 1 || opt > 3){
+                                System.out.println("Invalid input! Try again");
+                                continue;
+                            } else {
+                                break;
+                            }
+                        }
                         switch (opt) {
                             case 1:
                                 //orderInterface.addItemsToOrder();
@@ -120,44 +139,99 @@ public class Main{
                                 //orderInterface.removeItemsFromOrder();
                                 break;
                             case 3:
-                                opt = 0;
+                                System.out.println("Exiting..");
+                                opt = -1;
                                 break;
                             default:
-                                System.out.println("Invalid input!");
-                                opt = 1;
-                                continue;
+                                break;
+
                         }
                     }
                     break;
 
-
-
                 case 6:
                     clearScreen();
-
+                    opt = 1;
+                    while (opt != -1){
+                        System.out.println("1. Create new reservation");
+                        System.out.println("2. Return to the main menu");
+                        while (opt < 1 || opt > 2){
+                            System.out.print("Enter your option: ");
+                            opt = gi.getInt();
+                            if (opt < 1 || opt > 2){
+                                System.out.println("Invalid input! Try again");
+                                continue;
+                            } else {
+                                break;
+                            }
+                        }
+                        switch (opt){
+                            case 1:
+                                reservationInterface.createReservationBooking();
+                                break;
+                            case 2:
+                                System.out.println("Exiting");
+                                opt = -1;
+                                break;
+                        }
+                    }
+                    break;
 
                 case 7:
                     clearScreen();
-
+                    opt = 1;
+                    while (opt != 1){
+                        System.out.println("1. Check existing reservation");
+                        System.out.println("2. Remove reservation");
+                        System.out.println("3. Return to the main menu");
+                        while (opt < 1 || opt > 3){
+                            System.out.print("Enter your option: ");
+                            opt = gi.getInt();
+                            if (opt < 1 || opt > 3){
+                                System.out.println("Invalid input! Try again");
+                                continue;
+                            } else {
+                                break;
+                            }
+                        }
+                        switch (opt){
+                            case 1:
+                                //reservationInterface.
+                                break;
+                            case 2:
+                                //reservationInterface.
+                                break;
+                            case 3:
+                                System.out.println("Exiting..");
+                                opt = -1;
+                                break;
+                        }
+                    }
+                    break;
 
                 case 8:
                     clearScreen();
+                    break;
 
 
                 case 9:
                     clearScreen();
+                    break;
 
 
                 case 10:
                     clearScreen();
+                    break;
 
 
                 case 11:
                     clearScreen();
+                    break;
 
 
                 case 12:
                     clearScreen();
+                    break;
 
 
                 default:
@@ -184,5 +258,8 @@ public class Main{
         System.out.println("3. Create new order");
         System.out.println("4. View existing order");
         System.out.println("5. Add or remove item(s) to/from an existing order");
+        System.out.println("6. Create new reservation");
+        System.out.println("7. Check or remove an existing reservation");
+        System.out.println("8. Assign table");
     }
 }
