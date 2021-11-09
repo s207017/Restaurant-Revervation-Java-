@@ -29,6 +29,7 @@ public class MenuInterface {
         sc.nextLine();
         String desc = sc.nextLine();
         menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
+        System.out.println("New item added to the menu!");
     }
 
     public void removeMenuItemInterface() throws IOException {
@@ -115,9 +116,10 @@ public class MenuInterface {
 
     public void printOptionsMenuItems(){
         System.out.println("What would you like to do? ");
-        System.out.println("|     1. Create menu item     |");
-        System.out.println("|     2. Update menu item     |");
-        System.out.println("|     3. Remove menu item     |");
+        System.out.println("|        1. Create menu item        |");
+        System.out.println("|        2. Update menu item        |");
+        System.out.println("|        3. Remove menu item        |");
+        System.out.println("|     4. Return to the main menu    |");
         System.out.print("Your option: ");
     }
 
@@ -125,7 +127,8 @@ public class MenuInterface {
         System.out.println("Would you like to ");
         System.out.println("1. Create");
         System.out.println("2. Update");
-        System.out.println("3. Remove a set package?");
+        System.out.println("3. Remove a set package");
+        System.out.println("4. Return to the main menu");
     }
 
 
