@@ -107,13 +107,33 @@ public class Main{
                     clearScreen();
                     opt = 1;
                     while (opt != -1){
-                        orderInterface.createOrder();
+                        System.out.println("You are now creating an order");
+                        System.out.println("1. Create a new order");
+                        System.out.println("2. Return to the main menu");
+                        while (opt < 1 || opt > 2){
+                            System.out.print("Enter your option: ");
+                            opt = gi.getInt();
+                        }
+                        switch (opt) {
+                            case 1:
+                                orderInterface.createOrder();
+                                break;
+                            case 2:
+                                System.out.println("Exiting..");
+                                opt = -1;
+                                break;
+                        }
                     }
                     break;
 
                 case 4:
                     clearScreen();
-                    //orderInterface.viewOrder();
+                    opt = 1;
+                    while (opt != -1){
+                        orderInterface.viewOrder();
+                        System.out.print("Enter -1 to return to the main menu");
+                        opt = gi.getInt();
+                    }
                     break;
 
                 case 5:
@@ -212,11 +232,10 @@ public class Main{
                     tableAvailabilityInterface.assignTable();
                     break;
 
-
                 case 9:
                     clearScreen();
+                    System.out.println(restaurant.toString());
                     break;
-
 
                 case 10:
                     clearScreen();
