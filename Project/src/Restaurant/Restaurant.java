@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Restaurant {
     private ArrayList<Table> tableList = new ArrayList<Table>();
     private ArrayList<TransHistDay> transactionHistory = new ArrayList<TransHistDay>();
+    private ArrayList<Staff> staffList = new ArrayList<Staff>();
 
     public Restaurant(){
         tableList.add(new Table(1,2));
@@ -17,6 +18,11 @@ public class Restaurant {
         tableList.add(new Table(6,6));
         tableList.add(new Table(7,8));
         tableList.add(new Table(8,10));
+        staffList.add(new Staff(2307));
+        staffList.add(new Staff(1160));
+        staffList.add(new Staff(6969));
+        staffList.add(new Staff(4204));
+        staffList.add(new Staff(8008));
     }
 
     public ArrayList<TransHistDay> getTransactionHistory(){
@@ -118,6 +124,9 @@ public class Restaurant {
             }
         }
         return null;
+    }
+    public void addStaff(int ID){
+        this.staffList.add(new Staff(ID));
     }
 }
 

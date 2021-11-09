@@ -14,9 +14,17 @@ public class TransHistDay {
     public LocalDateTime getDate(){
         return this.date;
     }
+
     public ArrayList<TransHistItem> getTransList(){
         return transList;
     }
+
+    /**
+     *
+     * @param name Name of item to be found in the TransHistDay
+     * @param price Price of item to be found in TransHistDay
+     * @return Returns TransHistItem in TransHistDay with corresponding name and price
+     */
     public TransHistItem findTransHist(String name, double price) {
         for (TransHistItem i : this.transList) {
             if (i.getItem() == name && i.getPrice() == price) {

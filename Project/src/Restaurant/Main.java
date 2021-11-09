@@ -17,8 +17,7 @@ public class Main{
 
     public Main() throws IOException {
     }
-
-    // made public class not static bc there was static error
+    
     public static void main(String[] arg) throws IOException {
 
         Menu menu = new Menu();
@@ -116,7 +115,12 @@ public class Main{
 
                 case 4:
                     clearScreen();
-                    orderInterface.viewOrder();
+                    opt = 1;
+                    while (opt != -1){
+                        orderInterface.viewOrder();
+                        System.out.print("Enter -1 to return to the main menu");
+                        opt = gi.getInt();
+                    }
                     break;
 
                 case 5:
@@ -214,7 +218,6 @@ public class Main{
                     clearScreen();
                     tableAvailabilityInterface.assignTable();
                     break;
-
 
                 case 9:
                     clearScreen();
