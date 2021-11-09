@@ -29,17 +29,15 @@ public class SalesRevenueReportInterface {
     public void printSalesRevenueReport(){
         int choice;
         System.out.println("Select the type of report you wish to view:");
-        System.out.println("(1)\tPeriod report");
-        System.out.println("(2)\tDay report");
-        System.out.println("(Enter -1 to go back)");
-        choice = GetInput.getInt();
-        while(choice != 1 && choice != 2 && choice != -1) {
-            System.out.println("Invalid choice, please enter your choice again.");
+        do{
             System.out.println("(1)\tPeriod report");
             System.out.println("(2)\tDay report");
-            System.out.println("(Enter -1 to go back)");
+            System.out.println("[Enter -1 to go back]");
             choice = GetInput.getInt();
-        }
+            if(choice != 1 && choice != 2 && choice != -1){
+                System.out.println("Invalid input, please enter your choice again");
+            }
+        }while(choice != 1 && choice != 2 && choice != -1);
         switch(choice){
             case 1:
                 createPeriodSalesReport();
