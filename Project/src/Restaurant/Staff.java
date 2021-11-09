@@ -3,14 +3,14 @@ package Restaurant;
 import java.util.Scanner;
 
 public class Staff{
-    private String staffID;
+    private int staffID;
 
     public Staff() {
-        staffID = null;
+        staffID = 0;
     }
 
     // getter
-    public String getStaffID() {
+    public int getStaffID() {
         return staffID;
     }
 
@@ -18,6 +18,6 @@ public class Staff{
     public void setStaffID() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your 4 digit staff ID: ");
-        this.staffID = scanner.next();
+        this.staffID = GetInput.getInt();
     }
 }

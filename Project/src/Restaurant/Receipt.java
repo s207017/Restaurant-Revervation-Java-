@@ -25,16 +25,15 @@ public class Receipt {
 
         // Print address?
         // System.out.println("Server: " +) STAFFID
+        System.out.println("RECEIPT \n\n");
         System.out.println(String.format("Date/Time: " + dateFormat.format(date)));
         System.out.println();
         System.out.println();
-
-        System.out.print("Order ID: ");
         for (Table table: this.payment.getTables()) {
             orderIdList += table.getOrder().getOrderID() + " ";
             tableList += table.getTableNum() + " ";
         }
-        System.out.println("Order ID: " + tableList);
+        System.out.println("Table(s): " + tableList);
         System.out.println("Order ID: " + orderIdList);
 
         System.out.printf("%50s\n", "=".repeat(50));
@@ -46,13 +45,13 @@ public class Receipt {
         }
 
         System.out.printf("%50s\n", "=".repeat(50));
-        System.out.printf("%-40s $%-8f", "Sub-total:", this.payment.getSubTotal());
-        System.out.printf("%-40s $%-8f", "Taxes:", this.payment.getTax());
+        System.out.printf("%-40s $%-8f\n", "Sub-total:", this.payment.getSubTotal());
+        System.out.printf("%-40s $%-8f\n", "Taxes:", this.payment.getTax());
         System.out.printf("%50s\n", "-".repeat(50));
         System.out.printf("%-40s $%-8f", "TOTAL:", this.payment.getTax()+this.payment.getSubTotal());
-        System.out.println();
+        System.out.println("");
         System.out.printf("%50s\n", "*".repeat(50));
-        System.out.print("        * Thank you for dining with us! *        ");
+        System.out.print("        * Thank you for dining with us! *        \n");
         System.out.printf("%50s\n", "*".repeat(50));
     }
 }
