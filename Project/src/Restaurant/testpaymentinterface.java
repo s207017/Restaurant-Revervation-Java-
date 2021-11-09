@@ -18,10 +18,10 @@ public class testpaymentinterface {
 
         OrderItem oi = new OrderItem(menu.getMenuItemFromID(101),2);
         staff.setStaffID();
-        Order order = new Order(staff.getStaffID(),2);
-        order.addOrderItems(menu);
-        r.getTableFromTableNum(2).setOrder(order);
+        //Order order = new Order(staff.getStaffID(),2);
+        //order.addOrderItems(menu);
+        //r.getTableFromTableNum(2).setOrder(order);
         PaymentInterface pay = new PaymentInterface(r,m,hist);
-        pay.startPayment();
+
     }
 }

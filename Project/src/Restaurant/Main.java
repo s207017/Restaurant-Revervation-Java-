@@ -3,6 +3,7 @@ package Restaurant;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import javax.crypto.BadPaddingException;
@@ -24,7 +25,13 @@ public class Main{
         MenuInterface menuInterface = new MenuInterface(menu);
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
+
         Staff staff;
+
+        SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
+        TransHistDay transHistDay = new TransHistDay(LocalDateTime.now());
+        Staff staff = new Staff();
+
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
         Membership membership = new Membership();
@@ -107,25 +114,7 @@ public class Main{
 
                 case 3:
                     clearScreen();
-                    opt = 1;
-                    while (opt != -1){
-                        System.out.println("You are now creating an order");
-                        System.out.println("1. Create a new order");
-                        System.out.println("2. Return to the main menu");
-                        while (opt < 1 || opt > 2){
-                            System.out.print("Enter your option: ");
-                            opt = gi.getInt();
-                        }
-                        switch (opt) {
-                            case 1:
-                                orderInterface.createOrder();
-                                break;
-                            case 2:
-                                System.out.println("Exiting..");
-                                opt = -1;
-                                break;
-                        }
-                    }
+                    orderInterface.addItemsToOrder();
                     break;
 
                 case 4:
@@ -247,20 +236,22 @@ public class Main{
 
                 case 11:
                     clearScreen();
+                    //clarify
+                    //PaymentInterface paymentInterface = new PaymentInterface(restaurant, membership)
+                    //PaymentInterface.
                     break;
 
 
                 case 12:
                     clearScreen();
+                    salesRevenueReportInterface.printSalesRevenueReport();
                     break;
 
 
                 default:
+                    break;
             }
-
         }
-
-
     }
 
         public static void clearScreen(){
