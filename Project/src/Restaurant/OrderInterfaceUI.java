@@ -135,7 +135,7 @@ public class OrderInterfaceUI {
                 System.out.print("Invalid quantity! Please enter valid entry: ");
                 quantity = GetInput.getInt();
             }
-
+            order.addOrderItems(temp,quantity);
         }
     }
     //Remove items from order

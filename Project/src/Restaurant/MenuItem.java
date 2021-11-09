@@ -99,4 +99,7 @@ class  SetPackage extends MenuItem {
             System.out.println("Error, reached maximum number of side(s).");
         }
     }
+    public ArrayList<MenuItem> getSetItems(){
+        return this.setItems;
+    }
 }
