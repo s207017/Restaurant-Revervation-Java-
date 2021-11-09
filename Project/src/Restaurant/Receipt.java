@@ -32,7 +32,7 @@ public class Receipt {
         System.out.print("Order ID: ");
         for (Table table: this.payment.getTables()) {
             orderIdList += table.getOrder().getOrderID() + " ";
-            tableList += table.getId() + " ";
+            tableList += table.getTableNum() + " ";
         }
         System.out.println("Order ID: " + tableList);
         System.out.println("Order ID: " + orderIdList);
