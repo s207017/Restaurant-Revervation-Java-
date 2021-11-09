@@ -174,6 +174,7 @@ public class Table {
     public void freeTable(){
         this.pax = 0;
         this.tableStatus = Level.FREE;
+        this.order = null;
     }
 
     /**
