@@ -64,7 +64,7 @@ public class PaymentInterface {
             if (t == null) {
                 System.out.print("Invalid table number, please try again: ");
                 choice = GetInput.getInt();
-            } else if (t.getTableStatus() != Table.Level.OCCUPIED) {
+            } else if (t.getTableStatus() != Table.Level.OCCUPIED && t.getOrder() != null) {
                 System.out.print("No order, please try again: ");
                 choice = GetInput.getInt();
             } else {
@@ -75,7 +75,7 @@ public class PaymentInterface {
             }
         }
         if (this.payment.getTables().isEmpty()) {
-            System.out.println("TERMINATING PAYMENT...");
+            System.out.println("TERMINATING ADDING OF TABLE...");
             return;
         }
     }
@@ -94,14 +94,13 @@ public class PaymentInterface {
         selection = GetInput.getChar();
         while (selection != 'y' && selection != 'Y' && selection != 'n' && selection != 'N') {
             System.out.println("Please enter a valid option: ");
-            System.out.println("*" + selection + "*");
             selection = GetInput.getChar();
 
         }
         if (selection == 'y' || selection == 'Y') {
             System.out.print("Please enter phone number: ");
             phoneNumber = GetInput.getInt();
-            while (phoneNumber < 9000000 || phoneNumber > 99999999) {
+            while (phoneNumber < 80000000 || phoneNumber > 99999999) {
                 System.out.print("*ENTER -1 TO END*\nPlease enter a valid phone number: ");
                 phoneNumber = GetInput.getInt();
                 if (phoneNumber == -1) {
