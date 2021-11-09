@@ -74,4 +74,10 @@ public class ReservationInterface {
             }
         }
     }
+
+    public void printCheckRemove(){
+        System.out.println("1. Check existing reservation");
+        System.out.println("2. Remove reservation");
+        System.out.println("3. Return to the main menu");
+    }
 }
