@@ -30,10 +30,22 @@ public class Table {
         this.reservations = new HashMap<>();
     }
 
+    /**
+     * checks if the table has not been reserved for a particular timing
+     * @param arrivalDateTime the timing that will be checked against
+     * @return returns true/false
+     */
     boolean isFree(LocalDateTime arrivalDateTime){
         return !reservations.containsKey(arrivalDateTime);
     }
 
+    /**
+     * reserves the table for a particular date and time. creates Reservation object as value
+     * @param arrivalDateHour particular date and time
+     * @param pax number of guests
+     * @param name name of the person doing the reservation
+     * @param tel telephone number of the person doing the reservation
+     */
     void reserve(LocalDateTime arrivalDateHour, int pax, String name, String tel){
         reservations.put(arrivalDateHour, new Reservation(name, pax, tel));
     }
@@ -41,7 +53,7 @@ public class Table {
     /**
      * remove reservations if reservation+15min grace period is still less than current time
      * this ensures that the reservations in Reservations are beyond current time - 15min grace period only
-     * @param currentDateTime
+     * @param currentDateTime gets currentDateTime from interface
      */
     void updateReservationsHashMap(LocalDateTime currentDateTime) {
         Iterator<Map.Entry<LocalDateTime, Reservation>>
@@ -131,6 +143,7 @@ public class Table {
     public Order getOrder(){
         return this.order;
     }
+    public Map<LocalDateTime, Reservation> getReservations(){return this.reservations;}
 
     //setters
     //tableId doesn't change, capacity doesn't change. we don't need setters for those.
@@ -143,9 +156,9 @@ public class Table {
     }
 
 
-
-
-    //occupy table
+    /**
+     * assigns table by changing to OCCUPIED enum and assigning pax
+     */
     /**
      * arrayList(i-1).assignTable(pax) called in main()
      * @param pax number of people to be seated. stored here to be retrieved during payment
@@ -154,16 +167,23 @@ public class Table {
         this.pax = pax;
         this.tableStatus = Level.OCCUPIED;
     }
-    //free table
+
+    /**
+     * frees a table by changing to FREE enum and making pax 0
+     */
     public void freeTable(){
         this.pax = 0;
         this.tableStatus = Level.FREE;
     }
 
+    /**
+     * formats all the reservations of a table neatly
+     * @return returns a string to be printed
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Table: %d - MAX: %d\n", tableNum, capacity));
-        reservations.forEach((k, v) -> sb.append(String.format("\tDate: %s/%s %s: %s\n",
+        reservations.forEach((k, v) -> sb.append(String.format("\tDate: %s %s at %s for %s\n",
                 k.getDayOfMonth(), k.getMonth(),
                 k.getHour(), v)));
         return sb.toString();
