@@ -73,7 +73,11 @@ public class Main{
                                 menuInterface.createSetPackageInterface();
                                 break;
                             case 2:
-                                menuInterface.
+                                menuInterface.updateSetPackageInterface();
+                                break;
+                            case 3:
+                                menuInterface.removeSetPackageInterface();
+                                break;
                         }
                     }
 

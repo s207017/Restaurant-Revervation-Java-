@@ -182,9 +182,23 @@ public class MenuInterface {
         System.out.print("Enter the menu ID of the set package you would like to remove");
         menuItemID = gi.getInt();
         menu.removeMenuItem(5, menuItemID);
-
     }
-        //(int menuItemType, int menuItemID) throws IOException {
 
+    public void updateSetPackageInterface() throws IOException {
+        int menuItemID, changeOption;
+        System.out.println("You are now updating a set package item");
+        menu.printSetPackage();
+        System.out.print("Enter the menu ID of the set package you would like to update");
+        menuItemID = gi.getInt();
+        changeOption = 1;
+        while (changeOption != 4) {
+            System.out.println("What do you want to change?");
+            this.printChangeTypes();
+            System.out.println("Enter your option: ");
+            changeOption = gi.getInt();
+            menu.updateMenuItem(menuItemID, changeOption);
+        }
+        System.out.println("UPDATE SET PACKAGE END");
+    }
 
 }
