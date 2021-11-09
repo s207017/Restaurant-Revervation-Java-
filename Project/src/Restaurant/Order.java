@@ -13,18 +13,26 @@ public class Order {
     private double total;
     private ArrayList<OrderItem> orderList;
     private static int orderNum = 1;
+    private static Menu menu;
 
-    public Order(int staffID, int tableNum) {
+    public Order(int staffID, int tableNum,Menu menu) {
         this.orderID = orderNum++;
         this.staffID = staffID;
         this.tableNum = tableNum;
         this.date = LocalDateTime.now();
         this.orderList = new ArrayList<>();
+        this.menu = menu;
     }
     public double getTotal(){
         return this.total;
     }
-    public int checkItemExistence(int itemID,Menu menu){
+
+    /**
+     *
+     * @param itemID ID of the menuItem to be checked
+     * @return Returns the index of the requested item in the orderItem array
+     */
+    public int checkItemExistence(int itemID){
         MenuItem temp;
         for(int i = 0;i<orderList.size();i++){
             if(orderList.get(i).getItem() == menu.getMenuItemFromID(itemID)){
@@ -33,88 +41,29 @@ public class Order {
         }
         return -1;
     }
-    public void addOrderItems(Menu menu){
-        menu.printMenu();
-        Scanner sc = new Scanner(System.in);
-        MenuItem temp;
-        int choice = 0, quantity = 0;
-        while(choice != -1) {
-            System.out.print("Enter ID of intended item to be ordered (-1 to end): ");
-            choice = sc.nextInt();
-            if(choice == -1) break;
-            //set temp to be the menuItem/setPackage item
-            if(choice>500 || choice <=500+menu.getSetPackageItems().size()) {
-                temp = menu.getSetPackageItemFromID(choice);
-            }
-            else{
-                temp = menu.getMenuItemFromID(choice);
-            }
-            if(temp == null){
-                System.out.println("Item does not exist, please enter valid ID.");
-                continue;
-            }
-            if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
-                SetPackage tempSetPackage = new SetPackage(temp.getItemName(),temp.getItemID(),temp.getPrice(),temp.getDescription());
-                menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice()); 
-                System.out.print("Please select drink: ");
-                int drinkID = sc.nextInt();
-                while (300>=drinkID && drinkID>300+ menu.getDrinkItems().size()){
-                    System.out.print("Invalid ID, please try again: ");
-                    drinkID = sc.nextInt();
-                }
-                // add drink item to items array in setpackage
-                tempSetPackage.addSide(menu.getMenuItemFromID(drinkID));
-                temp = tempSetPackage; //upcasting
-            }
-            System.out.print("Enter quantity of items to be ordered: ");
-            quantity = sc.nextInt();
-            while(quantity<=0){
-                System.out.print("Invalid quantity! Please enter valid entry: ");
-                quantity = sc.nextInt();
-            }
-            int index = checkItemExistence(choice,menu);
-            if(index < 0) {//Item does not exist in order yet; create new orderitem
-                orderList.add(new OrderItem(temp, quantity));
-            }else{//Item already exists in order; update the quantity
-                orderList.get(index).addQuantityOrdered(quantity);
-            }
-            this.total += (temp.getPrice() * quantity);
+
+    /**
+     *
+      * @param item Item to be added to the order
+     * @param quantity Quantity of item to be added to the order
+     */
+    public void addOrderItems(MenuItem item, int quantity){
+        int index = checkItemExistence(item.getItemID());
+        if(index < 0) {//Item does not exist in order yet; create new orderitem
+            this.orderList.add(new OrderItem(item, quantity));
+        }else{//Item already exists in order; update the quantity
+            this.orderList.get(index).addQuantityOrdered(quantity);
         }
+        this.total += (item.getPrice() * quantity);
     }
-    public void removeOrderItems(Menu menu){
-        printOrder();
-        MenuItem temp;
-        Scanner sc = new Scanner(System.in);
-        int choice = 0,quantity = 0;
-        while(choice != -1){
-            System.out.print("Enter ID of intended item to be removed: ");
-            choice = sc.nextInt();
-            if(choice == -1) break; // End of order removal
-            temp = menu.getMenuItemFromID(choice);
-            if(temp == null){ //Item ID is invalid
-                System.out.println("Item does not exist, please enter valid ID.");
-                continue;
-            }
-            int index = checkItemExistence(choice,menu);
-            if(index<0){ // Order does not contain item
-                System.out.println("Item does not exist in order");
-                continue;
-            }
-            System.out.print("Enter quantity to be removed: ");
-            quantity = sc.nextInt();
-            while(quantity <=0){
-                System.out.print("Please enter a valid quantity: ");
-                quantity = sc.nextInt();
-            }
-            while(quantity > orderList.get(index).getQuantityOrdered()){// Quantity to be removed too high
-                System.out.printf("Only %d orders of %s exist.\n",
-                        orderList.get(index).getQuantityOrdered(),
-                        orderList.get(index).getItem().getItemName());
-                System.out.print("Enter quantity to be removed: ");
-                quantity = sc.nextInt();
-            }
-            orderList.get(index).subtractQuantityOrdered(quantity);
-        }
+
+    /**
+     *
+     * @param index Index of menuItem in the orders orderItem arraylist
+     * @param quantity Quantity of item to be deleted
+     */
+    public void removeOrderItems(int index, int quantity){
+        this.orderList.get(index).subtractQuantityOrdered(quantity);
     }
     public boolean isOrderCompleted(){
         for(int i = 0;i < orderList.size();i++){
@@ -138,6 +87,9 @@ public class Order {
     }
     public ArrayList<OrderItem> getOrderItemList(){
         return this.orderList;
+    }
+    public void addTotal(double amount){
+        this.total += amount;
     }
 
     public void printOrder(){

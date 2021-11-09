@@ -313,8 +313,9 @@ public class Menu {
                 System.out.println("Wrong input into createNewMenuItem.");
         }
     }
-
-    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems, SetPackage set) {
+    
+    
+    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems) {
         int ID=0;
         for (SetPackage m: setPackageItems){
             ID=m.getItemID();

@@ -11,6 +11,7 @@ public class MenuInterface {
     public MenuInterface(Menu menu) {
         this.menu = menu;
     }
+    public static GetInput gi = new GetInput();
 
     public void createNewMenuItemInterface() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -28,6 +29,7 @@ public class MenuInterface {
         sc.nextLine();
         String desc = sc.nextLine();
         menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
+        System.out.println("New item added to the menu!");
     }
 
     public void removeMenuItemInterface() throws IOException {
@@ -112,10 +114,27 @@ public class MenuInterface {
         System.out.println("|       4. Desserts       |");
     }
 
+    public void printOptionsMenuItems(){
+        System.out.println("What would you like to do? ");
+        System.out.println("|        1. Create menu item        |");
+        System.out.println("|        2. Update menu item        |");
+        System.out.println("|        3. Remove menu item        |");
+        System.out.println("|     4. Return to the main menu    |");
+        System.out.print("Your option: ");
+    }
+
+    public void printOptionsSetPackages(){
+        System.out.println("Would you like to ");
+        System.out.println("1. Create");
+        System.out.println("2. Update");
+        System.out.println("3. Remove a set package");
+        System.out.println("4. Return to the main menu");
+    }
 
 
     public void createSetPackageInterface(){
-        double initialPrice = 0;
+        double maxPrice, discountRate, finalPrice;
+        int mainMenuID, sideMenuID;
         ArrayList<MenuItem> menuID = new ArrayList<MenuItem>();
         Scanner sc = new Scanner(System.in);
         System.out.println("You are now creating a set package");
@@ -123,13 +142,66 @@ public class MenuInterface {
         String name = sc.next();
         System.out.println("Enter the description of the set package:");
         String desc = sc.next();
-
-        System.out.print("Enter the menu ID of the main course item.");
-        for (int i = 0; i < menuID.size(); i++){
-            (menuID.get(i)).getItemID();
+        System.out.print("Enter the menu ID of the main course item: ");
+        mainMenuID = sc.nextInt();
+        menuID.add(menu.getMenuItemFromID(mainMenuID));
+        System.out.print("Enter the menu ID of the side: ");
+        sideMenuID = sc.nextInt();
+        menuID.add(menu.getMenuItemFromID(sideMenuID));
+        System.out.print("Enter the maximum price of drink: ");
+        maxPrice = sc.nextDouble();
+        double tempTotalPrice = menu.getMenuItemFromID(mainMenuID).getPrice() +
+                menu.getMenuItemFromID(sideMenuID).getPrice() + maxPrice;
+        System.out.println("The total price of the current combination, with the maximum drink price is :" +
+                "$ " + tempTotalPrice);
+        while (true) {
+            discountRate = 1;
+            while (discountRate > 0 && discountRate < 100) {
+                System.out.print("Enter the discount rate: ");
+                discountRate = sc.nextDouble();
+                if (discountRate <= 0 || discountRate >= 100){
+                    System.out.println("Invalid input! Please try again");
+                    continue;
+                }
+            }
+            finalPrice = tempTotalPrice * ((100 - discountRate)/100);
+            System.out.print("The new price is: " + finalPrice);
+            System.out.print("Would you like to proceed with this pricing? Y/N ");
+            char yesNo = sc.next().charAt(0);
+            if (yesNo == 'Y' || yesNo == 'y'){
+                break;
+            } else if (yesNo == 'N' || yesNo == 'n'){
+                continue;
+            }
         }
-        System.out.println("");
 
+        menu.createNewSetPackage(name, finalPrice, desc, menuID);
+    }
+
+    public void removeSetPackageInterface() throws IOException {
+        int menuItemID;
+        System.out.println("You are now removing a set package item from the menu");
+        menu.printSetPackage();
+        System.out.print("Enter the menu ID of the set package you would like to remove");
+        menuItemID = gi.getInt();
+        menu.removeMenuItem(5, menuItemID);
+    }
+
+    public void updateSetPackageInterface() throws IOException {
+        int menuItemID, changeOption;
+        System.out.println("You are now updating a set package item");
+        menu.printSetPackage();
+        System.out.print("Enter the menu ID of the set package you would like to update");
+        menuItemID = gi.getInt();
+        changeOption = 1;
+        while (changeOption != 4) {
+            System.out.println("What do you want to change?");
+            this.printChangeTypes();
+            System.out.println("Enter your option: ");
+            changeOption = gi.getInt();
+            menu.updateMenuItem(menuItemID, changeOption);
+        }
+        System.out.println("UPDATE SET PACKAGE END");
     }
 
 }
