@@ -20,6 +20,9 @@ public class TableAvailabilityInterface {
         return pax;
     }
 
+    //print statement asking them if they got reserve
+    // if yes then call assignTable(true)
+
     public void assignTable(){
         LocalDateTime localDateTime = LocalDateTime.now();
         int pax = askForPax(), tableNum, newTableNum;
@@ -41,12 +44,19 @@ public class TableAvailabilityInterface {
             System.out.print("Enter the table number to assign the customer: ");
             newTableNum = sc.nextInt(); //needs error handling
             if (availableTableNumbers.contains(newTableNum)){
-                r.getTableFromTableNum(newTableNum).assignTable(pax);
+                r.getTableFromTableNum(newTableNum).occupyTable(pax);
                 System.out.println("Table assigned! Bring the customers to the table");
                 notIn = false;
             } else {
                 System.out.println("Table unavailable! Please enter a new table number");
             }
         }
+    }
+    public void assignReservedTable(){
+
+
+
+
+
     }
 }

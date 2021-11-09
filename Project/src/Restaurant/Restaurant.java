@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,8 +9,9 @@ public class Restaurant {
     private ArrayList<Table> tableList = new ArrayList<Table>();
     private ArrayList<TransHistDay> transactionHistory = new ArrayList<TransHistDay>();
     private ArrayList<Staff> staffList = new ArrayList<Staff>();
+    private Menu menu;
 
-    public Restaurant(){
+    public Restaurant() throws IOException {
         tableList.add(new Table(1,2));
         tableList.add(new Table(2,2));
         tableList.add(new Table(3,4));
@@ -23,7 +25,10 @@ public class Restaurant {
         staffList.add(new Staff(6969));
         staffList.add(new Staff(4204));
         staffList.add(new Staff(8008));
+        this.menu = new Menu();
     }
+
+    public Menu getMenu(){return this.menu;}
 
     public ArrayList<TransHistDay> getTransactionHistory(){
         return transactionHistory;
@@ -83,6 +88,8 @@ public class Restaurant {
         }
         return availableTables;
     }
+
+    //public void checkReservation
 
 
     /**

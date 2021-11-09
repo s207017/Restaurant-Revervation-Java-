@@ -12,6 +12,7 @@ public class Main{
 
 
 
+
     // made public class not static bc there was static error
     public static void main(String[] arg) throws IOException {
 
@@ -19,8 +20,12 @@ public class Main{
         MenuInterface menuInterface = new MenuInterface(menu);
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
+
+        Staff staff;
+
         SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
         Staff staff = new Staff();
+
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
         Membership membership = new Membership();
@@ -195,10 +200,10 @@ public class Main{
                         }
                         switch (opt){
                             case 1:
-                                //reservationInterface.
+                                reservationInterface.checkReservationBooking();
                                 break;
                             case 2:
-                                //reservationInterface.
+                                reservationInterface.removeReservationBooking();
                                 break;
                             case 3:
                                 System.out.println("Exiting..");
