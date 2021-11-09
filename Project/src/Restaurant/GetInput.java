@@ -7,6 +7,7 @@ public class GetInput {
     static int inputI;
     static String inputS;
     static double inputD;
+    static char inputC;
     static Scanner sc = new Scanner(System.in);
 
     public static int getInt(){
@@ -50,5 +51,19 @@ public class GetInput {
             }
         }
         return inputD;
+    }
+
+    public static char getChar(){
+        boolean isValid = false;
+        while(!isValid) {
+            try {
+                inputC = sc.next(".").charAt(0);
+                isValid = true;
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a valid char input: ");
+                sc.next();
+            }
+        }
+        return inputC;
     }
 }
