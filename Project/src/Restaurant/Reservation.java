@@ -3,7 +3,7 @@ package Restaurant;
 public class Reservation {
     private String name;
     private int pax;
-    private String tel;
+    private String tel =null;
 
     Reservation(String name, int pax, String tel) {
         this.name = name;

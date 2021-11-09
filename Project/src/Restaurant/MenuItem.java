@@ -46,11 +46,12 @@ public class MenuItem {
 }
 
 class  SetPackage extends MenuItem {
-    ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
-    double maxDrinkPrice;
-    int numMainCourse = 1;
-    int numDrink = 1;
-    int numSide = 1;
+    private ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
+    private double maxDrinkPrice;
+    private int numMainCourse = 1;
+    private int numDrink = 1;
+    private int numSide = 1;
+
 
     public void setMaxDrinkPrice(double maxDrinkPrice) {
         this.maxDrinkPrice = maxDrinkPrice;

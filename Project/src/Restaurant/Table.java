@@ -19,7 +19,7 @@ public class Table {
         OCCUPIED
     }
     private Level tableStatus;
-    private Map<LocalDateTime, Reservation> reservations;
+    private Map<LocalDateTime, Reservation> reservations= new HashMap<>();
 
 
     public Table(int tableNum, int capacity){
@@ -27,7 +27,6 @@ public class Table {
         this.capacity = capacity;
         this.pax = 0; //when initialising the table it should be 0 ppl sitting
         this.tableStatus = Level.FREE;
-        this.reservations = new HashMap<>();
     }
 
     /**

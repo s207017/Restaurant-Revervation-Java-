@@ -20,20 +20,18 @@ public class Main{
         MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
-
         Staff staff;
-
+        staff = restaurant.getStaffFromID(GetInput.getInt());
         SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
-        Staff staff = new Staff();
 
-        //public static GetInput gi = new GetInput();
+        //public static GetInputGetInput = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
         MembershipInterface membershipInterface = new MembershipInterface(membership);
         //WRITE function init data to load text file data to the programme
 
         //Clears the CMD prompt
-        clearScreen();
+        //clearScreen();
         //getStaffID asks the user for StaffID input and store it so that once keyed in during initialisation, the
         //waiter does not need to key in again.
         staff.setStaffID();
@@ -47,9 +45,9 @@ public class Main{
                     opt = 1;
                     while (opt != -1 ){
                         menuInterface.printOptionsMenuItems();
-                        opt = gi.getInt();
+                        opt =GetInput.getInt();
                         while (opt < 1 && opt > 3) {
-                            opt = gi.getInt();
+                            opt =GetInput.getInt();
                             System.out.println("Input should be either 1, 2 or 3!");
                         }
                         switch (opt) {
@@ -78,7 +76,7 @@ public class Main{
                         menuInterface.printOptionsSetPackages();
                         while (opt < 1 || opt > 3) {
                             System.out.print("Enter your option: ");
-                            opt = gi.getInt();
+                            opt =GetInput.getInt();
                             if (opt < 1 || opt > 3){
                                 System.out.println("Invalid input! Try again");
                                 continue;
@@ -117,7 +115,7 @@ public class Main{
                     while (opt != -1){
                         orderInterface.viewOrder();
                         System.out.print("Enter -1 to return to the main menu");
-                        opt = gi.getInt();
+                        opt =GetInput.getInt();
                     }
                     break;
 
@@ -128,7 +126,7 @@ public class Main{
                         orderInterface.printAddRemove();
                         while (opt < 1 || opt > 3) {
                             System.out.print("Enter your option: ");
-                            opt = gi.getInt();
+                            opt =GetInput.getInt();
                             if (opt < 1 || opt > 3){
                                 System.out.println("Invalid input! Try again");
                                 continue;
@@ -162,7 +160,7 @@ public class Main{
                         System.out.println("2. Return to the main menu");
                         while (opt < 1 || opt > 2){
                             System.out.print("Enter your option: ");
-                            opt = gi.getInt();
+                            opt =GetInput.getInt();
                             if (opt < 1 || opt > 2){
                                 System.out.println("Invalid input! Try again");
                                 continue;
@@ -186,11 +184,11 @@ public class Main{
                     clearScreen();
                     opt = 1;
                     while (opt != 1){
-                        opt = gi.getInt();
+                        opt =GetInput.getInt();
                         reservationInterface.printCheckRemove();
                         while (opt < 1 || opt > 3){
                             System.out.print("Enter your option: ");
-                            opt = gi.getInt();
+                            opt =GetInput.getInt();
                             if (opt < 1 || opt > 3){
                                 System.out.println("Invalid input! Try again");
                                 continue;
