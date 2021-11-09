@@ -24,6 +24,7 @@ public class Main{
         Restaurant restaurant = new Restaurant();
         MenuInterface menuInterface = new MenuInterface(menu);
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
+        TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
         Staff staff = new Staff();
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
@@ -105,7 +106,10 @@ public class Main{
 
                 case 3:
                     clearScreen();
-                    //orderInterface.createOrder();
+                    opt = 1;
+                    while (opt != -1){
+                        orderInterface.createOrder();
+                    }
                     break;
 
                 case 4:
@@ -117,10 +121,7 @@ public class Main{
                     clearScreen();
                     opt = 1;
                     while (opt != -1) {
-                        System.out.println("1. Add item(s) to an existing order");
-                        System.out.println("2. Remove item(s) from an existing order");
-                        System.out.println("3. Return to the main menu");
-                        System.out.print("Input your option: ");
+                        orderInterface.printAddRemove();
                         while (opt < 1 || opt > 3) {
                             System.out.print("Enter your option: ");
                             opt = gi.getInt();
@@ -181,9 +182,7 @@ public class Main{
                     clearScreen();
                     opt = 1;
                     while (opt != 1){
-                        System.out.println("1. Check existing reservation");
-                        System.out.println("2. Remove reservation");
-                        System.out.println("3. Return to the main menu");
+                        reservationInterface.printCheckRemove();
                         while (opt < 1 || opt > 3){
                             System.out.print("Enter your option: ");
                             opt = gi.getInt();
@@ -211,6 +210,12 @@ public class Main{
 
                 case 8:
                     clearScreen();
+                    int pax;
+                    System.out.println("You are now assigning a table to customer(s)");
+                    pax = tableAvailabilityInterface.askForPax();
+                    tableAvailabilityInterface.printTableAvailability();
+
+
                     break;
 
 
