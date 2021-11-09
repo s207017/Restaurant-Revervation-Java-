@@ -132,8 +132,18 @@ public class Restaurant {
         }
         return null;
     }
+
     public void addStaff(int ID){
         this.staffList.add(new Staff(ID));
+    }
+
+    public Staff getStaffFromID(int ID){
+        for(Staff s: staffList){
+            if(ID == s.getStaffID()){
+                return s;
+            }
+        }
+        return null;
     }
 }
 
