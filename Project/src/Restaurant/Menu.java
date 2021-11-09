@@ -218,29 +218,26 @@ public class Menu {
 
     //for Order
     public MenuItem getMenuItemFromID(int ID){
-        System.out.println("hereee " +ID);
         if (100<ID && ID<=100+ mainCourseItems.size()){
             for (MenuItem m: mainCourseItems){
                 if (m.getItemID()==ID){
-                    System.out.println("foundmenuitem " +ID);
                     return m; //returns menuitem of maincourse
                 }
             }
         }
         else if (200<ID && ID<=200+sideItems.size()){
-            System.out.println("hereeettttt " +ID);
             for (MenuItem m: sideItems){
                 System.out.print(m.getItemID());
                 if (m.getItemID()==ID){
                     System.out.println("foundsideitem " +ID);
-                    return m; //returns menuitem of maincourse
+                    return m; //returns menuitem of side dish
                 }
             }
         }
         else if (300<ID && ID<=300+ drinkItems.size()){
             for (MenuItem m: drinkItems){
                 if (m.getItemID()==ID){
-                    return m; //returns menuitem of maincourse
+                    return m; //returns menuitem of drink
                 }
             }
         }

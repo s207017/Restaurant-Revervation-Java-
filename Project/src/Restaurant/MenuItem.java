@@ -45,7 +45,7 @@ public class MenuItem {
 
 }
 
-class  SetPackage extends MenuItem {
+class SetPackage extends MenuItem {
     private ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
     private double maxDrinkPrice;
     private int numMainCourse = 1;

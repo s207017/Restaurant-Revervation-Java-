@@ -1,6 +1,7 @@
 package Restaurant;
 
 import java.util.ArrayList;
+import java.util.function.DoubleToIntFunction;
 
 public class PaymentInterface {
     private CashPayment payByCash = null;

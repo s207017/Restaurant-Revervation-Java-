@@ -76,7 +76,7 @@ public class OrderInterfaceUI {
             System.out.print("Enter table number: ");
             int TableNum = GetInput.getInt();
             while (this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED) {
-                System.out.print("No one at the table! Enter again");
+                System.out.println("No one at the table! Enter again");
                 TableNum = GetInput.getInt();
             }
             order = restaurant.getTableFromTableNum(TableNum).getOrder();
