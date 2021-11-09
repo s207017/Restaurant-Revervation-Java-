@@ -6,10 +6,19 @@ public class SalesRevenueReportInterface {
         this.restaurant = restaurant;
     }
 
+    /**
+     * creates a new sales report for a specified period
+     * @param choice == 1 will prompt user to enter 2 dates
+     * to get the period for which they wish to view the report
+     */
     public void createPeriodSalesReport(){
         SalesRevenueReport salesReport = new SalesRevenueReport(restaurant.getTransactionHistory(), 1);
     }
 
+    /**
+     * creates a new sales report for a specified day
+     * @param choice == 2 prompts user to enter one date
+     */
     public void createDaySalesReport(){
         SalesRevenueReport salesReport = new SalesRevenueReport(restaurant.getTransactionHistory(), 2);
     }
