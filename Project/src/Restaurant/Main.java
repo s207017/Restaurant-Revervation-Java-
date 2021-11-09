@@ -17,7 +17,7 @@ public class Main{
     public static void main(String[] arg) throws IOException {
 
         Restaurant restaurant = new Restaurant();
-        MenuInterface menuInterface = new MenuInterface(menu);
+        MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
 
@@ -27,7 +27,7 @@ public class Main{
         Staff staff = new Staff();
 
         //public static GetInput gi = new GetInput();
-        OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
+        OrderInterfaceUI orderInterface = new OrderInterfaceUI(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
         MembershipInterface membershipInterface = new MembershipInterface(membership);
         //WRITE function init data to load text file data to the programme
