@@ -10,24 +10,16 @@ import javax.crypto.BadPaddingException;
 
 public class Main{
 
-    Menu menu = new Menu();
-    MenuInterface menuInterface = new MenuInterface(menu);
-    Staff staff = new Staff();
-    public static GetInput gi = new GetInput();
 
-    public Main() throws IOException {
-    }
 
     // made public class not static bc there was static error
     public static void main(String[] arg) throws IOException {
 
-        Menu menu = new Menu();
         Restaurant restaurant = new Restaurant();
         MenuInterface menuInterface = new MenuInterface(menu);
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
         SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
-        TransHistDay transHistDay = new TransHistDay(LocalDateTime.now());
         Staff staff = new Staff();
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
@@ -136,10 +128,10 @@ public class Main{
                         }
                         switch (opt) {
                             case 1:
-                                //orderInterface.addItemsToOrder();
+                                orderInterface.addItemsToOrder();
                                 break;
                             case 2:
-                                //orderInterface.removeItemsFromOrder();
+                                orderInterface.removeItemsFromOrder();
                                 break;
                             case 3:
                                 System.out.println("Exiting..");
@@ -184,6 +176,7 @@ public class Main{
                     clearScreen();
                     opt = 1;
                     while (opt != 1){
+                        opt = gi.getInt();
                         reservationInterface.printCheckRemove();
                         while (opt < 1 || opt > 3){
                             System.out.print("Enter your option: ");
@@ -215,7 +208,6 @@ public class Main{
                     tableAvailabilityInterface.assignTable();
                     break;
 
-
                 case 9:
                     clearScreen();
                     System.out.println(restaurant.toString());
@@ -229,7 +221,6 @@ public class Main{
 
                 case 11:
                     clearScreen();
-                    //clarify
                     //PaymentInterface paymentInterface = new PaymentInterface(restaurant, membership)
                     //PaymentInterface.
                     break;
