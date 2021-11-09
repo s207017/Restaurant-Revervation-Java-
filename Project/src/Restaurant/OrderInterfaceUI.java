@@ -182,5 +182,11 @@ public class OrderInterfaceUI {
 
     }
 
+    public void printAddRemove(){
+        System.out.println("1. Add item(s) to an existing order");
+        System.out.println("2. Remove item(s) from an existing order");
+        System.out.println("3. Return to the main menu");
+    }
+
 
 }

@@ -24,6 +24,7 @@ public class GetInput {
         return inputI;
     }
 
+
     public static String getString(){
         boolean isValid = false;
         while(!isValid) {
