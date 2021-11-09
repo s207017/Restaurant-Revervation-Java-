@@ -1,13 +1,13 @@
 package Restaurant;
 
 public class Member {
-    private String Number;
+    private int Number;
 
-    public  Member(String number) {
+    public  Member(int number) {
         Number = number;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return Number;
     }
 }
