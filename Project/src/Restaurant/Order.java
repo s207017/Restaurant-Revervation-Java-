@@ -27,6 +27,11 @@ public class Order {
         return this.total;
     }
 
+    /**
+     *
+     * @param itemID ID of the menuItem to be checked
+     * @return Returns the index of the requested item in the orderItem array
+     */
     public int checkItemExistence(int itemID){
         MenuItem temp;
         for(int i = 0;i<orderList.size();i++){
@@ -36,6 +41,12 @@ public class Order {
         }
         return -1;
     }
+
+    /**
+     *
+      * @param item Item to be added to the order
+     * @param quantity Quantity of item to be added to the order
+     */
     public void addOrderItems(MenuItem item, int quantity){
         int index = checkItemExistence(item.getItemID());
         if(index < 0) {//Item does not exist in order yet; create new orderitem
@@ -46,6 +57,11 @@ public class Order {
         this.total += (item.getPrice() * quantity);
     }
 
+    /**
+     *
+     * @param index Index of menuItem in the orders orderItem arraylist
+     * @param quantity Quantity of item to be deleted
+     */
     public void removeOrderItems(int index, int quantity){
         this.orderList.get(index).subtractQuantityOrdered(quantity);
     }

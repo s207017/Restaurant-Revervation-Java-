@@ -108,7 +108,12 @@ public class Main{
 
                 case 4:
                     clearScreen();
-                    orderInterface.viewOrder();
+                    opt = 1;
+                    while (opt != -1){
+                        orderInterface.viewOrder();
+                        System.out.print("Enter -1 to return to the main menu");
+                        opt = gi.getInt();
+                    }
                     break;
 
                 case 5:

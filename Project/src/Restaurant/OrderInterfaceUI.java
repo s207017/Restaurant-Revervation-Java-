@@ -19,6 +19,7 @@ public class OrderInterfaceUI {
             TableNum = GetInput.getInt();
         }
         Order o = new Order(123,TableNum,menu);
+        restaurant.getTableFromTableNum(TableNum).setOrder(o);
     }
     //View order
     public void viewOrder(){
@@ -134,7 +135,7 @@ public class OrderInterfaceUI {
                 System.out.print("Invalid quantity! Please enter valid entry: ");
                 quantity = GetInput.getInt();
             }
-
+            order.addOrderItems(temp,quantity);
         }
     }
     //Remove items from order
