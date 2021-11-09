@@ -1,118 +1,52 @@
 package Restaurant;
-import java.io.*;
+
+import com.sun.tools.javac.Main;
+
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import com.sun.tools.javac.Main;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Menu {
-    private ArrayList<MenuItem> mainCourseItems = new ArrayList<MenuItem>();
-    private ArrayList<MenuItem> sideItems = new ArrayList<MenuItem>();
-    private ArrayList<MenuItem> drinkItems = new ArrayList<MenuItem>();
-    private ArrayList<MenuItem> dessertItems = new ArrayList<MenuItem>();
+    private ArrayList<Desert> dessertItems = new ArrayList<Desert>();
+    private ArrayList<Drink> drinkItems = new ArrayList<Drink>();
+    private ArrayList<MainCourse> mainCourseItems = new ArrayList<MainCourse>();
     private ArrayList<SetPackage> setPackageItems = new ArrayList<SetPackage>();
+    private ArrayList<Side> sideItems = new ArrayList<Side>();
 
-    public Menu() throws IOException {
-        ArrayList<BufferedReader> listOfTextFiles = new ArrayList<BufferedReader>();
-        BufferedReader maincourse_text = new BufferedReader(
-                new FileReader("./textfiles/maincourseitems.txt")
-        );
-        listOfTextFiles.add(maincourse_text);
+    public Menu(){
+        mainCourseItems.add(new MainCourse("Dry Truffle Ramen",101,6.90,"Freshly made ramen with house made sauce and truffle oil"));
+        mainCourseItems.add(new MainCourse("Tonkotsu Shouyu Ramen",102,7.9,"Creamy Tonkotsu soup stock flavoured with a secret blend of Japanese shouyu and dried fishes"));
+        mainCourseItems.add(new MainCourse("Original Tonkotsu Ramen",103,7.9,"Our best seller"));
 
-        BufferedReader side_text = new BufferedReader(
-                new FileReader("./textfiles/sideitems.txt")
-        );
-        listOfTextFiles.add(side_text);
-        BufferedReader drink_text = new BufferedReader(
-                new FileReader("./textfiles/drinkitems.txt")
-        );
-        listOfTextFiles.add(drink_text);
-        BufferedReader dessert_text = new BufferedReader(
-                new FileReader("./textfiles/dessertitems.txt")
-        );
-        listOfTextFiles.add(dessert_text);
-        BufferedReader setpackages_text = new BufferedReader(
-                new FileReader("./textfiles/setpackageitems.txt")
-        );
-        listOfTextFiles.add(setpackages_text);
+        sideItems.add(new Side("Gyoza",201,5,"Dumplings"));
+        sideItems.add(new Side("Ebi Fry",202,4.9,"Prawn"));
 
+        drinkItems.add(new Drink("Green Tea",301,1.5,"Refreshing green tea"));
+        drinkItems.add(new Drink("Mineral Water",302,1.5,"Plain ol bottled water"));
+        drinkItems.add(new Drink("Can Drink",303,1.5,"Choose any canned drink from our fridge"));
 
-        // for reading items from text file
-        String itemname = null;
-        int itemid = 0;
-        Double itemprice = 0.0;
-        String description = null;
+        dessertItems.add(new Desert("Ice Cream",401,4.50,"A yummy ice cold refresher"));
 
-
-        int menutype =0;
-        for (BufferedReader textfile: listOfTextFiles) {
-            int x = 0;
-            String s;
-            while ((s = textfile.readLine()) != null) {
-                if (x % 4 == 0) {
-                    itemname = s;
-                } else if (x % 4 == 1) {
-                    itemid = Integer.parseInt(s);
-                } else if (x % 4 == 2) {
-                    itemprice = Double.parseDouble(s);
-                } else if (x % 4 == 3) {
-                    description = s;
-                    MenuItem newitem = new MenuItem(itemname, itemid, itemprice, description);
-                    switch(menutype){
-                        case 0:
-                            mainCourseItems.add(newitem);
-                            break;
-                        case 1:
-                            sideItems.add(newitem);
-                            break;
-                        case 2:
-                            drinkItems.add(newitem);
-                            break;
-                        case 3:
-                            dessertItems.add(newitem);
-                            break;
-                        case 4:
-                            SetPackage newpackage = new SetPackage(newitem.getItemName(),newitem.getItemID(),newitem.getPrice(), newitem.getDescription());
-                            newpackage.addMainCourse(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
-                            newpackage.addMainCourse(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
-                            setPackageItems.add(newpackage);
-                            break;
-                        default:
-                            System.out.println("ERROR");
-                            break;
-                    }
-
-                }
-                x++;
-            }
-            menutype++;
-            textfile.close();
-        }
+        setPackageItems.add(new SetPackage("Set Meal A",501,13.40,"Tonkotsu Ramen + Ebi Fry + Drink"));
+        setPackageItems.add(new SetPackage("Set Meal B",501,13.70,"Tonkotsu Ramen + Gyoza + Drink"));
     }
 
-
-    public void updateMenuToFile(ArrayList<MenuItem> menuItems, String menuType) throws IOException {
-        BufferedWriter bw = new BufferedWriter(
-                new FileWriter("./textfiles/"+menuType+".txt", false)
-        );
-
-        for (MenuItem item: menuItems){
-            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n");
-        }
-        bw.close();
-    }
-
-    public ArrayList<MenuItem> getMainCourseItems() {
+    public ArrayList<MainCourse> getMainCourseItems() {
         return mainCourseItems;
     }
 
-    public ArrayList<MenuItem> getDessertItems() {
+    public ArrayList<Desert> getDessertItems() {
         return dessertItems;
     }
 
-    public ArrayList<MenuItem> getDrinkItems() {
+    public ArrayList<Drink> getDrinkItems() {
         return drinkItems;
     }
 
-    public ArrayList<MenuItem> getSideItems() {
+    public ArrayList<Side> getSideItems() {
         return sideItems;
     }
 
@@ -126,25 +60,25 @@ public class Menu {
         System.out.println("-".repeat(100));
         System.out.println("-".repeat(100));
         System.out.println("Main Courses:");
-        for(MenuItem m : mainCourseItems){
+        for(MainCourse m : mainCourseItems){
             System.out.format("%4d.%-60s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
             System.out.printf("     %s\n", m.getDescription());
         }
         System.out.println("-".repeat(100));
         System.out.println("Sides:");
-        for(MenuItem s : sideItems){
+        for(Side s : sideItems){
             System.out.printf("%4d.%-60s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
             System.out.printf("     %s\n", s.getDescription());
         }
         System.out.println("-".repeat(100));
         System.out.println("Drinks:");
-        for(MenuItem d : drinkItems){
+        for(Drink d : drinkItems){
             System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
             System.out.printf("     %s\n", d.getDescription());
         }
         System.out.println("-".repeat(100));
         System.out.println("Deserts:");
-        for(MenuItem de : dessertItems){
+        for(Desert de : dessertItems){
             System.out.printf("%4d.%-60s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
             System.out.printf("     %s\n", de.getDescription());
         }
@@ -160,7 +94,7 @@ public class Menu {
     public void printMainCourse(){
         System.out.println("-".repeat(100));
         System.out.println("Main Courses:");
-        for(MenuItem m : mainCourseItems){
+        for(MainCourse m : mainCourseItems){
             System.out.format("%4d.%-60s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
             System.out.printf("     %s\n", m.getDescription());
         }
@@ -169,7 +103,7 @@ public class Menu {
     public void printSide(){
         System.out.println("-".repeat(100));
         System.out.println("Sides:");
-        for(MenuItem s : sideItems){
+        for(Side s : sideItems){
             System.out.printf("%4d.%-60s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
             System.out.printf("     %s\n", s.getDescription());
         }
@@ -179,27 +113,16 @@ public class Menu {
     public void printDrink(){
         System.out.println("-".repeat(100));
         System.out.println("Drinks:");
-        for(MenuItem d : drinkItems){
+        for(Drink d : drinkItems){
             System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
             System.out.printf("     %s\n", d.getDescription());
-        }
-        System.out.println("-".repeat(100));
-    }
-    public void printDrinkLTEPrice(double price){
-        System.out.println("-".repeat(100));
-        System.out.println("Drinks:");
-        for(MenuItem d : drinkItems){
-            if(d.getPrice() <= price) {
-                System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
-                System.out.printf("     %s\n", d.getDescription());
-            }
         }
         System.out.println("-".repeat(100));
     }
     public void printDesert(){
         System.out.println("-".repeat(100));
         System.out.println("Deserts:");
-        for(MenuItem de : dessertItems){
+        for(Desert de : dessertItems){
             System.out.printf("%4d.%-60s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
             System.out.printf("     %s\n", de.getDescription());
         }
@@ -219,28 +142,35 @@ public class Menu {
     //for Order
     public MenuItem getMenuItemFromID(int ID){
         if (100<ID && ID<=100+ mainCourseItems.size()){
-            for (MenuItem m: mainCourseItems){
+            for (MainCourse m: mainCourseItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
                 }
             }
         }
-        else if (200<ID && ID<=200+sideItems.size()){
-            for (MenuItem m: sideItems){
+        else if (200<ID && ID<=300+sideItems.size()){
+            for (Side m: sideItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
                 }
             }
         }
-        else if (300<ID && ID<=300+ drinkItems.size()){
-            for (MenuItem m: drinkItems){
+        else if (300<ID && ID<=400+ drinkItems.size()){
+            for (Drink m: drinkItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
                 }
             }
         }
-        else if (400<ID && ID<=400+ dessertItems.size()){
-            for (MenuItem m: dessertItems){
+        else if (400<ID && ID<=500+ dessertItems.size()){
+            for (Desert m: dessertItems){
+                if (m.getItemID()==ID){
+                    return m; //returns menuitem of maincourse
+                }
+            }
+        }
+        else if (500<ID && ID<=600+ setPackageItems.size()){
+            for (SetPackage m: setPackageItems){
                 if (m.getItemID()==ID){
                     return m; //returns menuitem of maincourse
                 }
@@ -248,89 +178,59 @@ public class Menu {
         }
         return null; //this would only happen if the ID is invalid, which it wont be because of the IDexists function
     }
-
-    public SetPackage getSetPackageItemFromID(int ID){
-        if (500<ID && ID<=500 + setPackageItems.size()){
-            for (SetPackage m: setPackageItems){
-                if (m.getItemID()==ID){
-                    return m;
-                }
-            }
-        }
-        return null; //not found
-    }
-
     public boolean IDExists(int ID){
         if ((100<ID && ID<=100+ mainCourseItems.size()) ||
-                (200<ID && ID<=200+sideItems.size()) ||
-                (300<ID && ID<=300+ drinkItems.size()) ||
-                (400<ID && ID<=400+ dessertItems.size()) ||
-                (500<ID && ID<=500+ setPackageItems.size())){
+                (200<ID && ID<=300+sideItems.size()) ||
+                (300<ID && ID<=400+ drinkItems.size()) ||
+                (400<ID && ID<=500+ dessertItems.size()) ||
+                (500<ID && ID<=600+ setPackageItems.size())){
             return true;
         }
         else return false;
     }
 
 
-    public void createNewMenuItem(String name, int menuItemType, double price, String description) throws IOException {
-        int ID = 0;
+    public void createNewMenuItem(String name, int menuItemType, double price, String description){
+        int ID;
         switch (menuItemType){
             case 1: //maincourse
-                for (MenuItem m: mainCourseItems){ //gets the last itemID in the arraylist
-                    ID=m.getItemID();
+                for (MainCourse m: mainCourseItems){ //gets the last itemID in the arraylist
+                    ID=m.getItemID()
                 }
-                MenuItem mainCourse = new MenuItem(name, ID+1, price, description); //ID+1 is to add the item at the next point
-                mainCourseItems.add(mainCourse);
-                updateMenuToFile(mainCourseItems,"maincourseitems");
+                MainCourse mainCourse = new MainCourse(name, ID+1, price, description); //ID+1 is to add the item at the next point
                 break;
             case 2: //side
-                for (MenuItem m: sideItems){
+                for (Side m: sideItems){
                     ID=m.getItemID();
                 }
-                MenuItem side = new MenuItem(name, ID+1, price, description);
-                sideItems.add(side);
-                updateMenuToFile(sideItems,"sideitems");
+                Side side = new Side(name, ID+1, price, description);
                 break;
             case 3:
-                for (MenuItem m: drinkItems){
+                for (Drink m: drinkItems){
                     ID=m.getItemID();
                 }
-                MenuItem drink = new MenuItem(name, ID+1, price, description);
-                drinkItems.add(drink);
-                updateMenuToFile(drinkItems,"drinkitems");
+                Drink drink = new Drink(name, ID+1, price, description);
                 break;
             case 4:
-                for (MenuItem m: dessertItems){
+                for (Desert m: dessertItems){
                     ID=m.getItemID();
                 }
-                MenuItem dessert = new MenuItem(name, ID+1, price, description);
-                dessertItems.add(dessert); // need?
-                updateMenuToFile(dessertItems,"dessertitems");
+                Desert desert = new Desert(name, ID+1, price, description);
                 break;
             case 5:
-
+                for (SetPackage m: setPackageItems){
+                    ID=m.getItemID();
+                }
+                SetPackage setPackage = new SetPackage(name, ID+1, price, description);
+                break;
             default:
                 System.out.println("Wrong input into createNewMenuItem.");
         }
     }
 
-    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems, SetPackage set) {
-        int ID=0;
-        for (SetPackage m: setPackageItems){
-            ID=m.getItemID();
-        }
-        SetPackage newPackage = new SetPackage(name, ID+1, price,description);
-        for (MenuItem item: menuItems) {
-            if (100<item.getItemID() && item.getItemID()<=100+ mainCourseItems.size()) {
-                newPackage.addMainCourse(item);
-            }else if( 200<item.getItemID() && item.getItemID()<=200+sideItems.size()) {
-                newPackage.addSide(item);
-            }
-        }
-        setPackageItems.add(newPackage);
-    }
     //updating of menuItems done directly in the application!
-    public void removeMenuItem(int menuItemType, int menuItemID) throws IOException {
+
+    public void removeMenuItem(int menuItemType, int menuItemID){
         int toUpdateID;
         switch(menuItemType){
             case 1:
@@ -339,7 +239,6 @@ public class Menu {
                 for(int i=toUpdateID;i< mainCourseItems.size();i++){
                     mainCourseItems.get(i).setItemID(101+i);
                 }
-                updateMenuToFile(mainCourseItems,"maincourseitems");
                 break;
             case 2:
                 sideItems.remove(menuItemID-201);
@@ -347,7 +246,6 @@ public class Menu {
                 for(int i=toUpdateID;i< sideItems.size();i++){
                     sideItems.get(i).setItemID(201+i);
                 }
-                updateMenuToFile(sideItems,"sideitems");
                 break;
             case 3:
                 drinkItems.remove(menuItemID-301);
@@ -355,7 +253,6 @@ public class Menu {
                 for(int i=toUpdateID;i< drinkItems.size();i++){
                     drinkItems.get(i).setItemID(301+i);
                 }
-                updateMenuToFile(drinkItems,"drinkitems");
                 break;
             case 4:
                 dessertItems.remove(menuItemID-401);
@@ -363,49 +260,14 @@ public class Menu {
                 for(int i=toUpdateID;i< dessertItems.size();i++){
                     dessertItems.get(i).setItemID(401+i);
                 }
-                updateMenuToFile(dessertItems,"dessertitems");
                 break;
             case 5:
                 setPackageItems.remove(menuItemID-501);
                 toUpdateID = menuItemID-501; //the item after the item that was removed
                 for(int i=toUpdateID;i< setPackageItems.size();i++){
                     setPackageItems.get(i).setItemID(501+i);
-                }
-                //updateMenuToFile(dessertItems,"dessertitems");
+                }     
                 break;
         }
-    }
-
-
-
-    public void updateMenuItem(int ID, int changeOption) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        changeOption = sc.nextInt();
-        switch (changeOption) {
-            case 1:
-                System.out.println("What is the new price?");
-                double newPrice = sc.nextDouble();
-                getMenuItemFromID(ID).setPrice(newPrice);
-                break;
-            case 2:
-                System.out.println("What is the new name?");
-                String newName = sc.nextLine();
-                getMenuItemFromID(ID).setItemName(newName);
-                break;
-            case 3:
-                System.out.println("What is the new description?");
-                String newDesc = sc.nextLine();
-                getMenuItemFromID(ID).setDescription(newDesc);
-                break;
-            case 4:
-                System.out.println("Exiting update of menu...");
-                break;
-            default:
-                break;
-        }
-        updateMenuToFile(mainCourseItems,"maincourseitems");
-        updateMenuToFile(sideItems,"sideitems");
-        updateMenuToFile(drinkItems,"drinkitems");
-        updateMenuToFile(dessertItems,"dessertitems");
     }
 }
