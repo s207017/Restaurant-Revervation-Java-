@@ -48,9 +48,11 @@ public class Payment {
     public ArrayList<Table> getTables() {
         return tables;
     }
+
     public boolean checkPaymentComplete(){
         return this.paymentComplete;
     }
+
     public void pushItemsToHistory(ArrayList<TransHistDay> TransHist){
         if(this.tables.get(0).getOrder().getDate() != TransHist.get(TransHist.size()-1).getDate()){//Check if day exists
             TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));

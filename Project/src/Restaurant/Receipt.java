@@ -1,9 +1,10 @@
 package Restaurant;
 
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Receipt {
     private Payment payment;
@@ -17,16 +18,16 @@ public class Receipt {
     }
 
     public void printReceipt(){
+        SetPackage s;
         String orderIdList = ""; // to get the list of order ids to be printed later
         String tableList = ""; // to get the list of tables to be printed later
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date(); // to get current date and time
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime date = LocalDateTime.now(); // to get current date and time
 
         // Print address?
         // System.out.println("Server: " +) STAFFID
         System.out.println("RECEIPT \n\n");
-        System.out.println(String.format("Date/Time: " + dateFormat.format(date)));
+        System.out.println(String.format("Date/Time: " + dtf.format(date)));
         System.out.println();
         System.out.println();
         for (Table table: this.payment.getTables()) {
@@ -40,7 +41,15 @@ public class Receipt {
 
         for (Table table: this.payment.getTables()) {
             for (OrderItem o: table.getOrder().getOrderItemList()){
-                System.out.printf("%2d %35s $%-10f\n", o.getQuantityOrdered(),o.getItem().getItemName(),o.getQuantityOrdered()*o.getItem().getPrice());
+                if(o.getItem() instanceof SetPackage){
+                    s = (SetPackage)o.getItem();
+                    System.out.printf("%35s %-10f\n",s.getItemName(),s.getPrice());
+                    for(MenuItem m: s.getSetItems()){
+                        System.out.printf("\t- %35s\n",m.getItemName());
+                    }
+                }else {
+                    System.out.printf("%2d %35s $%-10f\n", o.getQuantityOrdered(), o.getItem().getItemName(), o.getQuantityOrdered() * o.getItem().getPrice());
+                }
             }
         }
 
