@@ -1,8 +1,7 @@
 package Restaurant;
 
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList; // import the ArrayList class
+import java.util.ArrayList;
 
 
 public class MenuInterface {
@@ -11,34 +10,28 @@ public class MenuInterface {
     public MenuInterface(Menu menu) {
         this.menu = menu;
     }
-    public static GetInput gi = new GetInput();
 
     public void createNewMenuItemInterface() throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("What type of menu item is your new menu?");
-        this.printMenuTypes();
-        //menu.printMenuTypes();
+        System.out.println("What is the type of the new menu item?");
+        printMenuTypes();
         System.out.print("Your input: ");
-        int menuTypeInt = sc.nextInt();
+        int menuTypeInt = GetInput.getIntFromRange(1,4);
         System.out.print("Enter the name of the new menu item: ");
-        sc.nextLine();
-        String menuName = sc.nextLine();
+        String menuName = GetInput.getString();
         System.out.print("Enter the price of the new menu item: ");
-        double price = sc.nextDouble();
+        double price = GetInput.getDouble();
         System.out.println("Enter the description of the new menu item in one line: ");
-        sc.nextLine();
-        String desc = sc.nextLine();
+        String desc = GetInput.getString();
         menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
         System.out.println("New item added to the menu!");
     }
 
     public void removeMenuItemInterface() throws IOException {
-        Scanner sc = new Scanner(System.in);
         int ID;
-        this.printMenuTypes();
+        printMenuTypes();
         System.out.println("What type of menu item would you like to remove?");
         System.out.print("Your input: ");
-        int menuType = sc.nextInt();
+        int menuType = GetInput.getIntFromRange(1,4);
         switch(menuType){
             case 1:
                 menu.printMainCourse();
@@ -58,9 +51,12 @@ public class MenuInterface {
                 System.out.println("Please enter values 1-4, enter -1 to exit.");
         }
         System.out.print("What is the menu item ID you would like to delete?");
-        ID = sc.nextInt();
+        //print ____ menu so that user can select more accurately
+        do {
+            ID = GetInput.getInt(); //needs more error checking that ID is of the correct menu item type
+        }while(menu.IDExists(ID));
         menu.removeMenuItem(menuType, ID);
-        System.out.println("Updated: ");
+        System.out.println("Updated ____ menu: "); //can try to fill in with the menu item type
         switch(menuType){
             case 1:
                 menu.printMainCourse();
@@ -83,21 +79,20 @@ public class MenuInterface {
     }
 
     public void updateMenuItemInterface() throws IOException {
-        Scanner sc = new Scanner(System.in);
         int ID, changeOption;
         menu.printMenu();
         System.out.println("Enter the menu ID which you want to modify: ");
-        ID = sc.nextInt();
-        changeOption = 1;
-        while (changeOption != 4) {
+        do {
+            ID = GetInput.getInt();
+        }while(menu.IDExists(ID));
+        do{
             System.out.println("What do you want to change?");
             this.printChangeTypes();
-            System.out.println("Enter your option: ");
-            changeOption = sc.nextInt();
+            System.out.print("Enter your option: ");
+            changeOption = GetInput.getIntFromRange(1,4);
             menu.updateMenuItem(ID, changeOption);
-        }
+        }while(changeOption != 4);
         System.out.println("UPDATE MENU ITEM END");
-
     }
 
     public void printChangeTypes(){
@@ -135,58 +130,52 @@ public class MenuInterface {
     public void createSetPackageInterface(){
         double maxPrice, discountRate, finalPrice;
         int mainMenuID, sideMenuID;
-        ArrayList<MenuItem> menuID = new ArrayList<MenuItem>();
-        Scanner sc = new Scanner(System.in);
+        ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
         System.out.println("You are now creating a set package");
         System.out.print("Enter the name of the set package: ");
-        String name = sc.next();
-        System.out.println("Enter the description of the set package:");
-        String desc = sc.next();
+        String name = GetInput.getString();
+        System.out.println("Enter the description of the set package in one line:");
+        String desc = GetInput.getString();
         System.out.print("Enter the menu ID of the main course item: ");
-        mainMenuID = sc.nextInt();
-        menuID.add(menu.getMenuItemFromID(mainMenuID));
+        mainMenuID = GetInput.getInt(); //error checking needed
+        setItems.add(menu.getMenuItemFromID(mainMenuID));
         System.out.print("Enter the menu ID of the side: ");
-        sideMenuID = sc.nextInt();
-        menuID.add(menu.getMenuItemFromID(sideMenuID));
+        sideMenuID = GetInput.getInt(); //error checking needed
+        setItems.add(menu.getMenuItemFromID(sideMenuID));
         System.out.print("Enter the maximum price of drink: ");
-        maxPrice = sc.nextDouble();
-        System.out.println(mainMenuID+sideMenuID);
+        maxPrice = GetInput.getDouble();
         double tempTotalPrice = menu.getMenuItemFromID(mainMenuID).getPrice() +
                 menu.getMenuItemFromID(sideMenuID).getPrice() + maxPrice;
-        System.out.println("The total price of the current combination, with the maximum drink price is :" +
+        System.out.println("The total price of the current combination, with the maximum drink price is : " +
                 "$ " + tempTotalPrice);
-        while (true) {
-            discountRate = 1;
-            while (discountRate > 0 && discountRate < 100) {
-                System.out.print("Enter the discount rate: ");
-                discountRate = sc.nextDouble();
+        do{
+            do{
+                System.out.print("Enter the percentage discount rate: ");
+                discountRate = GetInput.getDouble();
                 if (discountRate <= 0 || discountRate >= 100){
                     System.out.println("Invalid input! Please try again");
-                    continue;
                 } else {
                     break;
                 }
-            }
+            }while(true);
             finalPrice = tempTotalPrice * ((100 - discountRate)/100);
             System.out.print("The new price is: " + finalPrice);
             System.out.print("Would you like to proceed with this pricing? Y/N ");
-            char yesNo = sc.next().charAt(0);
+            char yesNo = GetInput.getChar();
             if (yesNo == 'Y' || yesNo == 'y'){
                 break;
-            } else if (yesNo == 'N' || yesNo == 'n'){
-                continue;
             }
-        }
+        }while(true);
 
-        menu.createNewSetPackage(name, finalPrice, desc, menuID);
+        menu.createNewSetPackage(name, finalPrice, desc, setItems);
     }
 
-    public void removeSetPackageInterface() throws IOException {
+    public void removeSetPackageInterface() throws IOException { //same as removing any other menu item so i don't think need this function
         int menuItemID;
         System.out.println("You are now removing a set package item from the menu");
         menu.printSetPackage();
         System.out.print("Enter the menu ID of the set package you would like to remove");
-        menuItemID = gi.getInt();
+        menuItemID = GetInput.getInt(); //needs error checking
         menu.removeMenuItem(5, menuItemID);
     }
 
@@ -195,16 +184,15 @@ public class MenuInterface {
         System.out.println("You are now updating a set package item");
         menu.printSetPackage();
         System.out.print("Enter the menu ID of the set package you would like to update");
-        menuItemID = gi.getInt();
+        menuItemID = GetInput.getInt();
         changeOption = 1;
         while (changeOption != 4) {
             System.out.println("What do you want to change?");
             this.printChangeTypes();
             System.out.println("Enter your option: ");
-            changeOption = gi.getInt();
+            changeOption = GetInput.getInt();
             menu.updateMenuItem(menuItemID, changeOption);
         }
         System.out.println("UPDATE SET PACKAGE END");
     }
-
 }

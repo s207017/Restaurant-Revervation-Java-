@@ -1,6 +1,5 @@
 package Restaurant;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 
@@ -72,8 +71,6 @@ public class Payment {
 
 class CashPayment extends Payment {
     private double cashPaid = 0;
-    Scanner sc = new Scanner(System.in);
-
 
     public CashPayment() {
         super();
