@@ -3,6 +3,7 @@ package Restaurant;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import javax.crypto.BadPaddingException;
@@ -25,6 +26,8 @@ public class Main{
         MenuInterface menuInterface = new MenuInterface(menu);
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
         TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
+        SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
+        TransHistDay transHistDay = new TransHistDay(LocalDateTime.now());
         Staff staff = new Staff();
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
@@ -108,15 +111,12 @@ public class Main{
 
                 case 3:
                     clearScreen();
-                    opt = 1;
-                    while (opt != -1){
-                        orderInterface.createOrder();
-                    }
+                    orderInterface.addItemsToOrder();
                     break;
 
                 case 4:
                     clearScreen();
-                    //orderInterface.viewOrder();
+                    orderInterface.viewOrder();
                     break;
 
                 case 5:
@@ -229,20 +229,22 @@ public class Main{
 
                 case 11:
                     clearScreen();
+                    //clarify
+                    //PaymentInterface paymentInterface = new PaymentInterface(restaurant, membership)
+                    //PaymentInterface.
                     break;
 
 
                 case 12:
                     clearScreen();
+                    salesRevenueReportInterface.printSalesRevenueReport();
                     break;
 
 
                 default:
+                    break;
             }
-
         }
-
-
     }
 
         public static void clearScreen(){
