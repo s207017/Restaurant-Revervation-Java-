@@ -22,6 +22,6 @@ public class testpaymentinterface {
         //order.addOrderItems(menu);
         //r.getTableFromTableNum(2).setOrder(order);
         PaymentInterface pay = new PaymentInterface(r,m,hist);
-        pay.startPayment();
+
     }
 }

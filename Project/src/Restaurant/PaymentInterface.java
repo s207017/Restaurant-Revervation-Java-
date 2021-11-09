@@ -169,7 +169,7 @@ public class PaymentInterface {
         newReceipt.printReceipt();
     }
 
-    public void addToHistory{
+    public void addToHistory(){
         this.payment.pushItemsToHistory(transHistDayArrayList);
     }
 }
