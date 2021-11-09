@@ -39,11 +39,12 @@ public class OrderInterfaceUI {
             choice = GetInput.getInt();
             if(choice == -1) break;
             //set temp to be the menuItem/setPackage item
+            MenuItem temp;
             if(choice>500 || choice <=500+menu.getSetPackageItems().size()) {
-                SetPackage temp = menu.getSetPackageItemFromID(choice);
+                temp = menu.getSetPackageItemFromID(choice);
             }
             else{
-                MenuItem temp = menu.getMenuItemFromID(choice);
+                temp = menu.getMenuItemFromID(choice);
             }
             if(temp == null){
                 System.out.println("Item does not exist, please enter valid ID.");
