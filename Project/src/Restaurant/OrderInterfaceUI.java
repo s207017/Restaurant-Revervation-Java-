@@ -10,85 +10,11 @@ public class OrderInterfaceUI {
         this.menu = menu;
         this.restaurant = restaurant;
     }
-    //Create order
-    public void CreateOrder(){
-        System.out.print("Enter table number: ");
-        int TableNum = GetInput.getInt();
-        while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-            System.out.print("No one at the table! Enter again");
-            TableNum = GetInput.getInt();
-        }
-        Order o = new Order(123,TableNum,menu);
-        restaurant.getTableFromTableNum(TableNum).setOrder(o);
-    }
     //View order
     public void viewOrder(){
         System.out.print("Enter table number: ");
         int TableNum = GetInput.getInt();
     }
-
-    //Add items to order
-//    public void addItemsToOrder(){
-//        System.out.print("Enter table number: ");
-//        int TableNum = GetInput.getInt();
-//        while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED) {
-//            System.out.print("No one at the table! Enter again");
-//            TableNum = GetInput.getInt();
-//        }
-//        int choice = 0, quantity = 0;
-//        while(choice != -1) {
-//            System.out.print("Enter ID of intended item to be ordered (-1 to end): ");
-//            choice = GetInput.getInt();
-//            if(choice == -1) break;
-//            //set temp to be the menuItem/setPackage item
-//            MenuItem temp;
-//            if(choice>500 || choice <=500+menu.getSetPackageItems().size()) {
-//                temp = menu.getSetPackageItemFromID(choice);
-//            }
-//            else{
-//                temp = menu.getMenuItemFromID(choice);
-//            }
-//            if(temp == null){
-//                System.out.println("Item does not exist, please enter valid ID.");
-//                continue;
-//            }
-//            if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
-//                SetPackage tempSetPackage = new SetPackage(temp.getItemName(),temp.getItemID(),temp.getPrice(),temp.getDescription());
-//                menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice());
-//                System.out.print("Please select drink: ");
-//                int drinkID = sc.nextInt();
-//                while (300>=drinkID && drinkID>300+ menu.getDrinkItems().size()){
-//                    System.out.print("Invalid ID, please try again: ");
-//                    drinkID = sc.nextInt();
-//                }
-//                // add drink item to items array in setpackage
-//                tempSetPackage.addSide(menu.getMenuItemFromID(drinkID));
-//                temp = tempSetPackage; //upcasting
-//            }
-//            System.out.print("Enter quantity of items to be ordered: ");
-//            quantity = sc.nextInt();
-//            while(quantity<=0){
-//                System.out.print("Invalid quantity! Please enter valid entry: ");
-//                quantity = sc.nextInt();
-//            }
-//            int index = checkItemExistence(choice,menu);
-//            if(index < 0) {//Item does not exist in order yet; create new orderitem
-//                orderList.add(new OrderItem(temp, quantity));
-//            }else{//Item already exists in order; update the quantity
-//                orderList.get(index).addQuantityOrdered(quantity);
-//            }
-//            this.total += (temp.getPrice() * quantity);
-//        }
-//    }
-//    //Remove items from order
-//    public void removeItemsFromOrder(){
-//        System.out.print("Enter table number: ");
-//        int TableNum = GetInput.getInt();
-//        while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-//            System.out.print("No one at the table! Enter again");
-//            TableNum = GetInput.getInt();
-//        }
-//    }
 
     public void addItemsToOrder(){
         System.out.print("Enter table number: ");
@@ -98,7 +24,12 @@ public class OrderInterfaceUI {
             TableNum = GetInput.getInt();
         }
         Order order= this.restaurant.getTableFromTableNum(TableNum).getOrder();
-        order.printOrder();
+        if(order == null){
+            order = new Order(1234,TableNum,menu);
+        }else {
+            System.out.println("Adding to existing order. Current order:");
+            order.printOrder();
+        }
         int choice = 0, quantity = 0;
         while(choice != -1) {
             System.out.print("Enter ID of intended item to be ordered (-1 to end): ");
@@ -140,13 +71,19 @@ public class OrderInterfaceUI {
     }
     //Remove items from order
     public void removeItemsFromOrder(){
-        System.out.print("Enter table number: ");
-        int TableNum = GetInput.getInt();
-        while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-            System.out.print("No one at the table! Enter again");
-            TableNum = GetInput.getInt();
+        Order order = null;
+        while(order == null) {
+            System.out.print("Enter table number: ");
+            int TableNum = GetInput.getInt();
+            while (this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED) {
+                System.out.print("No one at the table! Enter again");
+                TableNum = GetInput.getInt();
+            }
+            order = restaurant.getTableFromTableNum(TableNum).getOrder();
+            if (order == null) {
+                System.out.println("Table has no order! Enter another table");
+            }
         }
-        Order order = restaurant.getTableFromTableNum(TableNum).getOrder();
         order.printOrder();
         MenuItem temp;
         int choice = 0,quantity = 0;
@@ -166,14 +103,14 @@ public class OrderInterfaceUI {
             }
             System.out.print("Enter quantity to be removed: ");
             quantity = GetInput.getInt();
-            while(quantity <=0){
-                System.out.print("Please enter a valid quantity: ");
-                quantity = GetInput.getInt();
-            }
-            while(quantity > order.getOrderItemList().get(index).getQuantityOrdered()){// Quantity to be removed too high
-                System.out.printf("Only %d orders of %s exist.\n",
-                        order.getOrderItemList().get(index).getQuantityOrdered(),
-                        order.getOrderItemList().get(index).getItem().getItemName());
+            while(quantity > order.getOrderItemList().get(index).getQuantityOrdered() || quantity<=0){// Quantity to be removed too high
+                if(quantity>order.getOrderItemList().get(index).getQuantityOrdered()) {
+                    System.out.printf("Only %d orders of %s exist.\n",
+                            order.getOrderItemList().get(index).getQuantityOrdered(),
+                            order.getOrderItemList().get(index).getItem().getItemName());
+                }else if(quantity<=0){
+                    System.out.println("Quantity entered is negative or zero, invalid");
+                }
                 System.out.print("Enter quantity to be removed: ");
                 quantity = GetInput.getInt();
             }
