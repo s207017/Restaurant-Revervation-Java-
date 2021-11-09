@@ -88,7 +88,6 @@ public class OrderInterfaceUI {
 //            System.out.print("No one at the table! Enter again");
 //            TableNum = GetInput.getInt();
 //        }
-//
 //    }
 
     public void addItemsToOrder(){
