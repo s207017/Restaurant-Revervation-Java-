@@ -24,6 +24,24 @@ public class GetInput {
         return inputI;
     }
 
+    public static int getIntFromRange(int min, int max){
+        boolean isValid = false;
+        while(!isValid) {
+            try {
+                inputI = sc.nextInt();
+                if(inputI >= min && inputI <= max) {
+                    isValid = true;
+                }else {
+                    System.out.printf("Input should be between %d and %d (inclusive)\n", min, max);
+                }
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a valid integer input: ");
+                sc.next();
+            }
+        }
+        return inputI;
+    }
+
     public static int getInt(int min, int max){
         boolean isValid = false;
         inputI = -10;

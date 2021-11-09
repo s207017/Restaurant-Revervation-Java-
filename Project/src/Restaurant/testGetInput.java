@@ -7,15 +7,7 @@ public class testGetInput {
 
     public static void main(String[] args){
         System.out.print("Enter integer input: ");
-        a = GetInput.getInt();
+        a = GetInput.getIntFromRange(8,20);
         System.out.println(a);
-
-        System.out.print("Enter string input: ");
-        s = GetInput.getString();
-        System.out.println(s);
-
-        System.out.print("Enter double input: ");
-        d = GetInput.getDouble();
-        System.out.println(d);
     }
 }
