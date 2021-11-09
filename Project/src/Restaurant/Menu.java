@@ -313,12 +313,9 @@ public class Menu {
                 System.out.println("Wrong input into createNewMenuItem.");
         }
     }
-
-<<<<<<< Updated upstream
+    
+    
     public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems) {
-=======
-    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems, SetPackage set) {
->>>>>>> Stashed changes
         int ID=0;
         for (SetPackage m: setPackageItems){
             ID=m.getItemID();
