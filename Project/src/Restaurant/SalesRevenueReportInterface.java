@@ -8,7 +8,7 @@ public class SalesRevenueReportInterface {
 
     /**
      * creates a new sales report for a specified period
-     * @param choice == 1 will prompt user to enter 2 dates
+     * choice == 1 in SaleRevenueReport constructor will prompt user to enter 2 dates
      * to get the period for which they wish to view the report
      */
     public void createPeriodSalesReport(){
@@ -17,7 +17,7 @@ public class SalesRevenueReportInterface {
 
     /**
      * creates a new sales report for a specified day
-     * @param choice == 2 prompts user to enter one date
+     * choice == 2 in SaleRevenueReport constructor prompts user to enter one date
      */
     public void createDaySalesReport(){
         SalesRevenueReport salesReport = new SalesRevenueReport(restaurant.getTransactionHistory(), 2);
