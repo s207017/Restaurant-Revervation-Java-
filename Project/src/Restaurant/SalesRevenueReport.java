@@ -15,8 +15,8 @@ public class SalesRevenueReport {
         transHist = new ArrayList<TransHistDay>();
         summaryList = new ArrayList<TransHistItem>();
         do {
-            this.startDate = PeriodGetter.getDate();
-            this.endDate = PeriodGetter.getDate();
+            this.startDate = GetPeriod.getDate();
+            this.endDate = GetPeriod.getDate();
             if(endDate.isBefore(startDate)){
                 System.out.printf("End date (%s) is before start date (%s), please try again\n",endDate,startDate);
             }
