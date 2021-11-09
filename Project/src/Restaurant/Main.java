@@ -39,14 +39,10 @@ public class Main{
                 case 1: // Create/update/remove menu item
                     clearScreen();
                     Scanner sc = new Scanner(System.in);
-                    System.out.println("What would you like to do? ");
-                    System.out.println("|     1. Create menu item     |");
-                    System.out.println("|     2. Update menu item     |");
-                    System.out.println("|     3. Remove menu item     |");
-                    System.out.print("Your option: ");
-                    int opt = sc.nextInt();
+                    menuInterface.printOptionsMenuItems();
+                    int opt = gi.getInt();
                     while (opt < 1 && opt > 3) {
-                        opt = sc.nextInt();
+                        opt = gi.getInt();
                         System.out.println("Input should be either 1, 2 or 3!");
                     }
                     switch (opt) { //the 3 functions below need some error handling
@@ -68,23 +64,19 @@ public class Main{
                     break;
                 case 2: // Create/update/remove set packages
                     clearScreen();
-                    //Scanner sc = new Scanner(System.in);
-                    GetInput gi = new GetInput();
-                    System.out.println("Would you like to ");
-                    System.out.println("1. Create");
-                    System.out.println("2. Update");
-                    System.out.println("3. Remove a set package?");
-                    int input = 0;
-                    while (input < 1 && input > 3){
-                        //input = gi.getInput();
-                    }
-                    while (true){
-                            switch(input){
-                                case 1:
-                                    //menu.create
-
-                            }
+                    menuInterface.printOptionsSetPackages();
+                    System.out.print("Enter your option: ");
+                    opt = gi.getInt();
+                    while (opt >= 1 && opt <=3){
+                        switch(opt){
+                            case 1:
+                                menuInterface.createSetPackageInterface();
+                                break;
+                            case 2:
+                                menuInterface.
                         }
+                    }
+
 
 
 
