@@ -27,6 +27,8 @@ public class Main{
         Staff staff = new Staff();
         //public static GetInput gi = new GetInput();
         OrderInterfaceUI orderInterface = new OrderInterfaceUI(menu, restaurant);
+        Membership membership = new Membership();
+        MembershipInterface membershipInterface = new MembershipInterface(membership);
         //WRITE function init data to load text file data to the programme
 
         //Clears the CMD prompt
@@ -239,6 +241,7 @@ public class Main{
 
                 case 10:
                     clearScreen();
+                    membershipInterface.AddMember();
                     break;
 
 
