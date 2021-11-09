@@ -19,6 +19,7 @@ public class OrderInterfaceUI {
             TableNum = GetInput.getInt();
         }
         Order o = new Order(123,TableNum,menu);
+        restaurant.getTableFromTableNum(TableNum).setOrder(o);
     }
     //View order
     public void viewOrder(){
