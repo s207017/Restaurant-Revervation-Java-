@@ -126,12 +126,7 @@ public class Main2{
                     membershipInterface.AddMember();
                     break;
                 case 11:
-                    paymentInterface.selectPaymentMethod();
-                    paymentInterface.selectTable();
-                    paymentInterface.showAmount();
-                    paymentInterface.checkMembership();
-                    paymentInterface.makePayment();
-                    paymentInterface.generateReceipt();
+                    paymentInterface.makePaymentInterface();
                     break;
                 case 12:
                     salesRevenueReportInterface.printSalesRevenueReport();
