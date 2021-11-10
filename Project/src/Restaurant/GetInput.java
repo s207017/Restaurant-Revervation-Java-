@@ -77,10 +77,10 @@ public class GetInput {
         while(!isValid) {
             try {
                 inputD = sc.nextDouble();
-                if(inputD >= min && inputD <= max) {
+                if(inputD > min && inputD < max) {
                     isValid = true;
                 }else {
-                    System.out.printf("Input should be between %.2f and %.2f (inclusive)\n", min, max);
+                    System.out.printf("Input should be between %.2f and %.2f (exclusive)\n", min, max);
                     System.out.print("Your input: ");
                 }
             } catch (InputMismatchException e) {
