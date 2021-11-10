@@ -28,13 +28,11 @@ public class SalesRevenueReport {
             else if(choice == 2){//Creating a day sales report
                 this.startDate = GetPeriod.getDate();
                 this.endDate = startDate.plusHours(23);
-                System.out.printf("Start date: %s  End date: %s\n",startDate,endDate);
             }
         }while(endDate.isBefore(startDate) && endDate.isEqual(startDate));
         switch(choice){
             case 1://period report
                 for(TransHistDay x: transHistAll){//Narrow down to intended dates
-                    System.out.println("Entered for loop");
                     if((startDate.isBefore(x.getDate()) && endDate.isAfter(x.getDate())) || startDate.isEqual(x.getDate())){//Check if transHistDay is for that date
                         transHist.add(x); // Add the matching entry to the local arraylist of days of transhist
                     }
@@ -102,16 +100,13 @@ public class SalesRevenueReport {
     }
 
     public void generateReport(int choice){
-        System.out.println("Entered generate report");
         TransHistItem temp;
         for(TransHistDay t: this.transHist){
             for(TransHistItem i: t.getTransList()){
                 temp = itemExists(i.getItem(),i.getPrice()); // Checking if item already exists
                 if(temp == null){//Item doesnt exist
-                    System.out.println("Item does not exist in the summary list");
                     this.summaryList.add(new TransHistItem(i.getItem(),i.getQuantity(),i.getPrice()));
                 }else{
-                    System.out.println("Item exists: " + temp.getItem() + " ;incrementing quantity");
                     temp.setQuantity(i.getQuantity());
                 }
             }

@@ -1,6 +1,7 @@
 package Restaurant;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Main2{
     public static void main(String[] arg) throws IOException, InterruptedException {
@@ -29,10 +30,15 @@ public class Main2{
             thisStaff = restaurant.getStaffFromID(staffID);
             count++;
         }while(thisStaff==null);
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Logging you in to OOPsie RRPSS...");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Building kitchen...");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Configuring ant tasks...");
 
         int option, choice;
         do {
-            printAppOptions();
             option = getOption();
             switch (option) {
                 case 1: //Create/update/remove menu item
@@ -79,12 +85,15 @@ public class Main2{
                     } while (choice != 4);
                     break;
                 case 3:
-                    orderInterface.addItemsToOrder();
+                    restaurant.getMenu().printMenu();
                     break;
                 case 4:
-                    orderInterface.checkTableOrder();
+                    orderInterface.addItemsToOrder();
                     break;
                 case 5:
+                    orderInterface.checkTableOrder();
+                    break;
+                case 6:
                     orderInterface.printAddRemove();
                     System.out.print("Enter your option: ");
                     choice = GetInput.getIntFromRange(1, 3);
@@ -99,10 +108,10 @@ public class Main2{
                             break;
                     }
                     break;
-                case 6:
+                case 7:
                     reservationInterface.createReservationBooking();
                     break;
-                case 7:
+                case 8:
                     reservationInterface.printCheckRemove();
                     choice = GetInput.getIntFromRange(1, 3);
                     switch (choice) {
@@ -116,7 +125,7 @@ public class Main2{
                             break;
                     }
                     break;
-                case 8:
+                case 9:
                     System.out.println("Do you have a reservation? Enter [y/n]");
                     char YN = GetInput.getChar();
                     if (YN=='y'||YN=='Y'){
@@ -129,21 +138,21 @@ public class Main2{
                         break;
                     }
                     break;
-                case 9:
+                case 10:
                     tableAvailabilityInterface.checkTableAvailability();
                     break;
-                case 10:
+                case 11:
                     membershipInterface.AddMember();
                     break;
-                case 11:
+                case 12:
                     paymentInterface.makePaymentInterface();
                     break;
-                case 12:
+                case 13:
                     salesRevenueReportInterface.printSalesRevenueReport();
                     break;
-                case -1:
-                    System.out.println("App terminating..."); //never happens hehe
-                    break;
+                case 14:
+                    System.out.println("App terminating...");
+                    return;
             }
         }while(option != -1);
     }
@@ -153,16 +162,19 @@ public class Main2{
         System.out.println("+" + "-".repeat(164) + "+");
         System.out.printf("|%100s%65s\n","OOPsie Restaurant Reservation & Point of Sale App","|");
         System.out.println("+" + "-".repeat(164) + "+");
-        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu items from the menu", "(5) Add or remove item(s) to/from an existing order", "(9) Check table availability","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(2) Create/Update/Remove set","(6) Create new reservation","(10) Add or remove a member","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(3) Create new order","(7) Check or remove an existing reservation","(11) Make payment","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(4) View existing order","(8) Assign table","(12) View sales revenue report","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu item", "(6) Add or remove item(s) to/from an existing order", "(11) Add or remove a member","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(2) Create/Update/Remove set package item","(7) Create new reservation","(12) Make payment","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(3) View menu","(8) Check or remove an existing reservation","(13) View sales revenue report","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(4) Create new order","(9) Assign table","(14) Shut down app","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(5) View existing order","(10) Check table availability","","|");
         System.out.println("+" + "-".repeat(164) + "+");
     }
 
-    public static int getOption(){
+    public static int getOption() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+        printAppOptions();
         System.out.print("Enter your option: ");
-        int option = GetInput.getIntFromRange(1,12);
+        int option = GetInput.getIntFromRange(1,14);
         System.out.println("");
         return option;
     }

@@ -122,7 +122,7 @@ public class Menu {
 
     //print functions!
     public void printMenu(){
-        System.out.println("Suparakki Ramen Menu:");
+        System.out.println("OOPsie Menu:");
         System.out.println("-".repeat(100));
         System.out.println("-".repeat(100));
         System.out.println("Main Courses:");
