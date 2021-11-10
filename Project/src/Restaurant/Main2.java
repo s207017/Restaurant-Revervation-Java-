@@ -21,31 +21,32 @@ public class Main2{
             thisStaff = restaurant.getStaffFromID(staffID);
         }while(thisStaff!=null);
 
-        printAppOptions();
-        int option = GetInput.getIntFromRange(1,13);
-        int choice;
+        int option, choice;
         do {
+            printAppOptions();
+            option = getOption();
             switch (option) {
                 case 1: //Create/update/remove menu item
-                    menuInterface.printOptionsMenuItems();
-                    choice = GetInput.getIntFromRange(1, 4);
-                    switch (choice) {
-                        case 1:
-                            menuInterface.createNewMenuItemInterface();
-                            break;
-                        case 2:
-                            menuInterface.updateMenuItemInterface();
-                            break;
-                        case 3:
-                            menuInterface.removeMenuItemInterface();
-                            break;
-                        case 4:
-                            System.out.println("Exiting...");
-                            break;
-                        default:
-                            break;
-                    }
-                    option = getNextOption();
+                    do{
+                        menuInterface.printOptionsMenuItems();
+                        choice = GetInput.getIntFromRange(1, 4);
+                        switch (choice) {
+                            case 1:
+                                menuInterface.createNewMenuItemInterface();
+                                break;
+                            case 2:
+                                menuInterface.updateMenuItemInterface();
+                                break;
+                            case 3:
+                                menuInterface.removeMenuItemInterface();
+                                break;
+                            case 4:
+                                System.out.println("Exiting...");
+                                break;
+                            default:
+                                break;
+                        }
+                    } while(choice != 4);
                     break;
                 case 2: // Create/update/remove set packages
                     choice = GetInput.getIntFromRange(1, 4);
@@ -61,7 +62,7 @@ public class Main2{
                             break;
                         case 4:
                             printAppOptions();
-                            option = getNextOption();
+
                             break;
                         default:
                             break;
@@ -70,14 +71,14 @@ public class Main2{
                 case 3:
                     orderInterface.addItemsToOrder();
                     printAppOptions();
-                    option = getNextOption();
+
                     break;
                 case 4:
                     System.out.print("Enter table number: ");
                     int tableNum = GetInput.getIntFromRange(1, 8);
                     restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
                     printAppOptions();
-                    option = getNextOption();
+
                     break;
                 case 5:
                     orderInterface.printAddRemove();
@@ -92,12 +93,27 @@ public class Main2{
                             break;
                         case 3:
                             printAppOptions();
-                            option = getNextOption();
+
                             break;
                     }
                     break;
                 case 6:
+<<<<<<< HEAD
                     reservationInterface.createReservationBooking();
+=======
+                    System.out.println("(1) Create new reservation");
+                    System.out.println("(2) Return to the main menu");
+                    choice = GetInput.getIntFromRange(1, 2);
+                    switch (choice) {
+                        case 1:
+                            reservationInterface.checkReservationBooking();
+                            break;
+                        case 2:
+                            printAppOptions();
+
+                            break;
+                    }
+>>>>>>> main
                     break;
                 case 7:
                     reservationInterface.printCheckRemove();
@@ -111,24 +127,24 @@ public class Main2{
                             break;
                         case 3:
                             printAppOptions();
-                            option = getNextOption();
+
                             break;
                     }
                     break;
                 case 8:
                     tableAvailabilityInterface.assignTable();
                     printAppOptions();
-                    option = getNextOption();
+
                     break;
                 case 9:
                     System.out.println(restaurant);
                     printAppOptions();
-                    option = getNextOption();
+
                     break;
                 case 10:
                     membershipInterface.AddMember();
                     printAppOptions();
-                    option = getNextOption();
+
                     break;
                 case 11:
                     paymentInterface.selectPaymentMethod();
@@ -138,12 +154,12 @@ public class Main2{
                     paymentInterface.makePayment();
                     paymentInterface.generateReceipt();
                     printAppOptions();
-                    option = getNextOption();
+
                     break;
                 case 12:
                     salesRevenueReportInterface.printSalesRevenueReport();
                     printAppOptions();
-                    option = getNextOption();
+
                     break;
                 case -1:
                     System.out.println("App terminating..."); //never happens hehe
@@ -167,8 +183,8 @@ public class Main2{
         System.out.println("(12) View sales revenue report");
     }
 
-    public static int getNextOption(){
-        System.out.print("Enter your next option: ");
+    public static int getOption(){
+        System.out.print("Enter your option: ");
         int option = GetInput.getIntFromRange(1,12);
         return option;
     }

@@ -33,22 +33,8 @@ public class GetInput {
                     isValid = true;
                 }else {
                     System.out.printf("Input should be between %d and %d (inclusive)\n", min, max);
+                    System.out.print("Your input: ");
                 }
-            } catch (InputMismatchException e) {
-                System.out.print("Please enter a valid integer input: ");
-                sc.next();
-            }
-        }
-        return inputI;
-    }
-
-    public static int getInt(int min, int max){
-        boolean isValid = false;
-        inputI = -10;
-        while(!isValid || inputI < min || inputI > max) {
-            try {
-                inputI = sc.nextInt();
-                isValid = true;
             } catch (InputMismatchException e) {
                 System.out.print("Please enter a valid integer input: ");
                 sc.next();
