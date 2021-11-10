@@ -380,26 +380,24 @@ public class Menu {
 
 
     public void updateMenuItem(int ID, int changeOption) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        changeOption = sc.nextInt();
         switch (changeOption) {
             case 1:
                 System.out.println("What is the new price?");
-                double newPrice = sc.nextDouble();
+                double newPrice = GetInput.getDouble();
                 getMenuItemFromID(ID).setPrice(newPrice);
                 break;
             case 2:
                 System.out.println("What is the new name?");
-                String newName = sc.nextLine();
+                String newName = GetInput.getString();
                 getMenuItemFromID(ID).setItemName(newName);
                 break;
             case 3:
                 System.out.println("What is the new description?");
-                String newDesc = sc.nextLine();
+                String newDesc = GetInput.getString();
                 getMenuItemFromID(ID).setDescription(newDesc);
                 break;
             case 4:
-                System.out.println("Exiting update of menu...");
+//                System.out.println("Exiting update of menu...");
                 break;
             default:
                 break;
@@ -412,29 +410,27 @@ public class Menu {
 
     public boolean updateMenuItembool(int ID, int changeOption, boolean counts) throws IOException {
         boolean updated = false;
-        Scanner sc = new Scanner(System.in);
-        changeOption = sc.nextInt();
         switch (changeOption) {
             case 1:
                 System.out.println("What is the new price?");
-                double newPrice = sc.nextDouble();
+                double newPrice = GetInput.getDouble();
                 getMenuItemFromID(ID).setPrice(newPrice);
                 updated = true;
                 break;
             case 2:
                 System.out.println("What is the new name?");
-                String newName = sc.nextLine();
+                String newName = GetInput.getString();
                 getMenuItemFromID(ID).setItemName(newName);
                 updated = true;
                 break;
             case 3:
                 System.out.println("What is the new description?");
-                String newDesc = sc.nextLine();
+                String newDesc = GetInput.getString();
                 getMenuItemFromID(ID).setDescription(newDesc);
                 updated = true;
                 break;
             case 4:
-                System.out.println("Exiting update of menu...");
+//                System.out.println("Exiting update of menu...");
                 break;
             default:
                 break;

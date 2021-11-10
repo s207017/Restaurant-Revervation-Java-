@@ -110,8 +110,8 @@ public class MenuInterface {
     }
 
     public void updateMenuItemInterface() throws IOException, InterruptedException {
-        int ID, end, menuTypeInt, changeOption, changeCount = 0;
-        boolean invalidInput;
+        int ID, end, menuTypeInt, changeOption, changeCount;
+        boolean invalidInput, changed;
         do{
             printMenuTypes();
             System.out.println("What type of menu item would you like to update?");
@@ -151,23 +151,35 @@ public class MenuInterface {
                     System.out.println("The menu ID is out of range for the selected menu type!");
                 } else {
                     System.out.println("Menu ID found... LOADING..");
+                    System.out.println();
                 }
             } while (invalidInput);
             do{
-                System.out.println(menu.getMenuItemFromID(ID).getItemName());
+                changeCount = 0;
+                System.out.println("Before update: ");
+                System.out.println("Name: " + menu.getMenuItemFromID(ID).getItemName());
+                System.out.println("Price: " + menu.getMenuItemFromID(ID).getPrice());
+                System.out.println("Description: " + menu.getMenuItemFromID(ID).getDescription());
+                System.out.println("-".repeat(40));
                 System.out.println("What do you want to change?");
                 this.printChangeTypes();
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1,4);
-                if (menu.updateMenuItembool(ID, changeOption, true)){
+                changed = menu.updateMenuItembool(ID, changeOption, true);
+                if (changed){
                     changeCount++;
+                    System.out.println("Item updated!");
                 }
             }while(changeOption != 4);
-            if (changeCount != 0) {
-                System.out.println("Item updated!");
-                printUpdatedMenu(menuTypeInt);
-                TimeUnit.SECONDS.sleep(2);
-            }
+//            if (changeCount != 0) {
+//                System.out.println("Item updated!");
+//                System.out.println("After update: ");
+//                System.out.println("Name: " + menu.getMenuItemFromID(ID).getItemName());
+//                System.out.println("Price: " + menu.getMenuItemFromID(ID).getPrice());
+//                System.out.println("Description: " + menu.getMenuItemFromID(ID).getDescription());
+//                System.out.println("-".repeat(40));
+//                TimeUnit.SECONDS.sleep(2);
+//            }
 
             System.out.println();
             System.out.println("1. Update another menu");
