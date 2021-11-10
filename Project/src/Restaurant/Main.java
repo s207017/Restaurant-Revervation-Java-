@@ -106,7 +106,6 @@ public class Main {
                             orderUI.removeItemsFromOrder();
                             break;
                         case 3:
-                            System.out.println("*ORDER FUNCTION END*");
                             break;
                     }
                     break;

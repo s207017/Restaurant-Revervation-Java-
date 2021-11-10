@@ -39,8 +39,7 @@ public class MenuUI {
             System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2){
-                System.out.println("*CREATE MENU ITEM END*");
-                System.out.println("");
+                break;
             }
         } while (end == 1);
     }
@@ -102,8 +101,7 @@ public class MenuUI {
             System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
-                System.out.println("*REMOVE MENU ITEM END*");
-                System.out.println();
+                break;
             }
         } while (end != 2);
     }
@@ -186,8 +184,7 @@ public class MenuUI {
             System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
-                System.out.println("*UPDATE MENU ITEM END*");
-                System.out.println();
+                break;
             }
         } while (end != 2);
     }
@@ -350,8 +347,7 @@ public class MenuUI {
             System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
-                System.out.println("*CREATE SET PACKAGE END*");
-                System.out.println();
+                break;
             }
         } while (end != 2);
     }
@@ -391,6 +387,5 @@ public class MenuUI {
             changeOption = GetInput.getInt();
             menu.updateMenuItem(menuItemID, changeOption);
         }
-        System.out.println("*UPDATE SET PACKAGE END*");
     }
 }
