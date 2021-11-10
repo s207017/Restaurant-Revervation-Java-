@@ -8,18 +8,23 @@ public class Membership {
     public Membership(){
         membersList.add(new Member(91169149));
         membersList.add(new Member(81812335));
-        membersList.add(new Member(87426732));
+    }
+
+    public ArrayList<Member> getMembersList() {
+        return membersList;
     }
 
     public void addMember(Member member){
         membersList.add(member);
     }
 
-    public boolean checkMembership(int number){
+    public int checkMembership(int number){
+        int count = 0;
         for (Member member: membersList){
-            if (member.getNumber()== number)
-                return true;
+            count++;
+            if (member.getNumber() == number)
+                return count;
         }
-        return false;
+        return count;
     }
 }

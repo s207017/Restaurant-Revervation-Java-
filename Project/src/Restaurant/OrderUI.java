@@ -18,7 +18,8 @@ public class OrderUI {
 
     public void addItemsToOrder(){
         int TableNum;
-        System.out.printf("Enter table number (tables 1 - %d) [%d to exit]: ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
+        System.out.println(restaurant);
+        System.out.printf("Enter table number [%d to exit]: ",restaurant.getTableList().size()+1);
         do{
             TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+1);
             if(TableNum == restaurant.getTableList().size()+1){
@@ -145,6 +146,7 @@ public class OrderUI {
     }
 
     public void checkTableOrder(){
+        System.out.println(restaurant);
         System.out.print("Enter table number: ");
         int tableNum = GetInput.getIntFromRange(1, restaurant.getTableList().size());
         Order temp = restaurant.getTableFromTableNum(tableNum).getOrder();

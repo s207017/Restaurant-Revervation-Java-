@@ -18,7 +18,6 @@ public class Order {
     {orderNum +=1;}
     public Order(int staffID, int tableNum,Menu menu) {
         this.orderID = orderNum;
-        System.out.printf("Assigned orderID is %d\n",this.orderID);
         this.staffID = staffID;
         this.tableNum = tableNum;
         this.date = LocalDateTime.now();
