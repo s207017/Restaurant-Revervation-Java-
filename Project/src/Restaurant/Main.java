@@ -128,7 +128,7 @@ public class Main {
                     }
                     break;
                 case 9:
-                    System.out.print("*ENTER ANY OTHER KEY TO RETURN*\nDoes the customer have a reservation? [Y/N]: ");
+                    System.out.print("*ENTER ANY OTHER KEY TO RETURN\nDoes the customer have a reservation? [Y/N]: ");
                     char YN = GetInput.getChar();
                     if (YN=='y'||YN=='Y'){
                         tableAvailabilityUI.assignTable(true);
@@ -146,7 +146,7 @@ public class Main {
                 case 11:
                     System.out.print("Membership functions:\n(1) Add member\n(2) Remove member\n");
                     while(true){
-                        System.out.print("*ENTER (3) TO EXIT\nEnter option: ");
+                        System.out.print("*ENTER 3 TO EXIT\nEnter option: ");
                         choice = GetInput.getIntFromRange(1,3);
                         if(choice==1){
                             membershipUI.addMember();

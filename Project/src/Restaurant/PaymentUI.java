@@ -39,7 +39,7 @@ public class PaymentUI {
      */
     public boolean selectPaymentMethod() {
         int choice;
-        System.out.print("*ENTER -1 TO EXIT\nPayment by? \n(1) Cash \n(2) Others \nEnter option: ");
+        System.out.print("Payment by? \n(1) Cash \n(2) Others \n*ENTER -1 TO EXIT\nEnter option: ");
         do {
             choice = GetInput.getInt();
             switch (choice) {

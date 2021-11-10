@@ -19,7 +19,7 @@ public class OrderUI {
     public void addItemsToOrder(){
         int TableNum;
         System.out.println(restaurant);
-        System.out.printf("Enter table number [%d to exit]: ",restaurant.getTableList().size()+1);
+        System.out.printf("*ENTER 9 TO EXIT\nEnter table number: ",restaurant.getTableList().size()+1);
         do{
             TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+1);
             if(TableNum == restaurant.getTableList().size()+1){
@@ -27,7 +27,7 @@ public class OrderUI {
                 return;
             }
             if(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-                System.out.printf("No one at the table. Enter again (tables 1 - %d) [%d to exit]: ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
+                System.out.printf("*ENTER 9 TO EXIT\nNo one at the table. Enter table number again: ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
             }
         }while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED);
 //        int TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size());
