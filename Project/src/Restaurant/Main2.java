@@ -3,7 +3,7 @@ package Restaurant;
 import java.io.IOException;
 
 public class Main2{
-    public static void main(String[] arg) throws IOException {
+    public static void main(String[] arg) throws IOException, InterruptedException {
         Restaurant restaurant = new Restaurant();
         MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);

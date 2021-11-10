@@ -411,4 +411,40 @@ public class Menu {
         updateMenuToFile(drinkItems,"drinkitems");
         updateMenuToFile(dessertItems,"dessertitems");
     }
+
+    public boolean updateMenuItem(int ID, int changeOption, boolean counts) throws IOException {
+        boolean updated = false;
+        Scanner sc = new Scanner(System.in);
+        changeOption = sc.nextInt();
+        switch (changeOption) {
+            case 1:
+                System.out.println("What is the new price?");
+                double newPrice = sc.nextDouble();
+                getMenuItemFromID(ID).setPrice(newPrice);
+                updated = true;
+                break;
+            case 2:
+                System.out.println("What is the new name?");
+                String newName = sc.nextLine();
+                getMenuItemFromID(ID).setItemName(newName);
+                updated = true;
+                break;
+            case 3:
+                System.out.println("What is the new description?");
+                String newDesc = sc.nextLine();
+                getMenuItemFromID(ID).setDescription(newDesc);
+                updated = true;
+                break;
+            case 4:
+                System.out.println("Exiting update of menu...");
+                break;
+            default:
+                break;
+        }
+        updateMenuToFile(mainCourseItems,"maincourseitems");
+        updateMenuToFile(sideItems,"sideitems");
+        updateMenuToFile(drinkItems,"drinkitems");
+        updateMenuToFile(dessertItems,"dessertitems");
+        return updated;
+    }
 }
