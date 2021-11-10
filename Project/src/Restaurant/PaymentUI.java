@@ -37,8 +37,8 @@ public class PaymentUI {
      */
     public boolean selectPaymentMethod() {
         int choice;
+        System.out.print("Payment by? \n(1) Cash \n(2) Others \n(-1) To terminate payment\nEnter option: ");
         do {
-            System.out.print("*ENTER -1 TO TERMINATE* \nPayment by \n1. Cash \n2. Others \nInput: ");
             choice = GetInput.getInt();
             switch (choice) {
                 case 1:
@@ -49,10 +49,10 @@ public class PaymentUI {
                     this.payment = new Payment();
                     return true;
                 case -1:
-                    System.out.println("TERMINATING PAYMENT...");
+                    System.out.println("Terminating payment...");
                     return false;
                 default:
-                    System.out.println("Please enter a valid selection");
+                    System.out.print("Please enter a valid option: ");
                     continue;
             }
         } while (true);
@@ -61,7 +61,7 @@ public class PaymentUI {
     public boolean selectTable() {
         int choice;
         System.out.println(r);
-        System.out.print("*ENTER -1 WHEN DONE*\nSelect table number(s) for payment: ");
+        System.out.print("Select table number(s) for payment [enter -1 when done]: ");
         choice = GetInput.getInt();
         while (choice != -1) {
             Table t = (this.r.getTableFromTableNum(choice));
@@ -69,17 +69,17 @@ public class PaymentUI {
                 System.out.print("Invalid table number, please try again: ");
                 choice = GetInput.getInt();
             } else if (t.getTableStatus() != Table.Level.OCCUPIED || t.getOrder() == null) { //not occupied or no order
-                System.out.print("No order, please try again: ");
+                System.out.print("No order or table is unoccupied, please try again: ");
                 choice = GetInput.getInt();
             } else {
                 this.payment.addTable(this.r.getTableFromTableNum(choice));
                 System.out.println("Table " + choice + " selected");
-                System.out.print("*ENTER -1 WHEN DONE*\nSelect another table number for payment: ");
+                System.out.print("Select another table number for payment [enter -1 when done]: ");
                 choice = GetInput.getInt();
             }
         }
         if (this.payment.getTables().isEmpty()) {
-            System.out.println("TERMINATING PAYMENT...");
+            System.out.println("Terminating payment...");
             return false;
         }
         return true;
@@ -106,7 +106,7 @@ public class PaymentUI {
             System.out.print("Please enter phone number: ");
             phoneNumber = GetInput.getInt();
             while (phoneNumber < 80000000 || phoneNumber > 99999999) {
-                System.out.print("*ENTER -1 TO END*\nPlease enter a valid phone number: ");
+                System.out.print("Please enter a valid phone number [enter -1 to end]: ");
                 phoneNumber = GetInput.getInt();
                 if (phoneNumber == -1) {
                     break;
@@ -122,7 +122,7 @@ public class PaymentUI {
             }
         }
         if (isMember == false) {
-            System.out.print("Apply for membership? Y/N: ");
+            System.out.print("Apply for membership? (Y/N): ");
             selection = GetInput.getChar();
             if (selection == 'y' || selection == 'Y') {
                 System.out.print("Enter customer's mobile number: ");
@@ -151,7 +151,7 @@ public class PaymentUI {
             System.out.print("Cash received: ");
             double cashReceived = GetInput.getDouble();
             while (cashReceived < this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()) {
-                System.out.print("*ENTER -1 TO END*\nInsufficient amount.\nCash received: ");
+                System.out.print("Insufficient amount.\nCash received [enter -1 to end]: ");
                 cashReceived = GetInput.getDouble();
                 if (cashReceived == -1) {
                     System.out.println("PAYMENT FAILED");

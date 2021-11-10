@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class GetPeriod {
-    private static Scanner sc = new Scanner(System.in);
     private static int datesInMonthLeap[] = new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private static int datesInMonth[] = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -17,10 +16,10 @@ public class GetPeriod {
         LocalDateTime finalDate;
         String temp;
         //chose year
-        System.out.print("Please enter year:");
+        System.out.print("Please enter year: ");
         yearInt = sc.nextInt();
         //chose month
-        System.out.println("Enter month (1-12): ");
+        System.out.print("Enter month (1 - 12): ");
         monthInt = sc.nextInt();
         //chose date
         int dateArrayUsed[];
@@ -29,7 +28,7 @@ public class GetPeriod {
         } else {
             dateArrayUsed = datesInMonth;
         }
-        System.out.print("Enter date:");
+        System.out.print("Enter date: ");
         dateInt = sc.nextInt();
         while (dateInt > dateArrayUsed[monthInt- 1]) {//Check if the date is within the limit
             System.out.printf("Please enter date between 1 and %d inclusive: ", dateArrayUsed[monthInt - 1]);

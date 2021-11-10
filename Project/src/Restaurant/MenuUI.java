@@ -18,29 +18,28 @@ public class MenuUI {
         do{
             System.out.println("What is the type of the new menu item?");
             printMenuTypes();
-            System.out.print("Your input: ");
+            System.out.print("Enter your input: ");
             menuTypeInt = GetInput.getIntFromRange(1,4);
             printExistingMenu(menuTypeInt);
             System.out.print("Enter the name of the new menu item: ");
             String menuName = GetInput.getString();
             System.out.print("Enter the price of the new menu item: ");
             double price = GetInput.getDouble();
-            System.out.println("Enter the description of the new menu item in one line: ");
+            System.out.print("Enter the description of the new menu item: ");
             String desc = GetInput.getString();
             menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
             System.out.println("New item added to the menu!");
             printUpdatedMenu(menuTypeInt);
-            TimeUnit.SECONDS.sleep(2);
-
+            TimeUnit.SECONDS.sleep(1);
 
             System.out.println();
             System.out.println("What would you like to do next?");
-            System.out.println("1. Create another menu");
-            System.out.println("2. Return to the menu interface");
-            System.out.print("Your input: ");
+            System.out.println("(1) Create another menu");
+            System.out.println("(2) Return to the menu interface");
+            System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2){
-                System.out.println("----------CREATE MENU ITEM END----------");
+                System.out.println("*CREATE MENU ITEM END*");
                 System.out.println("");
             }
         } while (end == 1);
@@ -52,14 +51,14 @@ public class MenuUI {
         do{
             printMenuTypes();
             System.out.println("What type of menu item would you like to remove?");
-            System.out.print("Your input: ");
+            System.out.print("Enter your input: ");
             menuTypeInt = GetInput.getIntFromRange(1,4);
             printExistingMenu(menuTypeInt);
             System.out.println("What is the menu item ID you would like to delete?");
-            System.out.print("Your input: ");
+            System.out.print("Enter your input: ");
             do {
                 invalidInput = false;
-                System.out.print("Your input: ");
+                System.out.print("Enter your input: ");
                 ID = GetInput.getInt();
                 switch (menuTypeInt){
                     case 1:
@@ -86,24 +85,24 @@ public class MenuUI {
                         break;
                 }
                 if (invalidInput) {
-                    System.out.println("The menu ID is out of range for the selected menu type!");
+                    System.out.println("The menu item ID is out of range for the selected menu type!");
                 } else {
-                    System.out.println("Menu ID found... LOADING..");
+                    System.out.println("Menu item ID found... LOADING...");
                 }
             } while (invalidInput);
             menu.removeMenuItem(menuTypeInt, ID);
             System.out.println("Item removed!");
             printUpdatedMenu(menuTypeInt);
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(1);
 
             System.out.println();
             System.out.println("What would you like to do next?");
-            System.out.println("1. Remove another menu");
-            System.out.println("2. Return to the menu interface");
-            System.out.print("Your input: ");
+            System.out.println("(1) Remove another menu");
+            System.out.println("(2) Return to the menu interface");
+            System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
-                System.out.println("----------REMOVE MENU ITEM END----------");
+                System.out.println("*REMOVE MENU ITEM END*");
                 System.out.println();
             }
         } while (end != 2);
@@ -115,13 +114,13 @@ public class MenuUI {
         do{
             printMenuTypes();
             System.out.println("What type of menu item would you like to update?");
-            System.out.print("Your input: ");
+            System.out.print("Enter your input: ");
             menuTypeInt = GetInput.getIntFromRange(1,4);
             printExistingMenu(menuTypeInt);
             System.out.println("What is the menu item ID you would like to update?");
             do {
                 invalidInput = false;
-                System.out.print("Your input: ");
+                System.out.print("Enter your input: ");
                 ID = GetInput.getInt();
                 switch (menuTypeInt){
                     case 1:
@@ -148,9 +147,9 @@ public class MenuUI {
                         break;
                 }
                 if (invalidInput) {
-                    System.out.println("The menu ID is out of range for the selected menu type!");
+                    System.out.println("The menu item ID is out of range for the selected menu type!");
                 } else {
-                    System.out.println("Menu ID found... LOADING..");
+                    System.out.println("Menu item ID found... LOADING...");
                     System.out.println();
                 }
             } while (invalidInput);
@@ -182,46 +181,47 @@ public class MenuUI {
 //            }
 
             System.out.println();
-            System.out.println("1. Update another menu");
-            System.out.println("2. Return to the menu interface");
-            System.out.print("Your input: ");
+            System.out.println("(1) Update another menu");
+            System.out.println("(2) Back to main app");
+            System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
-                System.out.println("----------UPDATE MENU ITEM END----------");
+                System.out.println("*UPDATE MENU ITEM END*");
                 System.out.println();
             }
         } while (end != 2);
     }
 
     public void printChangeTypes(){
-        System.out.println("1. Price ");
-        System.out.println("2. Name         ");
-        System.out.println("3. Description   ");
-        System.out.println("4. Return ");
+        System.out.println("(1) Price");
+        System.out.println("(2) Name");
+        System.out.println("(3) Description");
+        System.out.println("(4) Return to the menu interface");
     }
 
     public void printMenuTypes(){
-        System.out.println("|      1. Main Course      |");
-        System.out.println("|      2. Sides            |");
-        System.out.println("|      3. Drinks           |");
-        System.out.println("|      4. Desserts         |");
+        System.out.println("(1) Main Course");
+        System.out.println("(2) Sides");
+        System.out.println("(3) Drinks");
+        System.out.println("(4) Desserts");
     }
 
     public void printOptionsMenuItems(){
-        System.out.println("What would you like to do? ");
-        System.out.println("|        1. Create menu item           |");
-        System.out.println("|        2. Update menu item           |");
-        System.out.println("|        3. Remove menu item           |");
-        System.out.println("|        4. Return to the main menu    |");
-        System.out.print("Your option: ");
+        System.out.println("What would you like to do?");
+        System.out.println("(1) Create menu item");
+        System.out.println("(2) Update menu item");
+        System.out.println("(3) Remove menu item");
+        System.out.println("(4) Return to the menu interface");
+        System.out.print("Enter your option: ");
     }
 
     public void printOptionsSetPackages(){
-        System.out.println("Would you like to ");
-        System.out.println("1. Create a set package");
-        System.out.println("2. Update an existing set package");
-        System.out.println("3. Remove an existing set package");
-        System.out.println("4. Return to the main menu");
+        System.out.println("What would you like to do?");
+        System.out.println("(1) Create a set package");
+        System.out.println("(2) Update an existing set package");
+        System.out.println("(3) Remove an existing set package");
+        System.out.println("(4) Return to the main menu");
+        System.out.print("Enter your option: ");
     }
 
     public void printExistingMenu(int menuTypeInt){
@@ -289,37 +289,37 @@ public class MenuUI {
             System.out.println("You are now creating a set package");
             System.out.print("Enter the name of the set package: ");
             String name = GetInput.getString();
-            System.out.println("Enter the description of the set package in one line:");
+            System.out.print("Enter the description of the set package: ");
             String desc = GetInput.getString();
             System.out.println("You will now have to choose 1 main course item and 1 side menu item");
             menu.printMainCourse();
             do {
                 invalidInput = false;
-                System.out.print("Enter the menu ID of the main course item: ");
+                System.out.print("Enter the menu item ID of the main course item: ");
                 mainMenuID = GetInput.getInt();
                 if (101 > mainMenuID || mainMenuID > 100 + menu.getMainCourseItems().size()){
                     invalidInput = true;
                 }
                 if (invalidInput) {
-                    System.out.println("The menu ID is out of range for the MAIN MENU!");
+                    System.out.println("The menu item ID is out of range for the MAIN MENU!");
                 } else {
-                    System.out.println("Menu ID found... Adding it to the set package..");
+                    System.out.println("Menu item ID found... Adding it to the set package...");
                 }
             } while (invalidInput);
             setItems.add(menu.getMenuItemFromID(mainMenuID));
             menu.printSide();
-            System.out.print("Enter the menu ID of the side: ");
+            System.out.print("Enter the menu item ID of the side: ");
             do {
                 invalidInput = false;
-                System.out.print("Enter the menu ID of the main course item: ");
+                System.out.print("Enter the menu item ID of the main course item: ");
                 sideMenuID = GetInput.getInt();
                 if (201 > sideMenuID || sideMenuID > 200 + menu.getSideItems().size()){
                     invalidInput = true;
                 }
                 if (invalidInput) {
-                    System.out.println("The menu ID is out of range for SIDE MENU!");
+                    System.out.println("The menu item ID is out of range for SIDE MENU!");
                 } else {
-                    System.out.println("Menu ID found... Adding it to the set package..");
+                    System.out.println("Menu item ID found... Adding it to the set package...");
                 }
             } while (invalidInput);
             setItems.add(menu.getMenuItemFromID(sideMenuID));
@@ -335,7 +335,7 @@ public class MenuUI {
                 finalPrice = tempTotalPrice * ((100 - discountRate) / 100);
                 System.out.println("The new price is: " + String.format("%,.2f", finalPrice));
                 System.out.println("Would you like to proceed with this pricing? Y/N ");
-                System.out.print("Your input: ");
+                System.out.print("Enter your input: ");
                 char yesNo = GetInput.getChar();
                 if (yesNo == 'Y' || yesNo == 'y') {
                     break;
@@ -345,12 +345,12 @@ public class MenuUI {
             } while (true);
             menu.createNewSetPackage(name, finalPrice, desc, setItems);
             System.out.println();
-            System.out.println("1. Create another set package");
-            System.out.println("2. Return to the set package interface");
-            System.out.print("Your input: ");
+            System.out.println("(1) Create another set package");
+            System.out.println("(2) Return to the set package interface");
+            System.out.print("Enter your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
-                System.out.println("---------- CREATE SET PACKAGE END----------");
+                System.out.println("*CREATE SET PACKAGE END*");
                 System.out.println();
             }
         } while (end != 2);
@@ -361,18 +361,17 @@ public class MenuUI {
         boolean invalidInput;
         System.out.println("You are now removing a set package item from the menu");
         menu.printSetPackage();
-        System.out.print("Enter the menu ID of the set package you would like to remove");
         do {
             invalidInput = false;
-            System.out.print("Enter the menu ID of the set package item: ");
+            System.out.print("Enter the menu item ID of the set package item you would like to remove: ");
             menuItemID = GetInput.getInt();
             if (501 > menuItemID || menuItemID > 500 + menu.getSideItems().size()){
                 invalidInput = true;
             }
             if (invalidInput) {
-                System.out.println("The menu ID is out of range for SET PACKAGE!");
+                System.out.println("The menu item ID is out of range for SET PACKAGE!");
             } else {
-                System.out.println("Menu ID found... Removing from the menu");
+                System.out.println("Menu item ID found... Removing from the menu...");
             }
         } while (invalidInput);
         menu.removeMenuItem(5, menuItemID);
@@ -382,7 +381,7 @@ public class MenuUI {
         int menuItemID, changeOption;
         System.out.println("You are now updating a set package item");
         menu.printSetPackage();
-        System.out.print("Enter the menu ID of the set package you would like to update");
+        System.out.print("Enter the menu item ID of the set package you would like to update");
         menuItemID = GetInput.getInt();
         changeOption = 1;
         while (changeOption != 4) {
@@ -392,6 +391,6 @@ public class MenuUI {
             changeOption = GetInput.getInt();
             menu.updateMenuItem(menuItemID, changeOption);
         }
-        System.out.println("UPDATE SET PACKAGE END");
+        System.out.println("*UPDATE SET PACKAGE END*");
     }
 }

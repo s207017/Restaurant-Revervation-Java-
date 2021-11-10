@@ -18,15 +18,15 @@ public class OrderUI {
 
     public void addItemsToOrder(){
         int TableNum;
-        System.out.printf("Enter table number (Tables 1 - %d)(%d to exit): ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
+        System.out.printf("Enter table number (tables 1 - %d) [%d to exit]: ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
         do{
             TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+1);
             if(TableNum == restaurant.getTableList().size()+1){
-                System.out.println("Exiting order function");
+                System.out.println("Exiting order function...");
                 return;
             }
             if(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-                System.out.printf("No one at the table. Enter again (Tables 1 - %d)(%d to exit): ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
+                System.out.printf("No one at the table. Enter again (tables 1 - %d) [%d to exit]: ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
             }
         }while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED);
 //        int TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size());
@@ -48,10 +48,10 @@ public class OrderUI {
         }
         int choice = 0, quantity = 0;
         while(choice != -1) {
-            System.out.print("Enter ID of intended item to be ordered (-1 to end): ");
+            System.out.print("Enter menu item ID of intended item to be ordered [-1 to end]: ");
             choice = GetInput.getInt();
             if(choice == -1) {
-                System.out.println("Exiting ordering function");
+                System.out.println("Exiting ordering function...");
                 break;
             }
             //set temp to be the menuItem/setPackage item
@@ -107,7 +107,7 @@ public class OrderUI {
         MenuItem temp;
         int choice = 0,quantity = 0;
         while(choice != -1){
-            System.out.print("Enter ID of intended item to be removed (-1 to end): ");
+            System.out.print("Enter menu item ID of intended item to be removed [-1 to end]: ");
             choice = GetInput.getInt();
             if(choice == -1) break; // End of order removal
             temp = menu.getMenuItemFromID(choice);
@@ -117,7 +117,7 @@ public class OrderUI {
             }
             int index = order.checkItemExistence(choice);
             if(index<0){ // Order does not contain item
-                System.out.println("Item does not exist in order");
+                System.out.println("Item does not exist in order.");
                 continue;
             }
             System.out.print("Enter quantity to be removed: ");
@@ -128,7 +128,7 @@ public class OrderUI {
                             order.getOrderItemList().get(index).getQuantityOrdered(),
                             order.getOrderItemList().get(index).getItem().getItemName());
                 }else if(quantity<=0){
-                    System.out.println("Quantity entered is negative or zero, invalid");
+                    System.out.println("Quantity entered is invalid");
                 }
                 System.out.print("Enter quantity to be removed: ");
                 quantity = GetInput.getInt();
@@ -139,9 +139,9 @@ public class OrderUI {
     }
 
     public void printAddRemove(){
-        System.out.println("1. Add item(s) to an existing order");
-        System.out.println("2. Remove item(s) from an existing order");
-        System.out.println("3. Return to the main menu");
+        System.out.println("(1) Add item(s) to an existing order");
+        System.out.println("(2) Remove item(s) from an existing order");
+        System.out.println("(3) Return to main app");
     }
 
     public void checkTableOrder(){
@@ -150,9 +150,11 @@ public class OrderUI {
         Order temp = restaurant.getTableFromTableNum(tableNum).getOrder();
         if(temp == null){
             System.out.printf("No orders at table %d\n",tableNum);
+            System.out.println("Exiting view order function...");
             return;
         }
         temp.printOrder();
+        System.out.println("*VIEW ORDER FUNCTION END*");
     }
 
 
