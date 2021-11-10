@@ -11,6 +11,7 @@ public class MenuInterface {
     public MenuInterface(Menu menu) {
         this.menu = menu;
     }
+<<<<<<< Updated upstream
     public static GetInput gi = new GetInput();
 
     public void createNewMenuItemInterface() throws IOException {
@@ -40,6 +41,170 @@ public class MenuInterface {
         System.out.print("Your input: ");
         int menuType = sc.nextInt();
         switch(menuType){
+=======
+
+    public void createNewMenuItemInterface() throws IOException, InterruptedException {
+        int menuTypeInt, end;
+        do{
+            System.out.println("What is the type of the new menu item?");
+            printMenuTypes();
+            System.out.print("Your input: ");
+            menuTypeInt = GetInput.getIntFromRange(1,4);
+            printExistingMenu(menuTypeInt);
+            System.out.print("Enter the name of the new menu item: ");
+            String menuName = GetInput.getString();
+            System.out.print("Enter the price of the new menu item: ");
+            double price = GetInput.getDouble();
+            System.out.println("Enter the description of the new menu item in one line: ");
+            String desc = GetInput.getString();
+            menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
+            System.out.println("New item added to the menu!");
+            printUpdatedMenu(menuTypeInt);
+            TimeUnit.SECONDS.sleep(2);
+
+
+            System.out.println();
+            System.out.println("What would you like to do next?");
+            System.out.println("1. Create another menu");
+            System.out.println("2. Return to the menu interface");
+            System.out.print("Your input: ");
+            end = GetInput.getIntFromRange(1,2);
+            if (end == 2){
+                System.out.println("----------CREATE MENU ITEM END----------");
+                System.out.println("\n");
+            }
+        } while (end == 1);
+    }
+
+    public void removeMenuItemInterface() throws IOException, InterruptedException {
+        int ID, end, menuTypeInt;
+        do{
+            printMenuTypes();
+            System.out.println("What type of menu item would you like to remove?");
+            System.out.print("Your input: ");
+            menuTypeInt = GetInput.getIntFromRange(1,4);
+            printExistingMenu(menuTypeInt);
+            System.out.println("What is the menu item ID you would like to delete?");
+            System.out.print("Your input: ");
+            do {
+                ID = GetInput.getInt();
+                if(!menu.IDExists(ID)){
+                    System.out.println("Menu ID does not exist. Please enter a valid menu ID!");
+                } else {
+                    System.out.println("Menu ID found... removing..");
+                }
+            } while(!menu.IDExists(ID));
+            menu.removeMenuItem(menuTypeInt, ID);
+            System.out.println("Item removed!");
+            printUpdatedMenu(menuTypeInt);
+            TimeUnit.SECONDS.sleep(2);
+
+            System.out.println();
+            System.out.println("What would you like to do next?");
+            System.out.println("1. Remove another menu");
+            System.out.println("2. Return to the menu interface");
+            System.out.print("Your input: ");
+            end = GetInput.getIntFromRange(1,2);
+            if (end == 2) {
+                System.out.println("----------REMOVE MENU ITEM END----------");
+            }
+        } while (end != 2);
+    }
+
+    public void updateMenuItemInterface() throws IOException, InterruptedException {
+        int ID, end, menuTypeInt, changeOption, changeCount = 0;
+        do{
+            printMenuTypes();
+            System.out.println("What type of menu item would you like to update?");
+            System.out.print("Your input: ");
+            menuTypeInt = GetInput.getIntFromRange(1,4);
+            printExistingMenu(menuTypeInt);
+            System.out.println("What is the menu item ID you would like to update?");
+            System.out.print("Your input: ");
+            do {
+                ID = GetInput.getInt();
+                if(!menu.IDExists(ID)){
+                    System.out.println("Menu ID does not exist. Please enter a valid menu ID!");
+                } else {
+                    System.out.println("Menu ID found... LOADING..");
+                }
+            } while(!menu.IDExists(ID));
+            do{
+                System.out.println("What do you want to change?");
+                this.printChangeTypes();
+                System.out.print("Enter your option: ");
+                changeOption = GetInput.getIntFromRange(1,4);
+                if (menu.updateMenuItem(ID, changeOption, true)){
+                    changeCount++;
+                }
+            }while(changeOption != 4);
+            if (changeCount != 0) {
+                System.out.println("Item updated!");
+                printUpdatedMenu(menuTypeInt);
+                TimeUnit.SECONDS.sleep(2);
+            }
+
+            System.out.println();
+            System.out.println("1. Update another menu");
+            System.out.println("2. Return to the menu interface");
+            System.out.print("Your input: ");
+            end = GetInput.getIntFromRange(1,2);
+            if (end == 2) {
+                System.out.println("----------UPDATE MENU ITEM END----------");
+            }
+        } while (end != 2);
+//        int ID, changeOption;
+//        menu.printMenu();
+//        System.out.print("Enter the menu ID which you want to modify: ");
+//        ID = GetInput.getInt();
+//        while (!menu.IDExists(ID)){
+//            System.out.print("Menu ID does not exist, please enter a valid ID: ");
+//            ID = GetInput.getInt();
+//        }
+//        do{
+//            System.out.println("What do you want to change?");
+//            this.printChangeTypes();
+//            System.out.print("Enter your option: ");
+//            changeOption = GetInput.getIntFromRange(1,4);
+//            menu.updateMenuItem(ID, changeOption);
+//        }while(changeOption != 4);
+//        System.out.println("UPDATE MENU ITEM END");
+    }
+
+    public void printChangeTypes(){
+        System.out.println("1. Price ");
+        System.out.println("2. Name         ");
+        System.out.println("3. Description   ");
+        System.out.println("4. Return ");
+    }
+
+    public void printMenuTypes(){
+        System.out.println("|      1. Main Course      |");
+        System.out.println("|      2. Sides            |");
+        System.out.println("|      3. Drinks           |");
+        System.out.println("|      4. Desserts         |");
+    }
+
+    public void printOptionsMenuItems(){
+        System.out.println("What would you like to do? ");
+        System.out.println("|        1. Create menu item           |");
+        System.out.println("|        2. Update menu item           |");
+        System.out.println("|        3. Remove menu item           |");
+        System.out.println("|        4. Return to the main menu    |");
+        System.out.print("Your option: ");
+    }
+
+    public void printOptionsSetPackages(){
+        System.out.println("Would you like to ");
+        System.out.println("1. Create");
+        System.out.println("2. Update");
+        System.out.println("3. Remove a set package");
+        System.out.println("4. Return to the main menu");
+    }
+
+    public void printExistingMenu(int menuTypeInt){
+        switch(menuTypeInt){
+>>>>>>> Stashed changes
             case 1:
                 menu.printMainCourse();
                 break;
