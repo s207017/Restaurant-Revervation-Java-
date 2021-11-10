@@ -122,97 +122,97 @@ public class Menu {
 
     //print functions!
     public void printMenu(){
-        System.out.println("OOPsie Menu:");
-        System.out.println("=".repeat(70));
+        System.out.println("OOPsie Menu");
+        System.out.println("=".repeat(132));
         System.out.println("Main Courses:");
         for(MenuItem m : mainCourseItems){
-            System.out.format("%4d.%-60s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
-            System.out.printf("     %s\n", m.getDescription());
+            System.out.format("%4d. %-120s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
+            System.out.printf("       %s\n", m.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Sides:");
         for(MenuItem s : sideItems){
-            System.out.printf("%4d.%-60s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
-            System.out.printf("     %s\n", s.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
+            System.out.printf("       %s\n", s.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Drinks:");
         for(MenuItem d : drinkItems){
-            System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
-            System.out.printf("     %s\n", d.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
+            System.out.printf("       %s\n", d.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Deserts:");
         for(MenuItem de : dessertItems){
-            System.out.printf("%4d.%-60s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
-            System.out.printf("     %s\n", de.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
+            System.out.printf("       %s\n", de.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Set Packages:");
         for(SetPackage sp : setPackageItems){
-            System.out.printf("%4d.%-60s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
-            System.out.printf("     %s\n", sp.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
+            System.out.printf("       %s\n", sp.getDescription());
 
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
     }
     public void printMainCourse(){
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Main Courses:");
         for(MenuItem m : mainCourseItems){
-            System.out.format("%4d.%-60s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
-            System.out.printf("     %s\n", m.getDescription());
+            System.out.format("%4d. %-120s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
+            System.out.printf("       %s\n", m.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
     }
     public void printSide(){
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Sides:");
         for(MenuItem s : sideItems){
-            System.out.printf("%4d.%-60s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
-            System.out.printf("     %s\n", s.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
+            System.out.printf("       %s\n", s.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
 
     }
     public void printDrink(){
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Drinks:");
         for(MenuItem d : drinkItems){
-            System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
-            System.out.printf("     %s\n", d.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
+            System.out.printf("       %s\n", d.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
     }
     public void printDrinkLTEPrice(double price){
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Drinks:");
         for(MenuItem d : drinkItems){
             if(d.getPrice() <= price) {
-                System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
-                System.out.printf("     %s\n", d.getDescription());
+                System.out.printf("%4d. %-120s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
+                System.out.printf("       %s\n", d.getDescription());
             }
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
     }
     public void printDesert(){
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Deserts:");
         for(MenuItem de : dessertItems){
-            System.out.printf("%4d.%-60s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
-            System.out.printf("     %s\n", de.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
+            System.out.printf("       %s\n", de.getDescription());
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
     }
     public void printSetPackage(){
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
         System.out.println("Set Packages:");
         for(SetPackage sp : setPackageItems){
-            System.out.printf("%4d.%-60s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
-            System.out.printf("     %s\n", sp.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
+            System.out.printf("       %s\n", sp.getDescription());
 
         }
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(132));
     }
 
     //for Order
