@@ -17,12 +17,27 @@ public class OrderInterfaceUI {
     }
 
     public void addItemsToOrder(){
+        int TableNum;
         System.out.print("Enter table number: ");
-        int TableNum = GetInput.getInt();
-        while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED) {
-            System.out.print("No one at the table! Enter again");
-            TableNum = GetInput.getInt();
-        }
+        do{
+            TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+1);
+            if(TableNum == restaurant.getTableList().size()+1){
+                System.out.println("Exiting order function");
+                return;
+            }
+            if(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
+                System.out.print("No one at the table. Enter again: ");
+            }
+        }while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED);
+//        int TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size());
+//        while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED) {
+//            System.out.printf("No one at the table! Enter again (%d to exit): ",restaurant.getTableList().size()+2);
+//            TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+2);
+//            if(TableNum == restaurant.getTableList().size()+2){
+//                System.out.println("Exiting order function");
+//                return;
+//            }
+//        }
         Order order= this.restaurant.getTableFromTableNum(TableNum).getOrder();
         if(order == null){
             order = new Order(1234,TableNum,menu);

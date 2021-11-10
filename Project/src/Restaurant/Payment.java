@@ -15,10 +15,6 @@ public class Payment {
         this.paymentComplete = false;
     }
 
-    public double getDiscountApplied() {
-        return discountApplied;
-    }
-
     public void calculateSubTotal(){
         int sum = 0;
         for(int i = 0; i < tables.size();i++){
@@ -34,6 +30,10 @@ public class Payment {
 
     public double getSubTotal(){
         return subtotal;
+    }
+
+    public double getDiscountApplied() {
+        return discountApplied;
     }
 
     public double getTax() {
@@ -89,7 +89,7 @@ class CashPayment extends Payment {
     }
 
     public double getChange() {
-        return this.cashPaid-this.subtotal-this.tax;
+        return this.cashPaid-(this.subtotal+this.tax-this.discountApplied);
     }
 
 }
