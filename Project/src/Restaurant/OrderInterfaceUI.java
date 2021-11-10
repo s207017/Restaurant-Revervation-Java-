@@ -26,6 +26,7 @@ public class OrderInterfaceUI {
         Order order= this.restaurant.getTableFromTableNum(TableNum).getOrder();
         if(order == null){
             order = new Order(1234,TableNum,menu);
+            restaurant.getTableFromTableNum(TableNum).setOrder(order);
         }else {
             System.out.println("Adding to existing order. Current order:");
             order.printOrder();
@@ -34,10 +35,13 @@ public class OrderInterfaceUI {
         while(choice != -1) {
             System.out.print("Enter ID of intended item to be ordered (-1 to end): ");
             choice = GetInput.getInt();
-            if(choice == -1) break;
+            if(choice == -1) {
+                System.out.println("Exiting ordering function");
+                break;
+            }
             //set temp to be the menuItem/setPackage item
             MenuItem temp;
-            if(choice>500 || choice <=500+menu.getSetPackageItems().size()) {
+            if(choice>500 && choice <=500+menu.getSetPackageItems().size()) {
                 temp = menu.getSetPackageItemFromID(choice);
             }
             else{

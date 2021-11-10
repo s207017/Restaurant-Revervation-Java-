@@ -6,17 +6,18 @@ import java.sql.Timestamp;
 import java.util.Scanner;
 
 public class Order {
+    private static int orderNum = 0;
     private int orderID;
     private int staffID;
     private int tableNum;
     private LocalDateTime date;
     private double total;
     private ArrayList<OrderItem> orderList;
-    private static int orderNum = 1;
     private static Menu menu;
 
+    {orderNum +=1;}
     public Order(int staffID, int tableNum,Menu menu) {
-        this.orderID = orderNum++;
+        this.orderID = orderNum;
         this.staffID = staffID;
         this.tableNum = tableNum;
         this.date = LocalDateTime.now();

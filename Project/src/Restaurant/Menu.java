@@ -218,6 +218,7 @@ public class Menu {
 
     //for Order
     public MenuItem getMenuItemFromID(int ID){
+        System.out.println("Entered function");
         if (100<ID && ID<=100+ mainCourseItems.size()){
             for (MenuItem m: mainCourseItems){
                 if (m.getItemID()==ID){
