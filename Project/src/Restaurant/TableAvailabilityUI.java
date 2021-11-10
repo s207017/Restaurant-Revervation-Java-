@@ -42,7 +42,7 @@ public class TableAvailabilityUI {
         } else {
             //prints available tables
             System.out.println("The available table numbers are: ");
-            System.out.print(" | ");
+            System.out.print(" || ");
             availableTables = r.getAvailableTables(pax, localDateTime);
             for (Table t: availableTables){
                 System.out.print("Table " + t.getTableNum() + " || ");

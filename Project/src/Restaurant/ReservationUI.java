@@ -104,7 +104,7 @@ public class ReservationUI {
             if (tableNum == -1) {
                 System.out.println("All the tables are occupied.");
                 System.out.println("Would you like to try for another timing, or quit?");
-                System.out.print("(1) Try for another timing.\n(Any other key) Back to main app\n");
+                System.out.print("*ENTER ANY OTHER KEY TO QUIT\n(1) Try for another timing.\n");
                 findReservation = GetInput.getString();
             }
             else {
@@ -140,9 +140,9 @@ public class ReservationUI {
         System.out.println("(3) Check reservations at a particular time.");
         System.out.println("(4) Check reservations for a particular day.");
         System.out.println("(5) Check all reservations now.");
-        System.out.println("(Any other number) Return to main app");
+        System.out.println("(6) Return to main app");
         System.out.print("Enter your choice: ");
-        int choice = GetInput.getInt();
+        int choice = GetInput.getIntFromRange(1,6);
         switch (choice) {
             case 1:{
                 LocalDateTime dateTimeToCheck = getCheckingPossibleReservationDateTimes();

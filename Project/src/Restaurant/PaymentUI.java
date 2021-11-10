@@ -39,7 +39,7 @@ public class PaymentUI {
      */
     public boolean selectPaymentMethod() {
         int choice;
-        System.out.print("Payment by? \n(1) Cash \n(2) Others \n(-1) To terminate payment\nEnter option: ");
+        System.out.print("*ENTER -1 TO EXIT\nPayment by? \n(1) Cash \n(2) Others \nEnter option: ");
         do {
             choice = GetInput.getInt();
             switch (choice) {
@@ -63,7 +63,7 @@ public class PaymentUI {
     public boolean selectTable() {
         int choice;
         System.out.println(r);
-        System.out.print("Select table number(s) for payment [enter -1 when done]: ");
+        System.out.print("*ENTER -1 WHEN DONE\nSelect table number(s) for payment: ");
         choice = GetInput.getInt();
         while (choice != -1) {
             Table t = (this.r.getTableFromTableNum(choice));
@@ -76,7 +76,7 @@ public class PaymentUI {
             } else {
                 this.payment.addTable(this.r.getTableFromTableNum(choice));
                 System.out.println("Table " + choice + " selected");
-                System.out.print("Select another table number for payment [enter -1 when done]: ");
+                System.out.print("*ENTER -1 WHEN DONE\nSelect another table number for payment: ");
                 choice = GetInput.getInt();
             }
         }
@@ -97,7 +97,7 @@ public class PaymentUI {
         int isMember = 0;
         int phoneNumber = -1;
         char selection;
-        System.out.print("Is customer a member? Y/N ");
+        System.out.print("Is customer a member? [Y/N] ");
         selection = GetInput.getChar();
         while (selection != 'y' && selection != 'Y' && selection != 'n' && selection != 'N') {
             System.out.println("Please enter a valid option: ");
@@ -108,7 +108,7 @@ public class PaymentUI {
             System.out.print("Please enter phone number: ");
             phoneNumber = GetInput.getInt();
             while (phoneNumber < 80000000 || phoneNumber > 99999999) {
-                System.out.print("Please enter a valid phone number [enter -1 to end]: ");
+                System.out.print("*ENTER -1 TO END\nPlease enter a valid phone number: ");
                 phoneNumber = GetInput.getInt();
                 if (phoneNumber == -1) {
                     break;
@@ -124,7 +124,7 @@ public class PaymentUI {
             }
         }
         if (isMember == 0) {
-            System.out.print("Apply for membership? (Y/N): ");
+            System.out.print("Apply for membership? [Y/N]: ");
             selection = GetInput.getChar();
             if (selection == 'y' || selection == 'Y') {
                 System.out.print("Enter customer's mobile number: ");
@@ -139,10 +139,10 @@ public class PaymentUI {
     public void makePayment() {
         char selection;
         System.out.println();
-        System.out.print("Payment received? Y/N: ");
+        System.out.print("Payment received? [Y/N]: ");
         selection = GetInput.getChar();
         while (selection != 'y' && selection != 'Y') {
-            System.out.print("Payment not yet received.\nPayment received? Y/N: ");
+            System.out.print("Payment not yet received.\nPayment received? [Y/N]: ");
             selection = GetInput.getChar();
             if (selection == 'n' || selection == 'n') {
                 System.out.println("PAYMENT FAILED");
