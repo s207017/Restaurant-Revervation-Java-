@@ -144,5 +144,11 @@ public class OrderInterfaceUI {
         System.out.println("3. Return to the main menu");
     }
 
+    public void checkTableOrder(){
+        System.out.print("Enter table number: ");
+        int tableNum = GetInput.getIntFromRange(1, 8);
+        restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
+    }
+
 
 }
