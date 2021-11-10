@@ -17,7 +17,9 @@ public class SalesRevenueReport {
         summaryList = new ArrayList<TransHistItem>();
         do {
             if(choice == 1) {//Creating period report
+                System.out.println("Entering start date of report:");
                 this.startDate = GetPeriod.getDate();
+                System.out.println("Entering end date of report:");
                 this.endDate = GetPeriod.getDate();
                 if (endDate.isBefore(startDate)) {
                     System.out.printf("End date (%s) is before start date (%s), please try again\n", endDate, startDate);
@@ -33,7 +35,7 @@ public class SalesRevenueReport {
             case 1://period report
                 for(TransHistDay x: transHistAll){//Narrow down to intended dates
                     System.out.println("Entered for loop");
-                    if(startDate.isBefore(x.getDate()) || startDate.isEqual(x.getDate())){//Check if transHistDay is for that date
+                    if((startDate.isBefore(x.getDate()) && endDate.isAfter(x.getDate())) || startDate.isEqual(x.getDate())){//Check if transHistDay is for that date
                         transHist.add(x); // Add the matching entry to the local arraylist of days of transhist
                     }
                     if(endDate.isBefore(x.getDate())){
