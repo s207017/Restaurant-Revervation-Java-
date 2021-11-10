@@ -19,11 +19,11 @@ public class Main2{
         int staffID;
         int count=1;
         do {
-            if (count==1){
+            if (count==1){ //first time asking for staff id, invalid input message not printed
                 System.out.print("Enter your staff ID: ");
             }
             else {
-                System.out.print("Invalid StaffID. Please enter a valid staff ID: ");
+                System.out.print("Invalid staff ID. Please enter a valid staff ID: ");
             }
             staffID = GetInput.getInt();
             thisStaff = restaurant.getStaffFromID(staffID);
@@ -56,7 +56,8 @@ public class Main2{
                     }
                     break;
                 case 2: // Create/update/remove set packages
-                    choice = GetInput.getIntFromRange(1, 4);
+                    menuInterface.printOptionsSetPackages();
+                    choice = GetInput.getIntFromRange(1,4);
                     switch (choice) {
                         case 1:
                             menuInterface.createSetPackageInterface();
@@ -69,8 +70,6 @@ public class Main2{
                             break;
                         case 4:
                             break;
-                        default:
-                            break;
                     }
                     break;
                 case 3:
@@ -79,11 +78,6 @@ public class Main2{
                 case 4:
                     System.out.print("Enter table number: ");
                     int tableNum = GetInput.getIntFromRange(1, 8);
-//                    Table table = restaurant.getTableFromTableNum(tableNum);
-//                    System.out.println("Table num is " + table.getTableNum());
-//                    Order order = table.getOrder();
-//                    System.out.printf("Order extracted with ID %d\n",order.getOrderID());
-//                    order.printOrder();
                     restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
                     break;
                 case 5:
@@ -146,23 +140,23 @@ public class Main2{
     }
 
     public static void printAppOptions(){
-        System.out.println("(1) Create/Update/Remove menu items from the menu");
-        System.out.println("(2) Create/Update/Remove set packages");
-        System.out.println("(3) Create new order"); //redundant
-        System.out.println("(4) View existing order");
-        System.out.println("(5) Add or remove item(s) to/from an existing order");
-        System.out.println("(6) Create new reservation");
-        System.out.println("(7) Check or remove an existing reservation");
-        System.out.println("(8) Assign table");
-        System.out.println("(9) Check table availability");
-        System.out.println("(10) Add or remove a member");
-        System.out.println("(11) Make payment");
-        System.out.println("(12) View sales revenue report");
+        System.out.println("");
+        System.out.println("+" + "-".repeat(164) + "+");
+        System.out.printf("|%100s%65s\n","OOPsie Restaurant Reservation & Point of Sale App","|");
+        System.out.println("+" + "-".repeat(164) + "+");
+        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu items from the menu", "(2) Create/Update/Remove set", "(3) Create new order","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(4) View existing order","(5) Add or remove item(s) to/from an existing order","(6) Create new reservation","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(7) Check or remove an existing reservation","(8) Assign table","(9) Check table availability","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(10) Add or remove a member","(11) Make payment","(12) View sales revenue report","|");
+        System.out.println("+" + "-".repeat(164) + "+");
     }
 
     public static int getOption(){
         System.out.print("Enter your option: ");
         int option = GetInput.getIntFromRange(1,12);
+        System.out.println("");
         return option;
     }
+
+
 }
