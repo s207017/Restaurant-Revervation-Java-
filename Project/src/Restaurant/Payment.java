@@ -8,10 +8,15 @@ public class Payment {
     protected double subtotal;
     protected double tax;
     protected boolean paymentComplete;
+    protected double discountApplied = 0 ;
     public Payment(){
         this.tables = new ArrayList<>();
         this.subtotal = 0;
         this.paymentComplete = false;
+    }
+
+    public double getDiscountApplied() {
+        return discountApplied;
     }
 
     public void calculateSubTotal(){
@@ -23,7 +28,7 @@ public class Payment {
     }
 
     public void calculateTax(){
-        this.tax = this.subtotal * 1.177;
+        this.tax = this.subtotal * 0.01177;
     }
 
 
@@ -36,8 +41,7 @@ public class Payment {
     }
 
     public void applyDiscount(){
-        this.subtotal = 0.9 * this.subtotal;
-        this.tax = 0.9 * this.tax;
+        this.discountApplied = 0.1 * this.subtotal + 0.1 * this.tax;
     }
 
     public void addTable(Table table){

@@ -114,7 +114,7 @@ public class PaymentInterface {
             } else {
                 this.payment.applyDiscount();
                 System.out.println("Customer is a member, discount applied!");
-                System.out.println("Sub-total: " + this.payment.getSubTotal() + "\nTax: " + this.payment.getSubTotal() + "\nTotal: " + (this.payment.getSubTotal() + this.payment.getTax()));
+                System.out.println("Sub-total: " + this.payment.getSubTotal() + "\nTax: " + this.payment.getSubTotal() + "\nTotal: " + (this.payment.getSubTotal() + this.payment.getTax()- this.payment.getDiscountApplied()));
             }
         }
         if (isMember == false) {
@@ -125,7 +125,7 @@ public class PaymentInterface {
                 this.m.addMember(new Member(GetInput.getInt()));
                 this.payment.applyDiscount();
                 System.out.println("Customer is now a member, discount applied");
-                System.out.println("Sub-total: " + this.payment.getSubTotal() + "\nTax: " + this.payment.getSubTotal() + "\nTotal: " + (this.payment.getSubTotal() + this.payment.getTax()));
+                System.out.println("Sub-total: " + this.payment.getSubTotal() + "\nTax: " + this.payment.getSubTotal() + "\nTotal: " + (this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()));
             }
         }
     }

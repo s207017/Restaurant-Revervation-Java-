@@ -56,8 +56,9 @@ public class Receipt {
         System.out.printf("%50s\n", "=".repeat(50));
         System.out.printf("%-40s $%-8f\n", "Sub-total:", this.payment.getSubTotal());
         System.out.printf("%-40s $%-8f\n", "Taxes:", this.payment.getTax());
+        System.out.printf("%-40s $%-8f\n", "Discount Applied:", this.payment.getDiscountApplied());
         System.out.printf("%50s\n", "-".repeat(50));
-        System.out.printf("%-40s $%-8f", "TOTAL:", this.payment.getTax()+this.payment.getSubTotal());
+        System.out.printf("%-40s $%-8f", "TOTAL:", this.payment.getTax()+this.payment.getSubTotal()-this.payment.getDiscountApplied());
         System.out.println("");
         System.out.printf("%50s\n", "*".repeat(50));
         System.out.print("        * Thank you for dining with us! *        \n");
