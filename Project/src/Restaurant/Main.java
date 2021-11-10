@@ -34,9 +34,9 @@ public class Main {
 
         System.out.println("Logging you in to OOPsie RRPSS...");
         TimeUnit.SECONDS.sleep(1);
-        System.out.println("Building kitchen...");
+        System.out.println("Making bread...");
         TimeUnit.SECONDS.sleep(1);
-        System.out.println("Hiring staff...");
+        System.out.println("Petting cats...");
 
         int option, choice;
         do {

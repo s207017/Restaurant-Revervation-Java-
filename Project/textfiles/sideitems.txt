@@ -1,16 +1,16 @@
 Gardein Crab Cake
 201
-10
+10.0
 Gardein Crabless Crab Cake, starfruit salsa
 Ratatouille Soup
 202
-8
+8.0
 Eggplant, zucchini, bell pepper, basil, Daiya mozzarella cheese crouton
 Meatless Meatballs
 203
-10
-OmniMeat and Beyong Meat Meatballs, marinara sauce
+10.0
+OmniMeat and Beyond Meat Meatballs, marinara sauce
 Sweet Potato Fries
 204
-6
+6.0
 Shichimi dusted fries, choice of dip - truffle, thai chili, BBQ, honey mustard

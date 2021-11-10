@@ -1,12 +1,12 @@
 Ice cream
 401
 4.5
-Creamy goodness!
+Creamy goodness
 Chocolate lava cake
 402
-8
+8.0
 Ooey gooey goodness
 Sticky Date Pudding
 403
-9
-I LOVE STICKY DATE PUDDING!!!
+9.0
+I LOVE STICKY DATE PUDDING

@@ -1,10 +1,12 @@
 Americano
 301
-5
+5.0
 Classic, deep flavour
 Matcha latte
 302
-5
+5.0
 Elegant matcha flavour
-
-
+Bottled Mineral Water
+303
+1.0
+Plain ol water
