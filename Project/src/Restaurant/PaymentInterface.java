@@ -37,23 +37,28 @@ public class PaymentInterface {
      */
     public void selectPaymentMethod() {
         int choice;
-        System.out.print("*ENTER -1 TO TERMINATE*\nPayment by\n1. Cash\n2. Others\nInput: ");
-        choice = GetInput.getInt();
-        switch (choice) {
-            case 1:
-                this.payByCash = new CashPayment();
-                this.payment = this.payByCash;
-                break;
-            case 2:
-                this.payment = new Payment();
-                break;
-            case -1:
-                System.out.println("TERMINATING PAYMENT...");
-                return;
-            default:
-                System.out.println("Please enter a valid selection\n\n*ENTER -1 TO TERMINATE*\\nPayment by\\n1. Cash\\n2. Others\\nInput: \"");
-                choice = GetInput.getInt();
-        }
+        boolean paymentSelected = false;
+        do {
+            System.out.print("*ENTER -1 TO TERMINATE* \nPayment by \n1. Cash \n2. Others \nInput: ");
+            choice = GetInput.getInt();
+            switch (choice) {
+                case 1:
+                    this.payByCash = new CashPayment();
+                    this.payment = this.payByCash;
+                    paymentSelected = true;
+                    break;
+                case 2:
+                    this.payment = new Payment();
+                    paymentSelected =true;
+                    break;
+                case -1:
+                    System.out.println("TERMINATING PAYMENT...");
+                    return;
+                default:
+                    System.out.println("Please enter a valid selection");
+                    continue;
+            }
+        } while (paymentSelected != true);
     }
 
     public void selectTable() {
@@ -63,7 +68,7 @@ public class PaymentInterface {
         choice = GetInput.getInt();
         while (choice != -1) {
             Table t = (this.r.getTableFromTableNum(choice));
-            if (t == null) {
+            if (t == null || t.getTableStatus() != Table.Level.OCCUPIED || t.getOrder() == null) {
                 System.out.print("Invalid table number, please try again: ");
                 choice = GetInput.getInt();
             } else if (t.getTableStatus() != Table.Level.OCCUPIED && t.getOrder() != null) {
@@ -134,12 +139,12 @@ public class PaymentInterface {
     public void makePayment() {
         char selection;
         System.out.println();
-        System.out.println("Payment received? Y/N ");
+        System.out.print("Payment received? Y/N: ");
         selection = GetInput.getChar();
         while (selection != 'y' && selection != 'Y') {
-            System.out.println("Payment not yet received.\nPayment received? Y/N ");
+            System.out.print("Payment not yet received.\nPayment received? Y/N: ");
             selection = GetInput.getChar();
-            if (selection != 'n' || selection != 'n') {
+            if (selection == 'n' || selection == 'n') {
                 System.out.println("PAYMENT FAILED");
                 return;
             }

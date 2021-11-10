@@ -26,7 +26,7 @@ public class OrderInterfaceUI {
                 return;
             }
             if(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-                System.out.print("No one at the table. Enter again: ");
+                System.out.printf("No one at the table. Enter again (Tables 1 - %d)(%d to exit): ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
             }
         }while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED);
 //        int TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size());
@@ -142,6 +142,12 @@ public class OrderInterfaceUI {
         System.out.println("1. Add item(s) to an existing order");
         System.out.println("2. Remove item(s) from an existing order");
         System.out.println("3. Return to the main menu");
+    }
+
+    public void checkTableOrder(){
+        System.out.print("Enter table number: ");
+        int tableNum = GetInput.getIntFromRange(1, 8);
+        restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
     }
 
 
