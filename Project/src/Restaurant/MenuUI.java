@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
-public class MenuInterface {
+public class MenuUI {
     private Menu menu;
 
-    public MenuInterface(Menu menu) {
+    public MenuUI(Menu menu) {
         this.menu = menu;
     }
 
-    public void createNewMenuItemInterface() throws IOException, InterruptedException {
+    public void createNewMenuItemUI() throws IOException, InterruptedException {
         int menuTypeInt, end;
         do{
             System.out.println("What is the type of the new menu item?");
@@ -46,7 +46,7 @@ public class MenuInterface {
         } while (end == 1);
     }
 
-    public void removeMenuItemInterface() throws IOException, InterruptedException {
+    public void removeMenuItemUI() throws IOException, InterruptedException {
         int ID, end, menuTypeInt;
         boolean invalidInput;
         do{
@@ -109,7 +109,7 @@ public class MenuInterface {
         } while (end != 2);
     }
 
-    public void updateMenuItemInterface() throws IOException, InterruptedException {
+    public void updateMenuItemUI() throws IOException, InterruptedException {
         int ID, end, menuTypeInt, changeOption, changeCount;
         boolean invalidInput, changed;
         do{
@@ -279,7 +279,7 @@ public class MenuInterface {
     }
 
 
-    public void createSetPackageInterface(){
+    public void createSetPackageUI(){
         double maxPrice, discountRate, finalPrice, end;
         int mainMenuID, sideMenuID;
         boolean invalidInput;
@@ -356,7 +356,7 @@ public class MenuInterface {
         } while (end != 2);
     }
 
-    public void removeSetPackageInterface() throws IOException { //same as removing any other menu item so i don't think need this function
+    public void removeSetPackageUI() throws IOException { //same as removing any other menu item so i don't think need this function
         int menuItemID;
         boolean invalidInput;
         System.out.println("You are now removing a set package item from the menu");
@@ -378,7 +378,7 @@ public class MenuInterface {
         menu.removeMenuItem(5, menuItemID);
     }
 
-    public void updateSetPackageInterface() throws IOException {
+    public void updateSetPackageUI() throws IOException {
         int menuItemID, changeOption;
         System.out.println("You are now updating a set package item");
         menu.printSetPackage();

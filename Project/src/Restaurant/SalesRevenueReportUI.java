@@ -1,8 +1,8 @@
 package Restaurant;
 
-public class SalesRevenueReportInterface {
+public class SalesRevenueReportUI {
     private Restaurant restaurant;
-    public SalesRevenueReportInterface(Restaurant restaurant){
+    public SalesRevenueReportUI(Restaurant restaurant){
         this.restaurant = restaurant;
     }
 

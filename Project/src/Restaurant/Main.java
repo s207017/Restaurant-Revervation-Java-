@@ -1,13 +1,6 @@
 package Restaurant;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
-import java.util.Scanner;
-
-import javax.crypto.BadPaddingException;
 
 public class Main{
 
@@ -20,17 +13,17 @@ public class Main{
 
 
         Restaurant restaurant = new Restaurant();
-        MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
-        ReservationInterface reservationInterface = new ReservationInterface(restaurant);
-        TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
+        MenuUI menuInterface = new MenuUI(restaurant.getMenu());
+        ReservationUI reservationInterface = new ReservationUI(restaurant);
+        TableAvailabilityUI tableAvailabilityInterface = new TableAvailabilityUI(restaurant);
         //Staff staff;
         //staff = restaurant.getStaffFromID(GetInput.getInt());
-        SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
+        SalesRevenueReportUI salesRevenueReportInterface = new SalesRevenueReportUI(restaurant);
 
         //public static GetInputGetInput = new GetInput();
-        OrderInterfaceUI orderInterface = new OrderInterfaceUI(restaurant.getMenu(), restaurant);
+        OrderUI orderInterface = new OrderUI(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
-        MembershipInterface membershipInterface = new MembershipInterface(membership);
+        MembershipUI membershipInterface = new MembershipUI(membership);
 
         //Clears the CMD prompt
         ////clearScreen();
@@ -54,13 +47,13 @@ public class Main{
                         }
                         switch (opt) {
                             case 1:
-                                menuInterface.createNewMenuItemInterface();
+                                menuInterface.createNewMenuItemUI();
                                 break;
                             case 2:
-                                menuInterface.updateMenuItemInterface();
+                                menuInterface.updateMenuItemUI();
                                 break;
                             case 3:
-                                menuInterface.removeMenuItemInterface();
+                                menuInterface.removeMenuItemUI();
                                 break;
                             case 4:
                                 System.out.println("Exiting...");
@@ -88,13 +81,13 @@ public class Main{
                         }
                         switch (opt) {
                             case 1:
-                                menuInterface.createSetPackageInterface();
+                                menuInterface.createSetPackageUI();
                                 break;
                             case 2:
-                                menuInterface.updateSetPackageInterface();
+                                menuInterface.updateSetPackageUI();
                                 break;
                             case 3:
-                                menuInterface.removeSetPackageInterface();
+                                menuInterface.removeSetPackageUI();
                                 break;
                             case 4:
                                 System.out.println("Exiting..");

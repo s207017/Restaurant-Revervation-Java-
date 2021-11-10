@@ -2,10 +2,10 @@ package Restaurant;
 
 import java.util.Scanner;
 
-public class MembershipInterface {
+public class MembershipUI {
     private Membership memberShip;
 
-    public MembershipInterface(Membership memberShip) {
+    public MembershipUI(Membership memberShip) {
         this.memberShip = memberShip;
     }
 

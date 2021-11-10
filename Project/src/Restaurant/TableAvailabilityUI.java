@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TableAvailabilityInterface {
+public class TableAvailabilityUI {
     private Restaurant r;
 
 
@@ -14,7 +14,7 @@ public class TableAvailabilityInterface {
      * constructor
      * @param r instantiates restaurant
      */
-    public TableAvailabilityInterface(Restaurant r){
+    public TableAvailabilityUI(Restaurant r){
         this.r = r;
     }
 
