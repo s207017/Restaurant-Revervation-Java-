@@ -182,10 +182,13 @@ public class Table {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Table: %d - MAX: %d\n", tableNum, capacity));
+        sb.append(String.format("Table: %d - Capacity: %d\n", tableNum, capacity));
         reservations.forEach((k, v) -> sb.append(String.format("\tDate: %s %s at %s for %s\n",
                 k.getDayOfMonth(), k.getMonth(),
                 k.getHour(), v)));
+        if (reservations.isEmpty()){
+            System.out.println("No Reservations.");
+        }
         return sb.toString();
     }
 }
