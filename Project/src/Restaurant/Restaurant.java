@@ -46,6 +46,44 @@ public class Restaurant {
             staffList.add(newStaff);
         }
         staffText.close();
+
+        BufferedReader transHistDayText = new BufferedReader(
+                new FileReader("./textfiles/transhistday.txt")
+        );
+
+        // for reading items from text file
+        TransHistDay dailyRecord =null;
+        LocalDateTime dateInput = null;
+        String transHistItemName = null;
+        int qty = 0;
+        double price;
+        x = 0;
+        while ((s = transHistDayText.readLine()) != null) {
+            if (s.equals("new-record")){
+                if (x!=0){
+                    transactionHistory.add(dailyRecord);
+                }
+                dateInput = LocalDateTime.parse(transHistDayText.readLine());
+                dailyRecord = new TransHistDay(dateInput);
+                s = transHistDayText.readLine();
+                x=0;
+            }
+            switch (x%3){
+                case 0:
+                    transHistItemName = s;
+                    break;
+                case 1:
+                    qty = Integer.parseInt(s);
+                    break;
+                case 2:
+                    price = Double.parseDouble(s);
+                    dailyRecord.addTransHistItem(transHistItemName,qty,price);
+                    break;
+            }
+            x++;
+        }
+        transactionHistory.add(dailyRecord);
+        transHistDayText.close();
     }
 
     public Menu getMenu(){return this.menu;}

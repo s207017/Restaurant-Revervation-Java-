@@ -13,7 +13,7 @@ public class Main2{
         Membership membership = new Membership();
         MembershipInterface membershipInterface = new MembershipInterface(membership);
         PaymentInterface paymentInterface = new PaymentInterface(restaurant,membership, restaurant.getTransactionHistory());
-
+        
         //gets staffID from the staff using the UI
         Staff thisStaff;
         int staffID;
