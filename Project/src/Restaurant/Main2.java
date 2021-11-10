@@ -27,26 +27,24 @@ public class Main2{
             option = getOption();
             switch (option) {
                 case 1: //Create/update/remove menu item
-                    do{
-                        menuInterface.printOptionsMenuItems();
-                        choice = GetInput.getIntFromRange(1, 4);
-                        switch (choice) {
-                            case 1:
-                                menuInterface.createNewMenuItemInterface();
-                                break;
-                            case 2:
-                                menuInterface.updateMenuItemInterface();
-                                break;
-                            case 3:
-                                menuInterface.removeMenuItemInterface();
-                                break;
-                            case 4:
-                                System.out.println("Exiting...");
-                                break;
-                            default:
-                                break;
-                        }
-                    } while(choice != 4);
+                    menuInterface.printOptionsMenuItems();
+                    choice = GetInput.getIntFromRange(1, 4);
+                    switch (choice) {
+                        case 1:
+                            menuInterface.createNewMenuItemInterface();
+                            break;
+                        case 2:
+                            menuInterface.updateMenuItemInterface();
+                            break;
+                        case 3:
+                            menuInterface.removeMenuItemInterface();
+                            break;
+                        case 4:
+                            System.out.println("Exiting...");
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 2: // Create/update/remove set packages
                     choice = GetInput.getIntFromRange(1, 4);
@@ -61,8 +59,6 @@ public class Main2{
                             menuInterface.removeSetPackageInterface();
                             break;
                         case 4:
-                            printAppOptions();
-
                             break;
                         default:
                             break;
@@ -70,15 +66,11 @@ public class Main2{
                     break;
                 case 3:
                     orderInterface.addItemsToOrder();
-                    printAppOptions();
-
                     break;
                 case 4:
                     System.out.print("Enter table number: ");
                     int tableNum = GetInput.getIntFromRange(1, 8);
                     restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
-                    printAppOptions();
-
                     break;
                 case 5:
                     orderInterface.printAddRemove();
@@ -92,8 +84,6 @@ public class Main2{
                             orderInterface.removeItemsFromOrder();
                             break;
                         case 3:
-                            printAppOptions();
-
                             break;
                     }
                     break;
@@ -111,25 +101,17 @@ public class Main2{
                             reservationInterface.removeReservationBooking();
                             break;
                         case 3:
-                            printAppOptions();
-
                             break;
                     }
                     break;
                 case 8:
                     tableAvailabilityInterface.assignTable();
-                    printAppOptions();
-
                     break;
                 case 9:
                     System.out.println(restaurant);
-                    printAppOptions();
-
                     break;
                 case 10:
                     membershipInterface.AddMember();
-                    printAppOptions();
-
                     break;
                 case 11:
                     paymentInterface.selectPaymentMethod();
@@ -138,13 +120,9 @@ public class Main2{
                     paymentInterface.checkMembership();
                     paymentInterface.makePayment();
                     paymentInterface.generateReceipt();
-                    printAppOptions();
-
                     break;
                 case 12:
                     salesRevenueReportInterface.printSalesRevenueReport();
-                    printAppOptions();
-
                     break;
                 case -1:
                     System.out.println("App terminating..."); //never happens hehe
