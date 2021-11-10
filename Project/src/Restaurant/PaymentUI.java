@@ -153,7 +153,7 @@ public class PaymentUI {
             System.out.print("Cash received: ");
             double cashReceived = GetInput.getDouble();
             while (cashReceived < this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()) {
-                System.out.print("Insufficient amount.\nCash received [enter -1 to end]: ");
+                System.out.print("*ENTER -1 TO END\nInsufficient amount.\nCash received: ");
                 cashReceived = GetInput.getDouble();
                 if (cashReceived == -1) {
                     System.out.println("PAYMENT FAILED");
