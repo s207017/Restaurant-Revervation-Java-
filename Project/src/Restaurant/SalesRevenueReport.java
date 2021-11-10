@@ -52,7 +52,7 @@ public class SalesRevenueReport {
                 }
                 break;
         }
-        generateReport();
+        generateReport(choice);
     }
 
     /**
@@ -94,27 +94,29 @@ public class SalesRevenueReport {
      */
     public TransHistItem itemExists(String name, double price){
         for(TransHistItem x: this.summaryList){
-            if(x.getItem() == name && x.getPrice() == price){
+            if(x.getItem().equals(name)  && x.getPrice() == price){
                 return x;
             }
         }
         return null;
     }
 
-    public void generateReport(){
+    public void generateReport(int choice){
         System.out.println("Entered generate report");
         TransHistItem temp;
         for(TransHistDay t: this.transHist){
             for(TransHistItem i: t.getTransList()){
                 temp = itemExists(i.getItem(),i.getPrice()); // Checking if item already exists
                 if(temp == null){//Item doesnt exist
+                    System.out.println("Item does not exist in the summary list");
                     this.summaryList.add(new TransHistItem(i.getItem(),i.getQuantity(),i.getPrice()));
                 }else{
+                    System.out.println("Item exists: " + temp.getItem() + " ;incrementing quantity");
                     temp.setQuantity(i.getQuantity());
                 }
             }
         }
-        printReport(2);
+        printReport(choice);
     }
 
 }

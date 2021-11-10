@@ -1,36 +1,28 @@
-curry rice
-101
-15.5
-yummier than anything
-pasta
-102
-12.5
-yummy yum yum
 noodles
-103
+101
 12.34
 slurpie
 hot dog
-104
+102
 6.45
 yummy
 hehexd
-105
+103
 5.0
 hehexdhehexd
 dog meat
-106
+104
 999.0
 yummy
 bitch
-107
+105
 2.0
 bitch
 cockroaches
-108
+106
 2.353
 yummy heehxd
 horse poo
-109
+107
 32.0
 dog
