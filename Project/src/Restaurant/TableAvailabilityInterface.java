@@ -22,6 +22,13 @@ public class TableAvailabilityInterface {
     // if yes then call assignTable(true)
 
     public void assignTable(){
+        //checks if getavailable tables returns any tables when 0 people want to sit
+        //meanwhile, it also updates tables and reservations based on current time
+        if (r.getAvailableTables(0, LocalDateTime.now()).size()==0){
+            System.out.println("All tables occupied. Please ask customer to wait.");
+            return;
+        }
+
         ArrayList<Table> availableTables;
 
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -80,7 +87,12 @@ public class TableAvailabilityInterface {
     }
 
     public void assignTable(boolean Reserved){
+        //updates tables and reservations based on current time
+        for (Table t: r.getTableList()){
+            t.updateReservationsHashMap(LocalDateTime.now());
+            t.updateLevel(LocalDateTime.now());
 
+        }
 
         //gets hour of booking
         System.out.print("What time is your booking for?");
@@ -104,14 +116,14 @@ public class TableAvailabilityInterface {
                 LocalDateTime.now().getMinute()>15) ||
                         (bookingHour>LocalDateTime.now().getHour()+1)){
 
-            System.out.print("Reservation expired/does not exist. Process table assignment as per normal");
+            System.out.print("Reservation expired/does not exist. Process table assignment as per normal.\n");
             r.removeReservation(reservationKeyDateTime, tel);
             assignTable();
         }
         else {
             Table t = r.getTableFromReservationHashMap(reservationKeyDateTime, tel);
             if (t==null){
-                System.out.print("Reservation does not exist. Process table assignment as per normal");
+                System.out.print("Reservation does not exist. Process table assignment as per normal.\n");
                 assignTable();
                 return;
             }
@@ -142,6 +154,13 @@ public class TableAvailabilityInterface {
     }
 
     public void assignTable(int pax){
+        //updates tables and reservations based on current time
+        for (Table t: r.getTableList()){
+            t.updateReservationsHashMap(LocalDateTime.now());
+            t.updateLevel(LocalDateTime.now());
+
+        }
+
         ArrayList<Table> availableTables;
 
         LocalDateTime localDateTime = LocalDateTime.now();
