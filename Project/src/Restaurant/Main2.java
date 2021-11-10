@@ -14,12 +14,21 @@ public class Main2{
         MembershipInterface membershipInterface = new MembershipInterface(membership);
         PaymentInterface paymentInterface = new PaymentInterface(restaurant,membership, restaurant.getTransactionHistory());
 
+        //gets staffID from the staff using the UI
         Staff thisStaff;
+        int staffID;
+        int count=1;
         do {
-            System.out.print("Enter your staff ID: ");
-            int staffID = GetInput.getInt();
+            if (count==1){
+                System.out.print("Enter your staff ID: ");
+            }
+            else {
+                System.out.print("Invalid StaffID. Please enter a valid staff ID: ");
+            }
+            staffID = GetInput.getInt();
             thisStaff = restaurant.getStaffFromID(staffID);
-        }while(thisStaff!=null);
+            count++;
+        }while(thisStaff==null);
 
         int option, choice;
         do {
