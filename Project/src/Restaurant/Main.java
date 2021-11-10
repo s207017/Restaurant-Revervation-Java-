@@ -57,7 +57,7 @@ public class Main {
                                 menuUI.removeMenuItemUI();
                                 break;
                             case 4:
-                                System.out.println("Returning to the main menu...\n");
+                                System.out.println("Returning to main app...\n");
                                 break;
                             default:
                                 break;
@@ -128,9 +128,7 @@ public class Main {
                     }
                     break;
                 case 9:
-                    System.out.println("Does the customer have a reservation? (Y/N)");
-                    System.out.println("[Any other key to return to main app]");
-                    System.out.print("Enter Y/N: ");
+                    System.out.print("*ENTER ANY OTHER KEY TO RETURN*\nDoes the customer have a reservation? [Y/N]: ");
                     char YN = GetInput.getChar();
                     if (YN=='y'||YN=='Y'){
                         tableAvailabilityUI.assignTable(true);
@@ -147,19 +145,17 @@ public class Main {
                     break;
                 case 11:
                     System.out.print("Membership functions:\n(1) Add member\n(2) Remove member\n");
-                    do{
-                        System.out.print("Enter option (-1 to return): ");
-                        choice = GetInput.getInt();
+                    while(true){
+                        System.out.print("*ENTER (3) TO EXIT\nEnter option: ");
+                        choice = GetInput.getIntFromRange(1,3);
                         if(choice==1){
                             membershipUI.addMember();
                             break;
-                        }else if(choice==2){
+                        }else{
                             membershipUI.removeMember();
                             break;
-                        }else if(choice==-1){
-                            break;
                         }
-                    }while(choice != 1 || choice != 2 || choice != -1);
+                    }
                     break;
                 case 12:
                     paymentUI.makePaymentUI();
@@ -168,7 +164,7 @@ public class Main {
                     salesRevenueReportUI.printSalesRevenueReport();
                     break;
                 case 14:
-                    System.out.println("App terminating...");
+                    System.out.println("Thank you for your hard work!\nApp terminating...");
                     return;
             }
         }while(option != -1);
@@ -190,7 +186,7 @@ public class Main {
     public static int getOption() throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
         printAppOptions();
-        System.out.print("Enter your option: ");
+        System.out.print("Enter option: ");
         int option = GetInput.getIntFromRange(1,14);
         System.out.println("");
         return option;
