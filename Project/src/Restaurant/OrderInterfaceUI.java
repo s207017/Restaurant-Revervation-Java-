@@ -26,7 +26,7 @@ public class OrderInterfaceUI {
                 return;
             }
             if(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-                System.out.print("No one at the table. Enter again: ");
+                System.out.printf("No one at the table. Enter again (Tables 1 - %d)(%d to exit): ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
             }
         }while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED);
 //        int TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size());
