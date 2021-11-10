@@ -146,8 +146,13 @@ public class OrderInterfaceUI {
 
     public void checkTableOrder(){
         System.out.print("Enter table number: ");
-        int tableNum = GetInput.getIntFromRange(1, 8);
-        restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
+        int tableNum = GetInput.getIntFromRange(1, restaurant.getTableList().size());
+        Order temp = restaurant.getTableFromTableNum(tableNum).getOrder();
+        if(temp == null){
+            System.out.printf("No orders at table %d\n",tableNum);
+            return;
+        }
+        temp.printOrder();
     }
 
 

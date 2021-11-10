@@ -189,6 +189,9 @@ public class PaymentInterface {
             checkMembership();
             makePayment();
             generateReceipt();
+            for(Table t: payment.getTables()){
+                t.freeTable();
+            }
         }
         else{
             return;
