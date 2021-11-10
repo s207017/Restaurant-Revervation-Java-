@@ -108,7 +108,7 @@ public class Main2{
                     tableAvailabilityInterface.assignTable();
                     break;
                 case 9:
-                    System.out.println(restaurant);
+                    tableAvailabilityInterface.checkTableAvailability();
                     break;
                 case 10:
                     membershipInterface.AddMember();
