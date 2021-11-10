@@ -110,7 +110,7 @@ public class Restaurant {
                 free++;
             }
             else if (t.getTableStatus()==Table.Level.OCCUPIED) {
-                sb.append(String.format("Table: %d - Capacity: %d - Status: Available - People Seated: \n", t.getTableNum(), t.getCapacity()));
+                sb.append(String.format("Table: %d - Capacity: %d - Status: Occupied - People Seated: %d\n", t.getTableNum(), t.getCapacity(), t.getPax()));
                 occupied++;
             }
             else{

@@ -127,7 +127,7 @@ public class Main2{
                     break;
                 case 8:
                     tableAvailabilityInterface.assignTable();
-                    printAppOptions();
+
 
                     break;
                 case 9:
