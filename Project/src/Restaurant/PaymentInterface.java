@@ -58,17 +58,17 @@ public class PaymentInterface {
         } while (true);
     }
 
-    public void selectTable() {
+    public boolean selectTable() {
         int choice;
         System.out.println(r);
         System.out.print("*ENTER -1 WHEN DONE*\nSelect table number(s) for payment: ");
         choice = GetInput.getInt();
         while (choice != -1) {
             Table t = (this.r.getTableFromTableNum(choice));
-            if (t == null || t.getTableStatus() != Table.Level.OCCUPIED || t.getOrder() == null) {
+            if (t == null) { //not a valid table input
                 System.out.print("Invalid table number, please try again: ");
                 choice = GetInput.getInt();
-            } else if (t.getTableStatus() != Table.Level.OCCUPIED && t.getOrder() != null) {
+            } else if (t.getTableStatus() != Table.Level.OCCUPIED || t.getOrder() == null) { //not occupied or no order
                 System.out.print("No order, please try again: ");
                 choice = GetInput.getInt();
             } else {
@@ -79,9 +79,10 @@ public class PaymentInterface {
             }
         }
         if (this.payment.getTables().isEmpty()) {
-            System.out.println("TERMINATING ADDING OF TABLE...");
-            return;
+            System.out.println("TERMINATING PAYMENT...");
+            return false;
         }
+        return true;
     }
 
     public void showAmount() {
@@ -183,8 +184,7 @@ public class PaymentInterface {
      * else, return to main function
      */
     public void makePaymentInterface(){
-        if(selectPaymentMethod()){
-            selectTable();
+        if(selectPaymentMethod() && selectTable()){
             showAmount();
             checkMembership();
             makePayment();

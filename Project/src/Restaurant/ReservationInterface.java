@@ -111,7 +111,6 @@ public class ReservationInterface {
                 System.out.print(t.getReservations().get(reservationDateTime).toString());
                 System.out.println("-".repeat(100));
                 System.out.println();
-                TimeUnit.SECONDS.sleep(3);
                 break;
             }
         }
