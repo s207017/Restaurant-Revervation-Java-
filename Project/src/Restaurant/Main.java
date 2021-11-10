@@ -113,6 +113,7 @@ public class Main {
                     break;
                 case 8:
                     reservationUI.printCheckRemove();
+                    System.out.print("Enter your choice: ");
                     choice = GetInput.getIntFromRange(1, 3);
                     switch (choice) {
                         case 1:
@@ -126,7 +127,9 @@ public class Main {
                     }
                     break;
                 case 9:
-                    System.out.println("Do you have a reservation? Enter [y/n]");
+                    System.out.println("Does the customer have a reservation? (Y/N)");
+                    System.out.println("[Any other key to return to main app]");
+                    System.out.print("Enter Y/N: ");
                     char YN = GetInput.getChar();
                     if (YN=='y'||YN=='Y'){
                         tableAvailabilityUI.assignTable(true);
@@ -134,7 +137,7 @@ public class Main {
                     else if (YN=='n'||YN=='N'){
                         tableAvailabilityUI.assignTable();
                     }
-                    else {
+                    else{
                         break;
                     }
                     break;

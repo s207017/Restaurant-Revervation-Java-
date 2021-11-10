@@ -24,8 +24,8 @@ public class TableAvailabilityUI {
     public void assignTable(){
         //checks if getavailable tables returns any tables when 0 people want to sit
         //meanwhile, it also updates tables and reservations based on current time
-        if (r.getAvailableTables(0, LocalDateTime.now()).size()==0){
-            System.out.println("All tables occupied. Please ask customer to wait.");
+        if (r.getAvailableTables(0, LocalDateTime.now()).size()==0){ //pax == 0 returns all tables
+            System.out.println("All tables are occupied. Please ask customer to wait.");
             return;
         }
 
@@ -42,10 +42,10 @@ public class TableAvailabilityUI {
         } else {
             //prints available tables
             System.out.println("The available table numbers are: ");
-            System.out.print("||");
+            System.out.print(" | ");
             availableTables = r.getAvailableTables(pax, localDateTime);
             for (Table t: availableTables){
-                System.out.print("Table " + t.getTableNum() + "||");
+                System.out.print("Table " + t.getTableNum() + " || ");
             }
             System.out.println();
 
@@ -54,7 +54,7 @@ public class TableAvailabilityUI {
             int newTableNum = GetInput.getInt();
             int i;
             boolean valid = false;
-            //checks if the table number inputted exists in the avialabletables array
+            //checks if the table number inputted exists in the availabletables array
             while (!valid) {
                 for (i = 0; i < availableTables.size(); i++) {
                     if (availableTables.get(i).getTableNum() == newTableNum) {
@@ -75,15 +75,8 @@ public class TableAvailabilityUI {
     }
 
     public void checkTableAvailability(){
-        int exit = 0;
-        char YN;
-        while (exit != 1) {
-            System.out.println(r);
-            System.out.print("Return to Main Menu? Y/N: ");
-            YN = GetInput.getChar();
-            if (YN == 'y' || YN =='Y')
-                exit =1;
-        }
+        System.out.println(r);
+        System.out.println("*CHECK TABLES FUNCTION END*");
     }
 
     public void assignTable(boolean Reserved){
@@ -95,8 +88,8 @@ public class TableAvailabilityUI {
         }
 
         //gets hour of booking
-        System.out.print("What time is your booking for?");
-        System.out.println("24hr format:\n11 12 13 14 15 16 17 18 19 20 21 22\n");
+        System.out.print("What time is your booking for? (24h format)");
+        System.out.println("\t11 12 13 14 15 16 17 18 19 20 21 22");
         int bookingHour = GetInput.getIntFromRange(11,22);
 
         System.out.print("Please input telephone number used for booking: ");
@@ -131,7 +124,7 @@ public class TableAvailabilityUI {
                 //table with reservation exists.
                 if (t.getTableStatus()==Table.Level.OCCUPIED){
                     int pax = t.getReservations().get(reservationKeyDateTime).getPax();
-                    System.out.println("Customers a bit too early! Checking tables as per normal now.");
+                    System.out.println("Customers' a bit too early! Checking tables as per normal now.");
                     assignTable(pax);
                     System.out.printf("Sorry! Please wait until %d for your table. Currently all tables are occupied.\n", bookingHour);
                     return;
@@ -144,11 +137,6 @@ public class TableAvailabilityUI {
                 }
 
             }
-
-
-
-
-
         }
 
     }
@@ -174,10 +162,10 @@ public class TableAvailabilityUI {
         } else {
             //prints available tables
             System.out.println("The available table numbers are: ");
-            System.out.print("||");
+            System.out.print(" || ");
             availableTables = r.getAvailableTables(pax, localDateTime);
             for (Table t: availableTables){
-                System.out.print("Table " + t.getTableNum() + "||");
+                System.out.print("Table " + t.getTableNum() + " || ");
             }
             System.out.println();
 

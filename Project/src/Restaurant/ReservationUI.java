@@ -16,9 +16,10 @@ public class ReservationUI {
     }
 
     public void printCheckRemove() {
+        System.out.println("What would you like to do?");
         System.out.println("(1) Check existing reservation");
         System.out.println("(2) Remove reservation");
-        System.out.println("(3) Return to the main menu");
+        System.out.println("(3) Return to the main app");
 
     }
 
@@ -43,7 +44,7 @@ public class ReservationUI {
         String string_date = nowDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         //chose time
         System.out.println("Our operating hours are from 11am to 11pm.");
-        System.out.println("Enter one of the following timings for booking (24 h format):\n\t11 12 13 14 15 16 17 18 19 20 21 22");
+        System.out.println("Enter one of the following timings for booking (24h format):\n\t11 12 13 14 15 16 17 18 19 20 21 22");
         System.out.print("Enter your choice: ");
         int hourInt = GetInput.getIntFromRange(10, 22);
         String temp = string_date + "T" + hourInt + ":00:00";
@@ -70,7 +71,7 @@ public class ReservationUI {
         String string_date = nowDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         //chose time
         System.out.println("Our operating hours are from 11am to 11pm.");
-        System.out.println("Enter one of the following timings for booking (24 h format):\n\t11 12 13 14 15 16 17 18 19 20 21 22");
+        System.out.println("Enter one of the following timings for booking (24h format):\n\t11 12 13 14 15 16 17 18 19 20 21 22");
         int hourInt = GetInput.getIntFromRange(10, 22);
         String temp = string_date + "T" + hourInt + ":00:00";
         return LocalDateTime.parse(temp);
@@ -108,12 +109,12 @@ public class ReservationUI {
             }
             else {
                 Table t = r.getTableFromTableNum(tableNum);
-                System.out.println();
-                System.out.println("-".repeat(50));
-                System.out.println("Reservation success!");
+                System.out.println("-".repeat(40));
+                System.out.println("Reservation successfully booked!");
                 System.out.printf("Reservation date: %s\n",reservationDateTime);
                 System.out.print(t.getReservations().get(reservationDateTime).toString());
-                System.out.println("-".repeat(50));
+                System.out.println("-".repeat(40));
+                System.out.println("*RESERVATION FUNCTION END*");
                 break;
             }
         }
@@ -266,7 +267,7 @@ public class ReservationUI {
             return;
         }
         LocalDateTime checkReservationDateTime = getCheckingPossibleReservationDateTimes();
-        System.out.println("Please enter the phone number of person who booked the table: ");
+        System.out.print("Please enter the phone number of person who booked the table: ");
         int tel = GetInput.getIntFromRange(80000000,99999999);
 
         Table removeReservationTable = r.removeReservation(checkReservationDateTime, tel);

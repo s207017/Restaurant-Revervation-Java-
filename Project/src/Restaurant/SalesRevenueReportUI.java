@@ -33,10 +33,11 @@ public class SalesRevenueReportUI {
         }
         int choice;
         System.out.println("Select the type of report you wish to view:");
+        System.out.println("(1) Period report");
+        System.out.println("(2) Day report");
+        System.out.println("(-1) Return to main app");
         do{
-            System.out.println("(1)\tPeriod report");
-            System.out.println("(2)\tDay report");
-            System.out.println("[Enter -1 to go back]");
+            System.out.print("Enter option: ");
             choice = GetInput.getInt();
             if(choice != 1 && choice != 2 && choice != -1){
                 System.out.println("Invalid input, please enter your choice again");

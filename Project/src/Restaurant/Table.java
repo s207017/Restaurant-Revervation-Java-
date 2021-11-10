@@ -203,7 +203,7 @@ public class Table {
                 k.getDayOfMonth(), k.getMonth(),
                 k.getHour(), v)));
         if (reservations.isEmpty()){
-            System.out.println("No Reservations.");
+            System.out.println("No reservations.");
         }
         return sb.toString();
     }
