@@ -40,7 +40,7 @@ public class TableAvailabilityInterface {
                 for (int i = 0; i < r.getAvailableTables(pax, localDateTime).size(); i++) {
                     tableNum = r.getAvailableTables(pax, localDateTime).get(i).getTableNum();
                     availableTableNumbers.add(tableNum);
-                    System.out.print(tableNum + "||");
+                    System.out.print("Table " + tableNum + "||");
                 }
                 System.out.println();
             }
@@ -59,7 +59,7 @@ public class TableAvailabilityInterface {
                     System.out.println("Please enter a valid table number");
                 }
             }
-            System.out.println("Return to Main Menu? Y/N: ");
+            System.out.print("Return to Main Menu? Y/N: ");
             YN = GetInput.getChar();
             if (YN == 'y' || YN =='Y')
                 exit =1;
@@ -71,7 +71,7 @@ public class TableAvailabilityInterface {
         char YN;
         while (exit != 1) {
             System.out.println(r);
-            System.out.println("Return to Main Menu? Y/N: ");
+            System.out.print("Return to Main Menu? Y/N: ");
             YN = GetInput.getChar();
             if (YN == 'y' || YN =='Y')
                 exit =1;

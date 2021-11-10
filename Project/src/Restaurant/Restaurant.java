@@ -24,7 +24,7 @@ public class Restaurant {
         staffList.add(new Staff(1160));
         staffList.add(new Staff(6969));
         staffList.add(new Staff(4204));
-        staffList.add(new Staff(8008));
+        staffList.add(new Staff(0001));
     }
 
     public Menu getMenu(){return this.menu;}

@@ -52,12 +52,13 @@ public class PaymentInterface {
                 return;
             default:
                 System.out.println("Please enter a valid selection\n\n*ENTER -1 TO TERMINATE*\\nPayment by\\n1. Cash\\n2. Others\\nInput: \"");
+                choice = GetInput.getInt();
         }
     }
 
     public void selectTable() {
         int choice;
-        System.out.println(r.toString());
+        System.out.println(r);
         System.out.print("*ENTER -1 WHEN DONE*\nSelect table number(s) for payment: ");
         choice = GetInput.getInt();
         while (choice != -1) {
@@ -84,7 +85,7 @@ public class PaymentInterface {
     public void showAmount() {
         this.payment.calculateSubTotal();
         this.payment.calculateTax();
-        System.out.println("Sub-total: " + this.payment.getSubTotal() + "\nTax: " + this.payment.getSubTotal() + "\nTotal: " + (this.payment.getSubTotal() + this.payment.getTax()));
+        System.out.printf("Sub-total: %.2f \nTax: %.2f \nTotal: %.2f \n",this.payment.getSubTotal(),this.payment.getTax(),(this.payment.getSubTotal() + this.payment.getTax()));
     }
 
     public void checkMembership() {
@@ -114,7 +115,7 @@ public class PaymentInterface {
             } else {
                 this.payment.applyDiscount();
                 System.out.println("Customer is a member, discount applied!");
-                System.out.println("Sub-total: " + this.payment.getSubTotal() + "\nTax: " + this.payment.getSubTotal() + "\nTotal: " + (this.payment.getSubTotal() + this.payment.getTax()- this.payment.getDiscountApplied()));
+                System.out.printf("Sub-total: %.2f \nTax: %.2f \nDiscount: %.2f \nTotal: %.2f \n",this.payment.getSubTotal(),this.payment.getTax(),this.payment.getDiscountApplied(),(this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()));
             }
         }
         if (isMember == false) {
@@ -125,7 +126,7 @@ public class PaymentInterface {
                 this.m.addMember(new Member(GetInput.getInt()));
                 this.payment.applyDiscount();
                 System.out.println("Customer is now a member, discount applied");
-                System.out.println("Sub-total: " + this.payment.getSubTotal() + "\nTax: " + this.payment.getSubTotal() + "\nTotal: " + (this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()));
+                System.out.printf("Sub-total: %.2f \nTax: %.2f \nDiscount: %.2f \nTotal: %.2f \n",this.payment.getSubTotal(),this.payment.getTax(),this.payment.getDiscountApplied(),(this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()));
             }
         }
     }
@@ -146,7 +147,7 @@ public class PaymentInterface {
         if (this.payment instanceof CashPayment) {
             System.out.print("Cash received: ");
             double cashReceived = GetInput.getDouble();
-            while (cashReceived < this.payment.getSubTotal() + this.payment.getTax()) {
+            while (cashReceived < this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()) {
                 System.out.print("*ENTER -1 TO END*\nInsufficient amount.\nCash received: ");
                 cashReceived = GetInput.getDouble();
                 if (cashReceived == -1) {
