@@ -14,12 +14,21 @@ public class Main2{
         MembershipInterface membershipInterface = new MembershipInterface(membership);
         PaymentInterface paymentInterface = new PaymentInterface(restaurant,membership, restaurant.getTransactionHistory());
 
+        //gets staffID from the staff using the UI
         Staff thisStaff;
+        int staffID;
+        int count=1;
         do {
-            System.out.print("Enter your staff ID: ");
-            int staffID = GetInput.getInt();
+            if (count==1){
+                System.out.print("Enter your staff ID: ");
+            }
+            else {
+                System.out.print("Invalid StaffID. Please enter a valid staff ID: ");
+            }
+            staffID = GetInput.getInt();
             thisStaff = restaurant.getStaffFromID(staffID);
-        }while(thisStaff!=null);
+            count++;
+        }while(thisStaff==null);
 
         int option, choice;
         do {
@@ -70,6 +79,11 @@ public class Main2{
                 case 4:
                     System.out.print("Enter table number: ");
                     int tableNum = GetInput.getIntFromRange(1, 8);
+//                    Table table = restaurant.getTableFromTableNum(tableNum);
+//                    System.out.println("Table num is " + table.getTableNum());
+//                    Order order = table.getOrder();
+//                    System.out.printf("Order extracted with ID %d\n",order.getOrderID());
+//                    order.printOrder();
                     restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
                     break;
                 case 5:
@@ -88,16 +102,7 @@ public class Main2{
                     }
                     break;
                 case 6:
-                    System.out.println("(1) Create new reservation");
-                    System.out.println("(2) Return to the main menu");
-                    choice = GetInput.getIntFromRange(1, 2);
-                    switch (choice) {
-                        case 1:
-                            reservationInterface.checkReservationBooking();
-                            break;
-                        case 2:
-                            break;
-                    }
+                    reservationInterface.createReservationBooking();
                     break;
                 case 7:
                     reservationInterface.printCheckRemove();
@@ -117,7 +122,7 @@ public class Main2{
                     tableAvailabilityInterface.assignTable();
                     break;
                 case 9:
-                    System.out.println(restaurant);
+                    tableAvailabilityInterface.checkTableAvailability();
                     break;
                 case 10:
                     membershipInterface.AddMember();

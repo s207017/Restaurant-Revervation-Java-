@@ -45,7 +45,7 @@ public class Table {
      * @param name name of the person doing the reservation
      * @param tel telephone number of the person doing the reservation
      */
-    void reserve(LocalDateTime arrivalDateHour, int pax, String name, String tel){
+    void reserve(LocalDateTime arrivalDateHour, int pax, String name, int tel){
         reservations.put(arrivalDateHour, new Reservation(name, pax, tel));
     }
 

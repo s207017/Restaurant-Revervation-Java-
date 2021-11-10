@@ -24,7 +24,7 @@ public class Restaurant {
         staffList.add(new Staff(1160));
         staffList.add(new Staff(6969));
         staffList.add(new Staff(4204));
-        staffList.add(new Staff(8008));
+        staffList.add(new Staff(0001));
     }
 
     public Menu getMenu(){return this.menu;}
@@ -55,7 +55,7 @@ public class Restaurant {
      * @param tel the phone number of the customer
      * @return returns first available table, doesnt iterate through all unless no table. -1 if no table is found.
      */
-    public int reserveTable(LocalDateTime arrivalDateTime, int pax, String name, String tel) {
+    public int reserveTable(LocalDateTime arrivalDateTime, int pax, String name, int tel) {
 
         // get first available table
         for (Table table : tableList) {
