@@ -155,8 +155,7 @@ public class MenuInterface {
                 }
             } while (invalidInput);
             do{
-                changeCount = 0;
-                System.out.println("Before update: ");
+                System.out.println("Item information: ");
                 System.out.println("Name: " + menu.getMenuItemFromID(ID).getItemName());
                 System.out.println("Price: " + menu.getMenuItemFromID(ID).getPrice());
                 System.out.println("Description: " + menu.getMenuItemFromID(ID).getDescription());
@@ -167,7 +166,6 @@ public class MenuInterface {
                 changeOption = GetInput.getIntFromRange(1,4);
                 changed = menu.updateMenuItembool(ID, changeOption, true);
                 if (changed){
-                    changeCount++;
                     System.out.println("Item updated!");
                 }
             }while(changeOption != 4);
@@ -331,7 +329,7 @@ public class MenuInterface {
                     "$ " + String.format("%,.2f", tempTotalPrice));
             do {
                 System.out.print("Enter the discount rate: ");
-                discountRate = GetInput.getDouble();   //TO BE MODIFIED TO GETDOUBLE(RANGE)
+                discountRate = GetInput.getDouble();   //TO BE MODIFIED TO GETDOUBLE(0,100)
                 finalPrice = tempTotalPrice * ((100 - discountRate) / 100);
                 System.out.println("The new price is: " + String.format("%,.2f", finalPrice));
                 System.out.println("Would you like to proceed with this pricing? Y/N ");
