@@ -36,24 +36,26 @@ public class Main2{
             option = getOption();
             switch (option) {
                 case 1: //Create/update/remove menu item
-                    menuInterface.printOptionsMenuItems();
-                    choice = GetInput.getIntFromRange(1, 4);
-                    switch (choice) {
-                        case 1:
-                            menuInterface.createNewMenuItemInterface();
-                            break;
-                        case 2:
-                            menuInterface.updateMenuItemInterface();
-                            break;
-                        case 3:
-                            menuInterface.removeMenuItemInterface();
-                            break;
-                        case 4:
-                            System.out.println("Returning to the main menu...\n");
-                            break;
-                        default:
-                            break;
-                    }
+                    do {
+                        menuInterface.printOptionsMenuItems();
+                        choice = GetInput.getIntFromRange(1, 4);
+                        switch (choice) {
+                            case 1:
+                                menuInterface.createNewMenuItemInterface();
+                                break;
+                            case 2:
+                                menuInterface.updateMenuItemInterface();
+                                break;
+                            case 3:
+                                menuInterface.removeMenuItemInterface();
+                                break;
+                            case 4:
+                                System.out.println("Returning to the main menu...\n");
+                                break;
+                            default:
+                                break;
+                        }
+                    } while (choice != 4);
                     break;
                 case 2: // Create/update/remove set packages
                     choice = GetInput.getIntFromRange(1, 4);

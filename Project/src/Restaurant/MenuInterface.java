@@ -30,7 +30,7 @@ public class MenuInterface {
             menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
             System.out.println("New item added to the menu!");
             printUpdatedMenu(menuTypeInt);
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(2);
 
 
             System.out.println();
@@ -41,7 +41,7 @@ public class MenuInterface {
             end = GetInput.getIntFromRange(1,2);
             if (end == 2){
                 System.out.println("----------CREATE MENU ITEM END----------");
-                System.out.println("\n");
+                System.out.println("");
             }
         } while (end == 1);
     }
@@ -67,7 +67,7 @@ public class MenuInterface {
             menu.removeMenuItem(menuTypeInt, ID);
             System.out.println("Item removed!");
             printUpdatedMenu(menuTypeInt);
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(2);
 
             System.out.println();
             System.out.println("What would you like to do next?");
@@ -77,6 +77,7 @@ public class MenuInterface {
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
                 System.out.println("----------REMOVE MENU ITEM END----------");
+                System.out.println();
             }
         } while (end != 2);
     }
@@ -111,7 +112,7 @@ public class MenuInterface {
             if (changeCount != 0) {
                 System.out.println("Item updated!");
                 printUpdatedMenu(menuTypeInt);
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(2);
             }
 
             System.out.println();
@@ -121,6 +122,7 @@ public class MenuInterface {
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
                 System.out.println("----------UPDATE MENU ITEM END----------");
+                System.out.println();
             }
         } while (end != 2);
 //        int ID, changeOption;
