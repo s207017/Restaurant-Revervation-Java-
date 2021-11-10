@@ -125,22 +125,6 @@ public class MenuInterface {
                 System.out.println();
             }
         } while (end != 2);
-//        int ID, changeOption;
-//        menu.printMenu();
-//        System.out.print("Enter the menu ID which you want to modify: ");
-//        ID = GetInput.getInt();
-//        while (!menu.IDExists(ID)){
-//            System.out.print("Menu ID does not exist, please enter a valid ID: ");
-//            ID = GetInput.getInt();
-//        }
-//        do{
-//            System.out.println("What do you want to change?");
-//            this.printChangeTypes();
-//            System.out.print("Enter your option: ");
-//            changeOption = GetInput.getIntFromRange(1,4);
-//            menu.updateMenuItem(ID, changeOption);
-//        }while(changeOption != 4);
-//        System.out.println("UPDATE MENU ITEM END");
     }
 
     public void printChangeTypes(){
@@ -168,9 +152,9 @@ public class MenuInterface {
 
     public void printOptionsSetPackages(){
         System.out.println("Would you like to ");
-        System.out.println("1. Create");
-        System.out.println("2. Update");
-        System.out.println("3. Remove a set package");
+        System.out.println("1. Create a set package");
+        System.out.println("2. Update an existing set package");
+        System.out.println("3. Remove an existing set package");
         System.out.println("4. Return to the main menu");
     }
 

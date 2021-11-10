@@ -58,6 +58,7 @@ public class Main2{
                     } while (choice != 4);
                     break;
                 case 2: // Create/update/remove set packages
+                    menuInterface.printOptionsSetPackages();
                     choice = GetInput.getIntFromRange(1, 4);
                     switch (choice) {
                         case 1:
