@@ -1,6 +1,6 @@
 package Restaurant;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,19 +12,40 @@ public class Restaurant {
     private Menu menu = new Menu();
 
     public Restaurant() throws IOException {
-        tableList.add(new Table(1,2));
-        tableList.add(new Table(2,2));
-        tableList.add(new Table(3,4));
-        tableList.add(new Table(4,4));
-        tableList.add(new Table(5,4));
-        tableList.add(new Table(6,6));
-        tableList.add(new Table(7,8));
-        tableList.add(new Table(8,10));
-        staffList.add(new Staff(2307));
-        staffList.add(new Staff(1160));
-        staffList.add(new Staff(6969));
-        staffList.add(new Staff(4204));
-        staffList.add(new Staff(0001));
+        BufferedReader tablesText = new BufferedReader(
+                new FileReader("./textfiles/tables.txt")
+        );
+
+        // for reading items from text file
+        int tableNum = 0;
+        int tableCap =0;
+
+        int x = 0;
+        String s;
+        while ((s = tablesText.readLine()) != null) {
+            if (x % 2 == 0) {
+                tableNum = Integer.parseInt(s);
+            } else if (x % 2 == 1) {
+                tableCap = Integer.parseInt(s);
+                Table newTable = new Table(tableNum,tableCap);
+                tableList.add(newTable);
+            }
+            x++;
+        }
+        tablesText.close();
+
+        BufferedReader staffText = new BufferedReader(
+                new FileReader("./textfiles/staff.txt")
+        );
+
+        // for reading items from text file
+        int staffID = 0;
+        while ((s = staffText.readLine()) != null) {
+            staffID = Integer.parseInt(s);
+            Staff newStaff = new Staff(staffID);
+            staffList.add(newStaff);
+        }
+        staffText.close();
     }
 
     public Menu getMenu(){return this.menu;}
@@ -41,8 +62,15 @@ public class Restaurant {
     }
 
     //when restaurant buys new table and wants to add them
-    public void addTable(int tableCapacity){
+    public void addTable(int tableCapacity) throws IOException {
         tableList.add(new Table(tableList.size()+1,tableCapacity));
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/tables.txt", false)
+        );
+        for (Table table: tableList){
+            bw.write(table.getTableNum()+"\n"+table.getCapacity()+"\n");
+        }
+        bw.close();
     }
 
 
@@ -132,8 +160,16 @@ public class Restaurant {
         return null;
     }
 
-    public void addStaff(int ID){
+    public void addStaff(int ID) throws IOException {
         this.staffList.add(new Staff(ID));
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/staff.txt", false)
+        );
+
+        for (Staff staff: staffList){
+            bw.write(staff.getStaffID()+"\n");
+        }
+        bw.close();
     }
 
     public Staff getStaffFromID(int ID){

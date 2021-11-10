@@ -58,29 +58,31 @@ public class Main2{
                     } while (choice != 4);
                     break;
                 case 2: // Create/update/remove set packages
-                    menuInterface.printOptionsSetPackages();
-                    choice = GetInput.getIntFromRange(1,4);
-                    switch (choice) {
-                        case 1:
-                            menuInterface.createSetPackageInterface();
-                            break;
-                        case 2:
-                            menuInterface.updateSetPackageInterface();
-                            break;
-                        case 3:
-                            menuInterface.removeSetPackageInterface();
-                            break;
-                        case 4:
-                            break;
-                    }
+                    do {
+                        menuInterface.printOptionsSetPackages();
+                        choice = GetInput.getIntFromRange(1, 4);
+                        switch (choice) {
+                            case 1:
+                                menuInterface.createSetPackageInterface();
+                                break;
+                            case 2:
+                                menuInterface.updateSetPackageInterface();
+                                break;
+                            case 3:
+                                menuInterface.removeSetPackageInterface();
+                                break;
+                            case 4:
+                                break;
+                            default:
+                                break;
+                        }
+                    } while (choice != 4);
                     break;
                 case 3:
                     orderInterface.addItemsToOrder();
                     break;
-                case 4: //View order
-                    System.out.print("Enter table number: ");
-                    int tableNum = GetInput.getIntFromRange(1, 8);
-                    restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
+                case 4:
+                    orderInterface.checkTableOrder();
                     break;
                 case 5:
                     orderInterface.printAddRemove();
