@@ -17,10 +17,10 @@ public class GetPeriod {
         String temp;
         //chose year
         System.out.print("Please enter year: ");
-        yearInt = sc.nextInt();
+        yearInt = GetInput.getIntFromRange(2020,2021);
         //chose month
-        System.out.print("Enter month (1 - 12): ");
-        monthInt = sc.nextInt();
+        System.out.print("Enter month: ");
+        monthInt = GetInput.getIntFromRange(1,12);
         //chose date
         int dateArrayUsed[];
         if (yearInt % 4 == 0) {//Checking for leap year
@@ -29,11 +29,7 @@ public class GetPeriod {
             dateArrayUsed = datesInMonth;
         }
         System.out.print("Enter date: ");
-        dateInt = sc.nextInt();
-        while (dateInt > dateArrayUsed[monthInt- 1]) {//Check if the date is within the limit
-            System.out.printf("Please enter date between 1 and %d inclusive: ", dateArrayUsed[monthInt - 1]);
-            dateInt = sc.nextInt();
-        }
+        dateInt = GetInput.getIntFromRange(1,dateArrayUsed[monthInt- 1]);
         //convert to format: 2007-12-03T10:15:30
         String year;
         String month;
@@ -76,36 +72,24 @@ public class GetPeriod {
         //----------------------
         //chose year
 
-
-
-
-
-
         do {
             System.out.print("Please enter year:");
-            yearInt = sc.nextInt();
+            yearInt = GetInput.getIntFromRange(2020,2022);
             //chose month
-            System.out.println("Enter month (1-12): ");
-            monthInt = sc.nextInt();
+            System.out.println("Enter month: ");
+            monthInt = GetInput.getIntFromRange(1,12);
             //chose date
             if (yearInt % 4 == 0) {//Checking for leap year
                 dateArrayUsed = datesInMonthLeap;
             } else {
                 dateArrayUsed = datesInMonth;
             }
-            System.out.print("Enter date:");
-            dateInt = sc.nextInt();
-            while (dateInt > dateArrayUsed[monthInt - 1]) {//Check if the date is within the limit
-                System.out.printf("Please enter date between 1 and %d inclusive: ", dateArrayUsed[monthInt - 1]);
-                dateInt = sc.nextInt();
-            }
+            System.out.print("Enter date: ");
+            dateInt = GetInput.getIntFromRange(1,dateArrayUsed[monthInt - 1]);
             //chose time
-            System.out.print("Enter hour (24H format within opening hours): ");
-            hourInt = sc.nextInt();
-            while (10 > hourInt || hourInt > 22) {
-                System.out.print("Please enter an hour within opening hours");
-                hourInt = sc.nextInt();
-            }
+            System.out.println("Opening hours are 11am to 11pm");
+            System.out.print("Enter time (24h format): ");
+            hourInt = GetInput.getIntFromRange(11,22);
             /*System.out.print("Enter minutes: ");
             minuteInt = sc.nextInt();
             while (minuteInt < 0 || minuteInt > 59) {

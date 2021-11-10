@@ -70,12 +70,6 @@ public class Payment {
                 TransHistItem temp = TransHist.get(TransHist.size()-1).findTransHist(o.getItem().getItemName(),o.getItem().getPrice());
                 if(temp == null){//If item does not exist yet, create a new slot for the item
                     TransHist.get(TransHist.size()-1).getTransList().add(new TransHistItem(o.getItem().getItemName(),o.getQuantityOrdered(),o.getItem().getPrice()));
-                    for(TransHistDay x: TransHist){
-                        System.out.println(x.getDate());
-                        for(TransHistItem y: x.getTransList()){
-                            System.out.println(y.getItem());
-                        }
-                    }
                 }else{//Item already exists, can just add to the existing slot
                     temp.setQuantity(o.getQuantityOrdered());
                 }

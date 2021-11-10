@@ -9,6 +9,7 @@ public class PaymentUI {
     private Restaurant r;
     private Membership m;
     private ArrayList<TransHistDay> transHistDayArrayList;
+    private Staff s;
 
     /**
      *
@@ -16,10 +17,11 @@ public class PaymentUI {
      * @param m -> Membership which is inputted in main -> Gain access to members list to check for membership
      * @param transHistDayArrayList -> transHistDayArrayList which is inputted in main -> to push all order items into the transaction history list
      */
-    public PaymentUI(Restaurant r, Membership m, ArrayList<TransHistDay> transHistDayArrayList) {
+    public PaymentUI(Restaurant r, Membership m, ArrayList<TransHistDay> transHistDayArrayList, Staff s) {
         this.r = r;
         this.m = m;
         this.transHistDayArrayList = transHistDayArrayList;
+        this.s = s;
     }
 
     /**
@@ -92,7 +94,7 @@ public class PaymentUI {
     }
 
     public void checkMembership() {
-        boolean isMember = false;
+        int isMember = 0;
         int phoneNumber = -1;
         char selection;
         System.out.print("Is customer a member? Y/N ");
@@ -113,7 +115,7 @@ public class PaymentUI {
                 }
             }
             isMember = m.checkMembership(phoneNumber);
-            if (isMember == false) {
+            if (isMember == 0) {
                 System.out.println("Customer is not a member");
             } else {
                 this.payment.applyDiscount();
@@ -121,7 +123,7 @@ public class PaymentUI {
                 System.out.printf("Sub-total: %.2f \nTax: %.2f \nDiscount: %.2f \nTotal: %.2f \n",this.payment.getSubTotal(),this.payment.getTax(),this.payment.getDiscountApplied(),(this.payment.getSubTotal() + this.payment.getTax() - this.payment.getDiscountApplied()));
             }
         }
-        if (isMember == false) {
+        if (isMember == 0) {
             System.out.print("Apply for membership? (Y/N): ");
             selection = GetInput.getChar();
             if (selection == 'y' || selection == 'Y') {
@@ -167,11 +169,11 @@ public class PaymentUI {
         addToHistory();
     }
 
-    public void generateReceipt() {
+    public void generateReceipt(int staffID) {
         Receipt newReceipt = new Receipt(this.payment);
         System.out.println();
         System.out.println();
-        newReceipt.printReceipt();
+        newReceipt.printReceipt(staffID);
     }
 
     public void addToHistory(){
@@ -188,7 +190,7 @@ public class PaymentUI {
             showAmount();
             checkMembership();
             makePayment();
-            generateReceipt();
+            generateReceipt(s.getStaffID());
             for(Table t: payment.getTables()){
                 t.freeTable();
             }

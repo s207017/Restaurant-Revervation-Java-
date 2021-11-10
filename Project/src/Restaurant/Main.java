@@ -13,7 +13,6 @@ public class Main {
         OrderUI orderUI = new OrderUI(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
         MembershipUI membershipUI = new MembershipUI(membership);
-        PaymentUI paymentUI = new PaymentUI(restaurant,membership, restaurant.getTransactionHistory());
 
         //gets staffID from the staff using the UI
         Staff thisStaff;
@@ -30,11 +29,14 @@ public class Main {
             thisStaff = restaurant.getStaffFromID(staffID);
             count++;
         }while(thisStaff==null);
-//        System.out.println("Logging you in to OOPsie RRPSS...");
-//        TimeUnit.SECONDS.sleep(1);
-//        System.out.println("Building kitchen...");
-//        TimeUnit.SECONDS.sleep(1);
-//        System.out.println("Hiring staff...");
+
+        PaymentUI paymentUI = new PaymentUI(restaurant,membership, restaurant.getTransactionHistory(),thisStaff);
+
+        System.out.println("Logging you in to OOPsie RRPSS...");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Building kitchen...");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Hiring staff...");
 
         int option, choice;
         do {
@@ -145,7 +147,20 @@ public class Main {
                     tableAvailabilityUI.checkTableAvailability();
                     break;
                 case 11:
-                    membershipUI.AddMember();
+                    System.out.print("Membership functions:\n(1) Add member\n(2) Remove member\n");
+                    do{
+                        System.out.print("Enter option (-1 to return): ");
+                        choice = GetInput.getInt();
+                        if(choice==1){
+                            membershipUI.addMember();
+                            break;
+                        }else if(choice==2){
+                            membershipUI.removeMember();
+                            break;
+                        }else if(choice==-1){
+                            break;
+                        }
+                    }while(choice != 1 || choice != 2 || choice != -1);
                     break;
                 case 12:
                     paymentUI.makePaymentUI();
