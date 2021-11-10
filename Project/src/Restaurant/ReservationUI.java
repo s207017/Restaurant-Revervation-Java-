@@ -114,7 +114,6 @@ public class ReservationUI {
                 System.out.printf("Reservation date: %s\n",reservationDateTime);
                 System.out.print(t.getReservations().get(reservationDateTime).toString());
                 System.out.println("-".repeat(40));
-                System.out.println("*RESERVATION FUNCTION END*");
                 break;
             }
         }
@@ -247,7 +246,6 @@ public class ReservationUI {
                 break;
             }
             default: {
-                System.out.println("*RESERVATION FUNCTION END*");
                 break;
             }
         }

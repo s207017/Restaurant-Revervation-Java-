@@ -156,7 +156,6 @@ public class OrderUI {
             return;
         }
         temp.printOrder();
-        System.out.println("*VIEW ORDER FUNCTION END*");
     }
 
 

@@ -76,7 +76,6 @@ public class TableAvailabilityUI {
 
     public void checkTableAvailability(){
         System.out.println(r);
-        System.out.println("*CHECK TABLES FUNCTION END*");
     }
 
     public void assignTable(boolean Reserved){
