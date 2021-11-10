@@ -81,10 +81,12 @@ public class MenuInterface {
     public void updateMenuItemInterface() throws IOException {
         int ID, changeOption;
         menu.printMenu();
-        System.out.println("Enter the menu ID which you want to modify: ");
-        do {
+        System.out.print("Enter the menu ID which you want to modify: ");
+        ID = GetInput.getInt();
+        while (!menu.IDExists(ID)){
+            System.out.print("Menu ID does not exist, please enter a valid ID: ");
             ID = GetInput.getInt();
-        }while(menu.IDExists(ID));
+        }
         do{
             System.out.println("What do you want to change?");
             this.printChangeTypes();

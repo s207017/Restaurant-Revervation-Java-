@@ -10,3 +10,7 @@ noodles
 103
 12.34
 slurpie
+hot dog
+104
+6.45
+yummy
