@@ -77,7 +77,7 @@ public class Main2{
                 case 3:
                     orderInterface.addItemsToOrder();
                     break;
-                case 4:
+                case 4: //View order
                     System.out.print("Enter table number: ");
                     int tableNum = GetInput.getIntFromRange(1, 8);
                     restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();

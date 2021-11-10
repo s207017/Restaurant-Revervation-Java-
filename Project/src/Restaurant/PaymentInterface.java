@@ -161,6 +161,7 @@ public class PaymentInterface {
             this.payment = this.payByCash;
         }
         System.out.println("PAYMENT SUCCESS!");
+        addToHistory();
     }
 
     public void generateReceipt() {
