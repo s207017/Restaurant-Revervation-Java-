@@ -48,6 +48,7 @@ public class MenuInterface {
 
     public void removeMenuItemInterface() throws IOException, InterruptedException {
         int ID, end, menuTypeInt;
+        boolean invalidInput;
         do{
             printMenuTypes();
             System.out.println("What type of menu item would you like to remove?");
@@ -57,13 +58,39 @@ public class MenuInterface {
             System.out.println("What is the menu item ID you would like to delete?");
             System.out.print("Your input: ");
             do {
+                invalidInput = false;
+                System.out.print("Your input: ");
                 ID = GetInput.getInt();
-                if(!menu.IDExists(ID)){
-                    System.out.println("Menu ID does not exist. Please enter a valid menu ID!");
-                } else {
-                    System.out.println("Menu ID found... removing..");
+                switch (menuTypeInt){
+                    case 1:
+                        if (101 > ID || ID > 100 + menu.getMainCourseItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 2:
+                        if (201 > ID || ID > 200 + menu.getSideItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 3:
+                        if (301 > ID || ID > 300 + menu.getDrinkItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 4:
+                        if (401 > ID || ID > 400 + menu.getDessertItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    default:
+                        break;
                 }
-            } while(!menu.IDExists(ID));
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for the selected menu type!");
+                } else {
+                    System.out.println("Menu ID found... LOADING..");
+                }
+            } while (invalidInput);
             menu.removeMenuItem(menuTypeInt, ID);
             System.out.println("Item removed!");
             printUpdatedMenu(menuTypeInt);
@@ -98,22 +125,22 @@ public class MenuInterface {
                 ID = GetInput.getInt();
                 switch (menuTypeInt){
                     case 1:
-                        if (101 > ID || ID > 101 + menu.getMainCourseItems().size()){
+                        if (101 > ID || ID > 100 + menu.getMainCourseItems().size()){
                             invalidInput = true;
                         }
                         break;
                     case 2:
-                        if (201 > ID || ID > 201 + menu.getSideItems().size()){
+                        if (201 > ID || ID > 200 + menu.getSideItems().size()){
                             invalidInput = true;
                         }
                         break;
                     case 3:
-                        if (301 > ID || ID > 301 + menu.getDrinkItems().size()){
+                        if (301 > ID || ID > 300 + menu.getDrinkItems().size()){
                             invalidInput = true;
                         }
                         break;
                     case 4:
-                        if (401 > ID || ID > 401 + menu.getDessertItems().size()){
+                        if (401 > ID || ID > 400 + menu.getDessertItems().size()){
                             invalidInput = true;
                         }
                         break;
@@ -127,6 +154,7 @@ public class MenuInterface {
                 }
             } while (invalidInput);
             do{
+                System.out.println(menu.getMenuItemFromID(ID).getItemName());
                 System.out.println("What do you want to change?");
                 this.printChangeTypes();
                 System.out.print("Enter your option: ");
@@ -242,6 +270,7 @@ public class MenuInterface {
     public void createSetPackageInterface(){
         double maxPrice, discountRate, finalPrice, end;
         int mainMenuID, sideMenuID;
+        boolean invalidInput;
         do {
             ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
             System.out.println();
@@ -252,26 +281,35 @@ public class MenuInterface {
             String desc = GetInput.getString();
             System.out.println("You will now have to choose 1 main course item and 1 side menu item");
             menu.printMainCourse();
-            System.out.print("Enter the menu ID of the main course item: ");
             do {
+                invalidInput = false;
+                System.out.print("Enter the menu ID of the main course item: ");
                 mainMenuID = GetInput.getInt();
-                if (!menu.IDExists(mainMenuID)) {
-                    System.out.println("MAIN Menu ID does not exist. Please enter a valid MAIN menu ID!");
-                } else {
-                    System.out.println("MAIN Menu ID found... ");
+                if (101 > mainMenuID || mainMenuID > 100 + menu.getMainCourseItems().size()){
+                    invalidInput = true;
                 }
-            } while (!menu.IDExists(mainMenuID));
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for the MAIN MENU!");
+                } else {
+                    System.out.println("Menu ID found... Adding it to the set package..");
+                }
+            } while (invalidInput);
             setItems.add(menu.getMenuItemFromID(mainMenuID));
             menu.printSide();
             System.out.print("Enter the menu ID of the side: ");
             do {
+                invalidInput = false;
+                System.out.print("Enter the menu ID of the main course item: ");
                 sideMenuID = GetInput.getInt();
-                if (!menu.IDExists(sideMenuID)) {
-                    System.out.println("SIDE Menu ID does not exist. Please enter a valid SIDE menu ID!");
-                } else {
-                    System.out.println("SIDE Menu ID found...");
+                if (201 > sideMenuID || sideMenuID > 200 + menu.getSideItems().size()){
+                    invalidInput = true;
                 }
-            } while (!menu.IDExists(sideMenuID));
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for SIDE MENU!");
+                } else {
+                    System.out.println("Menu ID found... Adding it to the set package..");
+                }
+            } while (invalidInput);
             setItems.add(menu.getMenuItemFromID(sideMenuID));
             System.out.print("Enter the maximum price of drink: ");
             maxPrice = GetInput.getDouble();
@@ -308,17 +346,23 @@ public class MenuInterface {
 
     public void removeSetPackageInterface() throws IOException { //same as removing any other menu item so i don't think need this function
         int menuItemID;
+        boolean invalidInput;
         System.out.println("You are now removing a set package item from the menu");
         menu.printSetPackage();
         System.out.print("Enter the menu ID of the set package you would like to remove");
         do {
+            invalidInput = false;
+            System.out.print("Enter the menu ID of the set package item: ");
             menuItemID = GetInput.getInt();
-            if (!menu.IDExists(menuItemID) || 501 < menuItemID || menuItemID > 599) {
-                System.out.println("SIDE PACKAGE Menu ID does not exist. Please enter a valid SIDE PACKAGE menu ID!");
-            } else {
-                System.out.println("SIDE PACKAGE Menu ID found...");
+            if (501 > menuItemID || menuItemID > 500 + menu.getSideItems().size()){
+                invalidInput = true;
             }
-        } while (!menu.IDExists(menuItemID));
+            if (invalidInput) {
+                System.out.println("The menu ID is out of range for SET PACKAGE!");
+            } else {
+                System.out.println("Menu ID found... Removing from the menu");
+            }
+        } while (invalidInput);
         menu.removeMenuItem(5, menuItemID);
     }
 
