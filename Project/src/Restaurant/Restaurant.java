@@ -55,7 +55,7 @@ public class Restaurant {
      * @param tel the phone number of the customer
      * @return returns first available table, doesnt iterate through all unless no table. -1 if no table is found.
      */
-    public int reserveTable(LocalDateTime arrivalDateTime, int pax, String name, String tel) {
+    public int reserveTable(LocalDateTime arrivalDateTime, int pax, String name, int tel) {
 
         // get first available table
         for (Table table : tableList) {

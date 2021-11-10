@@ -3,9 +3,9 @@ package Restaurant;
 public class Reservation {
     private String name;
     private int pax;
-    private String tel =null;
+    private int tel;
 
-    public Reservation(String name, int pax, String tel) {
+    public Reservation(String name, int pax, int tel) {
         this.name = name;
         this.tel = tel;
         this.pax = pax;
@@ -21,12 +21,12 @@ public class Reservation {
         return name;
     }
 
-    public String getTel() {
+    public int getTel() {
         return tel;
     }
 
     //when you call reservation.toString() --> prints the information
     public String toString() {
-        return String.format("%d persons for %s, telephone: %s", pax, name, tel);
+        return String.format("Reservation for: %s\nTelephone number: %d\nNumber of guests: %d\n", name, tel, pax);
     }
 }
