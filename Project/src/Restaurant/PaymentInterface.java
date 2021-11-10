@@ -68,7 +68,7 @@ public class PaymentInterface {
         choice = GetInput.getInt();
         while (choice != -1) {
             Table t = (this.r.getTableFromTableNum(choice));
-            if (t == null || t.getTableStatus() == Table.Level.FREE) {
+            if (t == null || t.getTableStatus() != Table.Level.OCCUPIED || t.getOrder() == null) {
                 System.out.print("Invalid table number, please try again: ");
                 choice = GetInput.getInt();
             } else if (t.getTableStatus() != Table.Level.OCCUPIED && t.getOrder() != null) {
