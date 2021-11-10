@@ -74,6 +74,11 @@ public class Main2{
                 case 4:
                     System.out.print("Enter table number: ");
                     int tableNum = GetInput.getIntFromRange(1, 8);
+//                    Table table = restaurant.getTableFromTableNum(tableNum);
+//                    System.out.println("Table num is " + table.getTableNum());
+//                    Order order = table.getOrder();
+//                    System.out.printf("Order extracted with ID %d\n",order.getOrderID());
+//                    order.printOrder();
                     restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
                     printAppOptions();
 
