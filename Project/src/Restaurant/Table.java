@@ -153,6 +153,9 @@ public class Table {
     }
     public Level getTableStatus(){return tableStatus;}
     public Order getOrder(){
+        if(this.order == null){
+            return null;
+        }
         return this.order;
     }
     public Map<LocalDateTime, Reservation> getReservations(){return this.reservations;}
