@@ -1,7 +1,7 @@
 package Restaurant;
 
 import java.util.ArrayList;
-
+import java.time.temporal.ChronoUnit;
 
 public class Payment {
     protected ArrayList<Table> tables;
@@ -57,12 +57,21 @@ public class Payment {
     }
 
     public void pushItemsToHistory(ArrayList<TransHistDay> TransHist){
-        if(this.tables.get(0).getOrder().getDate() != TransHist.get(TransHist.size()-1).getDate()){//Check if day exists
+        if(TransHist.isEmpty()){//checking if list is empty
+            System.out.println("List is empty, first entry ever");
+            System.out.printf("Date of entry is %s\n",this.tables.get(0).getOrder().getDate());
+            TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
+            System.out.println("Trans history added");
+        }
+        else if(this.tables.get(0).getOrder().getDate().truncatedTo(ChronoUnit.DAYS) != TransHist.get(TransHist.size()-1).getDate().truncatedTo(ChronoUnit.DAYS)){//Check if day exists
+            System.out.println("First entry of the day in non empty list");
             TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
         }
+        //TransHistDay is available for putting in of values
         for(Table t: tables){
             for(OrderItem o: t.getOrder().getOrderItemList()){
-                TransHistItem temp = TransHist.get(TransHist.size()).findTransHist(o.getItem().getItemName(),o.getItem().getPrice());
+                //temp is set to the latest TransHistDays transhistitemm that matches the current order items name
+                TransHistItem temp = TransHist.get(TransHist.size()-1).findTransHist(o.getItem().getItemName(),o.getItem().getPrice());
                 if(temp == null){//If item does not exist yet, create a new slot for the item
                     TransHist.get(TransHist.size()-1).getTransList().add(new TransHistItem(o.getItem().getItemName(),o.getQuantityOrdered(),o.getItem().getPrice()));
                 }else{//Item already exists, can just add to the existing slot
