@@ -16,25 +16,39 @@ public class SalesRevenueReport {
         transHist = new ArrayList<TransHistDay>();
         summaryList = new ArrayList<TransHistItem>();
         do {
-            if(choice == 1) {
+            if(choice == 1) {//Creating period report
                 this.startDate = GetPeriod.getDate();
                 this.endDate = GetPeriod.getDate();
                 if (endDate.isBefore(startDate)) {
                     System.out.printf("End date (%s) is before start date (%s), please try again\n", endDate, startDate);
                 }
             }
-            else if(choice == 2){
+            else if(choice == 2){//Creating a day sales report
                 this.startDate = GetPeriod.getDate();
-                this.endDate = startDate;
+                this.endDate = startDate.plusHours(23);
+                System.out.printf("Start date: %s  End date: %s\n",startDate,endDate);
             }
         }while(endDate.isBefore(startDate) && endDate.isEqual(startDate));
-        for(TransHistDay x: transHistAll){//Narrow down to intended dates
-            if(startDate.isBefore(x.getDate()) || startDate.isEqual(x.getDate())){//Check if transHistDay is for that date
-                transHist.add(x); // Add the matching entry to the local arraylist of days of transhist
-            }
-            if(endDate.isBefore(x.getDate())){
+        switch(choice){
+            case 1://period report
+                for(TransHistDay x: transHistAll){//Narrow down to intended dates
+                    System.out.println("Entered for loop");
+                    if(startDate.isBefore(x.getDate()) || startDate.isEqual(x.getDate())){//Check if transHistDay is for that date
+                        transHist.add(x); // Add the matching entry to the local arraylist of days of transhist
+                    }
+                    if(endDate.isBefore(x.getDate())){
+                        break;
+                    }
+                }
                 break;
-            }
+            case 2://day report
+                for(TransHistDay x: transHistAll){//Find specific date
+                    if(startDate.isBefore(x.getDate()) && endDate.isAfter(x.getDate())){//Check if transHistDay is for that date
+                        transHist.add(x); // Add the matching entry to the local arraylist of days of transhist
+                        break;
+                    }
+                }
+                break;
         }
         generateReport();
     }
@@ -47,8 +61,8 @@ public class SalesRevenueReport {
         double tempSum;
         double fullSum = 0;
         switch(choice) {
-            case 1:
-                System.out.printf("Summary of sales between %s and %s: \n", startDate);
+            case 1://FOR PERIOD REPORT
+                System.out.printf("Summary of sales between %s and %s: \n", startDate,endDate);
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
@@ -57,8 +71,8 @@ public class SalesRevenueReport {
                 }
                 System.out.printf("Total revenue: %f\n", fullSum);
                 break;
-            case 2:
-                System.out.printf("Summary of sales on %s: \n", startDate, endDate);
+            case 2:// FOR  DAY REPORT
+                System.out.printf("Summary of sales on %s: \n", startDate);
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
@@ -86,10 +100,11 @@ public class SalesRevenueReport {
     }
 
     public void generateReport(){
+        System.out.println("Entered generate report");
         TransHistItem temp;
         for(TransHistDay t: this.transHist){
             for(TransHistItem i: t.getTransList()){
-                temp = itemExists(i.getItem(),i.getPrice());
+                temp = itemExists(i.getItem(),i.getPrice()); // Checking if item already exists
                 if(temp == null){//Item doesnt exist
                     this.summaryList.add(new TransHistItem(i.getItem(),i.getQuantity(),i.getPrice()));
                 }else{
@@ -97,6 +112,7 @@ public class SalesRevenueReport {
                 }
             }
         }
+        printReport(2);
     }
 
 }

@@ -35,9 +35,8 @@ public class PaymentInterface {
      *      - If payment fails -> terminate method.
      *      - If payment succeeds -> show change (cash payment), print receipt and push orderitems into transaction history.
      */
-    public void selectPaymentMethod() {
+    public boolean selectPaymentMethod() {
         int choice;
-        boolean paymentSelected = false;
         do {
             System.out.print("*ENTER -1 TO TERMINATE* \nPayment by \n1. Cash \n2. Others \nInput: ");
             choice = GetInput.getInt();
@@ -45,20 +44,18 @@ public class PaymentInterface {
                 case 1:
                     this.payByCash = new CashPayment();
                     this.payment = this.payByCash;
-                    paymentSelected = true;
-                    break;
+                    return true;
                 case 2:
                     this.payment = new Payment();
-                    paymentSelected =true;
-                    break;
+                    return true;
                 case -1:
                     System.out.println("TERMINATING PAYMENT...");
-                    return;
+                    return false;
                 default:
                     System.out.println("Please enter a valid selection");
                     continue;
             }
-        } while (paymentSelected != true);
+        } while (true);
     }
 
     public void selectTable() {
@@ -68,7 +65,7 @@ public class PaymentInterface {
         choice = GetInput.getInt();
         while (choice != -1) {
             Table t = (this.r.getTableFromTableNum(choice));
-            if (t == null || t.getTableStatus() == Table.Level.FREE) {
+            if (t == null || t.getTableStatus() != Table.Level.OCCUPIED || t.getOrder() == null) {
                 System.out.print("Invalid table number, please try again: ");
                 choice = GetInput.getInt();
             } else if (t.getTableStatus() != Table.Level.OCCUPIED && t.getOrder() != null) {
@@ -166,6 +163,7 @@ public class PaymentInterface {
             this.payment = this.payByCash;
         }
         System.out.println("PAYMENT SUCCESS!");
+        addToHistory();
     }
 
     public void generateReceipt() {
@@ -177,5 +175,23 @@ public class PaymentInterface {
 
     public void addToHistory(){
         this.payment.pushItemsToHistory(transHistDayArrayList);
+    }
+
+    /**
+     * if select payment method is successful, ie payment is not terminated (when -1 is entered)
+     * this function will continue with the rest of the payment functions
+     * else, return to main function
+     */
+    public void makePaymentInterface(){
+        if(selectPaymentMethod()){
+            selectTable();
+            showAmount();
+            checkMembership();
+            makePayment();
+            generateReceipt();
+        }
+        else{
+            return;
+        }
     }
 }

@@ -48,6 +48,7 @@ public class MenuInterface {
 
     public void removeMenuItemInterface() throws IOException, InterruptedException {
         int ID, end, menuTypeInt;
+        boolean invalidInput;
         do{
             printMenuTypes();
             System.out.println("What type of menu item would you like to remove?");
@@ -57,13 +58,39 @@ public class MenuInterface {
             System.out.println("What is the menu item ID you would like to delete?");
             System.out.print("Your input: ");
             do {
+                invalidInput = false;
+                System.out.print("Your input: ");
                 ID = GetInput.getInt();
-                if(!menu.IDExists(ID)){
-                    System.out.println("Menu ID does not exist. Please enter a valid menu ID!");
-                } else {
-                    System.out.println("Menu ID found... removing..");
+                switch (menuTypeInt){
+                    case 1:
+                        if (101 > ID || ID > 100 + menu.getMainCourseItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 2:
+                        if (201 > ID || ID > 200 + menu.getSideItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 3:
+                        if (301 > ID || ID > 300 + menu.getDrinkItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 4:
+                        if (401 > ID || ID > 400 + menu.getDessertItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    default:
+                        break;
                 }
-            } while(!menu.IDExists(ID));
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for the selected menu type!");
+                } else {
+                    System.out.println("Menu ID found... LOADING..");
+                }
+            } while (invalidInput);
             menu.removeMenuItem(menuTypeInt, ID);
             System.out.println("Item removed!");
             printUpdatedMenu(menuTypeInt);
@@ -83,7 +110,8 @@ public class MenuInterface {
     }
 
     public void updateMenuItemInterface() throws IOException, InterruptedException {
-        int ID, end, menuTypeInt, changeOption, changeCount = 0;
+        int ID, end, menuTypeInt, changeOption, changeCount;
+        boolean invalidInput, changed;
         do{
             printMenuTypes();
             System.out.println("What type of menu item would you like to update?");
@@ -91,29 +119,67 @@ public class MenuInterface {
             menuTypeInt = GetInput.getIntFromRange(1,4);
             printExistingMenu(menuTypeInt);
             System.out.println("What is the menu item ID you would like to update?");
-            System.out.print("Your input: ");
             do {
+                invalidInput = false;
+                System.out.print("Your input: ");
                 ID = GetInput.getInt();
-                if(!menu.IDExists(ID)){
-                    System.out.println("Menu ID does not exist. Please enter a valid menu ID!");
+                switch (menuTypeInt){
+                    case 1:
+                        if (101 > ID || ID > 100 + menu.getMainCourseItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 2:
+                        if (201 > ID || ID > 200 + menu.getSideItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 3:
+                        if (301 > ID || ID > 300 + menu.getDrinkItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    case 4:
+                        if (401 > ID || ID > 400 + menu.getDessertItems().size()){
+                            invalidInput = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for the selected menu type!");
                 } else {
                     System.out.println("Menu ID found... LOADING..");
+                    System.out.println();
                 }
-            } while(!menu.IDExists(ID));
+            } while (invalidInput);
             do{
+                changeCount = 0;
+                System.out.println("Before update: ");
+                System.out.println("Name: " + menu.getMenuItemFromID(ID).getItemName());
+                System.out.println("Price: " + menu.getMenuItemFromID(ID).getPrice());
+                System.out.println("Description: " + menu.getMenuItemFromID(ID).getDescription());
+                System.out.println("-".repeat(40));
                 System.out.println("What do you want to change?");
                 this.printChangeTypes();
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1,4);
-                if (menu.updateMenuItem(ID, changeOption, true)){
+                changed = menu.updateMenuItembool(ID, changeOption, true);
+                if (changed){
                     changeCount++;
+                    System.out.println("Item updated!");
                 }
             }while(changeOption != 4);
-            if (changeCount != 0) {
-                System.out.println("Item updated!");
-                printUpdatedMenu(menuTypeInt);
-                TimeUnit.SECONDS.sleep(2);
-            }
+//            if (changeCount != 0) {
+//                System.out.println("Item updated!");
+//                System.out.println("After update: ");
+//                System.out.println("Name: " + menu.getMenuItemFromID(ID).getItemName());
+//                System.out.println("Price: " + menu.getMenuItemFromID(ID).getPrice());
+//                System.out.println("Description: " + menu.getMenuItemFromID(ID).getDescription());
+//                System.out.println("-".repeat(40));
+//                TimeUnit.SECONDS.sleep(2);
+//            }
 
             System.out.println();
             System.out.println("1. Update another menu");
@@ -214,54 +280,101 @@ public class MenuInterface {
 
 
     public void createSetPackageInterface(){
-        double maxPrice, discountRate, finalPrice;
+        double maxPrice, discountRate, finalPrice, end;
         int mainMenuID, sideMenuID;
-        ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
-        System.out.println("You are now creating a set package");
-        System.out.print("Enter the name of the set package: ");
-        String name = GetInput.getString();
-        System.out.println("Enter the description of the set package in one line:");
-        String desc = GetInput.getString();
-        System.out.print("Enter the menu ID of the main course item: ");
-        mainMenuID = GetInput.getInt(); //error checking needed
-        setItems.add(menu.getMenuItemFromID(mainMenuID));
-        System.out.print("Enter the menu ID of the side: ");
-        sideMenuID = GetInput.getInt(); //error checking needed
-        setItems.add(menu.getMenuItemFromID(sideMenuID));
-        System.out.print("Enter the maximum price of drink: ");
-        maxPrice = GetInput.getDouble();
-        double tempTotalPrice = menu.getMenuItemFromID(mainMenuID).getPrice() +
-                menu.getMenuItemFromID(sideMenuID).getPrice() + maxPrice;
-        System.out.println("The total price of the current combination, with the maximum drink price is : " +
-                "$ " + tempTotalPrice);
-        do{
-            do{
-                System.out.print("Enter the percentage discount rate: ");
-                discountRate = GetInput.getDouble();
-                if (discountRate <= 0 || discountRate >= 100){
-                    System.out.println("Invalid input! Please try again");
-                } else {
-                    break;
+        boolean invalidInput;
+        do {
+            ArrayList<MenuItem> setItems = new ArrayList<MenuItem>();
+            System.out.println();
+            System.out.println("You are now creating a set package");
+            System.out.print("Enter the name of the set package: ");
+            String name = GetInput.getString();
+            System.out.println("Enter the description of the set package in one line:");
+            String desc = GetInput.getString();
+            System.out.println("You will now have to choose 1 main course item and 1 side menu item");
+            menu.printMainCourse();
+            do {
+                invalidInput = false;
+                System.out.print("Enter the menu ID of the main course item: ");
+                mainMenuID = GetInput.getInt();
+                if (101 > mainMenuID || mainMenuID > 100 + menu.getMainCourseItems().size()){
+                    invalidInput = true;
                 }
-            }while(true);
-            finalPrice = tempTotalPrice * ((100 - discountRate)/100);
-            System.out.print("The new price is: " + finalPrice);
-            System.out.print("Would you like to proceed with this pricing? Y/N ");
-            char yesNo = GetInput.getChar();
-            if (yesNo == 'Y' || yesNo == 'y'){
-                break;
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for the MAIN MENU!");
+                } else {
+                    System.out.println("Menu ID found... Adding it to the set package..");
+                }
+            } while (invalidInput);
+            setItems.add(menu.getMenuItemFromID(mainMenuID));
+            menu.printSide();
+            System.out.print("Enter the menu ID of the side: ");
+            do {
+                invalidInput = false;
+                System.out.print("Enter the menu ID of the main course item: ");
+                sideMenuID = GetInput.getInt();
+                if (201 > sideMenuID || sideMenuID > 200 + menu.getSideItems().size()){
+                    invalidInput = true;
+                }
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for SIDE MENU!");
+                } else {
+                    System.out.println("Menu ID found... Adding it to the set package..");
+                }
+            } while (invalidInput);
+            setItems.add(menu.getMenuItemFromID(sideMenuID));
+            System.out.print("Enter the maximum price of drink: ");
+            maxPrice = GetInput.getDouble();
+            double tempTotalPrice = menu.getMenuItemFromID(mainMenuID).getPrice() +
+                    menu.getMenuItemFromID(sideMenuID).getPrice() + maxPrice;
+            System.out.println("The total price of the current combination, with the maximum drink price is : " +
+                    "$ " + String.format("%,.2f", tempTotalPrice));
+            do {
+                System.out.print("Enter the discount rate: ");
+                discountRate = GetInput.getDouble();   //TO BE MODIFIED TO GETDOUBLE(RANGE)
+                finalPrice = tempTotalPrice * ((100 - discountRate) / 100);
+                System.out.println("The new price is: " + String.format("%,.2f", finalPrice));
+                System.out.println("Would you like to proceed with this pricing? Y/N ");
+                System.out.print("Your input: ");
+                char yesNo = GetInput.getChar();
+                if (yesNo == 'Y' || yesNo == 'y') {
+                    break;
+                } else {
+                    System.out.println("Enter the new discount rate below");
+                }
+            } while (true);
+            menu.createNewSetPackage(name, finalPrice, desc, setItems);
+            System.out.println();
+            System.out.println("1. Create another set package");
+            System.out.println("2. Return to the set package interface");
+            System.out.print("Your input: ");
+            end = GetInput.getIntFromRange(1,2);
+            if (end == 2) {
+                System.out.println("---------- CREATE SET PACKAGE END----------");
+                System.out.println();
             }
-        }while(true);
-
-        menu.createNewSetPackage(name, finalPrice, desc, setItems);
+        } while (end != 2);
     }
 
     public void removeSetPackageInterface() throws IOException { //same as removing any other menu item so i don't think need this function
         int menuItemID;
+        boolean invalidInput;
         System.out.println("You are now removing a set package item from the menu");
         menu.printSetPackage();
         System.out.print("Enter the menu ID of the set package you would like to remove");
-        menuItemID = GetInput.getInt(); //needs error checking
+        do {
+            invalidInput = false;
+            System.out.print("Enter the menu ID of the set package item: ");
+            menuItemID = GetInput.getInt();
+            if (501 > menuItemID || menuItemID > 500 + menu.getSideItems().size()){
+                invalidInput = true;
+            }
+            if (invalidInput) {
+                System.out.println("The menu ID is out of range for SET PACKAGE!");
+            } else {
+                System.out.println("Menu ID found... Removing from the menu");
+            }
+        } while (invalidInput);
         menu.removeMenuItem(5, menuItemID);
     }
 

@@ -218,7 +218,6 @@ public class Menu {
 
     //for Order
     public MenuItem getMenuItemFromID(int ID){
-        System.out.println("Entered function");
         if (100<ID && ID<=100+ mainCourseItems.size()){
             for (MenuItem m: mainCourseItems){
                 if (m.getItemID()==ID){
@@ -228,9 +227,7 @@ public class Menu {
         }
         else if (200<ID && ID<=200+sideItems.size()){
             for (MenuItem m: sideItems){
-                System.out.print(m.getItemID());
                 if (m.getItemID()==ID){
-                    System.out.println("foundsideitem " +ID);
                     return m; //returns menuitem of side dish
                 }
             }
@@ -383,26 +380,24 @@ public class Menu {
 
 
     public void updateMenuItem(int ID, int changeOption) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        changeOption = sc.nextInt();
         switch (changeOption) {
             case 1:
                 System.out.println("What is the new price?");
-                double newPrice = sc.nextDouble();
+                double newPrice = GetInput.getDouble();
                 getMenuItemFromID(ID).setPrice(newPrice);
                 break;
             case 2:
                 System.out.println("What is the new name?");
-                String newName = sc.nextLine();
+                String newName = GetInput.getString();
                 getMenuItemFromID(ID).setItemName(newName);
                 break;
             case 3:
                 System.out.println("What is the new description?");
-                String newDesc = sc.nextLine();
+                String newDesc = GetInput.getString();
                 getMenuItemFromID(ID).setDescription(newDesc);
                 break;
             case 4:
-                System.out.println("Exiting update of menu...");
+//                System.out.println("Exiting update of menu...");
                 break;
             default:
                 break;
@@ -413,31 +408,29 @@ public class Menu {
         updateMenuToFile(dessertItems,"dessertitems");
     }
 
-    public boolean updateMenuItem(int ID, int changeOption, boolean counts) throws IOException {
+    public boolean updateMenuItembool(int ID, int changeOption, boolean counts) throws IOException {
         boolean updated = false;
-        Scanner sc = new Scanner(System.in);
-        changeOption = sc.nextInt();
         switch (changeOption) {
             case 1:
                 System.out.println("What is the new price?");
-                double newPrice = sc.nextDouble();
+                double newPrice = GetInput.getDouble();
                 getMenuItemFromID(ID).setPrice(newPrice);
                 updated = true;
                 break;
             case 2:
                 System.out.println("What is the new name?");
-                String newName = sc.nextLine();
+                String newName = GetInput.getString();
                 getMenuItemFromID(ID).setItemName(newName);
                 updated = true;
                 break;
             case 3:
                 System.out.println("What is the new description?");
-                String newDesc = sc.nextLine();
+                String newDesc = GetInput.getString();
                 getMenuItemFromID(ID).setDescription(newDesc);
                 updated = true;
                 break;
             case 4:
-                System.out.println("Exiting update of menu...");
+//                System.out.println("Exiting update of menu...");
                 break;
             default:
                 break;

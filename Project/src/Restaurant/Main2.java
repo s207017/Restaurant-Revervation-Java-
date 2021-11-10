@@ -58,21 +58,25 @@ public class Main2{
                     } while (choice != 4);
                     break;
                 case 2: // Create/update/remove set packages
-                    menuInterface.printOptionsSetPackages();
-                    choice = GetInput.getIntFromRange(1,4);
-                    switch (choice) {
-                        case 1:
-                            menuInterface.createSetPackageInterface();
-                            break;
-                        case 2:
-                            menuInterface.updateSetPackageInterface();
-                            break;
-                        case 3:
-                            menuInterface.removeSetPackageInterface();
-                            break;
-                        case 4:
-                            break;
-                    }
+                    do {
+                        menuInterface.printOptionsSetPackages();
+                        choice = GetInput.getIntFromRange(1, 4);
+                        switch (choice) {
+                            case 1:
+                                menuInterface.createSetPackageInterface();
+                                break;
+                            case 2:
+                                menuInterface.updateSetPackageInterface();
+                                break;
+                            case 3:
+                                menuInterface.removeSetPackageInterface();
+                                break;
+                            case 4:
+                                break;
+                            default:
+                                break;
+                        }
+                    } while (choice != 4);
                     break;
                 case 3:
                     orderInterface.addItemsToOrder();
@@ -122,12 +126,7 @@ public class Main2{
                     membershipInterface.AddMember();
                     break;
                 case 11:
-                    paymentInterface.selectPaymentMethod();
-                    paymentInterface.selectTable();
-                    paymentInterface.showAmount();
-                    paymentInterface.checkMembership();
-                    paymentInterface.makePayment();
-                    paymentInterface.generateReceipt();
+                    paymentInterface.makePaymentInterface();
                     break;
                 case 12:
                     salesRevenueReportInterface.printSalesRevenueReport();
@@ -144,10 +143,10 @@ public class Main2{
         System.out.println("+" + "-".repeat(164) + "+");
         System.out.printf("|%100s%65s\n","OOPsie Restaurant Reservation & Point of Sale App","|");
         System.out.println("+" + "-".repeat(164) + "+");
-        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu items from the menu", "(2) Create/Update/Remove set", "(3) Create new order","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(4) View existing order","(5) Add or remove item(s) to/from an existing order","(6) Create new reservation","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(7) Check or remove an existing reservation","(8) Assign table","(9) Check table availability","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(10) Add or remove a member","(11) Make payment","(12) View sales revenue report","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu items from the menu", "(5) Add or remove item(s) to/from an existing order", "(9) Check table availability","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(2) Create/Update/Remove set","(6) Create new reservation","(10) Add or remove a member","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(3) Create new order","(7) Check or remove an existing reservation","(11) Make payment","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(4) View existing order","(8) Assign table","(12) View sales revenue report","|");
         System.out.println("+" + "-".repeat(164) + "+");
     }
 
