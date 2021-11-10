@@ -15,7 +15,7 @@ public class MembershipUI {
         System.out.print("Enter the mobile number of the new member: ");
         number = GetInput.getIntFromRange(80000000,99999999);
         if (memberShip.checkMembership(number)!=0){
-            System.out.println("Existing member. Cannot be added");
+            System.out.println("Member already exists.`");
         } else {
             Member newMember = new Member(number);
             memberShip.addMember(newMember);

@@ -40,6 +40,7 @@ public class Main {
 
         int option, choice;
         do {
+            System.out.println("\nEntering main app...");
             option = getOption();
             switch (option) {
                 case 1: //Create/update/remove menu item
@@ -57,7 +58,6 @@ public class Main {
                                 menuUI.removeMenuItemUI();
                                 break;
                             case 4:
-                                System.out.println("Returning to main app...\n");
                                 break;
                             default:
                                 break;

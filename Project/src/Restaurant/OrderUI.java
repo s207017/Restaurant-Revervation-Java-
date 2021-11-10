@@ -49,7 +49,7 @@ public class OrderUI {
         }
         int choice = 0, quantity = 0;
         while(choice != -1) {
-            System.out.print("Enter menu item ID of intended item to be ordered [-1 to end]: ");
+            System.out.print("*ENTER -1 TO STOP ORDERING\nEnter menu item ID of intended item to be ordered: ");
             choice = GetInput.getInt();
             if(choice == -1) {
                 System.out.println("Exiting ordering function...");
@@ -108,7 +108,7 @@ public class OrderUI {
         MenuItem temp;
         int choice = 0,quantity = 0;
         while(choice != -1){
-            System.out.print("Enter menu item ID of intended item to be removed [-1 to end]: ");
+            System.out.print("*ENTER -1 TO STOP ORDERING\nEnter menu item ID of intended item to be removed: ");
             choice = GetInput.getInt();
             if(choice == -1) break; // End of order removal
             temp = menu.getMenuItemFromID(choice);
