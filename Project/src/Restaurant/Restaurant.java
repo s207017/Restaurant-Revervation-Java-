@@ -4,6 +4,8 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Restaurant {
     private ArrayList<Table> tableList = new ArrayList<Table>();
@@ -116,7 +118,34 @@ public class Restaurant {
         return availableTables;
     }
 
-    //public void checkReservation
+
+    public Table removeReservation(LocalDateTime removeDateTime, int tel){
+        for (Table t : tableList) {
+            Iterator<Map.Entry<LocalDateTime, Reservation>>
+                    iterator = t.getReservations().entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<LocalDateTime, Reservation> entry = iterator.next();
+
+                if (removeDateTime.isEqual(entry.getKey()) &&
+                        entry.getValue().getTel() == (tel)) {
+                    iterator.remove();
+                    return t;
+                }
+            }
+        }
+        //has iterated through all tables, no free tables
+        return null;
+    }
+
+    public Table getTableFromReservationHashMap(LocalDateTime dateTimeToCheck, int tel){
+        for (Table t : tableList){
+            if (t.getReservations().containsKey(dateTimeToCheck) &&
+                t.getReservations().get(dateTimeToCheck).getTel()==tel){
+                return t;
+            }
+        }
+        return null;
+    }
 
 
     /**

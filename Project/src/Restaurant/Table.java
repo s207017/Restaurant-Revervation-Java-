@@ -75,6 +75,19 @@ public class Table {
         }
     }
 
+    public void deleteReservationFromHashMap(LocalDateTime dateTime, int tel){
+        Iterator<Map.Entry<LocalDateTime, Reservation>>
+                iterator = reservations.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<LocalDateTime, Reservation> entry = iterator.next();
+
+            if (entry.getKey().isEqual(dateTime) &&
+            entry.getValue().getTel()==tel){
+                iterator.remove();
+            }
+        }
+    }
+
     /**
      * updates level to either free or reserved, exits if occupied
      * @param currentDateTime gets currentDateTime from main()
