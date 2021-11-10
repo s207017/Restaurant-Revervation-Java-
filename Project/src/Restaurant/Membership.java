@@ -6,16 +6,9 @@ public class Membership {
     ArrayList<Member> membersList = new ArrayList<Member>();
 
     public Membership(){
-        membersList.add(new Member(98357328));
-        membersList.add(new Member(84457564));
-        membersList.add(new Member(92925963));
-        membersList.add(new Member(92715388));
-        membersList.add(new Member(82943623));
-        membersList.add(new Member(87569116));
-        membersList.add(new Member(95431183));
-        membersList.add(new Member(96789030));
-        membersList.add(new Member(97420100));
-        membersList.add(new Member(98517739));
+        membersList.add(new Member(91169149));
+        membersList.add(new Member(81812335));
+        membersList.add(new Member(87426732));
     }
 
     public void addMember(Member member){
