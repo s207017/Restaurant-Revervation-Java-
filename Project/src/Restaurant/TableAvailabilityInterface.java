@@ -59,7 +59,7 @@ public class TableAvailabilityInterface {
                     System.out.println("Please enter a valid table number");
                 }
             }
-            System.out.println("Return to Main Menu? Y/N: ");
+            System.out.print("Return to Main Menu? Y/N: ");
             YN = GetInput.getChar();
             if (YN == 'y' || YN =='Y')
                 exit =1;
@@ -71,7 +71,7 @@ public class TableAvailabilityInterface {
         char YN;
         while (exit != 1) {
             System.out.println(r);
-            System.out.println("Return to Main Menu? Y/N: ");
+            System.out.print("Return to Main Menu? Y/N: ");
             YN = GetInput.getChar();
             if (YN == 'y' || YN =='Y')
                 exit =1;
