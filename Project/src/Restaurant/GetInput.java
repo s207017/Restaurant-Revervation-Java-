@@ -33,6 +33,7 @@ public class GetInput {
                     isValid = true;
                 }else {
                     System.out.printf("Input should be between %d and %d (inclusive)\n", min, max);
+                    System.out.print("Your input: ");
                 }
             } catch (InputMismatchException e) {
                 System.out.print("Please enter a valid integer input: ");
