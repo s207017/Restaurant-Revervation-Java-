@@ -40,7 +40,7 @@ public class Main2{
                             menuInterface.removeMenuItemInterface();
                             break;
                         case 4:
-                            System.out.println("Exiting...");
+                            System.out.println("Returning to the main menu...\n");
                             break;
                         default:
                             break;

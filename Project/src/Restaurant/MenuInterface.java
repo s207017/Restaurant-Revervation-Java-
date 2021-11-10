@@ -41,8 +41,9 @@ public class MenuInterface {
             end = GetInput.getIntFromRange(1,2);
             if (end == 2){
                 System.out.println("----------CREATE MENU ITEM END----------");
+                System.out.println("\n");
             }
-        } while (menuTypeInt == 1);
+        } while (end == 1);
     }
 
     public void removeMenuItemInterface() throws IOException, InterruptedException {
