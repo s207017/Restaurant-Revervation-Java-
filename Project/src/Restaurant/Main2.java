@@ -6,15 +6,15 @@ import java.util.concurrent.TimeUnit;
 public class Main2{
     public static void main(String[] arg) throws IOException, InterruptedException {
         Restaurant restaurant = new Restaurant();
-        MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
-        ReservationInterface reservationInterface = new ReservationInterface(restaurant);
-        TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
-        SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
-        OrderInterfaceUI orderInterface = new OrderInterfaceUI(restaurant.getMenu(), restaurant);
+        MenuUI menuUI = new MenuUI(restaurant.getMenu());
+        ReservationUI reservationUI = new ReservationUI(restaurant);
+        TableAvailabilityUI tableAvailabilityUI = new TableAvailabilityUI(restaurant);
+        SalesRevenueReportUI salesRevenueReportUI = new SalesRevenueReportUI(restaurant);
+        OrderUI orderUI = new OrderUI(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
-        MembershipInterface membershipInterface = new MembershipInterface(membership);
-        PaymentInterface paymentInterface = new PaymentInterface(restaurant,membership, restaurant.getTransactionHistory());
-        
+        MembershipUI membershipUI = new MembershipUI(membership);
+        PaymentUI paymentUI = new PaymentUI(restaurant,membership, restaurant.getTransactionHistory());
+
         //gets staffID from the staff using the UI
         Staff thisStaff;
         int staffID;
@@ -35,7 +35,7 @@ public class Main2{
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Building kitchen...");
         TimeUnit.SECONDS.sleep(1);
-        System.out.println("Configuring ant tasks...");
+        System.out.println("Hiring staff...");
 
         int option, choice;
         do {
@@ -43,17 +43,17 @@ public class Main2{
             switch (option) {
                 case 1: //Create/update/remove menu item
                     do {
-                        menuInterface.printOptionsMenuItems();
+                        menuUI.printOptionsMenuItems();
                         choice = GetInput.getIntFromRange(1, 4);
                         switch (choice) {
                             case 1:
-                                menuInterface.createNewMenuItemInterface();
+                                menuUI.createNewMenuItemUI();
                                 break;
                             case 2:
-                                menuInterface.updateMenuItemInterface();
+                                menuUI.updateMenuItemUI();
                                 break;
                             case 3:
-                                menuInterface.removeMenuItemInterface();
+                                menuUI.removeMenuItemUI();
                                 break;
                             case 4:
                                 System.out.println("Returning to the main menu...\n");
@@ -65,17 +65,17 @@ public class Main2{
                     break;
                 case 2: // Create/update/remove set packages
                     do {
-                        menuInterface.printOptionsSetPackages();
+                        menuUI.printOptionsSetPackages();
                         choice = GetInput.getIntFromRange(1, 4);
                         switch (choice) {
                             case 1:
-                                menuInterface.createSetPackageInterface();
+                                menuUI.createSetPackageUI();
                                 break;
                             case 2:
-                                menuInterface.updateSetPackageInterface();
+                                menuUI.updateSetPackageUI();
                                 break;
                             case 3:
-                                menuInterface.removeSetPackageInterface();
+                                menuUI.removeSetPackageUI();
                                 break;
                             case 4:
                                 break;
@@ -88,38 +88,38 @@ public class Main2{
                     restaurant.getMenu().printMenu();
                     break;
                 case 4:
-                    orderInterface.addItemsToOrder();
+                    orderUI.addItemsToOrder();
                     break;
                 case 5:
-                    orderInterface.checkTableOrder();
+                    orderUI.checkTableOrder();
                     break;
                 case 6:
-                    orderInterface.printAddRemove();
+                    orderUI.printAddRemove();
                     System.out.print("Enter your option: ");
                     choice = GetInput.getIntFromRange(1, 3);
                     switch (choice) {
                         case 1:
-                            orderInterface.addItemsToOrder(); //same as case 3
+                            orderUI.addItemsToOrder(); //same as case 3
                             break;
                         case 2:
-                            orderInterface.removeItemsFromOrder();
+                            orderUI.removeItemsFromOrder();
                             break;
                         case 3:
                             break;
                     }
                     break;
                 case 7:
-                    reservationInterface.createReservationBooking();
+                    reservationUI.createReservationBooking();
                     break;
                 case 8:
-                    reservationInterface.printCheckRemove();
+                    reservationUI.printCheckRemove();
                     choice = GetInput.getIntFromRange(1, 3);
                     switch (choice) {
                         case 1:
-                            reservationInterface.checkReservationBooking();
+                            reservationUI.checkReservationBooking();
                             break;
                         case 2:
-                            reservationInterface.removeReservationBooking();
+                            reservationUI.removeReservationBooking();
                             break;
                         case 3:
                             break;
@@ -129,26 +129,26 @@ public class Main2{
                     System.out.println("Do you have a reservation? Enter [y/n]");
                     char YN = GetInput.getChar();
                     if (YN=='y'||YN=='Y'){
-                        tableAvailabilityInterface.assignTable(true);
+                        tableAvailabilityUI.assignTable(true);
                     }
                     else if (YN=='n'||YN=='N'){
-                        tableAvailabilityInterface.assignTable();
+                        tableAvailabilityUI.assignTable();
                     }
                     else {
                         break;
                     }
                     break;
                 case 10:
-                    tableAvailabilityInterface.checkTableAvailability();
+                    tableAvailabilityUI.checkTableAvailability();
                     break;
                 case 11:
-                    membershipInterface.AddMember();
+                    membershipUI.AddMember();
                     break;
                 case 12:
-                    paymentInterface.makePaymentInterface();
+                    paymentUI.makePaymentUI();
                     break;
                 case 13:
-                    salesRevenueReportInterface.printSalesRevenueReport();
+                    salesRevenueReportUI.printSalesRevenueReport();
                     break;
                 case 14:
                     System.out.println("App terminating...");

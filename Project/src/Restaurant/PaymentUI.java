@@ -3,7 +3,7 @@ package Restaurant;
 import java.util.ArrayList;
 import java.util.function.DoubleToIntFunction;
 
-public class PaymentInterface {
+public class PaymentUI {
     private CashPayment payByCash = null;
     private Payment payment = null;
     private Restaurant r;
@@ -16,7 +16,7 @@ public class PaymentInterface {
      * @param m -> Membership which is inputted in main -> Gain access to members list to check for membership
      * @param transHistDayArrayList -> transHistDayArrayList which is inputted in main -> to push all order items into the transaction history list
      */
-    public PaymentInterface(Restaurant r, Membership m, ArrayList<TransHistDay> transHistDayArrayList) {
+    public PaymentUI(Restaurant r, Membership m, ArrayList<TransHistDay> transHistDayArrayList) {
         this.r = r;
         this.m = m;
         this.transHistDayArrayList = transHistDayArrayList;
@@ -183,7 +183,7 @@ public class PaymentInterface {
      * this function will continue with the rest of the payment functions
      * else, return to main function
      */
-    public void makePaymentInterface(){
+    public void makePaymentUI(){
         if(selectPaymentMethod() && selectTable()){
             showAmount();
             checkMembership();

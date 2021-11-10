@@ -3,10 +3,10 @@ package Restaurant;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class OrderInterfaceUI {
+public class OrderUI {
     private Menu menu;
     private Restaurant restaurant;
-    public OrderInterfaceUI(Menu menu,Restaurant restaurant){
+    public OrderUI(Menu menu, Restaurant restaurant){
         this.menu = menu;
         this.restaurant = restaurant;
     }

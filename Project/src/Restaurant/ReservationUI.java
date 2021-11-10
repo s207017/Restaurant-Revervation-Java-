@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ReservationInterface {
+public class ReservationUI {
     Restaurant r;
 
-    public ReservationInterface(Restaurant r) {
+    public ReservationUI(Restaurant r) {
         this.r = r;
     }
 
