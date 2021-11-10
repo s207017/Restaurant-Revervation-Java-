@@ -1,5 +1,7 @@
 package Restaurant;
 
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,70 +14,81 @@ public class MenuInterface {
     }
 
     public void createNewMenuItemInterface() throws IOException {
-        System.out.println("What is the type of the new menu item?");
-        printMenuTypes();
-        System.out.print("Your input: ");
-        int menuTypeInt = GetInput.getIntFromRange(1,4);
-        System.out.print("Enter the name of the new menu item: ");
-        String menuName = GetInput.getString();
-        System.out.print("Enter the price of the new menu item: ");
-        double price = GetInput.getDouble();
-        System.out.println("Enter the description of the new menu item in one line: ");
-        String desc = GetInput.getString();
-        menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
-        System.out.println("New item added to the menu!");
+        int menuTypeInt;
+        do{
+            System.out.println("What is the type of the new menu item?");
+            printMenuTypes();
+            System.out.print("Your input: ");
+            menuTypeInt = GetInput.getIntFromRange(1,4);
+            switch(menuTypeInt){
+                case 1:
+                    System.out.println();
+                    System.out.println("These are the existing MAIN COURSES");
+                    menu.printMainCourse();
+                    break;
+                case 2:
+                    System.out.println();
+                    System.out.println("These are the existing SIDES");
+                    menu.printSide();
+                    break;
+                case 3:
+                    System.out.println();
+                    System.out.println("These are the existing DRINKS");
+                    menu.printDrink();
+                    break;
+                case 4:
+                    System.out.println();
+                    System.out.println("These are the existing DESSERTS");
+                    menu.printDesert();
+                    break;
+                default:
+                    break;
+            }
+            System.out.print("Enter the name of the new menu item: ");
+            String menuName = GetInput.getString();
+            System.out.print("Enter the price of the new menu item: ");
+            double price = GetInput.getDouble();
+            System.out.println("Enter the description of the new menu item in one line: ");
+            String desc = GetInput.getString();
+            menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
+            System.out.println("New item added to the menu!");
+            switch(menuTypeInt){
+                case 1:
+                    System.out.println();
+                    System.out.println("These are the updated MAIN COURSES");
+                    menu.printMainCourse();
+                    break;
+                case 2:
+                    System.out.println();
+                    System.out.println("These are the updated SIDES");
+                    menu.printSide();
+                    break;
+                case 3:
+                    System.out.println();
+                    System.out.println("These are the updated DRINKS");
+                    menu.printDrink();
+                    break;
+                case 4:
+                    System.out.println();
+                    System.out.println("These are the updated DESSERTS");
+                    menu.printDesert();
+                    break;
+                default:
+                    break;
+            }
+
+            System.out.println();
+            System.out.println("1. Create another menu");
+            System.out.println("2. Return to the menu interface");
+            System.out.print("Your input");
+            menuTypeInt = GetInput.getIntFromRange(1,2);
+        } while (menuTypeInt == 1);
     }
 
     public void removeMenuItemInterface() throws IOException {
-        int ID;
-        printMenuTypes();
-        System.out.println("What type of menu item would you like to remove?");
-        System.out.print("Your input: ");
-        int menuType = GetInput.getIntFromRange(1,4);
-        switch(menuType){
-            case 1:
-                menu.printMainCourse();
-                break;
-            case 2:
-                menu.printSide();
-                break;
-            case 3:
-                menu.printDrink();
-                break;
-            case 4:
-                menu.printDesert();
-                break;
-            case -1:
-                break;
-            default:
-                System.out.println("Please enter values 1-4, enter -1 to exit.");
-        }
-        System.out.print("What is the menu item ID you would like to delete?");
-        //print ____ menu so that user can select more accurately
-        do {
-            ID = GetInput.getInt(); //needs more error checking that ID is of the correct menu item type
-        }while(menu.IDExists(ID));
-        menu.removeMenuItem(menuType, ID);
-        System.out.println("Updated ____ menu: "); //can try to fill in with the menu item type
-        switch(menuType){
-            case 1:
-                menu.printMainCourse();
-                break;
-            case 2:
-                menu.printSide();
-                break;
-            case 3:
-                menu.printDrink();
-                break;
-            case 4:
-                menu.printDesert();
-                break;
-            case -1:
-                break;
-            default:
-                System.out.println("Please enter values 1-4, enter -1 to exit.");
-        }
-        System.out.println("REMOVE MENU ITEM END");
+        do{
+            
+        } while ();
     }
 
     public void updateMenuItemInterface() throws IOException {
@@ -98,25 +111,25 @@ public class MenuInterface {
     }
 
     public void printChangeTypes(){
-        System.out.println("|        1. Price        |");
-        System.out.println("|        2. Name         |");
-        System.out.println("|     3. Description     |");
-        System.out.println("|        4. Quit         |");
+        System.out.println("|         1. Price           |");
+        System.out.println("|         2. Name            |");
+        System.out.println("|         3. Description     |");
+        System.out.println("|         4. Quit            |");
     }
 
     public void printMenuTypes(){
-        System.out.println("|     1. Main Course      |");
-        System.out.println("|        2. Sides         |");
-        System.out.println("|        3. Drinks        |");
-        System.out.println("|       4. Desserts       |");
+        System.out.println("|      1. Main Course      |");
+        System.out.println("|      2. Sides            |");
+        System.out.println("|      3. Drinks           |");
+        System.out.println("|      4. Desserts         |");
     }
 
     public void printOptionsMenuItems(){
         System.out.println("What would you like to do? ");
-        System.out.println("|        1. Create menu item        |");
-        System.out.println("|        2. Update menu item        |");
-        System.out.println("|        3. Remove menu item        |");
-        System.out.println("|     4. Return to the main menu    |");
+        System.out.println("|        1. Create menu item           |");
+        System.out.println("|        2. Update menu item           |");
+        System.out.println("|        3. Remove menu item           |");
+        System.out.println("|        4. Return to the main menu    |");
         System.out.print("Your option: ");
     }
 
