@@ -97,10 +97,10 @@ public class ReservationInterface {
 
 
             System.out.print("Please input telephone number for the booking: ");
-            String tel = GetInput.getString();
-            while (tel.length() != 8) {
+            int tel = GetInput.getIntFromRange(7999999,100000001);
+            while (String.valueOf(tel).length() != 8) {
                 System.out.println("Please input valid length of phone number.");
-                tel = GetInput.getString();
+                tel = GetInput.getIntFromRange(7999999,100000001);
             }
 
             System.out.print("Please input the number of guests who will be dining: ");
@@ -125,6 +125,7 @@ public class ReservationInterface {
                 System.out.println("Reservation success!");
                 System.out.println(t.getReservations().get(reservationDateTime).toString());
                 System.out.println("-".repeat(100));
+                System.out.println();
                 TimeUnit.SECONDS.sleep(3);
                 break;
             }
@@ -193,23 +194,19 @@ public class ReservationInterface {
     public void removeReservationBooking() {
         LocalDateTime checkReservationDateTime = getCheckingPossibleReservationDateTimes();
         System.out.println("Please enter the phone number of person who booked the table: ");
-        String tel = GetInput.getString();
-        while (tel.length() != 8) {
+        int tel = GetInput.getIntFromRange(7999999,100000001);
+        while (String.valueOf(tel).length() != 8) {
             System.out.println("Please input valid length of phone number.");
-            tel = GetInput.getString();
+            tel = GetInput.getIntFromRange(7999999,100000001);
         }
         for (Table t : r.getTableList()) {
-            if (t.getReservations().containsKey(checkReservationDateTime) &&
-                    t.getReservations().get(checkReservationDateTime).getTel().equals(tel)) {
-
-            }
             Iterator<Map.Entry<LocalDateTime, Reservation>>
                     iterator = t.getReservations().entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry<LocalDateTime, Reservation> entry = iterator.next();
 
                 if (checkReservationDateTime == entry.getKey() &&
-                        entry.getValue().getTel().equals(tel)) {
+                        entry.getValue().getTel()==(tel)) {
                     iterator.remove();
                     System.out.printf("Reservation was in Table %d and it was successfully removed.\n", t.getTableNum());
                     System.out.printf("Remaining reservations for Table %d are:\n", t.getTableNum());
