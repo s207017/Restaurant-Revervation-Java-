@@ -18,7 +18,7 @@ public class OrderInterfaceUI {
 
     public void addItemsToOrder(){
         int TableNum;
-        System.out.print("Enter table number: ");
+        System.out.printf("Enter table number (Tables 1 - %d)(%d to exit): ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
         do{
             TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+1);
             if(TableNum == restaurant.getTableList().size()+1){

@@ -27,6 +27,10 @@ public class SalesRevenueReportInterface {
      * method to be called in the main app for generating sales revenue reports
      */
     public void printSalesRevenueReport(){
+        if(restaurant.getTransactionHistory().isEmpty()){
+            System.out.println("No sales records found");
+            return;
+        }
         int choice;
         System.out.println("Select the type of report you wish to view:");
         do{
