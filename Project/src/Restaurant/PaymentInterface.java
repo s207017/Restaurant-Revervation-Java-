@@ -139,10 +139,10 @@ public class PaymentInterface {
     public void makePayment() {
         char selection;
         System.out.println();
-        System.out.println("Payment received? Y/N ");
+        System.out.print("Payment received? Y/N: ");
         selection = GetInput.getChar();
         while (selection != 'y' && selection != 'Y') {
-            System.out.println("Payment not yet received.\nPayment received? Y/N ");
+            System.out.print("Payment not yet received.\nPayment received? Y/N: ");
             selection = GetInput.getChar();
             if (selection == 'n' || selection == 'n') {
                 System.out.println("PAYMENT FAILED");
