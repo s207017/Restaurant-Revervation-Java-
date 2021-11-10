@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class ReservationInterface {
     Restaurant r;
@@ -45,7 +47,7 @@ public class ReservationInterface {
             System.out.print("Please enter an hour within opening hours: ");
             hourInt = GetInput.getInt();
         }
-        String temp = string_date + "T0" + hourInt + ":00:00";
+        String temp = string_date + "T" + hourInt + ":00:00";
         return LocalDateTime.parse(temp);
     }
 
@@ -80,21 +82,21 @@ public class ReservationInterface {
                 hourInt = GetInput.getInt();
             }
         }
-        String temp = string_date + "T0" + hourInt + ":00:00";
+        String temp = string_date + "T" + hourInt + ":00:00";
         return LocalDateTime.parse(temp);
     }
 
 
-    public void createReservationBooking() {
+    public void createReservationBooking() throws InterruptedException {
         String findReservation = "1";
-        while (findReservation == "1") {
+        while (Objects.equals(findReservation, "1")) {
             LocalDateTime reservationDateTime = getPossibleReservationDateTimes();
 
-            System.out.print("Please input your name for the booking: ");
+            System.out.print("Please input name for the booking: ");
             String name = GetInput.getString();
 
 
-            System.out.print("Please input your telephone number for the booking: ");
+            System.out.print("Please input telephone number for the booking: ");
             String tel = GetInput.getString();
             while (tel.length() != 8) {
                 System.out.println("Please input valid length of phone number.");
@@ -108,6 +110,7 @@ public class ReservationInterface {
                 pax = GetInput.getInt();
             }
 
+
             int tableNum = r.reserveTable(reservationDateTime, pax, name, tel);
             if (tableNum == -1) {
                 System.out.println("All the tables are occupied.");
@@ -115,7 +118,18 @@ public class ReservationInterface {
                 System.out.print("[1] Try for another timing.\n[Any other key] Quit.\n");
                 findReservation = GetInput.getString();
             }
+            else {
+                Table t = r.getTableFromTableNum(tableNum);
+                System.out.println();
+                System.out.println("-".repeat(100));
+                System.out.println("Reservation success!");
+                System.out.println(t.getReservations().get(reservationDateTime).toString());
+                System.out.println("-".repeat(100));
+                TimeUnit.SECONDS.sleep(3);
+                break;
+            }
         }
+        return;
     }
 
 
