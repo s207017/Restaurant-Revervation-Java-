@@ -52,12 +52,13 @@ public class PaymentInterface {
                 return;
             default:
                 System.out.println("Please enter a valid selection\n\n*ENTER -1 TO TERMINATE*\\nPayment by\\n1. Cash\\n2. Others\\nInput: \"");
+                choice = GetInput.getInt();
         }
     }
 
     public void selectTable() {
         int choice;
-        System.out.println(r.toString());
+        System.out.println(r);
         System.out.print("*ENTER -1 WHEN DONE*\nSelect table number(s) for payment: ");
         choice = GetInput.getInt();
         while (choice != -1) {

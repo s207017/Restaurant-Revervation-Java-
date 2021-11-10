@@ -1,9 +1,9 @@
 package Restaurant;
 
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 public class MenuInterface {
@@ -13,7 +13,7 @@ public class MenuInterface {
         this.menu = menu;
     }
 
-    public void createNewMenuItemInterface() throws IOException {
+    public void createNewMenuItemInterface() throws IOException, InterruptedException {
         int menuTypeInt, end;
         do{
             System.out.println("What is the type of the new menu item?");
@@ -30,19 +30,23 @@ public class MenuInterface {
             menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
             System.out.println("New item added to the menu!");
             printUpdatedMenu(menuTypeInt);
+            TimeUnit.SECONDS.sleep(2);
+
 
             System.out.println();
+            System.out.println("What would you like to do next?");
             System.out.println("1. Create another menu");
             System.out.println("2. Return to the menu interface");
             System.out.print("Your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2){
                 System.out.println("----------CREATE MENU ITEM END----------");
+                System.out.println("");
             }
-        } while (menuTypeInt == 1);
+        } while (end == 1);
     }
 
-    public void removeMenuItemInterface() throws IOException {
+    public void removeMenuItemInterface() throws IOException, InterruptedException {
         int ID, end, menuTypeInt;
         do{
             printMenuTypes();
@@ -50,48 +54,100 @@ public class MenuInterface {
             System.out.print("Your input: ");
             menuTypeInt = GetInput.getIntFromRange(1,4);
             printExistingMenu(menuTypeInt);
-            System.out.print("What is the menu item ID you would like to delete?");
+            System.out.println("What is the menu item ID you would like to delete?");
+            System.out.print("Your input: ");
             do {
-                ID = GetInput.getInt(); //needs more error checking that ID is of the correct menu item type
-            }while(menu.IDExists(ID));
+                ID = GetInput.getInt();
+                if(!menu.IDExists(ID)){
+                    System.out.println("Menu ID does not exist. Please enter a valid menu ID!");
+                } else {
+                    System.out.println("Menu ID found... removing..");
+                }
+            } while(!menu.IDExists(ID));
             menu.removeMenuItem(menuTypeInt, ID);
             System.out.println("Item removed!");
             printUpdatedMenu(menuTypeInt);
+            TimeUnit.SECONDS.sleep(2);
+
             System.out.println();
+            System.out.println("What would you like to do next?");
             System.out.println("1. Remove another menu");
             System.out.println("2. Return to the menu interface");
             System.out.print("Your input: ");
             end = GetInput.getIntFromRange(1,2);
             if (end == 2) {
                 System.out.println("----------REMOVE MENU ITEM END----------");
+                System.out.println();
             }
         } while (end != 2);
     }
 
-    public void updateMenuItemInterface() throws IOException {
-        int ID, changeOption;
-        menu.printMenu();
-        System.out.print("Enter the menu ID which you want to modify: ");
-        ID = GetInput.getInt();
-        while (!menu.IDExists(ID)){
-            System.out.print("Menu ID does not exist, please enter a valid ID: ");
-            ID = GetInput.getInt();
-        }
+    public void updateMenuItemInterface() throws IOException, InterruptedException {
+        int ID, end, menuTypeInt, changeOption, changeCount = 0;
         do{
-            System.out.println("What do you want to change?");
-            this.printChangeTypes();
-            System.out.print("Enter your option: ");
-            changeOption = GetInput.getIntFromRange(1,4);
-            menu.updateMenuItem(ID, changeOption);
-        }while(changeOption != 4);
-        System.out.println("UPDATE MENU ITEM END");
+            printMenuTypes();
+            System.out.println("What type of menu item would you like to update?");
+            System.out.print("Your input: ");
+            menuTypeInt = GetInput.getIntFromRange(1,4);
+            printExistingMenu(menuTypeInt);
+            System.out.println("What is the menu item ID you would like to update?");
+            System.out.print("Your input: ");
+            do {
+                ID = GetInput.getInt();
+                if(!menu.IDExists(ID)){
+                    System.out.println("Menu ID does not exist. Please enter a valid menu ID!");
+                } else {
+                    System.out.println("Menu ID found... LOADING..");
+                }
+            } while(!menu.IDExists(ID));
+            do{
+                System.out.println("What do you want to change?");
+                this.printChangeTypes();
+                System.out.print("Enter your option: ");
+                changeOption = GetInput.getIntFromRange(1,4);
+                if (menu.updateMenuItem(ID, changeOption, true)){
+                    changeCount++;
+                }
+            }while(changeOption != 4);
+            if (changeCount != 0) {
+                System.out.println("Item updated!");
+                printUpdatedMenu(menuTypeInt);
+                TimeUnit.SECONDS.sleep(2);
+            }
+
+            System.out.println();
+            System.out.println("1. Update another menu");
+            System.out.println("2. Return to the menu interface");
+            System.out.print("Your input: ");
+            end = GetInput.getIntFromRange(1,2);
+            if (end == 2) {
+                System.out.println("----------UPDATE MENU ITEM END----------");
+                System.out.println();
+            }
+        } while (end != 2);
+//        int ID, changeOption;
+//        menu.printMenu();
+//        System.out.print("Enter the menu ID which you want to modify: ");
+//        ID = GetInput.getInt();
+//        while (!menu.IDExists(ID)){
+//            System.out.print("Menu ID does not exist, please enter a valid ID: ");
+//            ID = GetInput.getInt();
+//        }
+//        do{
+//            System.out.println("What do you want to change?");
+//            this.printChangeTypes();
+//            System.out.print("Enter your option: ");
+//            changeOption = GetInput.getIntFromRange(1,4);
+//            menu.updateMenuItem(ID, changeOption);
+//        }while(changeOption != 4);
+//        System.out.println("UPDATE MENU ITEM END");
     }
 
     public void printChangeTypes(){
-        System.out.println("|         1. Price           |");
-        System.out.println("|         2. Name            |");
-        System.out.println("|         3. Description     |");
-        System.out.println("|         4. Quit            |");
+        System.out.println("1. Price ");
+        System.out.println("2. Name         ");
+        System.out.println("3. Description   ");
+        System.out.println("4. Return ");
     }
 
     public void printMenuTypes(){

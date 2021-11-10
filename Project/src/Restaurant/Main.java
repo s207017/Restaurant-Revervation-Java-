@@ -14,7 +14,7 @@ public class Main{
 
 
     // made public class not static bc there was static error
-    public static void main(String[] arg) throws IOException {
+    public static void main(String[] arg) throws IOException, InterruptedException {
 
         Restaurant restaurant = new Restaurant();
         MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
