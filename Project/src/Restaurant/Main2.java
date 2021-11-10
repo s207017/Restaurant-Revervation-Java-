@@ -3,7 +3,7 @@ package Restaurant;
 import java.io.IOException;
 
 public class Main2{
-    public static void main(String[] arg) throws IOException {
+    public static void main(String[] arg) throws IOException, InterruptedException {
         Restaurant restaurant = new Restaurant();
         MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
         ReservationInterface reservationInterface = new ReservationInterface(restaurant);
@@ -97,18 +97,7 @@ public class Main2{
                     }
                     break;
                 case 6:
-                    System.out.println("(1) Create new reservation");
-                    System.out.println("(2) Return to the main menu");
-                    choice = GetInput.getIntFromRange(1, 2);
-                    switch (choice) {
-                        case 1:
-                            reservationInterface.checkReservationBooking();
-                            break;
-                        case 2:
-                            printAppOptions();
-                            option = getNextOption();
-                            break;
-                    }
+                    reservationInterface.createReservationBooking();
                     break;
                 case 7:
                     reservationInterface.printCheckRemove();

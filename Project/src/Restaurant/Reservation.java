@@ -27,6 +27,6 @@ public class Reservation {
 
     //when you call reservation.toString() --> prints the information
     public String toString() {
-        return String.format("%d persons at name: %s, telephone: %s", pax, name, tel);
+        return String.format("%d persons for %s, telephone: %s", pax, name, tel);
     }
 }
