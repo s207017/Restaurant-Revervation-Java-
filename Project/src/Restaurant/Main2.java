@@ -117,7 +117,17 @@ public class Main2{
                     }
                     break;
                 case 8:
-                    tableAvailabilityInterface.assignTable();
+                    System.out.println("Do you have a reservation? Enter [y/n]");
+                    char YN = GetInput.getChar();
+                    if (YN=='y'||YN=='Y'){
+                        tableAvailabilityInterface.assignTable(true);
+                    }
+                    else if (YN=='n'||YN=='N'){
+                        tableAvailabilityInterface.assignTable();
+                    }
+                    else {
+                        break;
+                    }
                     break;
                 case 9:
                     tableAvailabilityInterface.checkTableAvailability();

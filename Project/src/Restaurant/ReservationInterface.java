@@ -28,7 +28,7 @@ public class ReservationInterface {
         System.out.println("Enter your choice for reservation date: ");
         for (int i = 0; i < 7; i++) {
             incrDate = incrDate.plusDays(1);
-            System.out.println((i + 1) + ". " + incrDate);
+            System.out.println((i + 1) + ". " + incrDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
         int dateOption = GetInput.getInt();
         while (dateOption <= 0 || dateOption > 7) {
@@ -53,7 +53,7 @@ public class ReservationInterface {
         LocalDate incrDate = nowDate;
         System.out.println("Please choose the reservation date: ");
         for (int i = 0; i < 8; i++) {
-            System.out.println((i + 1) + ". " + incrDate);
+            System.out.println((i + 1) + ". " + incrDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             incrDate = incrDate.plusDays(1);
         }
         int dateOption = GetInput.getInt();
@@ -120,15 +120,44 @@ public class ReservationInterface {
 
 
     public void checkReservationBooking() {
+        //this is the check to ensure there are any reservations to begin with
+        int count=0;
+        for (Table t: r.getTableList()){
+            if (t.getReservations().isEmpty()){
+                count++;
+            }
+        }
+        if (count==r.getTableList().size()){
+            System.out.println("No current reservations exist.");
+            return;
+        }
+
         System.out.println("Would you like to:");
-        System.out.println("1. Check all reservations of a specific table.");
-        System.out.println("2. Check reservations at a particular time.");
-        System.out.println("3. Check reservations for a particular day.");
-        System.out.println("4. Check all reservations now.");
+        System.out.println("1. Check specific reservation.");
+        System.out.println("2. Check all reservations of a specific table.");
+        System.out.println("3. Check reservations at a particular time.");
+        System.out.println("4. Check reservations for a particular day.");
+        System.out.println("5. Check all reservations now.");
         System.out.println("Any other number: Quit");
         int choice = GetInput.getInt();
         switch (choice) {
-            case 1: {
+            case 1:{
+                LocalDateTime dateTimeToCheck = getCheckingPossibleReservationDateTimes();
+                System.out.println("Please enter the phone number used to make reservation: ");
+                int tel = GetInput.getIntFromRange(80000000,99999999);
+                Table t = r.getTableFromReservationHashMap(dateTimeToCheck, tel);
+                if (t==null){
+                    System.out.println("Reservation does not exist/has expired.");
+                }
+                else{
+                    System.out.println("Reservation found!");
+                    System.out.println("Reservation at: "+ dateTimeToCheck.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+                    System.out.println(t.getReservations().get(dateTimeToCheck));
+                }
+
+                break;
+            }
+            case 2: {
                 System.out.println("Enter a table number from below list: ");
                 for (Table t : r.getTableList()) {
                     System.out.printf("Table Number: %d\n", t.getTableNum());
@@ -143,10 +172,10 @@ public class ReservationInterface {
                 System.out.println(table.toString());
                 break;
             }
-            case 2: {
+            case 3: {
                 LocalDateTime checkReservationDateTime = getCheckingPossibleReservationDateTimes();
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
                 String formatDateTime = checkReservationDateTime.format(formatter);
                 System.out.printf("At %s: \n\n", formatDateTime);
                 for (Table t : r.getTableList()) {
@@ -156,7 +185,7 @@ public class ReservationInterface {
                 }
                 break;
             }
-            case 3:{
+            case 4:{
                 LocalDate nowDate = LocalDate.now();
                 LocalDate incrDate = nowDate;
                 System.out.println("Please choose the reservation date: ");
@@ -175,7 +204,7 @@ public class ReservationInterface {
                 System.out.println("Chosen reservation date: " + nowDate);
                 String temp, string_date = nowDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 LocalDateTime checkingDateTime;
-                int count=0;
+                count=0;
                 int hourInt;
                 for (hourInt=11;hourInt<=22;hourInt++){
                     temp = string_date + "T" + hourInt + ":00:00";
@@ -190,13 +219,13 @@ public class ReservationInterface {
                             count++;
                         }
                     }
-                    if (count==12){
+                    if (count==r.getTableList().size()){
                         System.out.println("There are no reservations");
                     }
                 }
                 break;
             }
-            case 4: {
+            case 5: {
                 String string_date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 String string_hour = String.valueOf(LocalDateTime.now().getHour());
                 String temp = string_date + "T" + string_hour + ":00:00";
@@ -221,26 +250,32 @@ public class ReservationInterface {
     }
 
     public void removeReservationBooking() {
+        //this is the check to ensure there are any reservations to begin with
+        int count=0;
+        for (Table t: r.getTableList()){
+            if (t.getReservations().isEmpty()){
+                count++;
+            }
+        }
+        if (count==r.getTableList().size()){
+            System.out.println("No current reservations exist.");
+            return;
+        }
         LocalDateTime checkReservationDateTime = getCheckingPossibleReservationDateTimes();
         System.out.println("Please enter the phone number of person who booked the table: ");
         int tel = GetInput.getIntFromRange(80000000,99999999);
 
-        for (Table t : r.getTableList()) {
-            Iterator<Map.Entry<LocalDateTime, Reservation>>
-                    iterator = t.getReservations().entrySet().iterator();
-            while (iterator.hasNext()) {
-                Map.Entry<LocalDateTime, Reservation> entry = iterator.next();
+        Table removeReservationTable = r.removeReservation(checkReservationDateTime, tel);
 
-                if (checkReservationDateTime.isEqual(entry.getKey()) &&
-                        entry.getValue().getTel()==(tel)) {
-                    iterator.remove();
-                    System.out.printf("Reservation was in Table %d and it was successfully removed.\n", t.getTableNum());
-                    System.out.printf("Remaining reservations for Table %d are:\n", t.getTableNum());
-                    System.out.println(t.toString());
-                    return;
-                }
-            }
-
+        if (removeReservationTable==null){
+            System.out.println("The reservation does not exist.");
+            return;
+        }
+        else {
+            System.out.printf("Reservation was in Table %d and it was successfully removed.\n", removeReservationTable.getTableNum());
+            System.out.printf("Remaining reservations for Table %d are:\n",removeReservationTable.getTableNum());
+            System.out.println(removeReservationTable.toString());
+            return;
         }
     }
 }
