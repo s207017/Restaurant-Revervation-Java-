@@ -98,22 +98,7 @@ public class Main2{
                     }
                     break;
                 case 6:
-<<<<<<< HEAD
                     reservationInterface.createReservationBooking();
-=======
-                    System.out.println("(1) Create new reservation");
-                    System.out.println("(2) Return to the main menu");
-                    choice = GetInput.getIntFromRange(1, 2);
-                    switch (choice) {
-                        case 1:
-                            reservationInterface.checkReservationBooking();
-                            break;
-                        case 2:
-                            printAppOptions();
-
-                            break;
-                    }
->>>>>>> main
                     break;
                 case 7:
                     reservationInterface.printCheckRemove();
