@@ -61,8 +61,8 @@ public class SalesRevenueReport {
         double tempSum;
         double fullSum = 0;
         switch(choice) {
-            case 1:
-                System.out.printf("Summary of sales between %s and %s: \n", startDate);
+            case 1://FOR PERIOD REPORT
+                System.out.printf("Summary of sales between %s and %s: \n", startDate,endDate);
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
@@ -71,8 +71,8 @@ public class SalesRevenueReport {
                 }
                 System.out.printf("Total revenue: %f\n", fullSum);
                 break;
-            case 2:
-                System.out.printf("Summary of sales on %s: \n", startDate, endDate);
+            case 2:// FOR  DAY REPORT
+                System.out.printf("Summary of sales on %s: \n", startDate);
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
