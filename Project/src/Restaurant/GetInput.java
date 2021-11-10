@@ -72,6 +72,25 @@ public class GetInput {
         return inputD;
     }
 
+    public static double getDoubleFromRange(double min, double max){
+        boolean isValid = false;
+        while(!isValid) {
+            try {
+                inputD = sc.nextDouble();
+                if(inputD >= min && inputD <= max) {
+                    isValid = true;
+                }else {
+                    System.out.printf("Input should be between %.2f and %.2f (inclusive)\n", min, max);
+                    System.out.print("Your input: ");
+                }
+            } catch (InputMismatchException e) {
+                System.out.print("Please enter a valid double input: ");
+                sc.next();
+            }
+        }
+        return inputD;
+    }
+
     public static char getChar(){
         boolean isValid = false;
         while(!isValid) {
