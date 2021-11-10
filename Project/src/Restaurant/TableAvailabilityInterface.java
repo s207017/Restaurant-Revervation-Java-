@@ -40,7 +40,7 @@ public class TableAvailabilityInterface {
                 for (int i = 0; i < r.getAvailableTables(pax, localDateTime).size(); i++) {
                     tableNum = r.getAvailableTables(pax, localDateTime).get(i).getTableNum();
                     availableTableNumbers.add(tableNum);
-                    System.out.print(tableNum + "||");
+                    System.out.print("Table " + tableNum + "||");
                 }
                 System.out.println();
             }
