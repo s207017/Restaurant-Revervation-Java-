@@ -218,7 +218,6 @@ public class Menu {
 
     //for Order
     public MenuItem getMenuItemFromID(int ID){
-        System.out.println("Entered function");
         if (100<ID && ID<=100+ mainCourseItems.size()){
             for (MenuItem m: mainCourseItems){
                 if (m.getItemID()==ID){
@@ -228,9 +227,7 @@ public class Menu {
         }
         else if (200<ID && ID<=200+sideItems.size()){
             for (MenuItem m: sideItems){
-                System.out.print(m.getItemID());
                 if (m.getItemID()==ID){
-                    System.out.println("foundsideitem " +ID);
                     return m; //returns menuitem of side dish
                 }
             }
@@ -413,7 +410,7 @@ public class Menu {
         updateMenuToFile(dessertItems,"dessertitems");
     }
 
-    public boolean updateMenuItem(int ID, int changeOption, boolean counts) throws IOException {
+    public boolean updateMenuItembool(int ID, int changeOption, boolean counts) throws IOException {
         boolean updated = false;
         Scanner sc = new Scanner(System.in);
         changeOption = sc.nextInt();

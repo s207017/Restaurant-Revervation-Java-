@@ -58,23 +58,25 @@ public class Main2{
                     } while (choice != 4);
                     break;
                 case 2: // Create/update/remove set packages
-                    menuInterface.printOptionsSetPackages();
-                    choice = GetInput.getIntFromRange(1, 4);
-                    switch (choice) {
-                        case 1:
-                            menuInterface.createSetPackageInterface();
-                            break;
-                        case 2:
-                            menuInterface.updateSetPackageInterface();
-                            break;
-                        case 3:
-                            menuInterface.removeSetPackageInterface();
-                            break;
-                        case 4:
-                            break;
-                        default:
-                            break;
-                    }
+                    do {
+                        menuInterface.printOptionsSetPackages();
+                        choice = GetInput.getIntFromRange(1, 4);
+                        switch (choice) {
+                            case 1:
+                                menuInterface.createSetPackageInterface();
+                                break;
+                            case 2:
+                                menuInterface.updateSetPackageInterface();
+                                break;
+                            case 3:
+                                menuInterface.removeSetPackageInterface();
+                                break;
+                            case 4:
+                                break;
+                            default:
+                                break;
+                        }
+                    } while (choice != 4);
                     break;
                 case 3:
                     orderInterface.addItemsToOrder();
