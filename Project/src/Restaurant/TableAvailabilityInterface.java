@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class TableAvailabilityInterface {
     private Restaurant r;
-    Scanner sc = new Scanner(System.in);
     public TableAvailabilityInterface(Restaurant r){
         this.r = r;
     }
@@ -15,8 +14,8 @@ public class TableAvailabilityInterface {
     }
     public int askForPax(){
         int pax;
-        System.out.print("Enter the number of pax: "); //needs error handling
-        pax = sc.nextInt();
+        System.out.print("Enter the number of pax: ");
+        pax = GetInput.getIntFromRange(1,10);
         return pax;
     }
 
@@ -28,35 +27,37 @@ public class TableAvailabilityInterface {
         int pax = askForPax(), tableNum, newTableNum;
         boolean notIn = true;
         ArrayList<Integer> availableTableNumbers = new ArrayList<Integer>();
-        System.out.println("You are now assigning a table to customer(s)");
+        System.out.println("Checking for available seat(s)...");
         if (r.getAvailableTables(pax, localDateTime).size() == 0){
-            System.out.println("All tables are occupied or reserved");
+            System.out.println("Currently no table available for " + pax + ". Please ask customer to wait.");
             return;
         } else {
             System.out.println("The available table numbers are: ");
+            System.out.print("||");
             for (int i = 0; i < r.getAvailableTables(pax, localDateTime).size(); i++){
                 tableNum = r.getAvailableTables(pax, localDateTime).get(i).getTableNum();
                 availableTableNumbers.add(tableNum);
                 System.out.print(tableNum + "||");
             }
+            System.out.println();
+        }
+        if (availableTableNumbers.isEmpty()){
+            System.out.print("Currently no table available for " + pax + ". Please ask customer to wait.");
+            return;
         }
         while (notIn){
             System.out.print("Enter the table number to assign the customer: ");
-            newTableNum = sc.nextInt(); //needs error handling
+            newTableNum = GetInput.getIntFromRange(1,r.getTableList().size());
             if (availableTableNumbers.contains(newTableNum)){
                 r.getTableFromTableNum(newTableNum).occupyTable(pax);
-                System.out.println("Table assigned! Bring the customers to the table");
+                System.out.println("Table assigned! Bring the customers to the table " + newTableNum+ ".");
                 notIn = false;
             } else {
-                System.out.println("Table unavailable! Please enter a new table number");
+                System.out.println("Please enter a valid table number");
             }
         }
     }
     public void assignReservedTable(){
-
-
-
-
 
     }
 }
