@@ -21,11 +21,13 @@ public class TableAvailabilityInterface {
     //print statement asking them if they got reserve
     // if yes then call assignTable(true)
 
-    public void assignTable(){
+    public void assignTable(int pax){
         ArrayList<Table> availableTables;
-
         LocalDateTime localDateTime = LocalDateTime.now();
-        int pax = askForPax();
+
+        if (pax==0){
+            pax = askForPax();
+        }
         System.out.println("Checking for an available table...");
 
         //determines if the arraylist of available tables is empty or not
@@ -106,13 +108,13 @@ public class TableAvailabilityInterface {
 
             System.out.print("Reservation expired/does not exist. Process table assignment as per normal");
             r.removeReservation(reservationKeyDateTime, tel);
-            assignTable();
+            assignTable(0);
         }
         else {
             Table t = r.getTableFromReservationHashMap(reservationKeyDateTime, tel);
             if (t==null){
                 System.out.print("Reservation does not exist. Process table assignment as per normal");
-                assignTable();
+                assignTable(0);
                 return;
             }
             else{
@@ -121,7 +123,7 @@ public class TableAvailabilityInterface {
                     int pax = t.getReservations().get(reservationKeyDateTime).getPax();
                     System.out.println("Customers a bit too early! Checking tables as per normal now.");
                     assignTable(pax);
-                    System.out.printf("Sorry! Please wait until %d for your table. Currently all tables are occupied.\n", bookingHour);
+                    System.out.printf("Sorry! Please wait until time: %d for your table. Currently all tables are occupied.\n", bookingHour);
                     return;
                 }
                 else {
@@ -139,52 +141,6 @@ public class TableAvailabilityInterface {
 
         }
 
-    }
-
-    public void assignTable(int pax){
-        ArrayList<Table> availableTables;
-
-        LocalDateTime localDateTime = LocalDateTime.now();
-        //int pax = askForPax(), tableNum, newTableNum;
-        System.out.println("Checking for an available table...");
-
-        //determines if the arraylist of available tables is empty or not
-        if (r.getAvailableTables(pax, localDateTime).size() == 0) {
-            System.out.println("Currently no table available for " + pax + ". Please ask customer to wait.");
-            return;
-        } else {
-            //prints available tables
-            System.out.println("The available table numbers are: ");
-            System.out.print("||");
-            availableTables = r.getAvailableTables(pax, localDateTime);
-            for (Table t: availableTables){
-                System.out.print("Table " + t.getTableNum() + "||");
-            }
-            System.out.println();
-
-            //asks waiter to choose table from printed list of tables
-            System.out.print("Enter the table number to assign the customer: ");
-            int newTableNum = GetInput.getInt();
-            int i;
-            boolean valid = false;
-            //checks if the table number inputted exists in the avialabletables array
-            while (!valid) {
-                for (i = 0; i < availableTables.size(); i++) {
-                    if (availableTables.get(i).getTableNum() == newTableNum) {
-                        valid = true;
-                        break;
-                    }
-                }
-                if (!valid) {
-                    System.out.print("Please enter a valid available table number: ");
-                    newTableNum = GetInput.getInt();
-                }
-            }
-
-            r.getTableFromTableNum(newTableNum).occupyTable(pax);
-
-            System.out.println("Table assigned! Bring the customers to table " + newTableNum + ".");
-        }
     }
 
     /**

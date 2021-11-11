@@ -52,17 +52,13 @@ public class Table {
     /**
      * remove reservations if reservation+15min grace period is still less than current time
      * this ensures that the reservations in Reservations are beyond current time - 15min grace period only
-     * @param currentDateTime gets currentDateTime from interface
      */
-    void updateReservationsHashMap(LocalDateTime currentDateTime) {
+    void updateReservationsAccordingToCurrentTime() {
         Iterator<Map.Entry<LocalDateTime, Reservation>>
                 iterator = reservations.entrySet().iterator();
 
-        //gets purely the current date without the time
-        String string_current_date = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        DateTimeFormatter date_formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate current_date = LocalDate.parse(string_current_date, date_formatter);
-
+        //gets purely the current datetime
+        LocalDateTime currentDateTime = LocalDateTime.now();
 
         // Iterate over the HashMap
         while (iterator.hasNext()) {
@@ -75,6 +71,11 @@ public class Table {
         }
     }
 
+    /**
+     * deleted reservations when the dateTime and telephone number is inserted
+     * @param dateTime gets the dateTime input
+     * @param tel gets the telephone number used to make the reservation
+     */
     public void deleteReservationFromHashMap(LocalDateTime dateTime, int tel){
         Iterator<Map.Entry<LocalDateTime, Reservation>>
                 iterator = reservations.entrySet().iterator();
@@ -90,26 +91,26 @@ public class Table {
 
     /**
      * updates level to either free or reserved, exits if occupied
-     * @param currentDateTime gets currentDateTime from main()
      */
-    void updateLevel(LocalDateTime currentDateTime){
+    void updateTableStatus(){
         //if occupied, exit this
         if (this.tableStatus==Level.OCCUPIED){
             return;
         }
 
         //gets purely the current date without the time
-        String string_current_date = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        DateTimeFormatter date_formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate current_date = LocalDate.parse(string_current_date, date_formatter);
+        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDateTime = LocalDateTime.now();
 
         //for loop that goes through the reservations
         for(Map.Entry<LocalDateTime, Reservation> entry : reservations.entrySet()) {
-            LocalDateTime dateTimeOfReservation = entry.getKey();
-            String string_reserved_date = dateTimeOfReservation.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            LocalDate reserved_date = LocalDate.parse(string_reserved_date, date_formatter);
 
-            if (reserved_date.isEqual(current_date)){
+            //gets just the date from the stored dateTime
+            LocalDateTime dateTimeOfReservation = entry.getKey();
+            String stringReservedDate = dateTimeOfReservation.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate reservedDate = LocalDate.parse(stringReservedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+            if (reservedDate.isEqual(currentDate)){
                 //same date, same hour
                 if (currentDateTime.getHour()==dateTimeOfReservation.getHour()){
                     //same hour, within the 15min grace period for reservations -->reserved
@@ -135,7 +136,7 @@ public class Table {
              * after the current time
              * set table status to free
              */
-            else if (reserved_date.isAfter(current_date)){
+            else if (reservedDate.isAfter(currentDate)){
                 setTableStatus(Level.FREE);
                 return;
             }

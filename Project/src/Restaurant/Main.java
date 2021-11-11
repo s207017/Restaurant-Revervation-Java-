@@ -215,7 +215,7 @@ public class Main{
 
                 case 8:
                     //clearScreen();
-                    tableAvailabilityInterface.assignTable();
+                    tableAvailabilityInterface.assignTable(0);
                     break;
 
                 case 9:

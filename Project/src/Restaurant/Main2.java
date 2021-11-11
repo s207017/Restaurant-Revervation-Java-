@@ -123,7 +123,8 @@ public class Main2{
                         tableAvailabilityInterface.assignTable(true);
                     }
                     else if (YN=='n'||YN=='N'){
-                        tableAvailabilityInterface.assignTable();
+                        //no reservation, pass pax as 0 to distinguish in the tableAvailabilityInterfact
+                        tableAvailabilityInterface.assignTable(0);
                     }
                     else {
                         break;

@@ -146,9 +146,9 @@ public class Restaurant {
         ArrayList<Table> availableTables= new ArrayList<Table>();
         for (Table t: tableList){
             //removes overdue reservations
-            t.updateReservationsHashMap(currentDateTime);
+            t.updateReservationsAccordingToCurrentTime();
             //updates levels free & reserved
-            t.updateLevel(currentDateTime);
+            t.updateTableStatus();
             if (t.getTableStatus()== Table.Level.FREE && t.getCapacity()>=pax){
                 availableTables.add(t);
             }
@@ -191,15 +191,14 @@ public class Restaurant {
      * as well as the total number of free, occupied and reserved tables.
      */
     public String toString(){
-        LocalDateTime currentDateTime = LocalDateTime.now();
         StringBuilder sb = new StringBuilder();
         int reserved=0, occupied=0, free=0;
         sb.append("\nRESTAURANT TABLES\n");
         for (Table t : tableList) {
             //removes overdue reservations
-            t.updateReservationsHashMap(currentDateTime);
+            t.updateReservationsAccordingToCurrentTime();
             //updates levels free & reserved
-            t.updateLevel(currentDateTime);
+            t.updateTableStatus();
             if (t.getTableStatus()== Table.Level.FREE){
                 sb.append(String.format("Table: %d - Capacity: %d - Status: Available\n", t.getTableNum(), t.getCapacity()));
                 free++;
