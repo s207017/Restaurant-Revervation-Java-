@@ -21,23 +21,19 @@ public class TableAvailabilityUI {
     //print statement asking them if they got reserve
     // if yes then call assignTable(true)
 
-<<<<<<< HEAD:Project/src/Restaurant/TableAvailabilityInterface.java
     public void assignTable(int pax){
-=======
-    public void assignTable(){
-        //checks if getavailable tables returns any tables when 0 people want to sit
-        //meanwhile, it also updates tables and reservations based on current time
-        if (r.getAvailableTables(0, LocalDateTime.now()).size()==0){ //pax == 0 returns all tables
-            System.out.println("All tables are occupied. Please ask customer to wait.");
-            return;
-        }
-
->>>>>>> main:Project/src/Restaurant/TableAvailabilityUI.java
         ArrayList<Table> availableTables;
         LocalDateTime localDateTime = LocalDateTime.now();
 
         if (pax==0){
             pax = askForPax();
+        }
+        
+        //updates tables and reservations based on current time
+        for (Table t: r.getTableList()){
+            t.updateReservationsAccordingToCurrentTime();
+            t.updateTableStatus();
+
         }
         System.out.println("Checking for an available table...");
 
@@ -87,11 +83,10 @@ public class TableAvailabilityUI {
     public void assignTable(boolean Reserved){
         //updates tables and reservations based on current time
         for (Table t: r.getTableList()){
-            t.updateReservationsHashMap(LocalDateTime.now());
-            t.updateLevel(LocalDateTime.now());
+            t.updateReservationsAccordingToCurrentTime();
+            t.updateTableStatus();
 
         }
-
         //gets hour of booking
         System.out.print("What time is your booking for? (24h format)");
         System.out.println("\t11 12 13 14 15 16 17 18 19 20 21 22");
@@ -121,13 +116,8 @@ public class TableAvailabilityUI {
         else {
             Table t = r.getTableFromReservationHashMap(reservationKeyDateTime, tel);
             if (t==null){
-<<<<<<< HEAD:Project/src/Restaurant/TableAvailabilityInterface.java
                 System.out.print("Reservation does not exist. Process table assignment as per normal");
                 assignTable(0);
-=======
-                System.out.print("Reservation does not exist. Process table assignment as per normal.\n");
-                assignTable();
->>>>>>> main:Project/src/Restaurant/TableAvailabilityUI.java
                 return;
             }
             else{
@@ -151,62 +141,6 @@ public class TableAvailabilityUI {
 
     }
 
-<<<<<<< HEAD:Project/src/Restaurant/TableAvailabilityInterface.java
-=======
-    public void assignTable(int pax){
-        //updates tables and reservations based on current time
-        for (Table t: r.getTableList()){
-            t.updateReservationsHashMap(LocalDateTime.now());
-            t.updateLevel(LocalDateTime.now());
-
-        }
-
-        ArrayList<Table> availableTables;
-
-        LocalDateTime localDateTime = LocalDateTime.now();
-        //int pax = askForPax(), tableNum, newTableNum;
-        System.out.println("Checking for an available table...");
-
-        //determines if the arraylist of available tables is empty or not
-        if (r.getAvailableTables(pax, localDateTime).size() == 0) {
-            System.out.println("Currently no table available for " + pax + ". Please ask customer to wait.");
-            return;
-        } else {
-            //prints available tables
-            System.out.println("The available table numbers are: ");
-            System.out.print(" || ");
-            availableTables = r.getAvailableTables(pax, localDateTime);
-            for (Table t: availableTables){
-                System.out.print("Table " + t.getTableNum() + " || ");
-            }
-            System.out.println();
-
-            //asks waiter to choose table from printed list of tables
-            System.out.print("Enter the table number to assign the customer: ");
-            int newTableNum = GetInput.getInt();
-            int i;
-            boolean valid = false;
-            //checks if the table number inputted exists in the avialabletables array
-            while (!valid) {
-                for (i = 0; i < availableTables.size(); i++) {
-                    if (availableTables.get(i).getTableNum() == newTableNum) {
-                        valid = true;
-                        break;
-                    }
-                }
-                if (!valid) {
-                    System.out.print("Please enter a valid available table number: ");
-                    newTableNum = GetInput.getInt();
-                }
-            }
-
-            r.getTableFromTableNum(newTableNum).occupyTable(pax);
-
-            System.out.println("Table assigned! Bring the customers to table " + newTableNum + ".");
-        }
-    }
-
->>>>>>> main:Project/src/Restaurant/TableAvailabilityUI.java
     /**
      * asks for the number of guests
      * @return returns number of people to be seated
