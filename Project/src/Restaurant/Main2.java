@@ -35,6 +35,9 @@ public class Main2{
             printAppOptions();
             option = getOption();
             switch (option) {
+                case 0:
+                    restaurant.getMenu().printMenu();
+                    break;
                 case 1: //Create/update/remove menu item
                     do {
                         menuInterface.printOptionsMenuItems();

@@ -18,9 +18,9 @@ hehexd
 105
 5.0
 hehexdhehexd
-dog meat
+dog
 106
-999.0
+34.0
 yummy
 bitch
 107
@@ -30,7 +30,11 @@ cockroaches
 108
 2.353
 yummy heehxd
-horse poo
+cockroaches
 109
 32.0
+dog
+bitch4
+110
+50.0
 dog
