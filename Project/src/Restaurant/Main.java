@@ -87,6 +87,7 @@ public class Main {
                     break;
                 case 3:
                     restaurant.getMenu().printMenu();
+                    pressAnyKeyToContinue();
                     break;
                 case 4:
                     orderUI.addItemsToOrder();
@@ -165,6 +166,7 @@ public class Main {
                     salesRevenueReportUI.printSalesRevenueReport();
                     break;
                 case 14:
+                    restaurant.writeReservationsToTextFile();
                     System.out.println("Thank you for your hard work!\nApp terminating...");
                     return;
             }
@@ -191,6 +193,17 @@ public class Main {
         int option = GetInput.getIntFromRange(1,14);
         System.out.println("");
         return option;
+    }
+
+    public static void pressAnyKeyToContinue()
+    {
+        System.out.println("Press Enter key to continue...");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception e)
+        {}
     }
 
 

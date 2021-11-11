@@ -1,12 +1,12 @@
 package Restaurant;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+
+import static jdk.internal.org.jline.utils.Colors.s;
 
 public class Table {
     private int tableNum;
@@ -45,7 +45,7 @@ public class Table {
      * @param name name of the person doing the reservation
      * @param tel telephone number of the person doing the reservation
      */
-    void reserve(LocalDateTime arrivalDateHour, int pax, String name, int tel){
+    void reserve(LocalDateTime arrivalDateHour, int pax, String name, int tel) throws IOException {
         reservations.put(arrivalDateHour, new Reservation(name, pax, tel));
     }
 
@@ -53,7 +53,8 @@ public class Table {
      * remove reservations if reservation+15min grace period is still less than current time
      * this ensures that the reservations in Reservations are beyond current time - 15min grace period only
      */
-    void updateReservationsAccordingToCurrentTime() {
+    void updateReservationsAccordingToCurrentTime() throws IOException {
+
         Iterator<Map.Entry<LocalDateTime, Reservation>>
                 iterator = reservations.entrySet().iterator();
 
@@ -76,7 +77,7 @@ public class Table {
      * @param dateTime gets the dateTime input
      * @param tel gets the telephone number used to make the reservation
      */
-    public void deleteReservationFromHashMap(LocalDateTime dateTime, int tel){
+    public void deleteReservationFromHashMap(LocalDateTime dateTime, int tel) throws IOException {
         Iterator<Map.Entry<LocalDateTime, Reservation>>
                 iterator = reservations.entrySet().iterator();
         while (iterator.hasNext()) {
