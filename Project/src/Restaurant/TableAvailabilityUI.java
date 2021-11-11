@@ -21,6 +21,9 @@ public class TableAvailabilityUI {
     //print statement asking them if they got reserve
     // if yes then call assignTable(true)
 
+<<<<<<< HEAD:Project/src/Restaurant/TableAvailabilityInterface.java
+    public void assignTable(int pax){
+=======
     public void assignTable(){
         //checks if getavailable tables returns any tables when 0 people want to sit
         //meanwhile, it also updates tables and reservations based on current time
@@ -29,10 +32,13 @@ public class TableAvailabilityUI {
             return;
         }
 
+>>>>>>> main:Project/src/Restaurant/TableAvailabilityUI.java
         ArrayList<Table> availableTables;
-
         LocalDateTime localDateTime = LocalDateTime.now();
-        int pax = askForPax();
+
+        if (pax==0){
+            pax = askForPax();
+        }
         System.out.println("Checking for an available table...");
 
         //determines if the arraylist of available tables is empty or not
@@ -110,13 +116,18 @@ public class TableAvailabilityUI {
 
             System.out.print("Reservation expired/does not exist. Process table assignment as per normal.\n");
             r.removeReservation(reservationKeyDateTime, tel);
-            assignTable();
+            assignTable(0);
         }
         else {
             Table t = r.getTableFromReservationHashMap(reservationKeyDateTime, tel);
             if (t==null){
+<<<<<<< HEAD:Project/src/Restaurant/TableAvailabilityInterface.java
+                System.out.print("Reservation does not exist. Process table assignment as per normal");
+                assignTable(0);
+=======
                 System.out.print("Reservation does not exist. Process table assignment as per normal.\n");
                 assignTable();
+>>>>>>> main:Project/src/Restaurant/TableAvailabilityUI.java
                 return;
             }
             else{
@@ -125,7 +136,7 @@ public class TableAvailabilityUI {
                     int pax = t.getReservations().get(reservationKeyDateTime).getPax();
                     System.out.println("Customers' a bit too early! Checking tables as per normal now.");
                     assignTable(pax);
-                    System.out.printf("Sorry! Please wait until %d for your table. Currently all tables are occupied.\n", bookingHour);
+                    System.out.printf("Sorry! Please wait until time: %d for your table. Currently all tables are occupied.\n", bookingHour);
                     return;
                 }
                 else {
@@ -140,6 +151,8 @@ public class TableAvailabilityUI {
 
     }
 
+<<<<<<< HEAD:Project/src/Restaurant/TableAvailabilityInterface.java
+=======
     public void assignTable(int pax){
         //updates tables and reservations based on current time
         for (Table t: r.getTableList()){
@@ -193,6 +206,7 @@ public class TableAvailabilityUI {
         }
     }
 
+>>>>>>> main:Project/src/Restaurant/TableAvailabilityUI.java
     /**
      * asks for the number of guests
      * @return returns number of people to be seated
