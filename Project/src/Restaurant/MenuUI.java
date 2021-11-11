@@ -22,7 +22,6 @@ public class MenuUI {
             menuTypeInt = GetInput.getIntFromRange(1,4);
             printExistingMenu(menuTypeInt);
             System.out.print("Enter the name of the new menu item: ");
-            String menuName = GetInput.getString();
             while (menu.checkIfNameExists(menuName)){
                 System.out.println("The name already exists in the menu");
                 System.out.print("Please enter a new name: ");
