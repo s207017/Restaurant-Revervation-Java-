@@ -154,10 +154,11 @@ public class Restaurant {
             bw.write("TABLE\n");
             bw.write(t.getTableNum()+"\n");
             for (Map.Entry<LocalDateTime,Reservation> entry : t.getReservations().entrySet()) {
-                bw.write(entry.getKey().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + ";" + entry.getValue().getName() + ";" + entry.getValue().getPax() + ";" + entry.getValue().getTel()+ "\n");
+                bw.write(entry.getKey() + ";" + entry.getValue().getName() + ";" + entry.getValue().getPax() + ";" + entry.getValue().getTel()+ "\n");
             }
         }
         bw.close();
+
     }
 
 
