@@ -87,7 +87,7 @@ public class Main {
                     break;
                 case 3:
                     restaurant.getMenu().printMenu();
-                    pressAnyKeyToContinue();
+                    pressEnterToContinue();
                     break;
                 case 4:
                     orderUI.addItemsToOrder();
@@ -195,7 +195,7 @@ public class Main {
         return option;
     }
 
-    public static void pressAnyKeyToContinue()
+    public static void pressEnterToContinue()
     {
         System.out.println("Press Enter key to continue...");
         try
