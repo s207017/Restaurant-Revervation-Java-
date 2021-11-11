@@ -1,32 +1,50 @@
 package Restaurant;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class Membership {
     ArrayList<Member> membersList = new ArrayList<Member>();
 
-    public Membership(){
-        membersList.add(new Member(98357328));
-        membersList.add(new Member(84457564));
-        membersList.add(new Member(92925963));
-        membersList.add(new Member(92715388));
-        membersList.add(new Member(82943623));
-        membersList.add(new Member(87569116));
-        membersList.add(new Member(95431183));
-        membersList.add(new Member(96789030));
-        membersList.add(new Member(97420100));
-        membersList.add(new Member(98517739));
-    }
+    public Membership() throws IOException {
+        BufferedReader membersText = new BufferedReader(
+                new FileReader("./textfiles/members.txt")
+        );
 
-    public void addMember(Member member){
-        membersList.add(member);
-    }
-
-    public boolean checkMembership(int number){
-        for (Member member: membersList){
-            if (member.getNumber()== number)
-                return true;
+        // for reading items from text file
+        int phoneNum = 0;
+        String s;
+        while ((s = membersText.readLine()) != null) {
+            phoneNum = Integer.parseInt(s);
+            Member newMember = new Member(phoneNum);
+            membersList.add(newMember);
         }
-        return false;
+        membersText.close();
+    }
+
+    public ArrayList<Member> getMembersList() {
+        return membersList;
+    }
+
+    public void addMember(Member member) throws IOException {
+        membersList.add(member);
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/members.txt", false)
+        );
+
+        for (Member member_ : membersList) {
+            bw.write(member_.getNumber() + "\n");
+        }
+        bw.close();
+    }
+
+    public int checkMembership(int number){
+        int count = 0;
+        for (Member member: membersList){
+            count++;
+            if (member.getNumber() == number)
+                return count;
+        }
+        return 0;
     }
 }

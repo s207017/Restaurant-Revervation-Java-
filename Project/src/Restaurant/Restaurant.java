@@ -4,6 +4,8 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Restaurant {
     private ArrayList<Table> tableList = new ArrayList<Table>();
@@ -46,6 +48,47 @@ public class Restaurant {
             staffList.add(newStaff);
         }
         staffText.close();
+
+        BufferedReader transHistDayText = new BufferedReader(
+                new FileReader("./textfiles/transhistday.txt")
+        );
+
+        // for reading items from text file
+        TransHistDay dailyRecord =null;
+        LocalDateTime dateInput = null;
+        String transHistItemName = null;
+        int qty = 0;
+        double price;
+        x = 0;
+        while ((s = transHistDayText.readLine()) != null) {
+            if (s.equals("last-record")){
+                transactionHistory.add(dailyRecord);
+                break;
+            }
+            if (s.equals("new-record")){
+                if (x!=0){
+                    transactionHistory.add(dailyRecord);
+                }
+                dateInput = LocalDateTime.parse(transHistDayText.readLine());
+                dailyRecord = new TransHistDay(dateInput);
+                s = transHistDayText.readLine();
+                x=0;
+            }
+            switch (x%3){
+                case 0:
+                    transHistItemName = s;
+                    break;
+                case 1:
+                    qty = Integer.parseInt(s);
+                    break;
+                case 2:
+                    price = Double.parseDouble(s);
+                    dailyRecord.addTransHistItem(transHistItemName,qty,price);
+                    break;
+            }
+            x++;
+        }
+        transHistDayText.close();
     }
 
     public Menu getMenu(){return this.menu;}
@@ -106,9 +149,9 @@ public class Restaurant {
         ArrayList<Table> availableTables= new ArrayList<Table>();
         for (Table t: tableList){
             //removes overdue reservations
-            t.updateReservationsHashMap(currentDateTime);
+            t.updateReservationsAccordingToCurrentTime();
             //updates levels free & reserved
-            t.updateLevel(currentDateTime);
+            t.updateTableStatus();
             if (t.getTableStatus()== Table.Level.FREE && t.getCapacity()>=pax){
                 availableTables.add(t);
             }
@@ -116,7 +159,34 @@ public class Restaurant {
         return availableTables;
     }
 
-    //public void checkReservation
+
+    public Table removeReservation(LocalDateTime removeDateTime, int tel){
+        for (Table t : tableList) {
+            Iterator<Map.Entry<LocalDateTime, Reservation>>
+                    iterator = t.getReservations().entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<LocalDateTime, Reservation> entry = iterator.next();
+
+                if (removeDateTime.isEqual(entry.getKey()) &&
+                        entry.getValue().getTel() == (tel)) {
+                    iterator.remove();
+                    return t;
+                }
+            }
+        }
+        //has iterated through all tables, no free tables
+        return null;
+    }
+
+    public Table getTableFromReservationHashMap(LocalDateTime dateTimeToCheck, int tel){
+        for (Table t : tableList){
+            if (t.getReservations().containsKey(dateTimeToCheck) &&
+                t.getReservations().get(dateTimeToCheck).getTel()==tel){
+                return t;
+            }
+        }
+        return null;
+    }
 
 
     /**
@@ -124,15 +194,14 @@ public class Restaurant {
      * as well as the total number of free, occupied and reserved tables.
      */
     public String toString(){
-        LocalDateTime currentDateTime = LocalDateTime.now();
         StringBuilder sb = new StringBuilder();
         int reserved=0, occupied=0, free=0;
         sb.append("\nRESTAURANT TABLES\n");
         for (Table t : tableList) {
             //removes overdue reservations
-            t.updateReservationsHashMap(currentDateTime);
+            t.updateReservationsAccordingToCurrentTime();
             //updates levels free & reserved
-            t.updateLevel(currentDateTime);
+            t.updateTableStatus();
             if (t.getTableStatus()== Table.Level.FREE){
                 sb.append(String.format("Table: %d - Capacity: %d - Status: Available\n", t.getTableNum(), t.getCapacity()));
                 free++;

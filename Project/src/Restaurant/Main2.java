@@ -13,7 +13,7 @@ public class Main2{
         Membership membership = new Membership();
         MembershipInterface membershipInterface = new MembershipInterface(membership);
         PaymentInterface paymentInterface = new PaymentInterface(restaurant,membership, restaurant.getTransactionHistory());
-
+        
         //gets staffID from the staff using the UI
         Staff thisStaff;
         int staffID;
@@ -117,7 +117,18 @@ public class Main2{
                     }
                     break;
                 case 8:
-                    tableAvailabilityInterface.assignTable();
+                    System.out.println("Do you have a reservation? Enter [y/n]");
+                    char YN = GetInput.getChar();
+                    if (YN=='y'||YN=='Y'){
+                        tableAvailabilityInterface.assignTable(true);
+                    }
+                    else if (YN=='n'||YN=='N'){
+                        //no reservation, pass pax as 0 to distinguish in the tableAvailabilityInterfact
+                        tableAvailabilityInterface.assignTable(0);
+                    }
+                    else {
+                        break;
+                    }
                     break;
                 case 9:
                     tableAvailabilityInterface.checkTableAvailability();

@@ -18,7 +18,6 @@ public class Order {
     {orderNum +=1;}
     public Order(int staffID, int tableNum,Menu menu) {
         this.orderID = orderNum;
-        System.out.printf("Assigned orderID is %d\n",this.orderID);
         this.staffID = staffID;
         this.tableNum = tableNum;
         this.date = LocalDateTime.now();
@@ -96,9 +95,10 @@ public class Order {
 
     public void printOrder(){
         System.out.printf("Order: %d for Table Number: %d\n",this.orderID,this.tableNum);
-        System.out.println("ID | Item Name | Quantity ");
+        System.out.printf("%4s%2s %-38s| %-4s\n","ID","|","ITEM NAME","QTY");
+        System.out.println("-".repeat(50));
         for(OrderItem o: this.orderList){
-            System.out.printf("%d | %s | %d\n",o.getItem().getItemID(),o.getItem().getItemName(),o.getQuantityOrdered());
+            System.out.printf("%4d%2s %-38s| %-4d\n",o.getItem().getItemID(),"|",o.getItem().getItemName(),o.getQuantityOrdered());
         }
     }
 }

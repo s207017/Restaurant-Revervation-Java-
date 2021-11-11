@@ -33,6 +33,7 @@ public class TransHistDay {
         }
         return null;
     }
+
     public void addTransHistItem(String name, int quantity, double price){
         for(TransHistItem t: this.transList){//Checking if item is inside already
             if(t.getItem() == name && t.getPrice() == price) {//Found a matching item in list

@@ -3,10 +3,10 @@ package Restaurant;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class OrderInterfaceUI {
+public class OrderUI {
     private Menu menu;
     private Restaurant restaurant;
-    public OrderInterfaceUI(Menu menu,Restaurant restaurant){
+    public OrderUI(Menu menu, Restaurant restaurant){
         this.menu = menu;
         this.restaurant = restaurant;
     }
@@ -18,15 +18,16 @@ public class OrderInterfaceUI {
 
     public void addItemsToOrder(){
         int TableNum;
-        System.out.printf("Enter table number (Tables 1 - %d)(%d to exit): ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
+        System.out.println(restaurant);
+        System.out.printf("*ENTER 9 TO EXIT\nEnter table number: ",restaurant.getTableList().size()+1);
         do{
             TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+1);
             if(TableNum == restaurant.getTableList().size()+1){
-                System.out.println("Exiting order function");
+                System.out.println("Exiting order function...");
                 return;
             }
             if(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED){
-                System.out.printf("No one at the table. Enter again (Tables 1 - %d)(%d to exit): ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
+                System.out.printf("*ENTER 9 TO EXIT\nNo one at the table. Enter table number again: ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
             }
         }while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED);
 //        int TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size());
@@ -48,10 +49,10 @@ public class OrderInterfaceUI {
         }
         int choice = 0, quantity = 0;
         while(choice != -1) {
-            System.out.print("Enter ID of intended item to be ordered (-1 to end): ");
+            System.out.print("*ENTER -1 TO STOP ORDERING\nEnter menu item ID of intended item to be ordered: ");
             choice = GetInput.getInt();
             if(choice == -1) {
-                System.out.println("Exiting ordering function");
+                System.out.println("Exiting ordering function...");
                 break;
             }
             //set temp to be the menuItem/setPackage item
@@ -107,7 +108,7 @@ public class OrderInterfaceUI {
         MenuItem temp;
         int choice = 0,quantity = 0;
         while(choice != -1){
-            System.out.print("Enter ID of intended item to be removed (-1 to end): ");
+            System.out.print("*ENTER -1 TO STOP ORDERING\nEnter menu item ID of intended item to be removed: ");
             choice = GetInput.getInt();
             if(choice == -1) break; // End of order removal
             temp = menu.getMenuItemFromID(choice);
@@ -117,7 +118,7 @@ public class OrderInterfaceUI {
             }
             int index = order.checkItemExistence(choice);
             if(index<0){ // Order does not contain item
-                System.out.println("Item does not exist in order");
+                System.out.println("Item does not exist in order.");
                 continue;
             }
             System.out.print("Enter quantity to be removed: ");
@@ -128,7 +129,7 @@ public class OrderInterfaceUI {
                             order.getOrderItemList().get(index).getQuantityOrdered(),
                             order.getOrderItemList().get(index).getItem().getItemName());
                 }else if(quantity<=0){
-                    System.out.println("Quantity entered is negative or zero, invalid");
+                    System.out.println("Quantity entered is invalid");
                 }
                 System.out.print("Enter quantity to be removed: ");
                 quantity = GetInput.getInt();
@@ -139,15 +140,22 @@ public class OrderInterfaceUI {
     }
 
     public void printAddRemove(){
-        System.out.println("1. Add item(s) to an existing order");
-        System.out.println("2. Remove item(s) from an existing order");
-        System.out.println("3. Return to the main menu");
+        System.out.println("(1) Add item(s) to an existing order");
+        System.out.println("(2) Remove item(s) from an existing order");
+        System.out.println("(3) Return to main app");
     }
 
     public void checkTableOrder(){
+        System.out.println(restaurant);
         System.out.print("Enter table number: ");
-        int tableNum = GetInput.getIntFromRange(1, 8);
-        restaurant.getTableFromTableNum(tableNum).getOrder().printOrder();
+        int tableNum = GetInput.getIntFromRange(1, restaurant.getTableList().size());
+        Order temp = restaurant.getTableFromTableNum(tableNum).getOrder();
+        if(temp == null){
+            System.out.printf("No orders at table %d\n",tableNum);
+            System.out.println("Exiting view order function...");
+            return;
+        }
+        temp.printOrder();
     }
 
 

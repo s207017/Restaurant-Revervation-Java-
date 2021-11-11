@@ -1,5 +1,8 @@
 package Restaurant;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 
@@ -56,15 +59,11 @@ public class Payment {
         return this.paymentComplete;
     }
 
-    public void pushItemsToHistory(ArrayList<TransHistDay> TransHist){
-        if(TransHist.isEmpty()){//checking if list is empty
-            System.out.println("List is empty, first entry ever");
-            System.out.printf("Date of entry is %s\n",this.tables.get(0).getOrder().getDate());
+    public void pushItemsToHistory(ArrayList<TransHistDay> TransHist) throws IOException {
+        if(TransHist.size()==0){//checking if list is empty
             TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
-            System.out.println("Trans history added");
         }
-        else if(this.tables.get(0).getOrder().getDate().truncatedTo(ChronoUnit.DAYS) != TransHist.get(TransHist.size()-1).getDate().truncatedTo(ChronoUnit.DAYS)){//Check if day exists
-            System.out.println("First entry of the day in non empty list");
+        else if(!this.tables.get(0).getOrder().getDate().truncatedTo(ChronoUnit.DAYS).isEqual(TransHist.get(TransHist.size()-1).getDate().truncatedTo(ChronoUnit.DAYS))){//Check if day exists
             TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
         }
         //TransHistDay is available for putting in of values
@@ -79,6 +78,19 @@ public class Payment {
                 }
             }
         }
+
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/transhistday.txt", false)
+        );
+
+        for (TransHistDay transHistDay: TransHist){
+            bw.write("new-record\n"+transHistDay.getDate()+"\n");
+            for (TransHistItem transHistItem: transHistDay.getTransList()){
+                bw.write(transHistItem.getItem()+"\n"+transHistItem.getQuantity()+"\n"+transHistItem.getPrice()+"\n");
+            }
+        }
+        bw.write("last-record\n");
+        bw.close();
     }
 }
 
