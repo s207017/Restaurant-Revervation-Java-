@@ -163,7 +163,7 @@ public class PaymentUI {
             }
             this.payByCash = (CashPayment) this.payment;
             this.payByCash.setCashPaid(cashReceived);
-            System.out.println("Change :" + this.payByCash.getChange());
+            System.out.printf("Change: %.2f\n",this.payByCash.getChange());
             this.payment = this.payByCash;
         }
         System.out.println("PAYMENT SUCCESS!");

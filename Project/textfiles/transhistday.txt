@@ -2,22 +2,42 @@ new-record
 2021-10-10T18:18:29.111941800
 pizza
 1
-10
+10.0
 pasta
 5
-60
+60.0
 popcorn
 2
-10
+10.0
 new-record
 2021-11-10T18:18:29.111941800
 pizza
 9
-10
+10.0
 pasta
 10
-12
+12.0
 popcorn
 2
+1.0
+new-record
+2021-11-11T21:06:51.402029900
+Gardein Crab Cake
+3
+10.0
+Happy Meal
+2
+10.0
+Happy Meal
+5
+10.0
+Sad Meal
 1
+2.0
+Happy Meal
+2
+10.0
+Sad Meal
+2
+2.0
 last-record

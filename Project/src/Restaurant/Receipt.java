@@ -48,9 +48,9 @@ public class Receipt {
             for (OrderItem o: table.getOrder().getOrderItemList()){
                 if(o.getItem() instanceof SetPackage){
                     s = (SetPackage)o.getItem();
-                    System.out.printf("%35s %10.2f\n",s.getItemName(),s.getPrice());
+                    System.out.printf("%3d  %-34s %10.2f\n",o.getQuantityOrdered(),s.getItemName(),s.getPrice());
                     for(MenuItem m: s.getSetItems()){
-                        System.out.printf("\t- %35s\n",m.getItemName());
+                        System.out.printf("\t- %s\n",m.getItemName());
                     }
                 }else {
                     System.out.printf("%3d  %-34s %10.2f\n", o.getQuantityOrdered(), o.getItem().getItemName(), o.getQuantityOrdered() * o.getItem().getPrice());
@@ -69,6 +69,5 @@ public class Receipt {
         System.out.print("        * Thank you for dining with us! *        \n");
         System.out.printf("%50s\n", "*".repeat(50));
         System.out.printf("%50s\n", "-".repeat(50));
-        System.out.println();
     }
 }
