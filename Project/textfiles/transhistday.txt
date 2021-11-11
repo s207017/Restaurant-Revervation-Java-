@@ -40,4 +40,13 @@ Happy Meal
 Sad Meal
 2
 2.0
+Happy Meal
+1
+10.0
+Sad Meal
+3
+2.0
+Happy Meal
+4
+10.0
 last-record

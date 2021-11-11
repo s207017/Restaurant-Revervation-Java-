@@ -2,6 +2,7 @@ package Restaurant;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class OrderUI {
     private Menu menu;
@@ -68,17 +69,22 @@ public class OrderUI {
                 continue;
             }
             if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
-                SetPackage tempSetPackage = new SetPackage(temp.getItemName(),temp.getItemID(),temp.getPrice(),temp.getDescription());
-                menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice());
-                System.out.print("Please select drink: ");
-                int drinkID = GetInput.getInt();
-                while (300>=drinkID && drinkID>300+ menu.getDrinkItems().size()){
-                    System.out.print("Invalid ID, please try again: ");
-                    drinkID = GetInput.getInt();
+                if (temp instanceof SetPackage){
+                    SetPackage tempSetPackage = new SetPackage(temp.getItemName(),temp.getItemID(),temp.getPrice(),temp.getDescription());
+                    tempSetPackage.addMainCourse(menu.getMenuItemFromID(((SetPackage) temp).getSetItems().get(0).getItemID()));
+                    tempSetPackage.addSide(menu.getMenuItemFromID(((SetPackage) temp).getSetItems().get(1).getItemID()));
+                    menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice());
+                    System.out.print("Please select drink: ");
+                    int drinkID = GetInput.getInt();
+                    while (300>=drinkID && drinkID>300+ menu.getDrinkItems().size()) {
+                        System.out.print("Invalid ID, please try again: ");
+                        drinkID = GetInput.getInt();
+                        }
+                    // add drink item to items array in setpackage
+                    tempSetPackage.addSide(menu.getMenuItemFromID(drinkID));
+                    temp = tempSetPackage; //upcasting
                 }
-                // add drink item to items array in setpackage
-                tempSetPackage.addSide(menu.getMenuItemFromID(drinkID));
-                temp = tempSetPackage; //upcasting
+
             }
             System.out.print("Enter quantity of items to be ordered: ");
             quantity = GetInput.getInt();
