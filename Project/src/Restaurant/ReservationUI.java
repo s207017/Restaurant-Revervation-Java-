@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -75,7 +76,7 @@ public class ReservationUI {
     }
 
 
-    public void createReservationBooking() throws InterruptedException {
+    public void createReservationBooking() throws InterruptedException, IOException {
         String findReservation = "1";
         while (Objects.equals(findReservation, "1")) {
             LocalDateTime reservationDateTime = getPossibleReservationDateTimes();
@@ -196,12 +197,12 @@ public class ReservationUI {
                     for (int i = 0; i < (dateOption) - 1; i++) {
                         nowDate = nowDate.plusDays(1);
                     }
-                    System.out.println("Chosen reservation date: " + nowDate);
+                    System.out.println("Chosen reservation date: " + nowDate + "\n");
                     String temp, string_date = nowDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalDateTime checkingDateTime;
-                    count = 0;
                     int hourInt;
                     for (hourInt = 11; hourInt <= 22; hourInt++) {
+                        count = 0;
                         temp = string_date + "T" + hourInt + ":00:00";
                         checkingDateTime = LocalDateTime.parse(temp);
                         System.out.printf("At %s: \n", checkingDateTime);
@@ -213,9 +214,9 @@ public class ReservationUI {
                                 count++;
                             }
                         }
-                    }
-                    if (count == r.getTableList().size()) {
-                        System.out.println("There are no reservations");
+                        if (count == r.getTableList().size()) {
+                            System.out.println("There are no reservations\n");
+                        }
                     }
                     TimeUnit.SECONDS.sleep(1);
                     break;

@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,7 @@ public class TableAvailabilityUI {
     //print statement asking them if they got reserve
     // if yes then call assignTable(true)
 
-    public void assignTable(int pax){
+    public void assignTable(int pax) throws IOException {
         ArrayList<Table> availableTables;
         LocalDateTime localDateTime = LocalDateTime.now();
 
@@ -80,7 +81,7 @@ public class TableAvailabilityUI {
         System.out.println(r);
     }
 
-    public void assignTable(boolean Reserved){
+    public void assignTable(boolean Reserved) throws IOException {
         //updates tables and reservations based on current time
         for (Table t: r.getTableList()){
             t.updateReservationsAccordingToCurrentTime();
