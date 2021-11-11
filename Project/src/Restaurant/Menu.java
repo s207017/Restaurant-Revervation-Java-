@@ -1,6 +1,7 @@
 package Restaurant;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -389,6 +390,11 @@ public class Menu {
             case 2:
                 System.out.println("What is the new name?");
                 String newName = GetInput.getString();
+                while (this.checkIfNameExists(newName)){
+                    System.out.println("The name already exists in the menu");
+                    System.out.print("Please enter a new name: ");
+                    newName = GetInput.getString();
+                }
                 getMenuItemFromID(ID).setItemName(newName);
                 break;
             case 3:
@@ -420,6 +426,11 @@ public class Menu {
             case 2:
                 System.out.println("What is the new name?");
                 String newName = GetInput.getString();
+                while (this.checkIfNameExists(newName)){
+                    System.out.println("The name already exists in the menu");
+                    System.out.print("Please enter a new name: ");
+                    newName = GetInput.getString();
+                }
                 getMenuItemFromID(ID).setItemName(newName);
                 updated = true;
                 break;
@@ -440,5 +451,45 @@ public class Menu {
         updateMenuToFile(drinkItems,"drinkitems");
         updateMenuToFile(dessertItems,"dessertitems");
         return updated;
+    }
+
+    public boolean checkIfNameExists(String newName){
+        boolean exists = false;
+        newName = newName.toLowerCase();
+        for (int i = 0; i < this.getMainCourseItems().size(); i++){
+            if (newName.equals(this.getMainCourseItems().get(i).getItemName().toLowerCase())){
+                exists = true;
+                return exists;
+            }
+        }
+
+        for (int i = 0; i < this.getSideItems().size(); i++){
+            if (newName.equals(this.getSideItems().get(i).getItemName().toLowerCase())){
+                exists = true;
+                return exists;
+            }
+        }
+
+        for (int i = 0; i < this.getDrinkItems().size(); i++){
+            if (newName.equals(this.getDrinkItems().get(i).getItemName().toLowerCase())){
+                exists = true;
+                return exists;
+            }
+        }
+
+        for (int i = 0; i < this.getDessertItems().size(); i++){
+            if (newName.equals(this.getDessertItems().get(i).getItemName().toLowerCase())){
+                exists = true;
+                return exists;
+            }
+        }
+
+        for (int i = 0; i < this.getSetPackageItems().size(); i++){
+            if (newName.equals(this.getSetPackageItems().get(i).getItemName().toLowerCase())){
+                exists = true;
+                return exists;
+            }
+        }
+        return exists;
     }
 }

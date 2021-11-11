@@ -23,6 +23,11 @@ public class MenuInterface {
             printExistingMenu(menuTypeInt);
             System.out.print("Enter the name of the new menu item: ");
             String menuName = GetInput.getString();
+            while (menu.checkIfNameExists(menuName)){
+                System.out.println("The name already exists in the menu");
+                System.out.print("Please enter a new name: ");
+                menuName = GetInput.getString();
+            }
             System.out.print("Enter the price of the new menu item: ");
             double price = GetInput.getDouble();
             System.out.println("Enter the description of the new menu item in one line: ");
@@ -287,6 +292,11 @@ public class MenuInterface {
             System.out.println("You are now creating a set package");
             System.out.print("Enter the name of the set package: ");
             String name = GetInput.getString();
+            while (menu.checkIfNameExists(name)){
+                System.out.println("The name already exists in the menu");
+                System.out.print("Please enter a new name: ");
+                name = GetInput.getString();
+            }
             System.out.println("Enter the description of the set package in one line:");
             String desc = GetInput.getString();
             System.out.println("You will now have to choose 1 main course item and 1 side menu item");
@@ -377,19 +387,51 @@ public class MenuInterface {
     }
 
     public void updateSetPackageInterface() throws IOException {
-        int menuItemID, changeOption;
-        System.out.println("You are now updating a set package item");
-        menu.printSetPackage();
-        System.out.print("Enter the menu ID of the set package you would like to update");
-        menuItemID = GetInput.getInt();
-        changeOption = 1;
-        while (changeOption != 4) {
-            System.out.println("What do you want to change?");
-            this.printChangeTypes();
-            System.out.println("Enter your option: ");
-            changeOption = GetInput.getInt();
-            menu.updateMenuItem(menuItemID, changeOption);
-        }
-        System.out.println("UPDATE SET PACKAGE END");
+        int menuItemID, changeOption, end;
+        boolean invalidInput, changed;
+        do {
+            System.out.println("You are now updating a set package item");
+            menu.printSetPackage();
+            do {
+                invalidInput = false;
+                System.out.print("Enter the menu ID of the set package item you would like to update: ");
+                menuItemID = GetInput.getInt();
+                if (501 > menuItemID || menuItemID > 500 + menu.getSideItems().size()) {
+                    invalidInput = true;
+                }
+                if (invalidInput) {
+                    System.out.println("The menu ID is out of range for SET PACKAGE!");
+                } else {
+                    System.out.println("Menu ID found... Loading..");
+                }
+            } while (invalidInput);
+            //changeOption = 1;
+
+            do {
+                System.out.println("Item information: ");
+                System.out.println("Name: " + menu.getMenuItemFromID(menuItemID).getItemName());
+                System.out.println("Price: " + menu.getMenuItemFromID(menuItemID).getPrice());
+                System.out.println("Description: " + menu.getMenuItemFromID(menuItemID).getDescription());
+                System.out.println("-".repeat(40));
+                System.out.println("What do you want to change?");
+                this.printChangeTypes();
+                System.out.print("Enter your option: ");
+                changeOption = GetInput.getIntFromRange(1, 4);
+                changed = menu.updateMenuItembool(menuItemID, changeOption, true);
+                if (changed) {
+                    System.out.println("Set package updated!");
+                }
+            } while (changeOption != 4);
+
+            System.out.println();
+            System.out.println("1. Update another set package");
+            System.out.println("2. Return to the set package interface");
+            System.out.print("Your input: ");
+            end = GetInput.getIntFromRange(1,2);
+            if (end == 2) {
+                System.out.println("----------UPDATE SET PACKAGE END----------");
+                System.out.println();
+            }
+        } while (end != 2);
     }
 }
