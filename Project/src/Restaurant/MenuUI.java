@@ -13,6 +13,11 @@ public class MenuUI {
         this.menu = menu;
     }
 
+    /**
+     *
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void createNewMenuItemUI() throws IOException, InterruptedException {
         int menuTypeInt, end;
         do{
