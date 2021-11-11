@@ -114,6 +114,28 @@ public class Restaurant {
             bw.write(table.getTableNum()+"\n"+table.getCapacity()+"\n");
         }
         bw.close();
+<<<<<<< Updated upstream
+=======
+        BufferedWriter bw2 = new BufferedWriter(
+                new FileWriter("./textfiles/tables.txt", false)
+        );
+        bw2.write("TABLE\n"+(tableList.size()+1)+"\n");
+        bw2.close();
+    }
+
+    public void writeReservationsToTextFile() throws IOException {
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/reservationsrecords.txt", false)
+        );
+        for (Table t: tableList){
+            bw.write("TABLE\n");
+            bw.write(t.getTableNum()+"\n");
+            for (Map.Entry<LocalDateTime,Reservation> entry : t.getReservations().entrySet()) {
+                bw.write(entry.getKey() + ";" + entry.getValue().getName() + ";" + entry.getValue().getPax() + ";" + entry.getValue().getTel()+ "\n");
+            }
+        }
+        bw.close();
+>>>>>>> Stashed changes
     }
 
 
