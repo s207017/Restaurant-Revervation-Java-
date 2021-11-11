@@ -17,9 +17,9 @@ public class SalesRevenueReport {
         summaryList = new ArrayList<TransHistItem>();
         do {
             if(choice == 1) {//Creating period report
-                System.out.println("Entering start date of report:");
+                System.out.println("-ENTERING START DATE OF REPORT-");
                 this.startDate = GetPeriod.getDate();
-                System.out.println("Entering end date of report:");
+                System.out.println("-ENTERING END DATE OF REPORT-");
                 this.endDate = GetPeriod.getDate();
                 if (endDate.isBefore(startDate)) {
                     System.out.printf("End date (%s) is before start date (%s), please try again\n", endDate, startDate);
