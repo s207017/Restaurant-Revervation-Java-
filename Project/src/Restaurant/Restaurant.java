@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Restaurant {
     private ArrayList<Table> tableList = new ArrayList<Table>();
@@ -89,6 +91,29 @@ public class Restaurant {
             x++;
         }
         transHistDayText.close();
+
+        BufferedReader reservationsText = new BufferedReader(
+                new FileReader("./textfiles/reservationsrecords.txt")
+        );
+
+        // for reading items from text file
+        String[] oneRowData;
+        String nameInput = null;
+        int telInput,paxInput,tableNumInput = 0;
+        while ((s = reservationsText.readLine()) != null) {
+            if (s.equals("TABLE")) {
+                s = reservationsText.readLine();
+                tableNumInput = Integer.parseInt(s);
+            } else {
+                oneRowData = s.split(";");
+                dateInput = LocalDateTime.parse(oneRowData[0]);
+                nameInput = oneRowData[1];
+                paxInput = Integer.parseInt(oneRowData[2]);
+                telInput = Integer.parseInt(oneRowData[3]);
+                getTableFromTableNum(tableNumInput).reserve(dateInput, paxInput, nameInput, telInput);
+            }
+        }
+        reservationsText.close();
     }
 
     public Menu getMenu(){return this.menu;}
@@ -114,6 +139,25 @@ public class Restaurant {
             bw.write(table.getTableNum()+"\n"+table.getCapacity()+"\n");
         }
         bw.close();
+        BufferedWriter bw2 = new BufferedWriter(
+                new FileWriter("./textfiles/tables.txt", false)
+        );
+        bw2.write("TABLE\n"+(tableList.size()+1)+"\n");
+        bw2.close();
+    }
+
+    public void writeReservationsToTextFile() throws IOException {
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/reservationsrecords.txt", false)
+        );
+        for (Table t: tableList){
+            bw.write("TABLE\n");
+            bw.write(t.getTableNum()+"\n");
+            for (Map.Entry<LocalDateTime,Reservation> entry : t.getReservations().entrySet()) {
+                bw.write(entry.getKey().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + ";" + entry.getValue().getName() + ";" + entry.getValue().getPax() + ";" + entry.getValue().getTel()+ "\n");
+            }
+        }
+        bw.close();
     }
 
 
@@ -126,7 +170,7 @@ public class Restaurant {
      * @param tel the phone number of the customer
      * @return returns first available table, doesnt iterate through all unless no table. -1 if no table is found.
      */
-    public int reserveTable(LocalDateTime arrivalDateTime, int pax, String name, int tel) {
+    public int reserveTable(LocalDateTime arrivalDateTime, int pax, String name, int tel) throws IOException {
 
         // get first available table
         for (Table table : tableList) {
@@ -145,7 +189,7 @@ public class Restaurant {
      * @return returns an arraylist of Table objects that have status=FREE
      */
     //use arrayList.isEmpty() to find out if the array returned has any tables at all.
-    public ArrayList<Table> getAvailableTables(int pax, LocalDateTime currentDateTime){
+    public ArrayList<Table> getAvailableTables(int pax, LocalDateTime currentDateTime) throws IOException {
         ArrayList<Table> availableTables= new ArrayList<Table>();
         for (Table t: tableList){
             //removes overdue reservations
@@ -199,7 +243,11 @@ public class Restaurant {
         sb.append("\nRESTAURANT TABLES\n");
         for (Table t : tableList) {
             //removes overdue reservations
-            t.updateReservationsAccordingToCurrentTime();
+            try {
+                t.updateReservationsAccordingToCurrentTime();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             //updates levels free & reserved
             t.updateTableStatus();
             if (t.getTableStatus()== Table.Level.FREE){

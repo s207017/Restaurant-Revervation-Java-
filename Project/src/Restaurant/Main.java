@@ -165,6 +165,7 @@ public class Main {
                     salesRevenueReportUI.printSalesRevenueReport();
                     break;
                 case 14:
+                    restaurant.writeReservationsToTextFile();
                     System.out.println("Thank you for your hard work!\nApp terminating...");
                     return;
             }
