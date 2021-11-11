@@ -25,6 +25,6 @@ public class Membership {
             if (member.getNumber() == number)
                 return count;
         }
-        return count;
+        return 0;
     }
 }
