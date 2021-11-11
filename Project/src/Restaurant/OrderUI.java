@@ -18,7 +18,16 @@ public class OrderUI {
     }
 
     public void addItemsToOrder(){
-        int TableNum;
+        int TableNum, counter = 0;
+        for (int i = 0; i < restaurant.getTableList().size(); i++){
+            if (restaurant.getTableList().get(i).getTableStatus() == Table.Level.RESERVED || restaurant.getTableList().get(i).getTableStatus() == Table.Level.FREE){
+                counter += 1;
+            }
+        }
+        if (counter == restaurant.getTableList().size()){
+            System.out.println("no guests, returning to main");
+            return;
+        }
         System.out.println(restaurant);
         System.out.printf("*ENTER 9 TO EXIT\nEnter table number: ",restaurant.getTableList().size()+1);
         do{
