@@ -113,10 +113,7 @@ public class Main {
                     reservationUI.createReservationBooking();
                     break;
                 case 8:
-<<<<<<< HEAD
-                    //clearScreen();
-                    tableAvailabilityInterface.assignTable(0);
-=======
+
                     reservationUI.printCheckRemove();
                     System.out.print("Enter your choice: ");
                     choice = GetInput.getIntFromRange(1, 3);
@@ -130,7 +127,6 @@ public class Main {
                         case 3:
                             break;
                     }
->>>>>>> main
                     break;
                 case 9:
                     System.out.print("*ENTER ANY OTHER KEY TO RETURN\nDoes the customer have a reservation? [Y/N]: ");
@@ -139,7 +135,7 @@ public class Main {
                         tableAvailabilityUI.assignTable(true);
                     }
                     else if (YN=='n'||YN=='N'){
-                        tableAvailabilityUI.assignTable();
+                        tableAvailabilityUI.assignTable(0);
                     }
                     else{
                         break;
