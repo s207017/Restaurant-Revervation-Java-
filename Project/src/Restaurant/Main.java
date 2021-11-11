@@ -87,6 +87,7 @@ public class Main {
                     break;
                 case 3:
                     restaurant.getMenu().printMenu();
+                    pressAnyKeyToContinue();
                     break;
                 case 4:
                     orderUI.addItemsToOrder();
@@ -192,6 +193,17 @@ public class Main {
         int option = GetInput.getIntFromRange(1,14);
         System.out.println("");
         return option;
+    }
+
+    public static void pressAnyKeyToContinue()
+    {
+        System.out.println("Press Enter key to continue...");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception e)
+        {}
     }
 
 
