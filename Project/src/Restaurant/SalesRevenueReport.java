@@ -17,9 +17,9 @@ public class SalesRevenueReport {
         summaryList = new ArrayList<TransHistItem>();
         do {
             if(choice == 1) {//Creating period report
-                System.out.println("Entering start date of report:");
+                System.out.println("-ENTERING START DATE OF REPORT-");
                 this.startDate = GetPeriod.getDate();
-                System.out.println("Entering end date of report:");
+                System.out.println("-ENTERING END DATE OF REPORT-");
                 this.endDate = GetPeriod.getDate();
                 if (endDate.isBefore(startDate)) {
                     System.out.printf("End date (%s) is before start date (%s), please try again\n", endDate, startDate);
@@ -62,24 +62,37 @@ public class SalesRevenueReport {
         double fullSum = 0;
         switch(choice) {
             case 1://FOR PERIOD REPORT
+                System.out.println();
+                System.out.println("=".repeat(62));
                 System.out.printf("Summary of sales between %s and %s: \n", startDate,endDate);
+                System.out.println("-".repeat(62));
+                System.out.printf(" %-30s| %-8s| %-6s| %-10s\n","ITEM","PRICE","QTY","REVENUE");
+                System.out.println("-".repeat(62));
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
-                    System.out.printf("Item: %s   |   Price: %f   |   Quantity: %d   |   Revenue: %f\n",
+                    System.out.printf(" %-30s| %-8.2f| %-6d| %-10.2f\n",
                             x.getItem(), x.getPrice(), x.getQuantity(), tempSum);
                 }
-                System.out.printf("Total revenue: %f\n", fullSum);
+                System.out.println("-".repeat(62));
+                System.out.printf("TOTAL REVENUE FOR PERIOD: %.2f\n", fullSum);
+                System.out.println("=".repeat(62));
                 break;
             case 2:// FOR  DAY REPORT
+                System.out.println();
+                System.out.println("=".repeat(62));
                 System.out.printf("Summary of sales on %s: \n", startDate);
+                System.out.printf(" %-30s| %-8s| %-6s| %-10s\n","ITEM","PRICE","QTY","REVENUE");
+                System.out.println("-".repeat(62));
                 for (TransHistItem x : this.summaryList) {
                     tempSum = x.getPrice() * x.getQuantity();
                     fullSum += tempSum;
-                    System.out.printf("Item: %s   |   Price: %f   |   Quantity: %d   |   Revenue: %f\n",
+                    System.out.printf(" %-30s| %-8.2f| %-6d| %-10.2f\n",
                             x.getItem(), x.getPrice(), x.getQuantity(), tempSum);
                 }
-                System.out.printf("Total revenue: %f\n", fullSum);
+                System.out.println("-".repeat(62));
+                System.out.printf("TOTAL REVENUE FOR DAY: %.2f\n", fullSum);
+                System.out.println("=".repeat(62));
                 break;
         }
     }

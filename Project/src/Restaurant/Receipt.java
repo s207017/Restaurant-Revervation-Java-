@@ -53,7 +53,7 @@ public class Receipt {
                         System.out.printf("\t- %35s\n",m.getItemName());
                     }
                 }else {
-                    System.out.printf("%3d  %-34s %11.2f\n", o.getQuantityOrdered(), o.getItem().getItemName(), o.getQuantityOrdered() * o.getItem().getPrice());
+                    System.out.printf("%3d  %-34s %10.2f\n", o.getQuantityOrdered(), o.getItem().getItemName(), o.getQuantityOrdered() * o.getItem().getPrice());
                 }
             }
         }
