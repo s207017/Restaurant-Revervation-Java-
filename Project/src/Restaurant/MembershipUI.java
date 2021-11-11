@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MembershipUI {
@@ -9,7 +10,7 @@ public class MembershipUI {
         this.memberShip = memberShip;
     }
 
-    public void addMember(){
+    public void addMember() throws IOException {
         int number;
         System.out.println("You are now adding a new member to the system");
         System.out.print("Enter the mobile number of the new member: ");

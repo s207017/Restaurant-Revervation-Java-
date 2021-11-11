@@ -2,6 +2,7 @@ package Restaurant;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Menu {
     private ArrayList<MenuItem> mainCourseItems = new ArrayList<MenuItem>();
@@ -34,7 +35,6 @@ public class Menu {
         );
         listOfTextFiles.add(setpackages_text);
 
-
         // for reading items from text file
         String itemname = null;
         int itemid = 0;
@@ -42,8 +42,8 @@ public class Menu {
         String description = null;
 
 
-        int menutype =0;
-        for (BufferedReader textfile: listOfTextFiles) {
+        int menutype = 0;
+        for (BufferedReader textfile : listOfTextFiles) {
             int x = 0;
             String s;
             while ((s = textfile.readLine()) != null) {
@@ -56,7 +56,7 @@ public class Menu {
                 } else if (x % 4 == 3) {
                     description = s;
                     MenuItem newitem = new MenuItem(itemname, itemid, itemprice, description);
-                    switch(menutype){
+                    switch (menutype) {
                         case 0:
                             mainCourseItems.add(newitem);
                             break;
@@ -70,9 +70,9 @@ public class Menu {
                             dessertItems.add(newitem);
                             break;
                         case 4:
-                            SetPackage newpackage = new SetPackage(newitem.getItemName(),newitem.getItemID(),newitem.getPrice(), newitem.getDescription());
+                            SetPackage newpackage = new SetPackage(newitem.getItemName(), newitem.getItemID(), newitem.getPrice(), newitem.getDescription());
                             newpackage.addMainCourse(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
-                            newpackage.addMainCourse(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
+                            newpackage.addSide(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
                             setPackageItems.add(newpackage);
                             break;
                         default:
@@ -87,6 +87,8 @@ public class Menu {
             textfile.close();
         }
     }
+
+
 
 
     public void updateMenuToFile(ArrayList<MenuItem> menuItems, String menuType) throws IOException {
@@ -314,7 +316,7 @@ public class Menu {
     }
     
     
-    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems) {
+    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems) throws IOException {
         int ID=0;
         for (SetPackage m: setPackageItems){
             ID=m.getItemID();
@@ -328,6 +330,15 @@ public class Menu {
             }
         }
         setPackageItems.add(newPackage);
+
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/setpackageitems.txt", false)
+        );
+
+        for (SetPackage item: setPackageItems){
+            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
+        }
+        bw.close();
     }
     //updating of menuItems done directly in the application!
     public void removeMenuItem(int menuItemType, int menuItemID) throws IOException {

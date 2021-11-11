@@ -1,5 +1,8 @@
 package Restaurant;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 
@@ -56,7 +59,7 @@ public class Payment {
         return this.paymentComplete;
     }
 
-    public void pushItemsToHistory(ArrayList<TransHistDay> TransHist){
+    public void pushItemsToHistory(ArrayList<TransHistDay> TransHist) throws IOException {
         if(TransHist.size()==0){//checking if list is empty
             TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
         }
@@ -75,6 +78,19 @@ public class Payment {
                 }
             }
         }
+
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/transhistday.txt", false)
+        );
+
+        for (TransHistDay transHistDay: TransHist){
+            bw.write("new-record\n"+transHistDay.getDate()+"\n");
+            for (TransHistItem transHistItem: transHistDay.getTransList()){
+                bw.write(transHistItem.getItem()+"\n"+transHistItem.getQuantity()+"\n"+transHistItem.getPrice()+"\n");
+            }
+        }
+        bw.write("last-record\n");
+        bw.close();
     }
 }
 
