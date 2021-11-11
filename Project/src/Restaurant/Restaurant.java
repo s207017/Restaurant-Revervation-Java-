@@ -61,6 +61,10 @@ public class Restaurant {
         double price;
         x = 0;
         while ((s = transHistDayText.readLine()) != null) {
+            if (s.equals("last-record")){
+                transactionHistory.add(dailyRecord);
+                break;
+            }
             if (s.equals("new-record")){
                 if (x!=0){
                     transactionHistory.add(dailyRecord);
@@ -84,7 +88,6 @@ public class Restaurant {
             }
             x++;
         }
-        transactionHistory.add(dailyRecord);
         transHistDayText.close();
     }
 

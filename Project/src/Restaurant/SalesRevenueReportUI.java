@@ -1,8 +1,8 @@
 package Restaurant;
 
-public class SalesRevenueReportInterface {
+public class SalesRevenueReportUI {
     private Restaurant restaurant;
-    public SalesRevenueReportInterface(Restaurant restaurant){
+    public SalesRevenueReportUI(Restaurant restaurant){
         this.restaurant = restaurant;
     }
 
@@ -33,14 +33,12 @@ public class SalesRevenueReportInterface {
         }
         int choice;
         System.out.println("Select the type of report you wish to view:");
+        System.out.println("(1) Period report");
+        System.out.println("(2) Day report");
+        System.out.println("(3) Return to main app");
         do{
-            System.out.println("(1)\tPeriod report");
-            System.out.println("(2)\tDay report");
-            System.out.println("[Enter -1 to go back]");
-            choice = GetInput.getInt();
-            if(choice != 1 && choice != 2 && choice != -1){
-                System.out.println("Invalid input, please enter your choice again");
-            }
+            System.out.print("Enter option: ");
+            choice = GetInput.getIntFromRange(1,3);
         }while(choice != 1 && choice != 2 && choice != -1);
         switch(choice){
             case 1:

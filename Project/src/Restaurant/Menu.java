@@ -3,6 +3,7 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Menu {
     private ArrayList<MenuItem> mainCourseItems = new ArrayList<MenuItem>();
@@ -35,7 +36,6 @@ public class Menu {
         );
         listOfTextFiles.add(setpackages_text);
 
-
         // for reading items from text file
         String itemname = null;
         int itemid = 0;
@@ -43,8 +43,8 @@ public class Menu {
         String description = null;
 
 
-        int menutype =0;
-        for (BufferedReader textfile: listOfTextFiles) {
+        int menutype = 0;
+        for (BufferedReader textfile : listOfTextFiles) {
             int x = 0;
             String s;
             while ((s = textfile.readLine()) != null) {
@@ -57,7 +57,7 @@ public class Menu {
                 } else if (x % 4 == 3) {
                     description = s;
                     MenuItem newitem = new MenuItem(itemname, itemid, itemprice, description);
-                    switch(menutype){
+                    switch (menutype) {
                         case 0:
                             mainCourseItems.add(newitem);
                             break;
@@ -71,9 +71,9 @@ public class Menu {
                             dessertItems.add(newitem);
                             break;
                         case 4:
-                            SetPackage newpackage = new SetPackage(newitem.getItemName(),newitem.getItemID(),newitem.getPrice(), newitem.getDescription());
+                            SetPackage newpackage = new SetPackage(newitem.getItemName(), newitem.getItemID(), newitem.getPrice(), newitem.getDescription());
                             newpackage.addMainCourse(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
-                            newpackage.addMainCourse(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
+                            newpackage.addSide(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
                             setPackageItems.add(newpackage);
                             break;
                         default:
@@ -88,6 +88,8 @@ public class Menu {
             textfile.close();
         }
     }
+
+
 
 
     public void updateMenuToFile(ArrayList<MenuItem> menuItems, String menuType) throws IOException {
@@ -123,98 +125,97 @@ public class Menu {
 
     //print functions!
     public void printMenu(){
-        System.out.println("Suparakki Ramen Menu:");
-        System.out.println("-".repeat(100));
-        System.out.println("-".repeat(100));
+        System.out.println("OOPsie Menu");
+        System.out.println("=".repeat(132));
         System.out.println("Main Courses:");
         for(MenuItem m : mainCourseItems){
-            System.out.format("%4d.%-60s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
-            System.out.printf("     %s\n", m.getDescription());
+            System.out.format("%4d. %-120s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
+            System.out.printf("       %s\n", m.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Sides:");
         for(MenuItem s : sideItems){
-            System.out.printf("%4d.%-60s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
-            System.out.printf("     %s\n", s.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
+            System.out.printf("       %s\n", s.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Drinks:");
         for(MenuItem d : drinkItems){
-            System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
-            System.out.printf("     %s\n", d.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
+            System.out.printf("       %s\n", d.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Deserts:");
         for(MenuItem de : dessertItems){
-            System.out.printf("%4d.%-60s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
-            System.out.printf("     %s\n", de.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
+            System.out.printf("       %s\n", de.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Set Packages:");
         for(SetPackage sp : setPackageItems){
-            System.out.printf("%4d.%-60s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
-            System.out.printf("     %s\n", sp.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
+            System.out.printf("       %s\n", sp.getDescription());
 
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
     }
     public void printMainCourse(){
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Main Courses:");
         for(MenuItem m : mainCourseItems){
-            System.out.format("%4d.%-60s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
-            System.out.printf("     %s\n", m.getDescription());
+            System.out.format("%4d. %-120s$%.2f%n", m.getItemID(), m.getItemName(), m.getPrice());
+            System.out.printf("       %s\n", m.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
     }
     public void printSide(){
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Sides:");
         for(MenuItem s : sideItems){
-            System.out.printf("%4d.%-60s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
-            System.out.printf("     %s\n", s.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", s.getItemID(), s.getItemName(), s.getPrice());
+            System.out.printf("       %s\n", s.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
 
     }
     public void printDrink(){
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Drinks:");
         for(MenuItem d : drinkItems){
-            System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
-            System.out.printf("     %s\n", d.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
+            System.out.printf("       %s\n", d.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
     }
     public void printDrinkLTEPrice(double price){
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Drinks:");
         for(MenuItem d : drinkItems){
             if(d.getPrice() <= price) {
-                System.out.printf("%4d.%-60s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
-                System.out.printf("     %s\n", d.getDescription());
+                System.out.printf("%4d. %-120s$%.2f%n", d.getItemID(), d.getItemName(), d.getPrice());
+                System.out.printf("       %s\n", d.getDescription());
             }
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
     }
     public void printDesert(){
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Deserts:");
         for(MenuItem de : dessertItems){
-            System.out.printf("%4d.%-60s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
-            System.out.printf("     %s\n", de.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", de.getItemID(), de.getItemName(), de.getPrice());
+            System.out.printf("       %s\n", de.getDescription());
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
     }
     public void printSetPackage(){
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
         System.out.println("Set Packages:");
         for(SetPackage sp : setPackageItems){
-            System.out.printf("%4d.%-60s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
-            System.out.printf("     %s\n", sp.getDescription());
+            System.out.printf("%4d. %-120s$%.2f%n", sp.getItemID(), sp.getItemName(), sp.getPrice());
+            System.out.printf("       %s\n", sp.getDescription());
 
         }
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(132));
     }
 
     //for Order
@@ -316,7 +317,7 @@ public class Menu {
     }
     
     
-    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems) {
+    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems) throws IOException {
         int ID=0;
         for (SetPackage m: setPackageItems){
             ID=m.getItemID();
@@ -330,6 +331,15 @@ public class Menu {
             }
         }
         setPackageItems.add(newPackage);
+
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/setpackageitems.txt", false)
+        );
+
+        for (SetPackage item: setPackageItems){
+            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
+        }
+        bw.close();
     }
     //updating of menuItems done directly in the application!
     public void removeMenuItem(int menuItemType, int menuItemID) throws IOException {

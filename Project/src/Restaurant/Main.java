@@ -1,271 +1,201 @@
 package Restaurant;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
-import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-import javax.crypto.BadPaddingException;
-
-public class Main{
-
-
-
-
-    // made public class not static bc there was static error
+public class Main {
     public static void main(String[] arg) throws IOException, InterruptedException {
-
-
-
         Restaurant restaurant = new Restaurant();
-        MenuInterface menuInterface = new MenuInterface(restaurant.getMenu());
-        ReservationInterface reservationInterface = new ReservationInterface(restaurant);
-        TableAvailabilityInterface tableAvailabilityInterface = new TableAvailabilityInterface(restaurant);
-        //Staff staff;
-        //staff = restaurant.getStaffFromID(GetInput.getInt());
-        SalesRevenueReportInterface salesRevenueReportInterface = new SalesRevenueReportInterface(restaurant);
-
-        //public static GetInputGetInput = new GetInput();
-        OrderInterfaceUI orderInterface = new OrderInterfaceUI(restaurant.getMenu(), restaurant);
+        MenuUI menuUI = new MenuUI(restaurant.getMenu());
+        ReservationUI reservationUI = new ReservationUI(restaurant);
+        TableAvailabilityUI tableAvailabilityUI = new TableAvailabilityUI(restaurant);
+        SalesRevenueReportUI salesRevenueReportUI = new SalesRevenueReportUI(restaurant);
+        OrderUI orderUI = new OrderUI(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
-        MembershipInterface membershipInterface = new MembershipInterface(membership);
+        MembershipUI membershipUI = new MembershipUI(membership);
 
-        //Clears the CMD prompt
-        ////clearScreen();
-        //getStaffID asks the user for StaffID input and store it so that once keyed in during initialisation, the
-        //waiter does not need to key in again.
-        //staff.setStaffID();
-        printAppOptions();
-        int option = 2;
-        int opt;
-        while (option < 13 && option >= 1) { //TO BE UPDATED AS WHEN AND WHEN NEW SWITCH is added
+        //gets staffID from the staff using the UI
+        Staff thisStaff;
+        int staffID;
+        int count=1;
+        do {
+            if (count==1){ //first time asking for staff id, invalid input message not printed
+                System.out.print("Enter your staff ID: ");
+            }
+            else {
+                System.out.print("Invalid staff ID. Please enter a valid staff ID: ");
+            }
+            staffID = GetInput.getInt();
+            thisStaff = restaurant.getStaffFromID(staffID);
+            count++;
+        }while(thisStaff==null);
+
+        PaymentUI paymentUI = new PaymentUI(restaurant,membership, restaurant.getTransactionHistory(),thisStaff);
+
+        System.out.println("Logging you in to OOPsie RRPSS...");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Making bread...");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Petting cats...");
+
+        int option, choice;
+        do {
+            System.out.println("\nEntering main app...");
+            option = getOption();
             switch (option) {
-                case 1: // Create/update/remove menu item
-                    //clearScreen();
-                    opt = 1;
-                    while (opt != -1 ){
-                        menuInterface.printOptionsMenuItems();
-                        opt =GetInput.getInt();
-                        while (opt < 1 && opt > 3) {
-                            opt =GetInput.getInt();
-                            System.out.println("Input should be either 1, 2 or 3!");
-                        }
-                        switch (opt) {
+                case 1: //Create/update/remove menu item
+                    do {
+                        menuUI.printOptionsMenuItems();
+                        choice = GetInput.getIntFromRange(1, 4);
+                        switch (choice) {
                             case 1:
-                                menuInterface.createNewMenuItemInterface();
+                                menuUI.createNewMenuItemUI();
                                 break;
                             case 2:
-                                menuInterface.updateMenuItemInterface();
+                                menuUI.updateMenuItemUI();
                                 break;
                             case 3:
-                                menuInterface.removeMenuItemInterface();
+                                menuUI.removeMenuItemUI();
                                 break;
                             case 4:
-                                System.out.println("Exiting...");
-                                opt = -1;
                                 break;
                             default:
                                 break;
                         }
-                    }
+                    } while (choice != 4);
                     break;
                 case 2: // Create/update/remove set packages
-                    //clearScreen();
-                    opt = 1;
-                    while (opt != -1) {
-                        menuInterface.printOptionsSetPackages();
-                        while (opt < 1 || opt > 3) {
-                            System.out.print("Enter your option: ");
-                            opt =GetInput.getInt();
-                            if (opt < 1 || opt > 3){
-                                System.out.println("Invalid input! Try again");
-                                continue;
-                            } else {
-                                break;
-                            }
-                        }
-                        switch (opt) {
+                    do {
+                        menuUI.printOptionsSetPackages();
+                        choice = GetInput.getIntFromRange(1, 4);
+                        switch (choice) {
                             case 1:
-                                menuInterface.createSetPackageInterface();
+                                menuUI.createSetPackageUI();
                                 break;
                             case 2:
-                                menuInterface.updateSetPackageInterface();
+                                menuUI.updateSetPackageUI();
                                 break;
                             case 3:
-                                menuInterface.removeSetPackageInterface();
+                                menuUI.removeSetPackageUI();
                                 break;
                             case 4:
-                                System.out.println("Exiting..");
-                                opt = -1;
                                 break;
                             default:
                                 break;
                         }
-                    }
+                    } while (choice != 4);
                     break;
-
                 case 3:
-                    //clearScreen();
-                    orderInterface.addItemsToOrder();
+                    restaurant.getMenu().printMenu();
                     break;
-
                 case 4:
-                    //clearScreen();
-                    opt = 1;
-                    while (opt != -1){
-                        orderInterface.viewOrder();
-                        System.out.print("Enter -1 to return to the main menu");
-                        opt =GetInput.getInt();
-                    }
+                    orderUI.addItemsToOrder();
                     break;
-
                 case 5:
-                    //clearScreen();
-                    opt = 1;
-                    while (opt != -1) {
-                        orderInterface.printAddRemove();
-                        while (opt < 1 || opt > 3) {
-                            System.out.print("Enter your option: ");
-                            opt =GetInput.getInt();
-                            if (opt < 1 || opt > 3){
-                                System.out.println("Invalid input! Try again");
-                                continue;
-                            } else {
-                                break;
-                            }
-                        }
-                        switch (opt) {
-                            case 1:
-                                orderInterface.addItemsToOrder();
-                                break;
-                            case 2:
-                                orderInterface.removeItemsFromOrder();
-                                break;
-                            case 3:
-                                System.out.println("Exiting..");
-                                opt = -1;
-                                break;
-                            default:
-                                break;
-
-                        }
-                    }
+                    orderUI.checkTableOrder();
                     break;
-
                 case 6:
-                    //clearScreen();
-                    opt = 1;
-                    while (opt != -1){
-                        System.out.println("1. Create new reservation");
-                        System.out.println("2. Return to the main menu");
-                        while (opt < 1 || opt > 2){
-                            System.out.print("Enter your option: ");
-                            opt =GetInput.getInt();
-                            if (opt < 1 || opt > 2){
-                                System.out.println("Invalid input! Try again");
-                                continue;
-                            } else {
-                                break;
-                            }
-                        }
-                        switch (opt){
-                            case 1:
-                                reservationInterface.checkReservationBooking();
-                                break;
-                            case 2:
-                                System.out.println("Exiting");
-                                opt = -1;
-                                break;
-                        }
+                    orderUI.printAddRemove();
+                    System.out.print("Enter your option: ");
+                    choice = GetInput.getIntFromRange(1, 3);
+                    switch (choice) {
+                        case 1:
+                            orderUI.addItemsToOrder(); //same as case 3
+                            break;
+                        case 2:
+                            orderUI.removeItemsFromOrder();
+                            break;
+                        case 3:
+                            break;
                     }
                     break;
-
                 case 7:
-                    //clearScreen();
-                    opt = 1;
-                    while (opt != 1){
-                        opt =GetInput.getInt();
-                        reservationInterface.printCheckRemove();
-                        while (opt < 1 || opt > 3){
-                            System.out.print("Enter your option: ");
-                            opt =GetInput.getInt();
-                            if (opt < 1 || opt > 3){
-                                System.out.println("Invalid input! Try again");
-                                continue;
-                            } else {
-                                break;
-                            }
-                        }
-                        switch (opt){
-                            case 1:
-                                reservationInterface.checkReservationBooking();
-                                break;
-                            case 2:
-                                reservationInterface.removeReservationBooking();
-                                break;
-                            case 3:
-                                System.out.println("Exiting..");
-                                opt = -1;
-                                break;
-                        }
-                    }
+                    reservationUI.createReservationBooking();
                     break;
-
                 case 8:
+<<<<<<< HEAD
                     //clearScreen();
                     tableAvailabilityInterface.assignTable(0);
+=======
+                    reservationUI.printCheckRemove();
+                    System.out.print("Enter your choice: ");
+                    choice = GetInput.getIntFromRange(1, 3);
+                    switch (choice) {
+                        case 1:
+                            reservationUI.checkReservationBooking();
+                            break;
+                        case 2:
+                            reservationUI.removeReservationBooking();
+                            break;
+                        case 3:
+                            break;
+                    }
+>>>>>>> main
                     break;
-
                 case 9:
-                    //clearScreen();
-                    System.out.println(restaurant.toString());
+                    System.out.print("*ENTER ANY OTHER KEY TO RETURN\nDoes the customer have a reservation? [Y/N]: ");
+                    char YN = GetInput.getChar();
+                    if (YN=='y'||YN=='Y'){
+                        tableAvailabilityUI.assignTable(true);
+                    }
+                    else if (YN=='n'||YN=='N'){
+                        tableAvailabilityUI.assignTable();
+                    }
+                    else{
+                        break;
+                    }
                     break;
-
                 case 10:
-                    //clearScreen();
-                    membershipInterface.AddMember();
+                    tableAvailabilityUI.checkTableAvailability();
                     break;
-
-
                 case 11:
-                    //clearScreen();
-                    //PaymentInterface paymentInterface = new PaymentInterface(restaurant, membership)
-                    //PaymentInterface.
+                    System.out.print("Membership functions:\n(1) Add member\n(2) Remove member\n");
+                    while(true){
+                        System.out.print("*ENTER 3 TO EXIT\nEnter option: ");
+                        choice = GetInput.getIntFromRange(1,3);
+                        if(choice==1){
+                            membershipUI.addMember();
+                            break;
+                        }else{
+                            membershipUI.removeMember();
+                            break;
+                        }
+                    }
                     break;
-
-
                 case 12:
-                    //clearScreen();
-                    salesRevenueReportInterface.printSalesRevenueReport();
+                    paymentUI.makePaymentUI();
                     break;
-
-
-                default:
+                case 13:
+                    salesRevenueReportUI.printSalesRevenueReport();
                     break;
+                case 14:
+                    System.out.println("Thank you for your hard work!\nApp terminating...");
+                    return;
             }
-        }
+        }while(option != -1);
     }
-
-//        public static void //clearScreen(){
-//            try {
-//                new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-//            } catch (Exception E) {
-//                System.out.println(E);
-//            }
-//    }
-
-
 
     public static void printAppOptions(){
-        System.out.println("1. Create/Update/Remove menu items from the menu");
-        System.out.println("2. Create/Update/Remove set packages");
-        System.out.println("3. Create new order");
-        System.out.println("4. View existing order");
-        System.out.println("5. Add or remove item(s) to/from an existing order");
-        System.out.println("6. Create new reservation");
-        System.out.println("7. Check or remove an existing reservation");
-        System.out.println("8. Assign table");
+        System.out.println("");
+        System.out.println("+" + "-".repeat(164) + "+");
+        System.out.printf("|%100s%65s\n","OOPsie Restaurant Reservation & Point of Sale App","|");
+        System.out.println("+" + "-".repeat(164) + "+");
+        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu item", "(6) Add or remove item(s) to/from an existing order", "(11) Add or remove a member","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(2) Create/Update/Remove set package item","(7) Create new reservation","(12) Make payment","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(3) View menu","(8) Check or remove an existing reservation","(13) View sales revenue report","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(4) Create new order","(9) Assign table","(14) Shut down app","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(5) View existing order","(10) Check table availability","","|");
+        System.out.println("+" + "-".repeat(164) + "+");
     }
+
+    public static int getOption() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+        printAppOptions();
+        System.out.print("Enter option: ");
+        int option = GetInput.getIntFromRange(1,14);
+        System.out.println("");
+        return option;
+    }
+
+
 }

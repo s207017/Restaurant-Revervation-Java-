@@ -199,12 +199,12 @@ public class Table {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Table: %d - Capacity: %d\n", tableNum, capacity));
-        reservations.forEach((k, v) -> sb.append(String.format("\tDate: %s %s at %s for %s\n",
+        sb.append(String.format("\nTable: %d - Capacity: %d\n", tableNum, capacity));
+        reservations.forEach((k, v) -> sb.append(String.format("\tDate: %s %s at %s:00\n\t%s",
                 k.getDayOfMonth(), k.getMonth(),
                 k.getHour(), v)));
         if (reservations.isEmpty()){
-            System.out.println("No Reservations.");
+            System.out.println("No reservations.");
         }
         return sb.toString();
     }
