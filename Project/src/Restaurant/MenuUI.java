@@ -276,7 +276,7 @@ public class MenuUI {
     }
 
 
-    public void createSetPackageUI(){
+    public void createSetPackageUI() throws IOException {
         double maxPrice, discountRate, finalPrice, end;
         int mainMenuID, sideMenuID;
         boolean invalidInput;

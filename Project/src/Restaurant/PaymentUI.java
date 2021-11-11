@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.DoubleToIntFunction;
 
@@ -93,7 +94,7 @@ public class PaymentUI {
         System.out.printf("Sub-total: %.2f \nTax: %.2f \nTotal: %.2f \n",this.payment.getSubTotal(),this.payment.getTax(),(this.payment.getSubTotal() + this.payment.getTax()));
     }
 
-    public void checkMembership() {
+    public void checkMembership() throws IOException {
         int isMember = 0;
         int phoneNumber = -1;
         char selection;
@@ -136,7 +137,7 @@ public class PaymentUI {
         }
     }
 
-    public void makePayment() {
+    public void makePayment() throws IOException {
         char selection;
         System.out.println();
         System.out.print("Payment received? [Y/N]: ");
@@ -176,7 +177,7 @@ public class PaymentUI {
         newReceipt.printReceipt(staffID);
     }
 
-    public void addToHistory(){
+    public void addToHistory() throws IOException {
         this.payment.pushItemsToHistory(transHistDayArrayList);
     }
 
@@ -185,7 +186,7 @@ public class PaymentUI {
      * this function will continue with the rest of the payment functions
      * else, return to main function
      */
-    public void makePaymentUI(){
+    public void makePaymentUI() throws IOException {
         if(selectPaymentMethod() && selectTable()){
             showAmount();
             checkMembership();
