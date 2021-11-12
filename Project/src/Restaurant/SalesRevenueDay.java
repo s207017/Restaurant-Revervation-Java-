@@ -33,19 +33,20 @@ public class SalesRevenueDay {
         double tempSum;
         double fullSum = 0;
         System.out.println();
-        System.out.println("=".repeat(62));
+        System.out.println("=".repeat(73));
         System.out.printf("Summary of sales on %s: \n", date);
-        System.out.printf(" %-30s| %-8s| %-6s| %-10s\n","ITEM","PRICE","QTY","REVENUE");
-        System.out.println("-".repeat(62));
+        System.out.println("-".repeat(73));
+        System.out.printf(" %-30s| %-8s| %-7s| %-10s\n","ITEM","PRICE","QTY","REVENUE");
+        System.out.println("-".repeat(73));
         for (TransHistItem x : this.summaryList) {
             tempSum = x.getPrice() * x.getQuantity();
             fullSum += tempSum;
-            System.out.printf(" %-30s| %-8.2f| %-6d| %-10.2f\n",
+            System.out.printf(" %-30s| %-8.2f| %-7d| %-10.2f\n",
                     x.getItem(), x.getPrice(), x.getQuantity(), tempSum);
         }
-        System.out.println("-".repeat(62));
+        System.out.println("-".repeat(73));
         System.out.printf("TOTAL REVENUE FOR DAY: %.2f\n", fullSum);
-        System.out.println("=".repeat(62));
+        System.out.println("=".repeat(73));
     }
 
     /**
@@ -115,19 +116,19 @@ class SalesRevenuePeriod extends SalesRevenueDay{
         double tempSum;
         double fullSum = 0;
         System.out.println();
-        System.out.println("=".repeat(62));
+        System.out.println("=".repeat(73));
         System.out.printf("Summary of sales between %s and %s: \n", date, endDate);
-        System.out.println("-".repeat(62));
-        System.out.printf(" %-30s| %-8s| %-6s| %-10s\n", "ITEM", "PRICE", "QTY", "REVENUE");
-        System.out.println("-".repeat(62));
+        System.out.println("-".repeat(73));
+        System.out.printf(" %-30s| %-8s| %-7s| %-10s\n", "ITEM", "PRICE", "QTY", "REVENUE");
+        System.out.println("-".repeat(73));
         for (TransHistItem x : this.summaryList) {
             tempSum = x.getPrice() * x.getQuantity();
             fullSum += tempSum;
-            System.out.printf(" %-30s| %-8.2f| %-6d| %-10.2f\n",
+            System.out.printf(" %-30s| %-8.2f| %-7d| %-10.2f\n",
                     x.getItem(), x.getPrice(), x.getQuantity(), tempSum);
         }
-        System.out.println("-".repeat(62));
+        System.out.println("-".repeat(73));
         System.out.printf("TOTAL REVENUE FOR PERIOD: %.2f\n", fullSum);
-        System.out.println("=".repeat(62));
+        System.out.println("=".repeat(73));
     }
 }
