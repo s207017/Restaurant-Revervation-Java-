@@ -1,0 +1,465 @@
+@startuml
+
+title __RESTAURANT's Class Diagram__\n
+
+  namespace Restaurant {
+    class Restaurant.CashPayment {
+        - cashPaid : double
+        + CashPayment()
+        + getCashPaid()
+        + getChange()
+        + setCashPaid()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.GetInput {
+        {static} ~ inputC : char
+        {static} ~ inputD : double
+        {static} ~ inputI : int
+        {static} ~ inputS : String
+        {static} ~ sc : Scanner
+        {static} + getChar()
+        {static} + getDouble()
+        {static} + getDoubleFromRange()
+        {static} + getInt()
+        {static} + getIntFromRange()
+        {static} + getString()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.GetPeriod {
+        {static} - datesInMonth : int[]
+        {static} - datesInMonthLeap : int[]
+        {static} + getDate()
+        {static} + getDateAndTime()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MainUI {
+        {static} + getOption()
+        {static} + main()
+        {static} + pressAnyKeyToContinue()
+        {static} + printAppOptions()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Member {
+        - Number : int
+        + Member()
+        + getNumber()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Membership {
+        ~ membersList : ArrayList<Member>
+        + Membership()
+        + addMember()
+        + checkMembership()
+        + getMembersList()
+        + updateMembershipText()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MembershipController {
+        + MembershipController()
+        + addMember()
+        + removeMember()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Menu {
+        - dessertItems : ArrayList<MenuItem>
+        - drinkItems : ArrayList<MenuItem>
+        - mainCourseItems : ArrayList<MenuItem>
+        - setPackageItems : ArrayList<SetPackage>
+        - sideItems : ArrayList<MenuItem>
+        + IDExists()
+        + Menu()
+        + checkIfNameExists()
+        + createNewMenuItem()
+        + createNewSetPackage()
+        + getDessertItems()
+        + getDrinkItems()
+        + getMainCourseItems()
+        + getMenuItemFromID()
+        + getSetPackageItemFromID()
+        + getSetPackageItems()
+        + getSideItems()
+        + printDesert()
+        + printDrink()
+        + printDrinkLTEPrice()
+        + printMainCourse()
+        + printMenu()
+        + printSetPackage()
+        + printSide()
+        + removeMenuItem()
+        + updateMenuItembool()
+        + updateMenuToFile()
+        + updateSetPackageFile()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MenuController {
+        + MenuController()
+        + createNewMenuItemUI()
+        + createSetPackageUI()
+        + printChangeTypes()
+        + printExistingMenu()
+        + printMenuTypes()
+        + printOptionsMenuItems()
+        + printOptionsSetPackages()
+        + printUpdatedMenu()
+        + removeMenuItemUI()
+        + removeSetPackageUI()
+        + updateMenuItemUI()
+        + updateSetPackageUI()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MenuItem {
+        # description : String
+        # itemID : int
+        # itemName : String
+        # price : double
+        + MenuItem()
+        + getDescription()
+        + getItemID()
+        + getItemName()
+        + getPrice()
+        + setDescription()
+        + setItemID()
+        + setItemName()
+        + setPrice()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Order {
+        - date : LocalDateTime
+        {static} - menu : Menu
+        - orderID : int
+        - orderList : ArrayList<OrderItem>
+        {static} - orderNum : int
+        - staffID : int
+        - tableNum : int
+        - total : double
+        + Order()
+        + addOrderItems()
+        + addTotal()
+        + checkItemExistence()
+        + getDate()
+        + getOrderID()
+        + getOrderItemList()
+        + getStaffID()
+        + getTableNum()
+        + getTotal()
+        + isOrderCompleted()
+        + printOrder()
+        + removeOrderItems()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.OrderController {
+        + OrderController()
+        + addItemsToOrder()
+        + checkTableOrder()
+        + printAddRemove()
+        + removeItemsFromOrder()
+        + viewOrder()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.OrderItem {
+        - quantityCompleted : int
+        - quantityOrdered : int
+        + OrderItem()
+        + addQuantityOrdered()
+        + getItem()
+        + getQuantityCompleted()
+        + getQuantityOrdered()
+        + orderCompleted()
+        + setQuantityCompleted()
+        + subtractQuantityOrdered()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Payment {
+        # discountApplied : double
+        # paymentComplete : boolean
+        # subtotal : double
+        # tables : ArrayList<Table>
+        # tax : double
+        + Payment()
+        + addTable()
+        + applyDiscount()
+        + calculateSubTotal()
+        + calculateTax()
+        + checkPaymentComplete()
+        + getDiscountApplied()
+        + getSubTotal()
+        + getTables()
+        + getTax()
+        + pushItemsToHistory()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.PaymentController {
+        - transHistDayArrayList : ArrayList<TransHistDay>
+        + PaymentController()
+        + addToHistory()
+        + checkMembership()
+        + generateReceipt()
+        + makePayment()
+        + makePaymentController()
+        + selectPaymentMethod()
+        + selectTable()
+        + showAmount()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Receipt {
+        - orderList : ArrayList<Order>
+        + Receipt()
+        + printReceipt()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Reservation {
+        - name : String
+        - pax : int
+        - tel : int
+        + Reservation()
+        + getName()
+        + getPax()
+        + getTel()
+        + toString()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.ReservationController {
+        + ReservationController()
+        + checkReservationBooking()
+        + createReservationBooking()
+        + getCheckingPossibleReservationDateTimes()
+        + getPossibleReservationDateTimes()
+        + printCheckRemove()
+        + removeReservationBooking()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Restaurant {
+        - staffList : ArrayList<Staff>
+        - tableList : ArrayList<Table>
+        - transactionHistory : ArrayList<TransHistDay>
+        + Restaurant()
+        + addStaff()
+        + addTable()
+        + getAvailableTables()
+        + getMenu()
+        + getStaffFromID()
+        + getTableFromReservationHashMap()
+        + getTableFromTableNum()
+        + getTableList()
+        + getTransactionHistory()
+        + removeReservation()
+        + reserveTable()
+        + toString()
+        + writeReservationsToTextFile()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SalesRevenueReport {
+        - endDate : LocalDateTime
+        - startDate : LocalDateTime
+        - summaryList : ArrayList<TransHistItem>
+        - transHist : ArrayList<TransHistDay>
+        + SalesRevenueReport()
+        + generateReport()
+        + itemExists()
+        + printReport()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SalesRevenueReportController {
+        + SalesRevenueReportController()
+        + createDaySalesReport()
+        + createPeriodSalesReport()
+        + printSalesRevenueReport()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SetPackage {
+        - maxDrinkPrice : double
+        - numDrink : int
+        - numMainCourse : int
+        - numSide : int
+        - setItems : ArrayList<MenuItem>
+        + SetPackage()
+        + addDrink()
+        + addMainCourse()
+        + addSide()
+        + getMaxDrinkPrice()
+        + getSetItems()
+        + setMaxDrinkPrice()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Staff {
+        - staffID : int
+        + Staff()
+        + getStaffID()
+        + setStaffID()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Table {
+        - capacity : int
+        - pax : int
+        - reservations : Map<LocalDateTime, Reservation>
+        - tableNum : int
+        + Table()
+        + deleteReservationFromHashMap()
+        + freeTable()
+        + getCapacity()
+        + getOrder()
+        + getPax()
+        + getReservations()
+        + getTableNum()
+        + getTableStatus()
+        + occupyTable()
+        + setOrder()
+        + setPax()
+        + setTableStatus()
+        + toString()
+        ~ isFree()
+        ~ reserve()
+        ~ updateReservationsAccordingToCurrentTime()
+        ~ updateTableStatus()
+    }
+  }
+  
+
+  namespace Restaurant {
+    enum Level {
+      FREE
+      OCCUPIED
+      RESERVED
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TableAvailabilityController {
+        + TableAvailabilityController()
+        + askForPax()
+        + assignTable()
+        + assignTable()
+        + checkTableAvailability()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TransHistDay {
+        - date : LocalDateTime
+        - transList : ArrayList<TransHistItem>
+        + TransHistDay()
+        + addTransHistItem()
+        + findTransHist()
+        + getDate()
+        + getTransList()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TransHistItem {
+        - item : String
+        - price : double
+        - quantity : int
+        + TransHistItem()
+        + getItem()
+        + getPrice()
+        + getQuantity()
+        + setItem()
+        + setPrice()
+        + setQuantity()
+    }
+  }
+  
+
+  Restaurant.CashPayment -up-|> Restaurant.Payment
+  Restaurant.MembershipController o-- Restaurant.Membership : memberShip
+  Restaurant.MenuController o-- Restaurant.Menu : menu
+  Restaurant.OrderController o-- Restaurant.Menu : menu
+  Restaurant.OrderController o-- Restaurant.Restaurant : restaurant
+  Restaurant.OrderItem o-- Restaurant.MenuItem : item
+  Restaurant.PaymentController o-- Restaurant.Membership : m
+  Restaurant.PaymentController o-- Restaurant.CashPayment : payByCash
+  Restaurant.PaymentController o-- Restaurant.Payment : payment
+  Restaurant.PaymentController o-- Restaurant.Restaurant : r
+  Restaurant.PaymentController o-- Restaurant.Staff : s
+  Restaurant.Receipt o-- Restaurant.Payment : payment
+  Restaurant.ReservationController o-- Restaurant.Restaurant : r
+  Restaurant.Restaurant o-- Restaurant.Menu : menu
+  Restaurant.SalesRevenueReportController o-- Restaurant.Restaurant : restaurant
+  Restaurant.SetPackage -up-|> Restaurant.MenuItem
+  Restaurant.Table o-- Restaurant.Order : order
+  Restaurant.Table o-- Restaurant.Table.Level : tableStatus
+  Restaurant.Table +-down- Restaurant.Table.Level
+  Restaurant.TableAvailabilityController o-- Restaurant.Restaurant : r
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

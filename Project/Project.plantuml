@@ -1,0 +1,330 @@
+@startuml
+
+title __CZ2002's Class Diagram__\n
+
+  namespace Restaurant {
+    class Restaurant.CardPayment {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.CashPayment {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.CashPayment {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.GetInput {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.GetPeriod {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MainUI {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Member {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Member {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Membership {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Membership {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MembershipController {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Menu {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Menu {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MenuController {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MenuItem {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MenuItem {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Order {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Order {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.OrderController {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.OrderItem {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.OrderItem {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Payment {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Payment {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.PaymentController {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Receipt {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Receipt {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Reservation {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Reservation {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.ReservationController {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Restaurant {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Restaurant {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SalesRevenueReport {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SalesRevenueReport {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SalesRevenueReportController {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SetPackage {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.SetPackage {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Staff {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Table {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.Table {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TableAvailabilityController {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TransHistDay {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TransHistDay {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TransHistItem {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TransHistItem {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.TransactionHistory {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.arraylisttest {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.testAppClass {
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.testfortextfile {
+    }
+  }
+  
+
+  Restaurant.CardPayment -up-|> Restaurant.Payment
+  Restaurant.CashPayment -up-|> Restaurant.Payment
+  Restaurant.CashPayment -up-|> Restaurant.Payment
+  Restaurant.MembershipController o-- Restaurant.Membership : memberShip
+  Restaurant.MenuController o-- Restaurant.Menu : menu
+  Restaurant.OrderController o-- Restaurant.Menu : menu
+  Restaurant.OrderController o-- Restaurant.Restaurant : restaurant
+  Restaurant.OrderItem o-- Restaurant.MenuItem : item
+  Restaurant.OrderItem o-- Restaurant.MenuItem : item
+  Restaurant.Payment o-- Restaurant.Membership : membership
+  Restaurant.PaymentController o-- Restaurant.Membership : m
+  Restaurant.PaymentController o-- Restaurant.CashPayment : payByCash
+  Restaurant.PaymentController o-- Restaurant.Payment : payment
+  Restaurant.PaymentController o-- Restaurant.Restaurant : r
+  Restaurant.PaymentController o-- Restaurant.Staff : s
+  Restaurant.Receipt o-- Restaurant.Payment : payment
+  Restaurant.Receipt o-- Restaurant.Payment : payment
+  Restaurant.ReservationController o-- Restaurant.Restaurant : r
+  Restaurant.Restaurant o-- Restaurant.Menu : menu
+  Restaurant.SalesRevenueReportController o-- Restaurant.Restaurant : restaurant
+  Restaurant.SetPackage -up-|> Restaurant.MenuItem
+  Restaurant.SetPackage -up-|> Restaurant.MenuItem
+  Restaurant.Table o-- Restaurant.Order : order
+  Restaurant.Table o-- Restaurant.Order : order
+  Restaurant.Table o-- Restaurant.Table.Level : tableStatus
+  Restaurant.TableAvailabilityController o-- Restaurant.Restaurant : r
+  Restaurant.testfortextfile o-- Restaurant.MenuItem : item
+  Restaurant.testfortextfile o-- Restaurant.Menu : testmenu
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
