@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static jdk.internal.org.jline.utils.Colors.s;
 
 public class Table {
     private int tableNum;

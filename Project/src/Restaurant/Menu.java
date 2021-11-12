@@ -81,6 +81,7 @@ public class Menu {
                             System.out.println("ERROR");
                             break;
                     }
+
                 }
                 x++;
             }
@@ -88,6 +89,8 @@ public class Menu {
             textfile.close();
         }
     }
+
+
 
 
     public void updateMenuToFile(ArrayList<MenuItem> menuItems, String menuType) throws IOException {
@@ -388,51 +391,47 @@ public class Menu {
 
 
 
-//    public void updateMenuItem(int ID, int changeOption) throws IOException {
-//        switch (changeOption) {
-//            case 1:
-//                System.out.println("What is the new price?");
-//                double newPrice = GetInput.getDouble();
-//                getMenuItemFromID(ID).setPrice(newPrice);
-//                break;
-//            case 2:
-//                System.out.println("What is the new name?");
-//                String newName = GetInput.getString();
-//                while (this.checkIfNameExists(newName)){
-//                    System.out.println("The name already exists in the menu");
-//                    System.out.print("Please enter a new name: ");
-//                    newName = GetInput.getString();
-//                }
-//                getMenuItemFromID(ID).setItemName(newName);
-//                break;
-//            case 3:
-//                System.out.println("What is the new description?");
-//                String newDesc = GetInput.getString();
-//                getMenuItemFromID(ID).setDescription(newDesc);
-//                break;
-//            case 4:
-//                  System.out.println("Exiting update of menu...");
-//                break;
-//            default:
-//                break;
-//        }
-//        updateMenuToFile(mainCourseItems,"maincourseitems");
-//        updateMenuToFile(sideItems,"sideitems");
-//        updateMenuToFile(drinkItems,"drinkitems");
-//        updateMenuToFile(dessertItems,"dessertitems");
-//    }
+    public void updateMenuItem(int ID, int changeOption) throws IOException {
+        switch (changeOption) {
+            case 1:
+                System.out.println("What is the new price?");
+                double newPrice = GetInput.getDouble();
+                getMenuItemFromID(ID).setPrice(newPrice);
+                break;
+            case 2:
+                System.out.println("What is the new name?");
+                String newName = GetInput.getString();
+                while (this.checkIfNameExists(newName)){
+                    System.out.println("The name already exists in the menu");
+                    System.out.print("Please enter a new name: ");
+                    newName = GetInput.getString();
+                }
+                getMenuItemFromID(ID).setItemName(newName);
+                break;
+            case 3:
+                System.out.println("What is the new description?");
+                String newDesc = GetInput.getString();
+                getMenuItemFromID(ID).setDescription(newDesc);
+                break;
+            case 4:
+//                System.out.println("Exiting update of menu...");
+                break;
+            default:
+                break;
+        }
+        updateMenuToFile(mainCourseItems,"maincourseitems");
+        updateMenuToFile(sideItems,"sideitems");
+        updateMenuToFile(drinkItems,"drinkitems");
+        updateMenuToFile(dessertItems,"dessertitems");
+    }
 
-    public boolean updateMenuItembool(int ID, int changeOption, boolean counts,boolean isSetPackage) throws IOException {
+    public boolean updateMenuItembool(int ID, int changeOption, boolean counts) throws IOException {
         boolean updated = false;
         switch (changeOption) {
             case 1:
                 System.out.println("What is the new price?");
                 double newPrice = GetInput.getDouble();
-                if (isSetPackage == false) {
-                    getMenuItemFromID(ID).setPrice(newPrice);
-                }else{
-                    getSetPackageItemFromID(ID).setPrice(newPrice);
-                }
+                getMenuItemFromID(ID).setPrice(newPrice);
                 updated = true;
                 break;
             case 2:
@@ -443,21 +442,13 @@ public class Menu {
                     System.out.print("Please enter a new name: ");
                     newName = GetInput.getString();
                 }
-                if (isSetPackage == false) {
-                    getMenuItemFromID(ID).setItemName(newName);
-                }else{
-                    getSetPackageItemFromID(ID).setItemName(newName);
-                }
+                getMenuItemFromID(ID).setItemName(newName);
                 updated = true;
                 break;
             case 3:
                 System.out.println("What is the new description?");
                 String newDesc = GetInput.getString();
-                if (isSetPackage == false) {
-                    getMenuItemFromID(ID).setDescription(newDesc);
-                }else{
-                    getSetPackageItemFromID(ID).setDescription(newDesc);
-                }
+                getMenuItemFromID(ID).setDescription(newDesc);
                 updated = true;
                 break;
             case 4:
@@ -470,14 +461,6 @@ public class Menu {
         updateMenuToFile(sideItems,"sideitems");
         updateMenuToFile(drinkItems,"drinkitems");
         updateMenuToFile(dessertItems,"dessertitems");
-        BufferedWriter bw = new BufferedWriter(
-                new FileWriter("./textfiles/setpackageitems.txt", false)
-        );
-
-        for (SetPackage item: setPackageItems){
-            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
-        }
-        bw.close();
         return updated;
     }
 
