@@ -348,7 +348,7 @@ public class MenuController {
                     System.out.println("Enter the new discount rate below");
                 }
             } while (true);
-            menu.createNewSetPackage(name, finalPrice, desc, setItems);
+            menu.createNewSetPackage(name, finalPrice, desc, setItems,maxPrice);
             System.out.println();
             System.out.println("(1) Create another set package");
             System.out.println("(2) Return to the set package interface");

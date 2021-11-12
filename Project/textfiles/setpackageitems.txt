@@ -4,27 +4,25 @@ Happy Meal
 Puts a smile on your face
 101
 201
+3.0
 Sad Meal
 502
 2.0
 Saddie
 102
 202
+10.0
 PPPP
 503
 24.75
 test
 103
 204
-yummy fuud
+1.5
+newtest
 504
-22.5
-i like elephants
-104
-201
--1
-505
-22.32
-8
+42.300000000000004
+es
 101
 201
+20.0
