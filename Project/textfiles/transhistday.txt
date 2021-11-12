@@ -54,4 +54,9 @@ new-record
 Happy Meal
 3
 10.0
+new-record
+2021-11-13T01:58:39.325496800
+Sad Meal
+1
+2.0
 last-record
