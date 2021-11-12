@@ -104,6 +104,17 @@ public class Menu {
         bw.close();
     }
 
+    public void updateSetPackageFile() throws IOException {
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/setpackageitems.txt", false)
+        );
+
+        for (SetPackage item: setPackageItems){
+            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
+        }
+        bw.close();
+    }
+
     public ArrayList<MenuItem> getMainCourseItems() {
         return mainCourseItems;
     }
@@ -332,15 +343,7 @@ public class Menu {
             }
         }
         setPackageItems.add(newPackage);
-
-        BufferedWriter bw = new BufferedWriter(
-                new FileWriter("./textfiles/setpackageitems.txt", false)
-        );
-
-        for (SetPackage item: setPackageItems){
-            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
-        }
-        bw.close();
+        updateSetPackageFile();
     }
     //updating of menuItems done directly in the application!
     public void removeMenuItem(int menuItemType, int menuItemID) throws IOException {
@@ -384,54 +387,47 @@ public class Menu {
                 for(int i=toUpdateID;i< setPackageItems.size();i++){
                     setPackageItems.get(i).setItemID(501+i);
                 }
-                //updateMenuToFile(dessertItems,"dessertitems");
+                updateSetPackageFile();
                 break;
         }
     }
 
 
 
-    public void updateMenuItem(int ID, int changeOption) throws IOException {
-        switch (changeOption) {
-            case 1:
-                System.out.println("What is the new price?");
-                double newPrice = GetInput.getDouble();
-                getMenuItemFromID(ID).setPrice(newPrice);
-                break;
-            case 2:
-                System.out.println("What is the new name?");
-                String newName = GetInput.getString();
-                while (this.checkIfNameExists(newName)){
-                    System.out.println("The name already exists in the menu");
-                    System.out.print("Please enter a new name: ");
-                    newName = GetInput.getString();
-                }
-                getMenuItemFromID(ID).setItemName(newName);
-                break;
-            case 3:
-                System.out.println("What is the new description?");
-                String newDesc = GetInput.getString();
-                getMenuItemFromID(ID).setDescription(newDesc);
-                break;
-            case 4:
-//                System.out.println("Exiting update of menu...");
-                break;
-            default:
-                break;
-        }
-        updateMenuToFile(mainCourseItems,"maincourseitems");
-        updateMenuToFile(sideItems,"sideitems");
-        updateMenuToFile(drinkItems,"drinkitems");
-        updateMenuToFile(dessertItems,"dessertitems");
-        BufferedWriter bw = new BufferedWriter(
-                new FileWriter("./textfiles/setpackageitems.txt", false)
-        );
-
-        for (SetPackage item: setPackageItems){
-            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
-        }
-        bw.close();
-    }
+//    public void updateMenuItem(int ID, int changeOption) throws IOException {
+//        switch (changeOption) {
+//            case 1:
+//                System.out.println("What is the new price?");
+//                double newPrice = GetInput.getDouble();
+//                getMenuItemFromID(ID).setPrice(newPrice);
+//                break;
+//            case 2:
+//                System.out.println("What is the new name?");
+//                String newName = GetInput.getString();
+//                while (this.checkIfNameExists(newName)){
+//                    System.out.println("The name already exists in the menu");
+//                    System.out.print("Please enter a new name: ");
+//                    newName = GetInput.getString();
+//                }
+//                getMenuItemFromID(ID).setItemName(newName);
+//                break;
+//            case 3:
+//                System.out.println("What is the new description?");
+//                String newDesc = GetInput.getString();
+//                getMenuItemFromID(ID).setDescription(newDesc);
+//                break;
+//            case 4:
+////                System.out.println("Exiting update of menu...");
+//                break;
+//            default:
+//                break;
+//        }
+//        updateMenuToFile(mainCourseItems,"maincourseitems");
+//        updateMenuToFile(sideItems,"sideitems");
+//        updateMenuToFile(drinkItems,"drinkitems");
+//        updateMenuToFile(dessertItems,"dessertitems");
+//        updateSetPackageFile();
+//    }
 
     public boolean updateMenuItembool(int ID, int changeOption, boolean counts, boolean set) throws IOException {
         boolean updated = false;
@@ -481,6 +477,7 @@ public class Menu {
         updateMenuToFile(sideItems,"sideitems");
         updateMenuToFile(drinkItems,"drinkitems");
         updateMenuToFile(dessertItems,"dessertitems");
+        updateSetPackageFile();
         return updated;
     }
 
