@@ -1,6 +1,7 @@
 package Restaurant;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 public class MainUI {
@@ -44,46 +45,56 @@ public class MainUI {
             option = getOption();
             switch (option) {
                 case 1: //Create/update/remove menu item
-                    do {
-                        menuController.printOptionsMenuItems();
-                        choice = GetInput.getIntFromRange(1, 4);
-                        switch (choice) {
-                            case 1:
-                                menuController.createNewMenuItemUI();
-                                break;
-                            case 2:
-                                menuController.updateMenuItemUI();
-                                break;
-                            case 3:
-                                menuController.removeMenuItemUI();
-                                break;
-                            case 4:
-                                break;
-                            default:
-                                break;
-                        }
-                    } while (choice != 4);
+                    if(restaurant.getAvailableTables(0, LocalDateTime.now()).size() == restaurant.getTableList().size()) {
+                        do {
+                            menuController.printOptionsMenuItems();
+                            choice = GetInput.getIntFromRange(1, 4);
+                            switch (choice) {
+                                case 1:
+                                    menuController.createNewMenuItemUI();
+                                    break;
+                                case 2:
+                                    menuController.updateMenuItemUI();
+                                    break;
+                                case 3:
+                                    menuController.removeMenuItemUI();
+                                    break;
+                                case 4:
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } while (choice != 4);
+                    }
+                    else{
+                        System.out.println("You cannot alter the menu while the restaurant has customers!");
+                    }
                     break;
                 case 2: // Create/update/remove set packages
-                    do {
-                        menuController.printOptionsSetPackages();
-                        choice = GetInput.getIntFromRange(1, 4);
-                        switch (choice) {
-                            case 1:
-                                menuController.createSetPackageUI();
-                                break;
-                            case 2:
-                                menuController.updateSetPackageUI();
-                                break;
-                            case 3:
-                                menuController.removeSetPackageUI();
-                                break;
-                            case 4:
-                                break;
-                            default:
-                                break;
-                        }
-                    } while (choice != 4);
+                    if(restaurant.getAvailableTables(0, LocalDateTime.now()).size() == restaurant.getTableList().size()) {
+                        do {
+                            menuController.printOptionsSetPackages();
+                            choice = GetInput.getIntFromRange(1, 4);
+                            switch (choice) {
+                                case 1:
+                                    menuController.createSetPackageUI();
+                                    break;
+                                case 2:
+                                    menuController.updateSetPackageUI();
+                                    break;
+                                case 3:
+                                    menuController.removeSetPackageUI();
+                                    break;
+                                case 4:
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } while (choice != 4);
+                    }
+                    else{
+                        System.out.println("You cannot alter the menu while the restaurant has customers!");
+                    }
                     break;
                 case 3:
                     restaurant.getMenu().printMenu();
