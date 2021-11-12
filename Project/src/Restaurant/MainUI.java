@@ -200,7 +200,7 @@ public class MainUI {
 
     public static void pressEnterToContinue()
     {
-        System.out.println("*PRESS ENTER TO CONTINUE");
+        System.out.print("*PRESS ENTER TO CONTINUE");
         try
         {
             System.in.read();
