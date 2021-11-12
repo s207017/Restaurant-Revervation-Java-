@@ -3,16 +3,16 @@ package Restaurant;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Main {
+public class MainUI {
     public static void main(String[] arg) throws IOException, InterruptedException {
         Restaurant restaurant = new Restaurant();
-        MenuUI menuUI = new MenuUI(restaurant.getMenu());
-        ReservationUI reservationUI = new ReservationUI(restaurant);
-        TableAvailabilityUI tableAvailabilityUI = new TableAvailabilityUI(restaurant);
-        SalesRevenueReportUI salesRevenueReportUI = new SalesRevenueReportUI(restaurant);
-        OrderUI orderUI = new OrderUI(restaurant.getMenu(), restaurant);
+        MenuController menuController = new MenuController(restaurant.getMenu());
+        ReservationController reservationController = new ReservationController(restaurant);
+        TableAvailabilityController tableAvailabilityController = new TableAvailabilityController(restaurant);
+        SalesRevenueReportController salesRevenueReportController = new SalesRevenueReportController(restaurant);
+        OrderController orderController = new OrderController(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
-        MembershipUI membershipUI = new MembershipUI(membership);
+        MembershipController membershipController = new MembershipController(membership);
 
         //gets staffID from the staff using the UI
         Staff thisStaff;
@@ -30,7 +30,7 @@ public class Main {
             count++;
         }while(thisStaff==null);
 
-        PaymentUI paymentUI = new PaymentUI(restaurant,membership, restaurant.getTransactionHistory(),thisStaff);
+        PaymentController paymentController = new PaymentController(restaurant,membership, restaurant.getTransactionHistory(),thisStaff);
 
         System.out.println("Logging you in to OOPsie RRPSS...");
         TimeUnit.SECONDS.sleep(1);
@@ -45,17 +45,17 @@ public class Main {
             switch (option) {
                 case 1: //Create/update/remove menu item
                     do {
-                        menuUI.printOptionsMenuItems();
+                        menuController.printOptionsMenuItems();
                         choice = GetInput.getIntFromRange(1, 4);
                         switch (choice) {
                             case 1:
-                                menuUI.createNewMenuItemUI();
+                                menuController.createNewMenuItemUI();
                                 break;
                             case 2:
-                                menuUI.updateMenuItemUI();
+                                menuController.updateMenuItemUI();
                                 break;
                             case 3:
-                                menuUI.removeMenuItemUI();
+                                menuController.removeMenuItemUI();
                                 break;
                             case 4:
                                 break;
@@ -66,17 +66,17 @@ public class Main {
                     break;
                 case 2: // Create/update/remove set packages
                     do {
-                        menuUI.printOptionsSetPackages();
+                        menuController.printOptionsSetPackages();
                         choice = GetInput.getIntFromRange(1, 4);
                         switch (choice) {
                             case 1:
-                                menuUI.createSetPackageUI();
+                                menuController.createSetPackageUI();
                                 break;
                             case 2:
-                                menuUI.updateSetPackageUI();
+                                menuController.updateSetPackageUI();
                                 break;
                             case 3:
-                                menuUI.removeSetPackageUI();
+                                menuController.removeSetPackageUI();
                                 break;
                             case 4:
                                 break;
@@ -90,40 +90,40 @@ public class Main {
                     pressAnyKeyToContinue();
                     break;
                 case 4:
-                    orderUI.addItemsToOrder();
+                    orderController.addItemsToOrder();
                     break;
                 case 5:
-                    orderUI.checkTableOrder();
+                    orderController.checkTableOrder();
                     break;
                 case 6:
-                    orderUI.printAddRemove();
+                    orderController.printAddRemove();
                     System.out.print("Enter your option: ");
                     choice = GetInput.getIntFromRange(1, 3);
                     switch (choice) {
                         case 1:
-                            orderUI.addItemsToOrder(); //same as case 3
+                            orderController.addItemsToOrder(); //same as case 3
                             break;
                         case 2:
-                            orderUI.removeItemsFromOrder();
+                            orderController.removeItemsFromOrder();
                             break;
                         case 3:
                             break;
                     }
                     break;
                 case 7:
-                    reservationUI.createReservationBooking();
+                    reservationController.createReservationBooking();
                     break;
                 case 8:
 
-                    reservationUI.printCheckRemove();
+                    reservationController.printCheckRemove();
                     System.out.print("Enter your choice: ");
                     choice = GetInput.getIntFromRange(1, 3);
                     switch (choice) {
                         case 1:
-                            reservationUI.checkReservationBooking();
+                            reservationController.checkReservationBooking();
                             break;
                         case 2:
-                            reservationUI.removeReservationBooking();
+                            reservationController.removeReservationBooking();
                             break;
                         case 3:
                             break;
@@ -133,17 +133,17 @@ public class Main {
                     System.out.print("*ENTER ANY OTHER KEY TO RETURN\nDoes the customer have a reservation? [Y/N]: ");
                     char YN = GetInput.getChar();
                     if (YN=='y'||YN=='Y'){
-                        tableAvailabilityUI.assignTable(true);
+                        tableAvailabilityController.assignTable(true);
                     }
                     else if (YN=='n'||YN=='N'){
-                        tableAvailabilityUI.assignTable(0);
+                        tableAvailabilityController.assignTable(0);
                     }
                     else{
                         break;
                     }
                     break;
                 case 10:
-                    tableAvailabilityUI.checkTableAvailability();
+                    tableAvailabilityController.checkTableAvailability();
                     break;
                 case 11:
                     System.out.print("Membership functions:\n(1) Add member\n(2) Remove member\n");
@@ -151,19 +151,19 @@ public class Main {
                         System.out.print("*ENTER 3 TO EXIT\nEnter option: ");
                         choice = GetInput.getIntFromRange(1,3);
                         if(choice==1){
-                            membershipUI.addMember();
+                            membershipController.addMember();
                             break;
                         }else{
-                            membershipUI.removeMember();
+                            membershipController.removeMember();
                             break;
                         }
                     }
                     break;
                 case 12:
-                    paymentUI.makePaymentUI();
+                    paymentController.makePaymentController();
                     break;
                 case 13:
-                    salesRevenueReportUI.printSalesRevenueReport();
+                    salesRevenueReportController.printSalesRevenueReport();
                     break;
                 case 14:
                     restaurant.writeReservationsToTextFile();
@@ -175,6 +175,8 @@ public class Main {
 
     public static void printAppOptions(){
         System.out.println("");
+        System.out.println("                                                                                      /\\_/\\");
+        System.out.println("                                                                                     / o o \\");
         System.out.println("+" + "-".repeat(164) + "+");
         System.out.printf("|%100s%65s\n","OOPsie Restaurant Reservation & Point of Sale App","|");
         System.out.println("+" + "-".repeat(164) + "+");

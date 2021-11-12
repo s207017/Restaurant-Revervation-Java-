@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TableAvailabilityUI {
+public class TableAvailabilityController {
     private Restaurant r;
 
 
@@ -15,7 +15,7 @@ public class TableAvailabilityUI {
      * constructor
      * @param r instantiates restaurant
      */
-    public TableAvailabilityUI(Restaurant r){
+    public TableAvailabilityController(Restaurant r){
         this.r = r;
     }
 

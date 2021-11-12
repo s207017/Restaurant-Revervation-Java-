@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
-public class MenuUI {
+public class MenuController {
     private Menu menu;
 
-    public MenuUI(Menu menu) {
+    public MenuController(Menu menu) {
         this.menu = menu;
     }
 

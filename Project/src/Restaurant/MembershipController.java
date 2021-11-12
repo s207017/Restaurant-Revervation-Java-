@@ -3,10 +3,10 @@ package Restaurant;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MembershipUI {
+public class MembershipController {
     private Membership memberShip;
 
-    public MembershipUI(Membership memberShip) {
+    public MembershipController(Membership memberShip) {
         this.memberShip = memberShip;
     }
 

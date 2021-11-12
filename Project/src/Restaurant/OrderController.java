@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
-public class OrderUI {
+public class OrderController {
     private Menu menu;
     private Restaurant restaurant;
-    public OrderUI(Menu menu, Restaurant restaurant){
+    public OrderController(Menu menu, Restaurant restaurant){
         this.menu = menu;
         this.restaurant = restaurant;
     }
