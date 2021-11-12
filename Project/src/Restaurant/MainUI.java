@@ -87,7 +87,7 @@ public class MainUI {
                     break;
                 case 3:
                     restaurant.getMenu().printMenu();
-                    pressAnyKeyToContinue();
+                    pressEnterToContinue();
                     break;
                 case 4:
                     orderController.addItemsToOrder();
@@ -114,7 +114,6 @@ public class MainUI {
                     reservationController.createReservationBooking();
                     break;
                 case 8:
-
                     reservationController.printCheckRemove();
                     System.out.print("Enter your choice: ");
                     choice = GetInput.getIntFromRange(1, 3);
@@ -144,6 +143,7 @@ public class MainUI {
                     break;
                 case 10:
                     tableAvailabilityController.checkTableAvailability();
+                    pressEnterToContinue();
                     break;
                 case 11:
                     System.out.print("Membership functions:\n(1) Add member\n(2) Remove member\n");
@@ -164,6 +164,7 @@ public class MainUI {
                     break;
                 case 13:
                     salesRevenueReportController.printSalesRevenueReport();
+                    pressEnterToContinue();
                     break;
                 case 14:
                     restaurant.writeReservationsToTextFile();
@@ -175,8 +176,8 @@ public class MainUI {
 
     public static void printAppOptions(){
         System.out.println("");
-        System.out.println("                                                                                      /\\_/\\");
-        System.out.println("                                                                                     / o o \\");
+        System.out.println("                                                                              /\\_/\\");
+        System.out.println("                                                                             / o o \\");
         System.out.println("+" + "-".repeat(164) + "+");
         System.out.printf("|%100s%65s\n","OOPsie Restaurant Reservation & Point of Sale App","|");
         System.out.println("+" + "-".repeat(164) + "+");
@@ -197,9 +198,9 @@ public class MainUI {
         return option;
     }
 
-    public static void pressAnyKeyToContinue()
+    public static void pressEnterToContinue()
     {
-        System.out.println("Press Enter key to continue...");
+        System.out.println("*PRESS ENTER TO CONTINUE");
         try
         {
             System.in.read();
