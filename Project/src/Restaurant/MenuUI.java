@@ -166,7 +166,7 @@ public class MenuUI {
                 this.printChangeTypes();
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1,4);
-                changed = menu.updateMenuItembool(ID, changeOption, true);
+                changed = menu.updateMenuItembool(ID, changeOption, true, false);
                 if (changed){
                     System.out.println("Item updated!");
                 }
@@ -369,7 +369,7 @@ public class MenuUI {
             invalidInput = false;
             System.out.print("Enter the menu item ID of the set package item you would like to remove: ");
             menuItemID = GetInput.getInt();
-            if (501 > menuItemID || menuItemID > 500 + menu.getSideItems().size()){
+            if (501 > menuItemID || menuItemID > 500 + menu.getSetPackageItems().size()){
                 invalidInput = true;
             }
             if (invalidInput) {
@@ -391,7 +391,7 @@ public class MenuUI {
                 invalidInput = false;
                 System.out.print("Enter the menu ID of the set package item you would like to update: ");
                 menuItemID = GetInput.getInt();
-                if (501 > menuItemID || menuItemID > 500 + menu.getSideItems().size()) {
+                if (501 > menuItemID || menuItemID > 500 + menu.getSetPackageItems().size()) {
                     invalidInput = true;
                 }
                 if (invalidInput) {
@@ -401,18 +401,18 @@ public class MenuUI {
                 }
             } while (invalidInput);
             //changeOption = 1;
-
+            System.out.println("check");
             do {
                 System.out.println("Item information: ");
-                System.out.println("Name: " + menu.getMenuItemFromID(menuItemID).getItemName());
-                System.out.println("Price: " + menu.getMenuItemFromID(menuItemID).getPrice());
-                System.out.println("Description: " + menu.getMenuItemFromID(menuItemID).getDescription());
+                System.out.println("Name: " + menu.getSetPackageItems().get(menuItemID - 501).getItemName());
+                System.out.println("Price: " + menu.getSetPackageItems().get(menuItemID - 501).getPrice());
+                System.out.println("Description: " + menu.getSetPackageItems().get(menuItemID - 501).getDescription());
                 System.out.println("-".repeat(40));
                 System.out.println("What do you want to change?");
                 this.printChangeTypes();
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1, 4);
-                changed = menu.updateMenuItembool(menuItemID, changeOption, true);
+                changed = menu.updateMenuItembool(menuItemID, changeOption, true, true);
                 if (changed) {
                     System.out.println("Set package updated!");
                 }

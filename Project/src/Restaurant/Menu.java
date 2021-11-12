@@ -423,15 +423,27 @@ public class Menu {
         updateMenuToFile(sideItems,"sideitems");
         updateMenuToFile(drinkItems,"drinkitems");
         updateMenuToFile(dessertItems,"dessertitems");
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/setpackageitems.txt", false)
+        );
+
+        for (SetPackage item: setPackageItems){
+            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
+        }
+        bw.close();
     }
 
-    public boolean updateMenuItembool(int ID, int changeOption, boolean counts) throws IOException {
+    public boolean updateMenuItembool(int ID, int changeOption, boolean counts, boolean set) throws IOException {
         boolean updated = false;
         switch (changeOption) {
             case 1:
                 System.out.println("What is the new price?");
                 double newPrice = GetInput.getDouble();
-                getMenuItemFromID(ID).setPrice(newPrice);
+                if (set){
+                    getSetPackageItemFromID(ID).setPrice(newPrice);
+                } else {
+                    getMenuItemFromID(ID).setPrice(newPrice);
+                }
                 updated = true;
                 break;
             case 2:
@@ -442,13 +454,21 @@ public class Menu {
                     System.out.print("Please enter a new name: ");
                     newName = GetInput.getString();
                 }
-                getMenuItemFromID(ID).setItemName(newName);
+                if (set){
+                    getSetPackageItemFromID(ID).setItemName(newName);
+                } else {
+                    getMenuItemFromID(ID).setItemName(newName);
+                }
                 updated = true;
                 break;
             case 3:
                 System.out.println("What is the new description?");
                 String newDesc = GetInput.getString();
-                getMenuItemFromID(ID).setDescription(newDesc);
+                if (set){
+                    getSetPackageItemFromID(ID).setDescription(newDesc);
+                } else {
+                    getMenuItemFromID(ID).setDescription(newDesc);
+                }
                 updated = true;
                 break;
             case 4:
