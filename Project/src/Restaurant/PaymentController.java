@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.DoubleToIntFunction;
 
-public class PaymentUI {
+public class PaymentController {
     private CashPayment payByCash = null;
     private Payment payment = null;
     private Restaurant r;
@@ -18,7 +18,7 @@ public class PaymentUI {
      * @param m -> Membership which is inputted in main -> Gain access to members list to check for membership
      * @param transHistDayArrayList -> transHistDayArrayList which is inputted in main -> to push all order items into the transaction history list
      */
-    public PaymentUI(Restaurant r, Membership m, ArrayList<TransHistDay> transHistDayArrayList, Staff s) {
+    public PaymentController(Restaurant r, Membership m, ArrayList<TransHistDay> transHistDayArrayList, Staff s) {
         this.r = r;
         this.m = m;
         this.transHistDayArrayList = transHistDayArrayList;
@@ -186,7 +186,7 @@ public class PaymentUI {
      * this function will continue with the rest of the payment functions
      * else, return to main function
      */
-    public void makePaymentUI() throws IOException {
+    public void makePaymentController() throws IOException {
         if(selectPaymentMethod() && selectTable()){
             showAmount();
             checkMembership();

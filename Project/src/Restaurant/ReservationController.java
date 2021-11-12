@@ -9,10 +9,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ReservationUI {
+public class ReservationController {
     Restaurant r;
 
-    public ReservationUI(Restaurant r) {
+    public ReservationController(Restaurant r) {
         this.r = r;
     }
 
