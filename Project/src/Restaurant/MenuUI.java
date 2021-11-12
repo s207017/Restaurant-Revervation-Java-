@@ -166,7 +166,7 @@ public class MenuUI {
                 this.printChangeTypes();
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1,4);
-                changed = menu.updateMenuItembool(ID, changeOption, true);
+                changed = menu.updateMenuItembool(ID, changeOption, true,false);
                 if (changed){
                     System.out.println("Item updated!");
                 }
@@ -404,15 +404,15 @@ public class MenuUI {
 
             do {
                 System.out.println("Item information: ");
-                System.out.println("Name: " + menu.getMenuItemFromID(menuItemID).getItemName());
-                System.out.println("Price: " + menu.getMenuItemFromID(menuItemID).getPrice());
-                System.out.println("Description: " + menu.getMenuItemFromID(menuItemID).getDescription());
+                System.out.println("Name: " + menu.getSetPackageItemFromID(menuItemID).getItemName());
+                System.out.println("Price: " + menu.getSetPackageItemFromID(menuItemID).getPrice());
+                System.out.println("Description: " + menu.getSetPackageItemFromID(menuItemID).getDescription());
                 System.out.println("-".repeat(40));
                 System.out.println("What do you want to change?");
                 this.printChangeTypes();
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1, 4);
-                changed = menu.updateMenuItembool(menuItemID, changeOption, true);
+                changed = menu.updateMenuItembool(menuItemID, changeOption, true,true);
                 if (changed) {
                     System.out.println("Set package updated!");
                 }
