@@ -68,18 +68,18 @@ public class OrderController {
                 System.out.println("Item does not exist, please enter valid ID.");
                 continue;
             }
-            if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
+            else if(500<choice && choice<=500+ menu.getSetPackageItems().size()){
                 if (temp instanceof SetPackage){
                     SetPackage tempSetPackage = new SetPackage(temp.getItemName(),temp.getItemID(),temp.getPrice(),temp.getDescription());
                     tempSetPackage.addMainCourse(menu.getMenuItemFromID(((SetPackage) temp).getSetItems().get(0).getItemID()));
                     tempSetPackage.addSide(menu.getMenuItemFromID(((SetPackage) temp).getSetItems().get(1).getItemID()));
                     menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice());
                     System.out.print("Please select drink: ");
-                    int drinkID = GetInput.getInt();
-                    while (300>=drinkID && drinkID>300+ menu.getDrinkItems().size()) {
-                        System.out.print("Invalid ID, please try again: ");
-                        drinkID = GetInput.getInt();
-                        }
+                    int drinkID = GetInput.getIntFromRange(301,300+menu.getDrinkItems().size());
+                    while (menu.getMenuItemFromID(drinkID).getPrice()>tempSetPackage.getMaxDrinkPrice()) {
+                        System.out.print("The selected drink is not applicable for set packages\nPlease select drink again: ");
+                        drinkID = GetInput.getIntFromRange(301,300+menu.getDrinkItems().size());
+                    }
                     // add drink item to items array in setpackage
                     tempSetPackage.addSide(menu.getMenuItemFromID(drinkID));
                     temp = tempSetPackage; //upcasting
