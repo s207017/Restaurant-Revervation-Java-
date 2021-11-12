@@ -75,6 +75,7 @@ public class Menu {
                             SetPackage newpackage = new SetPackage(newitem.getItemName(), newitem.getItemID(), newitem.getPrice(), newitem.getDescription());
                             newpackage.addMainCourse(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
                             newpackage.addSide(getMenuItemFromID(Integer.parseInt(textfile.readLine())));
+                            newpackage.setMaxDrinkPrice(Double.parseDouble(textfile.readLine()));
                             setPackageItems.add(newpackage);
                             break;
                         default:
@@ -108,9 +109,8 @@ public class Menu {
         BufferedWriter bw = new BufferedWriter(
                 new FileWriter("./textfiles/setpackageitems.txt", false)
         );
-
         for (SetPackage item: setPackageItems){
-            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n");
+            bw.write(item.getItemName()+"\n" +String.valueOf(item.getItemID())+"\n"+String.valueOf(item.getPrice()) +"\n"+item.getDescription()+"\n"+item.getSetItems().get(0).getItemID()+"\n"+item.getSetItems().get(1).getItemID()+"\n"+item.getMaxDrinkPrice()+"\n");
         }
         bw.close();
     }
@@ -329,7 +329,7 @@ public class Menu {
     }
     
     
-    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems) throws IOException {
+    public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems, double maxDrinkPrice) throws IOException {
         int ID=0;
         for (SetPackage m: setPackageItems){
             ID=m.getItemID();
@@ -342,6 +342,7 @@ public class Menu {
                 newPackage.addSide(item);
             }
         }
+        newPackage.setMaxDrinkPrice(maxDrinkPrice);
         setPackageItems.add(newPackage);
         updateSetPackageFile();
     }

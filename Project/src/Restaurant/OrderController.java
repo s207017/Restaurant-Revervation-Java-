@@ -73,6 +73,7 @@ public class OrderController {
                     SetPackage tempSetPackage = new SetPackage(temp.getItemName(),temp.getItemID(),temp.getPrice(),temp.getDescription());
                     tempSetPackage.addMainCourse(menu.getMenuItemFromID(((SetPackage) temp).getSetItems().get(0).getItemID()));
                     tempSetPackage.addSide(menu.getMenuItemFromID(((SetPackage) temp).getSetItems().get(1).getItemID()));
+                    tempSetPackage.setMaxDrinkPrice(((SetPackage) temp).getMaxDrinkPrice());
                     menu.printDrinkLTEPrice(tempSetPackage.getMaxDrinkPrice());
                     System.out.print("Please select drink: ");
                     int drinkID = GetInput.getIntFromRange(301,300+menu.getDrinkItems().size());
