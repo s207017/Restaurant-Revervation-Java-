@@ -20,11 +20,12 @@ public class MembershipController {
         } else {
             Member newMember = new Member(number);
             memberShip.addMember(newMember);
+            memberShip.updateMembershipText();
             System.out.println("Adding new member completed!");
         }
     }
 
-    public void removeMember(){
+    public void removeMember() throws IOException {
         int number;
         Member member;
         System.out.println("You are now removing a member from the system");
@@ -32,6 +33,7 @@ public class MembershipController {
         number = GetInput.getIntFromRange(80000000,99999999);
         if (memberShip.checkMembership(number)!=0){
             memberShip.getMembersList().remove(memberShip.checkMembership(number)-1); //checkMembership returns the index the member was found at
+            memberShip.updateMembershipText();
             System.out.println("Member removed!");
         } else {
             System.out.println("No member record found. Cannot be added");

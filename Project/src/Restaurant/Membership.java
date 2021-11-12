@@ -28,14 +28,6 @@ public class Membership {
 
     public void addMember(Member member) throws IOException {
         membersList.add(member);
-        BufferedWriter bw = new BufferedWriter(
-                new FileWriter("./textfiles/members.txt", false)
-        );
-
-        for (Member member_ : membersList) {
-            bw.write(member_.getNumber() + "\n");
-        }
-        bw.close();
     }
 
     public int checkMembership(int number){
@@ -47,4 +39,16 @@ public class Membership {
         }
         return 0;
     }
+
+    public void updateMembershipText() throws IOException {
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/members.txt", false)
+        );
+
+        for (Member member_ : membersList) {
+            bw.write(member_.getNumber() + "\n");
+        }
+        bw.close();
+    }
 }
+//
