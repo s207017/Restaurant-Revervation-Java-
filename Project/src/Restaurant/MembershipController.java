@@ -3,13 +3,28 @@ package Restaurant;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Used to manage membership operations.
+ */
 public class MembershipController {
+    /**
+     * Declaring a membership reference.
+     */
     private Membership memberShip;
 
+    /**
+     * The constructor for MembershipController.
+     * @param memberShip
+     */
     public MembershipController(Membership memberShip) {
         this.memberShip = memberShip;
     }
 
+    /**
+     * Asks for the phone number of customer and checks if customer is an existing member.
+     * If customer is not an existing member, adds member to the list of members and updates members.txt file.
+     * @throws IOException
+     */
     public void addMember() throws IOException {
         int number;
         System.out.println("You are now adding a new member to the system");
@@ -25,6 +40,11 @@ public class MembershipController {
         }
     }
 
+    /**
+     * Asks for the phone number of customer and checks if customer is an existing member.
+     * If customer is an existing member, removes member from the list of members and updates the member.txt file.
+     * @throws IOException
+     */
     public void removeMember() throws IOException {
         int number;
         Member member;

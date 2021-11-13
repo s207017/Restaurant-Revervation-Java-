@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- *An instance of this class represents a single membership.
+ * This is an entity class.
+ * An instance of this class represents a single membership.
  */
 public class Membership {
     /**
@@ -13,8 +14,8 @@ public class Membership {
     ArrayList<Member> membersList = new ArrayList<Member>();
 
     /**
-     * The constructor for membership.
-     * Reads the phone number of every member from the members.txt file and creates new members which are added to the list of members in this membership.
+     * The constructor for Membership.
+     * Reads the phone number of every member from the members.txt file and creates new members which are added to the list of members in this Membership.
      * @throws IOException
      */
     public Membership() throws IOException {
