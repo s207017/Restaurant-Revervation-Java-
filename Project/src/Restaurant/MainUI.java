@@ -4,7 +4,17 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The main boundary class that prints the main app options, gets app options from the user, and calls the necessary methods from the necessary classes
+ * Instantiates the all classes used
+ */
 public class MainUI {
+    /**
+     * Main method that runs the entire app
+     * @param arg Contains the supplied command-line arguments as an array of String objects
+     * @throws IOException Thrown when file I/O exception occurs
+     * @throws InterruptedException Thrown when thread is interrupted while waiting/sleeping/is occupied
+     */
     public static void main(String[] arg) throws IOException, InterruptedException {
         Restaurant restaurant = new Restaurant();
         MenuController menuController = new MenuController(restaurant.getMenu());
@@ -192,6 +202,9 @@ public class MainUI {
         }while(option != -1);
     }
 
+    /**
+     * Prints main app options
+     */
     public static void printAppOptions(){
         System.out.println("");
         System.out.println("                                                                              /\\_/\\");
@@ -199,14 +212,20 @@ public class MainUI {
         System.out.println("+" + "-".repeat(164) + "+");
         System.out.printf("|%100s%65s\n","OOPsie Restaurant Reservation & Point of Sale App","|");
         System.out.println("+" + "-".repeat(164) + "+");
-        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu item", "(6) Add or remove item(s) to/from an existing order", "(11) Add or remove a member","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(2) Create/Update/Remove set package item","(7) Create new reservation","(12) Make payment","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(3) View menu","(8) Check or remove an existing reservation","(13) View sales revenue report","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(4) Create new order","(9) Assign table","(14) Shut down app","|");
-        System.out.printf("| %-60s %-60s %-40s %s\n","(5) View existing order","(10) Check table availability","","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n", "(1) Create/Update/Remove menu item", "(7) Create new reservation", "(13) View sales revenue report","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(2) Create/Update/Remove set package item","(8) Check or remove an existing reservation","(14) Add a new staff","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(3) View menu","(9) Assign table","(15) Add a new table","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(4) Create new order","(10) Check table availability","(16) Shut down app","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(5) View existing order","(11) Add or remove a member","","|");
+        System.out.printf("| %-60s %-60s %-40s %s\n","(6) Add or remove item(s) to/from an existing order","(12) Make payment","","|");
         System.out.println("+" + "-".repeat(164) + "+");
     }
 
+    /**
+     * Calls the printAppOptions method to print the main app functionality and asks for input from the user
+     * @return Integer that indicates which case statement to enter in the switch in the main
+     * @throws InterruptedException Thrown when thread is interrupted while waiting/sleeping/is occupied
+     */
     public static int getOption() throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
         printAppOptions();
@@ -216,6 +235,9 @@ public class MainUI {
         return option;
     }
 
+    /**
+     * Returns to the main app only when the enter key is pressed
+     */
     public static void pressEnterToContinue()
     {
         System.out.print("*PRESS ENTER TO CONTINUE");
