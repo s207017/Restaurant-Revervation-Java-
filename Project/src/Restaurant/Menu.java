@@ -496,7 +496,9 @@ public class Menu {
         }
     }
 
-    public boolean updateMenuItemBool(int ID, int changeOption, boolean counts, boolean set) throws IOException {
+
+    public boolean updateMenuItem(int ID, int changeOption, boolean counts, boolean set) throws IOException {
+
         boolean updated = false;
         switch (changeOption) {
             case 1:

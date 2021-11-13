@@ -60,5 +60,5 @@ public class OrderItem {
      */
     public void subtractQuantityOrdered(int qty) {this.quantityOrdered = this.quantityOrdered - qty;}
 
-    
+
 }
