@@ -18,7 +18,14 @@ public abstract class GetPeriod {
      * array of 31 days for a normal year
      */
     private static int datesInMonth[] = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    
+
+    /**
+     * Gets date from user, prompting user in layers
+     * Starts by asking for year, month, then date
+     * Values or year and month are used to determine how many dates to display
+     * This is to account for leap years and different months having different numbers of days
+     * @return Returns a date as a LocalDateTime object
+     */
     public static LocalDateTime getDate() {
         int yearInt;
         int monthInt;
@@ -61,7 +68,11 @@ public abstract class GetPeriod {
     }
 
 
-
+    /**
+     * Gets date AND time from user
+     * Same concept as getDate function, just that it asks for time as well
+     * @return Returns a date, together with time, as a LocalDateTime object
+     */
     public static LocalDateTime getDateAndTime(){
         int yearInt;
         int monthInt;

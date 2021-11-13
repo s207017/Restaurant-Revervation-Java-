@@ -28,7 +28,10 @@ public class OrderController {
     }
 
     /**
-     * Help
+     * Adds items to an order, loops so that user is able to add multiple items at a time
+     * Method covers both creation of orders and addition of order items to an existing order
+     * If table does not currently have an order, method creates one
+     * Method can also be used to create set packages
      */
     public void addItemsToOrder(){
         int TableNum;
@@ -100,7 +103,12 @@ public class OrderController {
             order.addOrderItems(temp,quantity);
         }
     }
-    //Remove items from order
+
+    /**
+     * Removes items from order at waiters discretion; need to check with chefs etc
+     * Checks if there intended removal with actual existing orders
+     * Will prevent user from removing more items than actually exists
+     */
     public void removeItemsFromOrder(){
         Order order = null;
         while(order == null) {

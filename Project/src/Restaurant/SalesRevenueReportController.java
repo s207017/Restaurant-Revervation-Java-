@@ -1,5 +1,7 @@
 package Restaurant;
 
+import java.time.LocalDateTime;
+
 /**
  * Used to control Sales Revenue Report operations
  */
@@ -35,12 +37,23 @@ public class SalesRevenueReportController {
         choice = GetInput.getIntFromRange(1,3);
         switch(choice){
             case 1:
+                LocalDateTime startDate,endDate;
+                do{
+                    System.out.println("-ENTERING START DATE OF REPORT-");
+                    startDate = GetPeriod.getDate();
+                    System.out.println("-ENTERING END DATE OF REPORT-");
+                    endDate = GetPeriod.getDate();
+                    if (endDate.isBefore(startDate)) {
+                        System.out.printf("End date (%s) is before start date (%s), please try again\n", endDate, startDate);
+                    }
+                }while(endDate.isBefore(startDate) && endDate.isEqual(startDate));
                 SalesRevenuePeriod sp = new SalesRevenuePeriod();
-                sp.createReport(restaurant.getTransactionHistory());
+                sp.createReport(restaurant.getTransactionHistory(), startDate,endDate);
                 break;
             case 2:
+                LocalDateTime date = GetPeriod.getDate();
                 SalesRevenueDay sd = new SalesRevenueDay();
-                sd.createReport(restaurant.getTransactionHistory());
+                sd.createReport(restaurant.getTransactionHistory(),date);
                 break;
             case 3:
                 break;
