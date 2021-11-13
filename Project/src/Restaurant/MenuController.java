@@ -5,14 +5,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-
 public class MenuController {
+    /**
+     * Declaring menu reference
+     */
     private Menu menu;
 
+    /**
+     * Constructor of the MenuController class
+     * @param menu
+     */
     public MenuController(Menu menu) {
         this.menu = menu;
     }
 
+    /**
+     * User Interface used when creating a new menu item in the menu.
+     * Asks for the name of the menu item, price, description and an integer value for the menu type
+     * Then it calls the createNewMenuItem method in the menu class
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void createNewMenuItemUI() throws IOException, InterruptedException {
         int menuTypeInt, end;
         do{
@@ -20,7 +33,7 @@ public class MenuController {
             printMenuTypes();
             System.out.print("Enter your input: ");
             menuTypeInt = GetInput.getIntFromRange(1,4);
-            printExistingMenu(menuTypeInt);
+            printMenu(menuTypeInt, false);
             System.out.print("Enter the name of the new menu item: ");
             String menuName = GetInput.getString();
             while (menu.checkIfNameExists(menuName)){
@@ -34,7 +47,7 @@ public class MenuController {
             String desc = GetInput.getString();
             menu.createNewMenuItem(menuName, menuTypeInt, price, desc);
             System.out.println("New item added to the menu!");
-            printUpdatedMenu(menuTypeInt);
+            printMenu(menuTypeInt, true);
             TimeUnit.SECONDS.sleep(1);
 
             System.out.println();
@@ -49,6 +62,14 @@ public class MenuController {
         } while (end == 1);
     }
 
+
+    /**
+     * User interface for removing an existing menu item from the menu
+     * Asks the user for the type of menu item he/she wants to remove, followed by the menu item's ID,
+     * then it performs error checking just to make sure that the menu ID entered by the user exists in the menu
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void removeMenuItemUI() throws IOException, InterruptedException {
         int ID, end, menuTypeInt;
         boolean invalidInput;
@@ -57,7 +78,7 @@ public class MenuController {
             System.out.println("What type of menu item would you like to remove?");
             System.out.print("Enter your input: ");
             menuTypeInt = GetInput.getIntFromRange(1,4);
-            printExistingMenu(menuTypeInt);
+            printMenu(menuTypeInt, false);
             System.out.println("What is the menu item ID you would like to delete?");
             System.out.print("Enter your input: ");
             do {
@@ -96,7 +117,7 @@ public class MenuController {
             } while (invalidInput);
             menu.removeMenuItem(menuTypeInt, ID);
             System.out.println("Item removed!");
-            printUpdatedMenu(menuTypeInt);
+            printMenu(menuTypeInt, true);
             TimeUnit.SECONDS.sleep(1);
 
             System.out.println();
@@ -111,15 +132,23 @@ public class MenuController {
         } while (end != 2);
     }
 
+    /**
+     * User interface for updating an existing menu item in the menu. Asks the user for the type of menu item he/she wants
+     * to update, followed by the menu ID of the menu item, performs error checking just to make sure that the menu ID entered
+     * by the user exists in the menu. It then asks the user what attribute of the menu item (i.e. price, name, description)
+     * needs to be updated.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void updateMenuItemUI() throws IOException, InterruptedException {
-        int ID, end, menuTypeInt, changeOption, changeCount;
+        int ID, end, menuTypeInt, changeOption;
         boolean invalidInput, changed;
         do{
             printMenuTypes();
             System.out.println("What type of menu item would you like to update?");
             System.out.print("Enter your input: ");
             menuTypeInt = GetInput.getIntFromRange(1,4);
-            printExistingMenu(menuTypeInt);
+            printMenu(menuTypeInt, false);
             System.out.println("What is the menu item ID you would like to update?");
             do {
                 invalidInput = false;
@@ -171,15 +200,6 @@ public class MenuController {
                     System.out.println("Item updated!");
                 }
             }while(changeOption != 4);
-//            if (changeCount != 0) {
-//                System.out.println("Item updated!");
-//                System.out.println("After update: ");
-//                System.out.println("Name: " + menu.getMenuItemFromID(ID).getItemName());
-//                System.out.println("Price: " + menu.getMenuItemFromID(ID).getPrice());
-//                System.out.println("Description: " + menu.getMenuItemFromID(ID).getDescription());
-//                System.out.println("-".repeat(40));
-//                TimeUnit.SECONDS.sleep(2);
-//            }
 
             System.out.println();
             System.out.println("(1) Update another menu");
@@ -192,6 +212,9 @@ public class MenuController {
         } while (end != 2);
     }
 
+    /**
+     * Method for printing out the options for the attributes of a menu item prior to getting a user's input
+     */
     public void printChangeTypes(){
         System.out.println("(1) Price");
         System.out.println("(2) Name");
@@ -199,6 +222,9 @@ public class MenuController {
         System.out.println("(4) Return to the menu interface");
     }
 
+    /**
+     * Method for printing out the types of menu items prior to getting a user's input
+     */
     public void printMenuTypes(){
         System.out.println("(1) Main Course");
         System.out.println("(2) Sides");
@@ -206,6 +232,10 @@ public class MenuController {
         System.out.println("(4) Desserts");
     }
 
+    /**
+     * Method for printing out the methods available related to menu items in
+     * this user interface class prior to getting a user's input
+     */
     public void printOptionsMenuItems(){
         System.out.println("What would you like to do?");
         System.out.println("(1) Create menu item");
@@ -215,6 +245,10 @@ public class MenuController {
         System.out.print("Enter your option: ");
     }
 
+    /**
+     * Method for printing out the methods available related to set packages in
+     * this user interface class prior to getting a user's input
+     */
     public void printOptionsSetPackages(){
         System.out.println("What would you like to do?");
         System.out.println("(1) Create a set package");
@@ -224,26 +258,39 @@ public class MenuController {
         System.out.print("Enter your option: ");
     }
 
-    public void printExistingMenu(int menuTypeInt){
+    /**
+     * Method used for printing out the menu items in the menu.
+     * @param menuTypeInt is used in the switch statement within the method. Different menu type is represented by
+     *                    a different integer value. Hence, different types of menu items will be printed depending on
+     *                    this integer value passed into the method
+     * @param updated is used to determine whether to print "existing menu" or "updated menu" within the method
+     */
+    public void printMenu(int menuTypeInt, boolean updated){
+        String a;
+        if (updated){
+            a = " updated ";
+        } else {
+            a = " existing ";
+        }
         switch(menuTypeInt){
             case 1:
                 System.out.println();
-                System.out.println("These are the existing MAIN COURSES");
+                System.out.println("These are the" + a + "MAIN COURSES");
                 menu.printMainCourse();
                 break;
             case 2:
                 System.out.println();
-                System.out.println("These are the existing SIDES");
+                System.out.println("These are the" + a + "SIDES");
                 menu.printSide();
                 break;
             case 3:
                 System.out.println();
-                System.out.println("These are the existing DRINKS");
+                System.out.println("These are the" + a + "DRINKS");
                 menu.printDrink();
                 break;
             case 4:
                 System.out.println();
-                System.out.println("These are the existing DESSERTS");
+                System.out.println("These are the" + a + "DESSERTS");
                 menu.printDesert();
                 break;
             default:
@@ -251,34 +298,14 @@ public class MenuController {
         }
     }
 
-    public void printUpdatedMenu(int menuTypeInt){
-        switch(menuTypeInt){
-            case 1:
-                System.out.println();
-                System.out.println("These are the updated MAIN COURSES");
-                menu.printMainCourse();
-                break;
-            case 2:
-                System.out.println();
-                System.out.println("These are the updated SIDES");
-                menu.printSide();
-                break;
-            case 3:
-                System.out.println();
-                System.out.println("These are the updated DRINKS");
-                menu.printDrink();
-                break;
-            case 4:
-                System.out.println();
-                System.out.println("These are the updated DESSERTS");
-                menu.printDesert();
-                break;
-            default:
-                break;
-        }
-    }
-
-
+    /**
+     * User interface for creating set package. Asks for the name of the new set package, its description and the maximum price
+     * of the drink. Error check for name is performed to prevent duplicate names on the menu. It then asks for the menu ID for
+     * a main course item and side menu item and performs error checking to ensure that the two menu IDs exist in the menu.
+     * It then asks for the maximum price of the drink which can be chosen by the customer, followed by discount rate to be applied.
+     * The waiter can repeatedly try out different discount rate until he is satisfactory with the final price.
+     * @throws IOException
+     */
     public void createSetPackageUI() throws IOException {
         double maxPrice, discountRate, finalPrice, end;
         int mainMenuID, sideMenuID;
@@ -360,7 +387,12 @@ public class MenuController {
         } while (end != 2);
     }
 
-    public void removeSetPackageUI() throws IOException { //same as removing any other menu item so i don't think need this function
+    /**
+     * User interface for removing a set package. Asks for the set package ID, performs error checking to ensure that
+     * it is an existing ID on the menu, then calls removeMenuItem in the menu class
+     * @throws IOException
+     */
+    public void removeSetPackageUI() throws IOException {
         int menuItemID;
         boolean invalidInput;
         System.out.println("You are now removing a set package item from the menu");
@@ -381,6 +413,11 @@ public class MenuController {
         menu.removeMenuItem(5, menuItemID);
     }
 
+
+    /**
+     * User interface for updating set package item on the menu
+     * @throws IOException
+     */
     public void updateSetPackageUI() throws IOException {
         int menuItemID, changeOption, end;
         boolean invalidInput, changed;

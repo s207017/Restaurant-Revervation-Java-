@@ -6,25 +6,133 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * this is an entity class
+ * the instance of this object represents a single table
+ */
 public class Table {
+    /**
+     * the table number of this table
+     */
     private int tableNum;
+
+    /**
+     * the capacity of this table
+     */
     private int capacity;
+
+    /**
+     * the number of people currently seated at this table
+     */
     private int pax; //once occupied, update this
+
+    /**
+     * the order attached to this table
+     * Order order will be null if no order is currently attached to table
+     */
     private Order order;
+
+    /**
+     * the 3 types of status a table can  be in
+     */
     enum Level {
         FREE,
         RESERVED,
         OCCUPIED
     }
+
+    /**
+     * the tableStatus of this table
+     */
     private Level tableStatus;
+
+    /**
+     * a hashmap of reservations for this table
+     */
     private Map<LocalDateTime, Reservation> reservations= new HashMap<>();
 
-
+    /**
+     * when new Table is created, pax is set to 0 as no one is occupying it, and status is set to FREE
+     * @param tableNum the number of this table
+     * @param capacity the capacity of this table
+     */
     public Table(int tableNum, int capacity){
         this.tableNum = tableNum;
         this.capacity = capacity;
         this.pax = 0; //when initialising the table it should be 0 ppl sitting
         this.tableStatus = Level.FREE;
+    }
+
+    //getters
+
+    /**
+     *
+     * @return tableNum of this table
+     */
+    public int getTableNum(){ return tableNum;}
+
+    /**
+     *
+     * @return capacity of this table
+     */
+    public int getCapacity() {
+        return capacity;
+    }
+
+    /**
+     *
+     * @return the number of guests seated at this table
+     */
+    public int getPax() {
+        return pax;
+    }
+
+    /**
+     *
+     * @return the current status of this table
+     */
+    public Level getTableStatus(){return tableStatus;}
+
+    /**
+     *
+     * @return the Order object attached to this table, returns null if no Order attached
+     */
+    public Order getOrder(){
+        if(this.order == null){
+            return null;
+        }
+        return this.order;
+    }
+
+    /**
+     *
+     * @return the reservations HashMap associated with this table
+     */
+    public Map<LocalDateTime, Reservation> getReservations(){return this.reservations;}
+
+    //setters
+    //tableId doesn't change, capacity doesn't change. we don't need setters for those.
+
+    /**
+     * sets/changes the status of this table
+     * @param level the status to change the table to
+     */
+    public void setTableStatus(Level level){
+        this.tableStatus=level;
+    }
+
+    /**
+     * sets/changes the number of guests seated at this table
+     * @param pax the number of guests to change it to
+     */
+    public void setPax(int pax){this.pax=pax;}
+
+    /**
+     * sets/changes the Order associated with this table
+     * @param order the order
+     */
+    public void setOrder(Order order){
+        this.order = order;
     }
 
     /**
@@ -49,7 +157,7 @@ public class Table {
 
     /**
      * remove reservations if reservation+15min grace period is still less than current time
-     * this ensures that the reservations in Reservations are beyond current time - 15min grace period only
+     * this ensures that the reservations in Reservations are for after the current time minus 15min grace period only
      */
     void updateReservationsAccordingToCurrentTime() throws IOException {
 
@@ -71,9 +179,10 @@ public class Table {
     }
 
     /**
-     * deleted reservations when the dateTime and telephone number is inserted
-     * @param dateTime gets the dateTime input
-     * @param tel gets the telephone number used to make the reservation
+     * deletes reservations when the dateTime and telephone number is inserted
+     * enables people to call and cancel reservations
+     * @param dateTime dateTime of reservation to be cancelled
+     * @param tel telephone number of reservation to be cancelled
      */
     public void deleteReservationFromHashMap(LocalDateTime dateTime, int tel) throws IOException {
         Iterator<Map.Entry<LocalDateTime, Reservation>>
@@ -89,7 +198,7 @@ public class Table {
     }
 
     /**
-     * updates level to either free or reserved, exits if occupied
+     * updates level to either free or reserved based on reservations, exits if occupied
      */
     void updateTableStatus(){
         //if occupied, exit this
@@ -129,7 +238,7 @@ public class Table {
                     return;
                 }
             }
-            /*
+             /*
              * reservations current day
              * either no reservations on current day, or all reservations are more than 1h
              * after the current time
@@ -143,39 +252,8 @@ public class Table {
 
     }
 
-    //getters
-    public int getTableNum(){ return tableNum;}
-    public int getCapacity() {
-        return capacity;
-    }
-    public int getPax() {
-        return pax;
-    }
-    public Level getTableStatus(){return tableStatus;}
-    public Order getOrder(){
-        if(this.order == null){
-            return null;
-        }
-        return this.order;
-    }
-    public Map<LocalDateTime, Reservation> getReservations(){return this.reservations;}
-
-    //setters
-    //tableId doesn't change, capacity doesn't change. we don't need setters for those.
-    public void setTableStatus(Level level){
-        this.tableStatus=level;
-    }
-    public void setPax(int pax){this.pax=pax;}
-    public void setOrder(Order order){
-        this.order = order;
-    }
-
-
     /**
      * assigns table by changing to OCCUPIED enum and assigning pax
-     */
-    /**
-     * arrayList(i-1).assignTable(pax) called in main()
      * @param pax number of people to be seated. stored here to be retrieved during payment
      */
     public void occupyTable(int pax){

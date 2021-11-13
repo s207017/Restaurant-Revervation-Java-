@@ -4,25 +4,50 @@ package Restaurant;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+/**
+ * An instance of this entity class represents the transaction history for one day
+ */
 public class TransHistDay {
+    /**
+     * Date of this TransHistDay
+     */
     private LocalDateTime date;
+    /**
+     * Reference to an Arraylist to hold all records of transactions for the day in the form of TransHistItems
+     */
     private ArrayList<TransHistItem> transList;
+
+    /**
+     * Constructor takes in date variable and instantiates an arraylist to hold the TransHistItems
+     * @param date date of this TransHistDay
+     */
     public TransHistDay(LocalDateTime date){
         this.date = date;
         this.transList  = new ArrayList<TransHistItem>();
     }
+
+    /**
+     * Gets the date of this TransHistDay
+     * @return Returns the date of this TransHistDay
+     */
     public LocalDateTime getDate(){
         return this.date;
     }
 
+    /**
+     * Gets the list of transactions
+     * @return Returns the Arraylist of TransHistItems
+     */
     public ArrayList<TransHistItem> getTransList(){
         return transList;
     }
 
     /**
-     *
-     * @param name Name of item to be found in the TransHistDay
-     * @param price Price of item to be found in TransHistDay
+     * Finds a specific item by matching item name and price
+     * Returns the TransHistItem object if it finds it
+     * If it does not, it returns null
+     * @param name Name of item to be found in this TransHistDay
+     * @param price Price of item to be found in this TransHistDay
      * @return Returns TransHistItem in TransHistDay with corresponding name and price
      */
     public TransHistItem findTransHist(String name, double price) {
@@ -34,6 +59,14 @@ public class TransHistDay {
         return null;
     }
 
+    /**
+     * Adds items to this TransHistDay
+     * Checks for the existence of the item, and adds to its quantity
+     * If the item does not exist in the day yet, the method will create a new TransHistItem to hold it
+     * @param name Name of this item to be added to this TransHistDay
+     * @param quantity Quantity of items to be added to this TransHistDay
+     * @param price Price of item to be added to this day of TransHistDay
+     */
     public void addTransHistItem(String name, int quantity, double price){
         for(TransHistItem t: this.transList){//Checking if item is inside already
             if(t.getItem() == name && t.getPrice() == price) {//Found a matching item in list

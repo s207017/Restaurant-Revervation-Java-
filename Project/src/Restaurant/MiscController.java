@@ -9,6 +9,12 @@ public class MiscController {
         this.r = r;
     }
 
+    /**
+     * This method adds a new table in the restaurant.
+     * Since a table can only have even number of pax, when the waiter inputs an odd number for maximum pax
+     * of the table, it adds 1 then creates the table.
+     * @throws IOException
+     */
     public void addTable() throws IOException {
         System.out.println("You are now adding a new table");
         System.out.println("Pax per table must be even numbers and, ");
@@ -25,6 +31,14 @@ public class MiscController {
         System.out.println("Table added successfully!");
     }
 
+
+    /**
+     * This method adds a new staff ID for a new staff at the restaurant.
+     * When the user inputs a desired staff ID, it iterates through the arraylist of staff instances stored in
+     * restaurant obtained from getStaffList getter in the restaurant class to make sure the input ID does not exist.
+     * If there is a match, it asks for another input, until a staff ID that does not already exist has been entered into the system
+     * @throws IOException
+     */
     public void addStaff() throws IOException {
         int ID;
         boolean exists;
