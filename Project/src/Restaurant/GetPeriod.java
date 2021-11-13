@@ -5,10 +5,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class GetPeriod {
+/**
+ * abstract class
+ * contains static methods to get specific inputs from the customer
+ */
+public abstract class GetPeriod {
+    /**
+     * array of 31 days for leap years
+     */
     private static int datesInMonthLeap[] = new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    /**
+     * array of 31 days for a normal year
+     */
     private static int datesInMonth[] = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
+    
     public static LocalDateTime getDate() {
         int yearInt;
         int monthInt;
