@@ -2,6 +2,9 @@ package Restaurant;
 
 import java.io.IOException;
 
+/**
+ * Miscellaneous operations are stored in this class
+ */
 public class MiscController {
     private Restaurant r;
 
