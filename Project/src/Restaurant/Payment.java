@@ -6,18 +6,83 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * An instance of this class represents a payment for orders of table(s)
+ */
 public class Payment {
+    /**
+     * Reference to Arraylist of Tables declared to hold tables for payment
+     */
     protected ArrayList<Table> tables;
+    /**
+     * Subtotal price of all orders for this payment
+     */
     protected double subtotal;
+    /**
+     * Tax on the total price of the orders for this payment
+     */
     protected double tax;
+    /**
+     * Indicator for whether the payment is complete
+     */
     protected boolean paymentComplete;
+    /**
+     * Discount applied to total price for members
+     */
     protected double discountApplied = 0 ;
+
+    /**
+     * Constructor instantiates a new ArrayList of tables, sets subtotal to zero and paymentComplete to false
+     */
     public Payment(){
         this.tables = new ArrayList<>();
         this.subtotal = 0;
         this.paymentComplete = false;
     }
 
+    /**
+     * Gets subtotal of this payment
+     * @return Returns subtotal of this payment as a double
+     */
+    public double getSubTotal(){
+        return subtotal;
+    }
+
+    /**
+     * Gets tables paid for in this payment
+     * @return Returns tables that payment is paying for as an ArrayList
+     */
+    public ArrayList<Table> getTables() {
+        return tables;
+    }
+
+    /**
+     * Gets discount to be applied to payment for members
+     * @return Returns discount to be applied as a double
+     */
+    public double getDiscountApplied() {
+        return discountApplied;
+    }
+
+    /**
+     * Gets tax to be applied to payment
+     * @return Returns dollar tax amount to be applied as a double
+     */
+    public double getTax() {
+        return tax;
+    }
+
+    /**
+     * Gets the payment complete variable to check whether payment is complete
+     * @return Returns a boolean variable which indicates if this payment is complete
+     */
+    public boolean checkPaymentComplete(){
+        return this.paymentComplete;
+    }
+
+    /**
+     * Calculates subtotal price of all the orders from the tables of this payment
+     */
     public void calculateSubTotal(){
         int sum = 0;
         for(int i = 0; i < tables.size();i++){
@@ -26,39 +91,33 @@ public class Payment {
         this.subtotal = sum;
     }
 
+    /**
+     * Calculates dollar tax amount to be applied and sets it to this Payment
+     */
     public void calculateTax(){
         this.tax = this.subtotal * 0.01177;
     }
 
-
-    public double getSubTotal(){
-        return subtotal;
-    }
-
-    public double getDiscountApplied() {
-        return discountApplied;
-    }
-
-    public double getTax() {
-        return tax;
-    }
-
+    /**
+     * Applies discount to this Payments total
+     */
     public void applyDiscount(){
         this.discountApplied = 0.1 * this.subtotal + 0.1 * this.tax;
     }
 
+    /**
+     * Adds a table for this payment
+     * @param table Table object to be added to this Payment
+     */
     public void addTable(Table table){
         this.tables.add(table);
     }
 
-    public ArrayList<Table> getTables() {
-        return tables;
-    }
-
-    public boolean checkPaymentComplete(){
-        return this.paymentComplete;
-    }
-
+    /**
+     * Pushes all items paid for in this payment to transaction history
+     * @param TransHist ArrayList of TransHistDay for this Payment transactions to be added to
+     * @throws IOException Thrown when reading/writing to text file and IOException error occurs
+     */
     public void pushItemsToHistory(ArrayList<TransHistDay> TransHist) throws IOException {
         if(TransHist.size()==0){//checking if list is empty
             TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
@@ -94,23 +153,46 @@ public class Payment {
     }
 }
 
+/**
+ * An instance of this class represents a cash payment for orders of table(s)
+ * Subclass of Payment; specific for cash payments
+ */
 class CashPayment extends Payment {
-    private double cashPaid = 0;
+    /**
+     * Cash paid for this payment
+     */
+    private double cashPaid;
 
+    /**
+     * Constructor that uses CashPayment's superclass constructor (Payment) to instantiate its variables
+     */
     public CashPayment() {
         super();
+        this.cashPaid = 0;
     }
 
-    public void setCashPaid(double cashPaid) {
-        this.cashPaid = cashPaid;
-    }
-
+    /**
+     * Gets cash paid for this cash payment
+     * @return Returns cash paid for this cash payment as a double
+     */
     public double getCashPaid() {
         return cashPaid;
     }
 
+    /**
+     * Gets change returned for this payment
+     * @return Returns cash returned for this payment as a double
+     */
     public double getChange() {
         return this.cashPaid-(this.subtotal+this.tax-this.discountApplied);
+    }
+
+    /**
+     * Sets cash paid for this cash payment
+     * @param cashPaid Returns cash paid for this cash payment as a double
+     */
+    public void setCashPaid(double cashPaid) {
+        this.cashPaid = cashPaid;
     }
 
 }

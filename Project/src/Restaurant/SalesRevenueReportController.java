@@ -1,13 +1,25 @@
 package Restaurant;
 
+/**
+ * Used to control Sales Revenue Report operations
+ */
 public class SalesRevenueReportController {
+    /**
+     * Declaring a restaurant reference for use in the classes methods
+     */
     private Restaurant restaurant;
+
+    /**
+     * Constructor takes restaurant as an argument and assigns it to this class's restaurant reference
+     * @param restaurant Restaurant object to be added to this SalesRevenueReportController
+     */
     public SalesRevenueReportController(Restaurant restaurant){
         this.restaurant = restaurant;
     }
 
     /**
-     * method to be called in the main app for generating sales revenue reports
+     * Facilitates options for sales revenue report generation
+     * Sales reports generated can be either daily or by period
      */
     public void printSalesRevenueReport(){
         if(restaurant.getTransactionHistory().isEmpty()){
