@@ -496,9 +496,7 @@ public class Menu {
         }
     }
 
-
     public boolean updateMenuItem(int ID, int changeOption, boolean counts, boolean set) throws IOException {
-
         boolean updated = false;
         switch (changeOption) {
             case 1:
@@ -549,43 +547,42 @@ public class Menu {
         return updated;
     }
 
+    /**
+     * Checks that the name of a new menu/set package items exists already in the menu
+     * @param newName The user inputted name of the new menu item
+     * @return True if the name exists and false if not
+     */
     public boolean checkIfNameExists(String newName){
-        boolean exists = false;
         newName = newName.toLowerCase();
         for (int i = 0; i < this.getMainCourseItems().size(); i++){
             if (newName.equals(this.getMainCourseItems().get(i).getItemName().toLowerCase())){
-                exists = true;
-                return exists;
+                return true;
             }
         }
 
         for (int i = 0; i < this.getSideItems().size(); i++){
             if (newName.equals(this.getSideItems().get(i).getItemName().toLowerCase())){
-                exists = true;
-                return exists;
+                return true;
             }
         }
 
         for (int i = 0; i < this.getDrinkItems().size(); i++){
             if (newName.equals(this.getDrinkItems().get(i).getItemName().toLowerCase())){
-                exists = true;
-                return exists;
+                return true;
             }
         }
 
         for (int i = 0; i < this.getDessertItems().size(); i++){
             if (newName.equals(this.getDessertItems().get(i).getItemName().toLowerCase())){
-                exists = true;
-                return exists;
+                return true;
             }
         }
 
         for (int i = 0; i < this.getSetPackageItems().size(); i++){
             if (newName.equals(this.getSetPackageItems().get(i).getItemName().toLowerCase())){
-                exists = true;
-                return exists;
+                return true;
             }
         }
-        return exists;
+        return false;
     }
 }
