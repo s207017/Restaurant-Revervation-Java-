@@ -3,13 +3,23 @@ package Restaurant;
 import java.util.Scanner;
 
 public class Staff{
+    /**
+     * Integer attribute which is the staff ID number of a staff represented by an instance of this class
+     */
     private int staffID;
 
+    /**
+     * Constructor for staff class
+     * @param ID
+     */
     public Staff(int ID) {
         this.staffID = ID;
     }
 
-    // getter
+    /**
+     * gets staff ID
+      * @return staffID of the instance of the class
+     */
     public int getStaffID() {
         return staffID;
     }
