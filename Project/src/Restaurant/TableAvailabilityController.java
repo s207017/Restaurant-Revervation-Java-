@@ -7,27 +7,49 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * used to manage table availability related operations
+ */
 public class TableAvailabilityController {
+    /**
+     * declaring a Restaurant reference
+     */
     private Restaurant r;
 
 
     /**
-     * constructor
-     * @param r instantiates restaurant
+     * gets the Restaurant object from the UI and assigns it to the Restaurant reference in this class
+     * @param r Restaurant object
      */
     public TableAvailabilityController(Restaurant r){
         this.r = r;
     }
 
-    //print statement asking them if they got reserve
-    // if yes then call assignTable(true)
+    /**
+     * prints out the toString() method in Restaurant Class
+     * prints out all our tables and their current statuses with relevant information
+     */
+    public void checkTableAvailability(){
+        System.out.println(r);
+    }
 
+
+
+    /**
+     * input pax = 0, means there has not been a reservation
+     * while pax=any other number means there has been a prior reservation but due to circumstances the reserved table cannot be occupied
+     * checks through all tables to see if there's a table where tableStatus==FREE at the current date and time
+     * if table found, asks waiter to assign guests to the table, else restaurant is full print returned.
+     * @param pax number of quests to be seated
+     * @throws IOException
+     */
     public void assignTable(int pax) throws IOException {
         ArrayList<Table> availableTables;
         LocalDateTime localDateTime = LocalDateTime.now();
 
         if (pax==0){
-            pax = askForPax();
+            System.out.print("Enter the number of pax: ");
+            pax = GetInput.getIntFromRange(1,10);
         }
         
         //updates tables and reservations based on current time
@@ -77,10 +99,14 @@ public class TableAvailabilityController {
         }
     }
 
-    public void checkTableAvailability(){
-        System.out.println(r);
-    }
-
+    /**
+     * overrides previous assignTable(int)
+     * this is called when there has been a reservation
+     * checks through reservations to see if reservation is valid/not expired
+     * if reservation does not exist/has expired/guests are too early then assignTable(int) is called
+     * @param Reserved boolean value from UI that is not used
+     * @throws IOException
+     */
     public void assignTable(boolean Reserved) throws IOException {
         //updates tables and reservations based on current time
         for (Table t: r.getTableList()){
@@ -140,16 +166,5 @@ public class TableAvailabilityController {
             }
         }
 
-    }
-
-    /**
-     * asks for the number of guests
-     * @return returns number of people to be seated
-     */
-    public int askForPax(){
-        int pax;
-        System.out.print("Enter the number of pax: ");
-        pax = GetInput.getIntFromRange(1,10);
-        return pax;
     }
 }
