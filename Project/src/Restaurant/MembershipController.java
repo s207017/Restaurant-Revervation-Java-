@@ -23,6 +23,7 @@ public class MembershipController {
     /**
      * Asks for the phone number of customer and checks if customer is an existing member.
      * If customer is not an existing member, adds member to the list of members and updates members.txt file.
+     * If customer is an existing member, prints an error message.
      * @throws IOException
      */
     public void addMember() throws IOException {
@@ -43,6 +44,7 @@ public class MembershipController {
     /**
      * Asks for the phone number of customer and checks if customer is an existing member.
      * If customer is an existing member, removes member from the list of members and updates the member.txt file.
+     * If customer is not an existing member, prints an error message.
      * @throws IOException
      */
     public void removeMember() throws IOException {
