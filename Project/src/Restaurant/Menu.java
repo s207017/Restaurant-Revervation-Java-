@@ -395,42 +395,9 @@ public class Menu {
 
 
 
-//    public void updateMenuItem(int ID, int changeOption) throws IOException {
-//        switch (changeOption) {
-//            case 1:
-//                System.out.println("What is the new price?");
-//                double newPrice = GetInput.getDouble();
-//                getMenuItemFromID(ID).setPrice(newPrice);
-//                break;
-//            case 2:
-//                System.out.println("What is the new name?");
-//                String newName = GetInput.getString();
-//                while (this.checkIfNameExists(newName)){
-//                    System.out.println("The name already exists in the menu");
-//                    System.out.print("Please enter a new name: ");
-//                    newName = GetInput.getString();
-//                }
-//                getMenuItemFromID(ID).setItemName(newName);
-//                break;
-//            case 3:
-//                System.out.println("What is the new description?");
-//                String newDesc = GetInput.getString();
-//                getMenuItemFromID(ID).setDescription(newDesc);
-//                break;
-//            case 4:
-////                System.out.println("Exiting update of menu...");
-//                break;
-//            default:
-//                break;
-//        }
-//        updateMenuToFile(mainCourseItems,"maincourseitems");
-//        updateMenuToFile(sideItems,"sideitems");
-//        updateMenuToFile(drinkItems,"drinkitems");
-//        updateMenuToFile(dessertItems,"dessertitems");
-//        updateSetPackageFile();
-//    }
 
-    public boolean updateMenuItembool(int ID, int changeOption, boolean counts, boolean set) throws IOException {
+
+    public boolean updateMenuItem(int ID, int changeOption, boolean counts, boolean set) throws IOException {
         boolean updated = false;
         switch (changeOption) {
             case 1:
