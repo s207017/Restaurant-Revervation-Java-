@@ -18,6 +18,24 @@ public class Payment {
         this.paymentComplete = false;
     }
 
+    //getters
+    public double getSubTotal(){
+        return subtotal;
+    }
+    public double getDiscountApplied() {
+        return discountApplied;
+    }
+    public double getTax() {
+        return tax;
+    }
+    public ArrayList<Table> getTables() {
+        return tables;
+    }
+
+    /**
+     * calculates sub-total by iterating though the list of tables selected for payment and adding up the total price
+     * of each table's order and assigns it to the subtotal attribute.
+      */
     public void calculateSubTotal(){
         int sum = 0;
         for(int i = 0; i < tables.size();i++){
@@ -26,39 +44,38 @@ public class Payment {
         this.subtotal = sum;
     }
 
+    /**
+     * calculates GST and service charge (1.177%) of sub-total
+     */
     public void calculateTax(){
         this.tax = this.subtotal * 0.01177;
     }
 
-
-    public double getSubTotal(){
-        return subtotal;
-    }
-
-    public double getDiscountApplied() {
-        return discountApplied;
-    }
-
-    public double getTax() {
-        return tax;
-    }
-
+    /**
+     * calculates the membership discount (10% of sub-total and tax)
+     */
     public void applyDiscount(){
         this.discountApplied = 0.1 * this.subtotal + 0.1 * this.tax;
     }
 
+    /**
+     * adds table to the list of tables for payment.
+     * @param table which customer wishes to pay for (as some customers may want to pay for multiple tables at one go)
+     */
     public void addTable(Table table){
         this.tables.add(table);
     }
 
-    public ArrayList<Table> getTables() {
-        return tables;
-    }
-
+    // DO WE NEED THIS?
     public boolean checkPaymentComplete(){
         return this.paymentComplete;
     }
 
+    /**
+     *
+     * @param TransHist the list of daily transactions which is updated when payment is completed.
+     * @throws IOException
+     */
     public void pushItemsToHistory(ArrayList<TransHistDay> TransHist) throws IOException {
         if(TransHist.size()==0){//checking if list is empty
             TransHist.add(new TransHistDay(this.tables.get(0).getOrder().getDate()));
@@ -100,15 +117,20 @@ class CashPayment extends Payment {
     public CashPayment() {
         super();
     }
-
+    //setter
     public void setCashPaid(double cashPaid) {
         this.cashPaid = cashPaid;
     }
 
+    //getter
     public double getCashPaid() {
         return cashPaid;
     }
 
+    /**
+     * calculates the change to return to customers who opt for cash payment.
+     * @return change to be returned to customer.
+     */
     public double getChange() {
         return this.cashPaid-(this.subtotal+this.tax-this.discountApplied);
     }
