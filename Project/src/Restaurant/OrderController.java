@@ -4,19 +4,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Used to manage order operations.
+ */
 public class OrderController {
+    /**
+     * Declaring a menu reference.
+     */
     private Menu menu;
+    /**
+     * Declaring a restaurant reference/
+     */
     private Restaurant restaurant;
+
+    /**
+     * The Constructor for OrderController. Gets restaurant and menu objects from the UI and assigns it to the Restaurant and Menu reference in this class.
+     * @param menu The menu object.
+     * @param restaurant The restaurant object.
+     */
     public OrderController(Menu menu, Restaurant restaurant){
         this.menu = menu;
         this.restaurant = restaurant;
     }
-    //View order
-    public void viewOrder(){
-        System.out.print("Enter table number: ");
-        int TableNum = GetInput.getInt();
-    }
 
+    /**
+     * Help
+     */
     public void addItemsToOrder(){
         int TableNum;
         System.out.println(restaurant);
@@ -31,15 +44,6 @@ public class OrderController {
                 System.out.printf("*ENTER 9 TO EXIT\nNo one at the table. Enter table number again: ",restaurant.getTableList().size(),restaurant.getTableList().size()+1);
             }
         }while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED);
-//        int TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size());
-//        while(this.restaurant.getTableFromTableNum(TableNum).getTableStatus() != Table.Level.OCCUPIED) {
-//            System.out.printf("No one at the table! Enter again (%d to exit): ",restaurant.getTableList().size()+2);
-//            TableNum = GetInput.getIntFromRange(1,restaurant.getTableList().size()+2);
-//            if(TableNum == restaurant.getTableList().size()+2){
-//                System.out.println("Exiting order function");
-//                return;
-//            }
-//        }
         Order order= this.restaurant.getTableFromTableNum(TableNum).getOrder();
         if(order == null){
             order = new Order(1234,TableNum,menu);
@@ -146,12 +150,19 @@ public class OrderController {
 
     }
 
+    /**
+     * Prints the options to add items, remove items and return to main app.
+     */
     public void printAddRemove(){
         System.out.println("(1) Add item(s) to an existing order");
         System.out.println("(2) Remove item(s) from an existing order");
         System.out.println("(3) Return to main app");
     }
 
+    /**
+     * Asks for table number and if the table has an existing order, prints out the order.
+     * If there is no existing order, prints an error message.
+     */
     public void checkTableOrder(){
         System.out.println(restaurant);
         System.out.print("Enter table number: ");
