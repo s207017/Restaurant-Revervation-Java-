@@ -8,10 +8,24 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * This is an entity class.
+ * An instance of this class represents a single receipt.
+ */
 public class Receipt {
+    /**
+     * Declaring a payment reference.
+     */
     private Payment payment;
+    /**
+     * Arraylist of orders that are displayed on this receipt.
+     */
     private ArrayList<Order> orderList = new ArrayList<Order>();
 
+    /**
+     * The constructor for Receipt.
+     * @param payment The payment which details are displayed on this receipt.
+     */
     public Receipt(Payment payment){
         this.payment=payment;
         for (Table t: payment.getTables()){
@@ -19,6 +33,11 @@ public class Receipt {
         }
     }
 
+    /**
+     * Prints the following details of the payment: Date and time, Name and address of restaurant, Table number(s), Order ID(s), Staff ID,
+     * Details (quantity, name and price) of order items, Sub-total, Taxes, Discounts and Total price.
+     * @param staffID The staff ID of the staff who processed the payment detailed in this receipt.
+     */
     public void printReceipt(int staffID){
         SetPackage s;
         String orderIdList = ""; // to get the list of order ids to be printed later

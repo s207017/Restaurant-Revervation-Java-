@@ -1,18 +1,37 @@
 package Restaurant;
 import java.io.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.Set;
 
+/**
+ * A Menu object that contains all menu items/set packages
+ */
 public class Menu {
+    /**
+     * ArrayList that stores every main course item
+     */
     private ArrayList<MenuItem> mainCourseItems = new ArrayList<MenuItem>();
+    /**
+     * ArrayList that stores every side item
+     */
     private ArrayList<MenuItem> sideItems = new ArrayList<MenuItem>();
+    /**
+     * ArrayList that stores every drink item
+     */
     private ArrayList<MenuItem> drinkItems = new ArrayList<MenuItem>();
+    /**
+     * ArrayList that stores every dessert item
+     */
     private ArrayList<MenuItem> dessertItems = new ArrayList<MenuItem>();
+    /**
+     * ArrayList that stores every set package item
+     */
     private ArrayList<SetPackage> setPackageItems = new ArrayList<SetPackage>();
 
+    /**
+     * Menu constructor
+     * Reads in the menu items/set package from text files
+     * @throws IOException Thrown when reading/writing to text file, an I/O exception occurs
+     */
     public Menu() throws IOException {
         ArrayList<BufferedReader> listOfTextFiles = new ArrayList<BufferedReader>();
         BufferedReader maincourse_text = new BufferedReader(
@@ -91,9 +110,52 @@ public class Menu {
         }
     }
 
+    /**
+     * Getter for main course items
+     * @return All main course items (MenuItem type)
+     */
+    public ArrayList<MenuItem> getMainCourseItems() {
+        return mainCourseItems;
+    }
 
+    /**
+     * Getter for side items
+     * @return All side items (MenuItem type)
+     */
+    public ArrayList<MenuItem> getSideItems() {
+        return sideItems;
+    }
 
+    /**
+     * Getter for drink items
+     * @return All drink items (MenuItem type)
+     */
+    public ArrayList<MenuItem> getDrinkItems() {
+        return drinkItems;
+    }
 
+    /**
+     * Getter for dessert items
+     * @return All dessert items (MenuItem type)
+     */
+    public ArrayList<MenuItem> getDessertItems() {
+        return dessertItems;
+    }
+
+    /**
+     * Getter for set package items
+     * @return All set package items (SetPackage type)
+     */
+    public ArrayList<SetPackage> getSetPackageItems() {
+        return setPackageItems;
+    }
+
+    /**
+     * Updates menu items that were created/removed/updated to the respective menu item type text file
+     * @param menuItems Takes in the all menu items from the menu items array
+     * @param menuType Takes in the type of menu item to update
+     * @throws IOException Thrown when reading/writing to text file, an I/O exception occurs
+     */
     public void updateMenuToFile(ArrayList<MenuItem> menuItems, String menuType) throws IOException {
         BufferedWriter bw = new BufferedWriter(
                 new FileWriter("./textfiles/"+menuType+".txt", false)
@@ -105,6 +167,10 @@ public class Menu {
         bw.close();
     }
 
+    /**
+     * Updates set package items that were created/removed/updated to he set package text file
+     * @throws IOException Thrown when reading/writing to text file, an I/O exception occurs
+     */
     public void updateSetPackageFile() throws IOException {
         BufferedWriter bw = new BufferedWriter(
                 new FileWriter("./textfiles/setpackageitems.txt", false)
@@ -115,27 +181,9 @@ public class Menu {
         bw.close();
     }
 
-    public ArrayList<MenuItem> getMainCourseItems() {
-        return mainCourseItems;
-    }
-
-    public ArrayList<MenuItem> getDessertItems() {
-        return dessertItems;
-    }
-
-    public ArrayList<MenuItem> getDrinkItems() {
-        return drinkItems;
-    }
-
-    public ArrayList<MenuItem> getSideItems() {
-        return sideItems;
-    }
-
-    public ArrayList<SetPackage> getSetPackageItems() {
-        return setPackageItems;
-    }
-
-    //print functions!
+    /**
+     * Prints the entire restaurant's menu
+     */
     public void printMenu(){
         System.out.println("OOPsie Menu");
         System.out.println("=".repeat(132));
@@ -171,6 +219,10 @@ public class Menu {
         }
         System.out.println("-".repeat(132));
     }
+
+    /**
+     * Prints only items from the main course items arraylist
+     */
     public void printMainCourse(){
         System.out.println("-".repeat(132));
         System.out.println("Main Courses:");
@@ -180,6 +232,10 @@ public class Menu {
         }
         System.out.println("-".repeat(132));
     }
+
+    /**
+     * Prints only items from the side items arraylist
+     */
     public void printSide(){
         System.out.println("-".repeat(132));
         System.out.println("Sides:");
@@ -190,6 +246,10 @@ public class Menu {
         System.out.println("-".repeat(132));
 
     }
+
+    /**
+     * Prints only items from the drink items arraylist
+     */
     public void printDrink(){
         System.out.println("-".repeat(132));
         System.out.println("Drinks:");
@@ -199,6 +259,13 @@ public class Menu {
         }
         System.out.println("-".repeat(132));
     }
+
+    /**
+     * Prints only drinks less than or equal to the inputted price
+     * Called when customer orders a set package, and they are selecting the drink they want
+     * Each set package has a maximum drink price attribute that specifies which drinks can be ordered for that particular set package
+     * @param price The maximum drink price specified of each set package
+     */
     public void printDrinkLTEPrice(double price){
         System.out.println("-".repeat(132));
         System.out.println("Drinks:");
@@ -210,6 +277,10 @@ public class Menu {
         }
         System.out.println("-".repeat(132));
     }
+
+    /**
+     * Prints only items from the dessert items arraylist
+     */
     public void printDesert(){
         System.out.println("-".repeat(132));
         System.out.println("Deserts:");
@@ -219,6 +290,10 @@ public class Menu {
         }
         System.out.println("-".repeat(132));
     }
+
+    /**
+     * Prints only items from the set package items arraylist
+     */
     public void printSetPackage(){
         System.out.println("-".repeat(132));
         System.out.println("Set Packages:");
@@ -230,7 +305,16 @@ public class Menu {
         System.out.println("-".repeat(132));
     }
 
-    //for Order
+
+    /**
+     * Method to return the specific menu item (of MenuItem type) based on the inputted ID
+     * Index starting with 1 represents main course
+     * Index starting with 2 represents sides
+     * Index starting with 3 represents drinks
+     * Index starting with 4 represents dessert
+     * @param ID Identifies the menu item inputted
+     * @return The menu item (of MenuItem type) found from the particular inputted valid ID
+     */
     public MenuItem getMenuItemFromID(int ID){
         if (100<ID && ID<=100+ mainCourseItems.size()){
             for (MenuItem m: mainCourseItems){
@@ -260,9 +344,15 @@ public class Menu {
                 }
             }
         }
-        return null; //this would only happen if the ID is invalid, which it wont be because of the IDexists function
+        return null;
     }
 
+    /**
+     * Method to return the specific set package item (of SetPackage type) based on the inputted ID
+     * Index starting with 5 represents set package
+     * @param ID Identifies the set package item inputted
+     * @return The set package item (of SetPackage type) found from the particular inputted valid ID
+     */
     public SetPackage getSetPackageItemFromID(int ID){
         if (500<ID && ID<=500 + setPackageItems.size()){
             for (SetPackage m: setPackageItems){
@@ -274,18 +364,15 @@ public class Menu {
         return null; //not found
     }
 
-    public boolean IDExists(int ID){
-        if ((100<ID && ID<=100+ mainCourseItems.size()) ||
-                (200<ID && ID<=200+sideItems.size()) ||
-                (300<ID && ID<=300+ drinkItems.size()) ||
-                (400<ID && ID<=400+ dessertItems.size()) ||
-                (500<ID && ID<=500+ setPackageItems.size())){
-            return true;
-        }
-        else return false;
-    }
-
-
+    /**
+     * Creates a new menu item, and adds on to the respective menu item type arraylist
+     * Updates the respective text files accordingly
+     * @param name Name of the new menu item
+     * @param menuItemType Menu item type of the new menu item
+     * @param price Price of the new menu item
+     * @param description Description of the new menu item
+     * @throws IOException Thrown when reading/writing to text file, an I/O exception occurs
+     */
     public void createNewMenuItem(String name, int menuItemType, double price, String description) throws IOException {
         int ID = 0;
         switch (menuItemType){
@@ -327,8 +414,17 @@ public class Menu {
                 System.out.println("Wrong input into createNewMenuItem.");
         }
     }
-    
-    
+
+    /**
+     * Creates a new set package item, and adds on to the set package items arraylist
+     * Updates the set package text files accordingly
+     * @param name Name of the new set package item
+     * @param price Price of the new set package item
+     * @param description Description of the new set package item
+     * @param menuItems The menu items that the new set package consists of
+     * @param maxDrinkPrice Specifies the maximum drink price that is allowed to be ordered when ordering this new set package
+     * @throws IOException Thrown when reading/writing to text file, an I/O exception occurs
+     */
     public void createNewSetPackage(String name,double price, String description, ArrayList<MenuItem> menuItems, double maxDrinkPrice) throws IOException {
         int ID=0;
         for (SetPackage m: setPackageItems){
@@ -346,7 +442,14 @@ public class Menu {
         setPackageItems.add(newPackage);
         updateSetPackageFile();
     }
-    //updating of menuItems done directly in the application!
+
+    /**
+     * Removes the relevant menu item based on the ID
+     * Updates the relevant arraylist and text file accordingly
+     * @param menuItemType Specifies the menu item type of the menu item to be removed
+     * @param menuItemID Specifies the ID of the menu item to be removed
+     * @throws IOException Thrown when reading/writing to text file, an I/O exception occurs
+     */
     public void removeMenuItem(int menuItemType, int menuItemID) throws IOException {
         int toUpdateID;
         switch(menuItemType){
@@ -394,14 +497,12 @@ public class Menu {
     }
 
 
-
-
-
     public boolean updateMenuItem(int ID, int changeOption, boolean counts, boolean set) throws IOException {
+
         boolean updated = false;
         switch (changeOption) {
             case 1:
-                System.out.println("What is the new price?");
+                System.out.print("What is the new price?: ");
                 double newPrice = GetInput.getDouble();
                 if (set){
                     getSetPackageItemFromID(ID).setPrice(newPrice);
@@ -411,7 +512,7 @@ public class Menu {
                 updated = true;
                 break;
             case 2:
-                System.out.println("What is the new name?");
+                System.out.print ("What is the new name?: ");
                 String newName = GetInput.getString();
                 while (this.checkIfNameExists(newName)){
                     System.out.println("The name already exists in the menu");
@@ -426,7 +527,7 @@ public class Menu {
                 updated = true;
                 break;
             case 3:
-                System.out.println("What is the new description?");
+                System.out.println("What is the new description?:");
                 String newDesc = GetInput.getString();
                 if (set){
                     getSetPackageItemFromID(ID).setDescription(newDesc);
@@ -436,7 +537,6 @@ public class Menu {
                 updated = true;
                 break;
             case 4:
-//                System.out.println("Exiting update of menu...");
                 break;
             default:
                 break;

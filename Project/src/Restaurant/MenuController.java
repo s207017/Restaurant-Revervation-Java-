@@ -196,6 +196,7 @@ public class MenuController {
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1,4);
                 changed = menu.updateMenuItem(ID, changeOption, true, false);
+
                 if (changed){
                     System.out.println("Item updated!");
                 }
@@ -450,6 +451,7 @@ public class MenuController {
                 System.out.print("Enter your option: ");
                 changeOption = GetInput.getIntFromRange(1, 4);
                 changed = menu.updateMenuItem(menuItemID, changeOption, true, true);
+
                 if (changed) {
                     System.out.println("Set package updated!");
                 }
