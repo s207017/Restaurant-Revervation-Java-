@@ -31,7 +31,7 @@ public class MiscController {
         do {
             exists = false;
             System.out.print("Enter the 4 digit staff ID: ");
-            ID = GetInput.getIntFromRange(0000, 9999);
+            ID = GetInput.getIntFromRange(1000, 9999);
             for (int i = 0; i < r.getStaffList().size(); i++) {
                 if (ID == r.getStaffList().get(i).getStaffID()) {
                     exists = true;
