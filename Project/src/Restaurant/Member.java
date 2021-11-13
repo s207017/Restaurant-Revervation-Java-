@@ -20,7 +20,7 @@ public class Member {
     }
 
     /**
-     * Getter for phone number of this member.
+     * Gets the phone number of this member.
      * @return The phone number of this member.
      */
     public int getNumber() {
