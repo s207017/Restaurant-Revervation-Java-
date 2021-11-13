@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Used to manage menu related operations such as creating, removing or updating a menu item in the menu
+ */
 public class MenuController {
     /**
      * Declaring menu reference
