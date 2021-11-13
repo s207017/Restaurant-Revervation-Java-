@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 /**
- * An instance of this class represents the transaction history for one day
+ * An instance of this entity class represents the transaction history for one day
  */
 public class TransHistDay {
     /**
@@ -13,7 +13,7 @@ public class TransHistDay {
      */
     private LocalDateTime date;
     /**
-     * Arraylist to hold all records of transactions for the day in the form of TransHistItems
+     * Reference to an Arraylist to hold all records of transactions for the day in the form of TransHistItems
      */
     private ArrayList<TransHistItem> transList;
 
@@ -27,7 +27,7 @@ public class TransHistDay {
     }
 
     /**
-     * This method is used to get the date of this TransHistDay
+     * Gets the date of this TransHistDay
      * @return Returns the date of this TransHistDay
      */
     public LocalDateTime getDate(){
@@ -35,7 +35,7 @@ public class TransHistDay {
     }
 
     /**
-     * This method is used to get the list of transactions
+     * Gets the list of transactions
      * @return Returns the Arraylist of TransHistItems
      */
     public ArrayList<TransHistItem> getTransList(){
@@ -43,8 +43,8 @@ public class TransHistDay {
     }
 
     /**
-     *This method is used to find a specific item by matching item name and price
-     * The method returns the TransHistItem object if it finds it
+     * Finds a specific item by matching item name and price
+     * Returns the TransHistItem object if it finds it
      * If it does not, it returns null
      * @param name Name of item to be found in this TransHistDay
      * @param price Price of item to be found in this TransHistDay
@@ -60,8 +60,8 @@ public class TransHistDay {
     }
 
     /**
-     * This method is used to add items to this TransHistDay
-     * The method checks for the existence of the item, and adds to its quantity
+     * Adds items to this TransHistDay
+     * Checks for the existence of the item, and adds to its quantity
      * If the item does not exist in the day yet, the method will create a new TransHistItem to hold it
      * @param name Name of this item to be added to this TransHistDay
      * @param quantity Quantity of items to be added to this TransHistDay
