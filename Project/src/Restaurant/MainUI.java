@@ -13,6 +13,7 @@ public class MainUI {
         OrderController orderController = new OrderController(restaurant.getMenu(), restaurant);
         Membership membership = new Membership();
         MembershipController membershipController = new MembershipController(membership);
+        MiscController miscController = new MiscController(restaurant);
 
         //gets staffID from the staff using the UI
         Staff thisStaff;
@@ -166,6 +167,12 @@ public class MainUI {
                     salesRevenueReportController.printSalesRevenueReport();
                     break;
                 case 14:
+                    miscController.addTable();
+                    break;
+                case 15:
+                    miscController.addStaff();
+                    break;
+                case 16:
                     restaurant.writeReservationsToTextFile();
                     System.out.println("Thank you for your hard work!\nApp terminating...");
                     return;
@@ -192,7 +199,7 @@ public class MainUI {
         TimeUnit.SECONDS.sleep(2);
         printAppOptions();
         System.out.print("Enter option: ");
-        int option = GetInput.getIntFromRange(1,14);
+        int option = GetInput.getIntFromRange(1,16);
         System.out.println("");
         return option;
     }

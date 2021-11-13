@@ -118,6 +118,10 @@ public class Restaurant {
 
     public Menu getMenu(){return this.menu;}
 
+    public ArrayList<Staff> getStaffList(){
+        return staffList;
+    }
+
     public ArrayList<TransHistDay> getTransactionHistory(){
         return transactionHistory;
     }
