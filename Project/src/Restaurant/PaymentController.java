@@ -4,19 +4,43 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.DoubleToIntFunction;
 
+/**
+ * Used to manage payment operations.
+ */
 public class PaymentController {
+    /**
+     * Instantiates CashPayment object as null.
+     * Will be assigned a new CashPayment object when payment by cash is selected.
+     */
     private CashPayment payByCash = null;
+    /**
+     * Instantiates Payment object as null.
+     * Will be asssigned a new Payment object when payment type is selected.
+     */
     private Payment payment = null;
+    /**
+     * Declaring a Restaurant reference.
+     */
     private Restaurant r;
+    /**
+     * Declaring a Membership reference.
+     */
     private Membership m;
+    /**
+     * Declaring a TransHistDay Arraylist reference.
+     */
     private ArrayList<TransHistDay> transHistDayArrayList;
+    /**
+     * Declaring a Staff reference.
+     */
     private Staff s;
 
     /**
-     *
-     * @param r -> Restaurant which is inputted in main -> Gain access to table info
-     * @param m -> Membership which is inputted in main -> Gain access to members list to check for membership
-     * @param transHistDayArrayList -> transHistDayArrayList which is inputted in main -> to push all order items into the transaction history list
+     * The constructor for PaymentController. Gets Restaurant, Membership, TransHistDay Arraylist, Staff objects from UI
+     * and assigns it to Restaurant, Membership, TransHistDay Arraylist, Staff reference in this class.
+     * @param r -> Restaurant object -> Gain access to table info
+     * @param m -> Membership object -> Gain access to members list to check for membership
+     * @param transHistDayArrayList -> transHistDayArrayList object -> to push all order items into the transaction history list
      */
     public PaymentController(Restaurant r, Membership m, ArrayList<TransHistDay> transHistDayArrayList, Staff s) {
         this.r = r;
@@ -61,6 +85,11 @@ public class PaymentController {
         } while (true);
     }
 
+    /**
+     * Asks for table number to select Table object for payment. If the Table object is occupied and has an existing order,
+     * adds table to the list of tables for payment. This is done until user inputs -1.
+     * @return true if the list of tables for payment is empty after selection. Else, false.
+     */
     public boolean selectTable() {
         int choice;
         System.out.println(r);
@@ -88,12 +117,23 @@ public class PaymentController {
         return true;
     }
 
+    /**
+     * Calculates and prints the sub-total and taxes for payment.
+     */
     public void showAmount() {
         this.payment.calculateSubTotal();
         this.payment.calculateTax();
         System.out.printf("Sub-total: %.2f \nTax: %.2f \nTotal: %.2f \n",this.payment.getSubTotal(),this.payment.getTax(),(this.payment.getSubTotal() + this.payment.getTax()));
     }
 
+    /**
+     * Asks if customer is a member. If, checks if yes, checks if customer is really a member by inputting the customer's phone number.
+     * If customer is a member, applies discount.
+     * Else and if the customer says no (when asked if he/she is a member), asks if customer would like to be a member.
+     * If yes, adds customer as a member using phone number and applies discount.
+     * Else, there is no membership discount applied.
+     * @throws IOException
+     */
     public void checkMembership() throws IOException {
         int isMember = 0;
         int phoneNumber = -1;
@@ -137,6 +177,13 @@ public class PaymentController {
         }
     }
 
+    /**
+     * Asks if payment is received. If yes and payment is by cash, asks for cash received, print out the change and payment goes through.
+     * If yes and payment is by others, then payment goes through.
+     * If no, asks again and if no is received again, terminates payment.
+     * If payment is successful, pushes the order details to the daily transaction history.`
+     * @throws IOException
+     */
     public void makePayment() throws IOException {
         char selection;
         System.out.println();
@@ -170,6 +217,10 @@ public class PaymentController {
         addToHistory();
     }
 
+    /**
+     * Creates new receipt for the payment and prints the receipt.
+     * @param staffID
+     */
     public void generateReceipt(int staffID) {
         Receipt newReceipt = new Receipt(this.payment);
         System.out.println();
@@ -177,6 +228,10 @@ public class PaymentController {
         newReceipt.printReceipt(staffID);
     }
 
+    /**
+     * Adds order details to the daily transaction history.
+     * @throws IOException
+     */
     public void addToHistory() throws IOException {
         this.payment.pushItemsToHistory(transHistDayArrayList);
     }
