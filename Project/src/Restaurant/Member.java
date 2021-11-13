@@ -1,5 +1,9 @@
 package Restaurant;
 
+/**
+ * This is an entity class.
+ * An instance of this class represents a single memeber.
+ */
 public class Member {
     /**
      * This is an entity class.

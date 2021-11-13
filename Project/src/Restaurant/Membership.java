@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Membership {
     /**
-     * The list of members of the restaurant.
+     * Arraylist of members of the restaurant.
      */
     ArrayList<Member> membersList = new ArrayList<Member>();
 
@@ -35,7 +35,7 @@ public class Membership {
 
     /**
      * Getter for membersList of this membership.
-     * @return
+     * @return Arraylist of members in this membership.
      */
     public ArrayList<Member> getMembersList() {
         return membersList;
@@ -53,7 +53,7 @@ public class Membership {
     /**
      * Checks if a person is a member in the list of members in this membership using phone number.
      * @param number The phone number of a person.
-     * @return The index of the member in the list of members if the member exists. Else, 0.
+     * @return The index of the member in the list of members if the member exists. 0 if member is not in list of members.
      */
     public int checkMembership(int number){
         int count = 0;
