@@ -1,48 +1,64 @@
 package Restaurant;
 
 public class OrderItem {
+    /**
+     * Declaring a reference of MenuItem class
+     */
     private MenuItem item;
+    /**
+     * Declaring an integer for quantity ordered
+     */
     private int quantityOrdered;
+    /**
+     * Declaring an integer for quantity of completed order
+     */
     private int quantityCompleted;
 
-    //constructor. assigns item to item and quantityOrdered to quantityOrdered
+    /**
+     * Constructor. assigns item to item and quantityOrdered to quantityOrdered
+     */
     public OrderItem(MenuItem item, int quantityOrdered) {
         this.item = item;
         this.quantityOrdered = quantityOrdered;
         this.quantityCompleted = 0;
     }
 
-
+    /**
+     * Getter
+     * @return item object stored in this class
+     */
     public MenuItem getItem() {
         return item;
     }
 
+    /**
+     * Getter
+     * @return integer quantityOrdered stored in this class
+     */
     public int getQuantityOrdered(){
         return quantityOrdered;
     }
 
+    /**
+     * Getter
+     * @return  integer quantityCompleted stored in this class
+     */
     public int getQuantityCompleted() {
         return quantityCompleted;
     }
-    public int orderCompleted(){
-        if (quantityOrdered-quantityCompleted==0){
-            return 1;
-        }
-        else return 0;
-        //returns 1 when all orders are completed
-        //returns 0 when orders are not completed
-    }
 
-    //adds quantity of orders added to quantityOrdered
+
+    /**
+    *   Adds quantity of orders added to quantityOrdered
+     * */
     public void addQuantityOrdered(int qty){
         this.quantityOrdered=this.quantityOrdered+qty;
     }
 
-    //subtracts quantity of orders for this order item
+    /**
+     *  subtracts quantity of orders for this order item
+     */
     public void subtractQuantityOrdered(int qty) {this.quantityOrdered = this.quantityOrdered - qty;}
 
-    //adds quantity of orders completed to quantityCompleted
-    public void setQuantityCompleted(int qty){
-        this.quantityCompleted += qty;
-    }
+    
 }
