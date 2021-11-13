@@ -39,7 +39,7 @@ public class MenuItem {
     }
 
     /**
-     * Getter for the price of this menu item.
+     * Gets the price of this menu item.
      * @return The price of this menu item.
      */
     public double getPrice() {
@@ -47,7 +47,7 @@ public class MenuItem {
     }
 
     /**
-     * Getter for the name of this menu item.
+     * Gets the name of this menu item.
      * @return The name of this menu item.
      */
     public String getItemName() {
@@ -55,7 +55,7 @@ public class MenuItem {
     }
 
     /**
-     * Getter for the item ID of this menu item.
+     * Gets the item ID of this menu item.
      * @return The item ID of this menu item.
      */
     public int getItemID() {
@@ -63,7 +63,7 @@ public class MenuItem {
     }
 
     /**
-     * Getter for the description of this menu item.
+     * Gets the description of this menu item.
      * @return The description of this menu item.
      */
     public String getDescription() {
@@ -144,7 +144,7 @@ class SetPackage extends MenuItem {
     }
 
     /**
-     * Getter for the list of menu items that are part of this set package.
+     * Gets the list of menu items that are part of this set package.
      * @return Arraylist of menu items that are part of this set package.
      */
     public ArrayList<MenuItem> getSetItems(){
@@ -152,7 +152,7 @@ class SetPackage extends MenuItem {
     }
 
     /**
-     * Getter for the maximum price of the drinks offered for this set package.
+     * Gets the maximum price of the drinks offered for this set package.
      * @return The maximum price of the drinks offered for this set package.
      */
     public double getMaxDrinkPrice() {

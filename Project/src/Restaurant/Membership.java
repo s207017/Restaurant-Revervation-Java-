@@ -34,7 +34,7 @@ public class Membership {
     }
 
     /**
-     * Getter for membersList of this membership.
+     * Gets the membersList of this membership.
      * @return Arraylist of members in this membership.
      */
     public ArrayList<Member> getMembersList() {
