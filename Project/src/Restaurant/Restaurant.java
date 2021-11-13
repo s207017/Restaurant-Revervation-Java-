@@ -10,12 +10,37 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * this is an entity class
+ * throughout the duration of application runtime, only one instance of this class is created
+ * stores main information about the restaurant
+ */
 public class Restaurant {
+    /**
+     * an arrayList of Table objects keeping track of the tables in the restaurant
+     */
     private ArrayList<Table> tableList = new ArrayList<Table>();
+
+    /**
+     * an arrayList of TransHistDay objects keeping track of the revenue of restaurant
+     */
     private ArrayList<TransHistDay> transactionHistory = new ArrayList<TransHistDay>();
+    /**
+     * an arraylist of Staff objects keeping track of the staff employed to the restaurant
+     */
     private ArrayList<Staff> staffList = new ArrayList<Staff>();
+
+    /**
+     * creates new object Menu
+     */
     private Menu menu = new Menu();
 
+    /**
+     * constructor for restaurant
+     * reads the text files "tables.txt", "staff.txt", "transhistday.txt" and "reservationsrecords.txt"
+     * based on the information in the textfiles, objects are created and arraylists are updated.
+     * @throws IOException
+     */
     public Restaurant() throws IOException {
         BufferedReader tablesText = new BufferedReader(
                 new FileReader("./textfiles/tables.txt")
@@ -117,20 +142,70 @@ public class Restaurant {
         reservationsText.close();
     }
 
+    /**
+     *
+     * @return the menu instantiated in this class
+     */
     public Menu getMenu(){return this.menu;}
 
+    /**
+     *
+     * @return the transactionHistory arraylist
+     */
     public ArrayList<TransHistDay> getTransactionHistory(){
         return transactionHistory;
     }
 
-    //setters
-
-    //getters
+    /**
+     *
+     * @return the tableList arrayList of Tables
+     */
     public ArrayList<Table> getTableList() {
         return tableList;
     }
 
-    //when restaurant buys new table and wants to add them
+    /**
+     * waiter just needs to key in the table number, and we return the Table object after searching throught
+     * the tableList arraylist of Tables for other Table related information
+     * @param tableNum number of the table
+     * @return the Table object from the tableNum
+     */
+    public Table getTableFromTableNum(int tableNum){
+        for (Table t: tableList){
+            if (t.getTableNum()==tableNum){
+                return t;
+            }
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @return arraylist getStaffList of Staff
+     */
+    public ArrayList<Staff> getStaffList(){
+        return this.staffList;
+    }
+
+    /**
+     * waiter just needs to key in staffId, the information required can be accessed through the returned Staff object
+     * @param ID ID of the staff
+     * @return Staff Object with staffId = ID
+     */
+    public Staff getStaffFromID(int ID){
+        for(Staff s: staffList){
+            if(ID == s.getStaffID()){
+                return s;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * when restaurant wants to buy new table and add it implement this
+     * @param tableCapacity capacity of the new table
+     * @throws IOException
+     */
     public void addTable(int tableCapacity) throws IOException {
         tableList.add(new Table(tableList.size()+1,tableCapacity));
         BufferedWriter bw = new BufferedWriter(
@@ -147,7 +222,31 @@ public class Restaurant {
         bw2.close();
     }
 
+    /**
+     * adds new staff member
+     * @param ID ID of staff to be added
+     * @throws IOException
+     */
+    public void addStaff(int ID) throws IOException {
+        this.staffList.add(new Staff(ID));
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("./textfiles/staff.txt", false)
+        );
+
+        for (Staff staff: staffList){
+            bw.write(staff.getStaffID()+"\n");
+        }
+        bw.close();
+    }
+
+    /**
+     * writes the updated reservations (where outdated ones are removed and future ones are added) into text file
+     * @throws IOException
+     */
     public void writeReservationsToTextFile() throws IOException {
+        for (Table t: tableList){
+            t.updateReservationsAccordingToCurrentTime();
+        }
         BufferedWriter bw = new BufferedWriter(
                 new FileWriter("./textfiles/reservationsrecords.txt", false)
         );
@@ -190,7 +289,6 @@ public class Restaurant {
      * @param currentDateTime gets the current dateTime from the main()
      * @return returns an arraylist of Table objects that have status=FREE
      */
-    //use arrayList.isEmpty() to find out if the array returned has any tables at all.
     public ArrayList<Table> getAvailableTables(int pax, LocalDateTime currentDateTime) throws IOException {
         ArrayList<Table> availableTables= new ArrayList<Table>();
         for (Table t: tableList){
@@ -205,7 +303,12 @@ public class Restaurant {
         return availableTables;
     }
 
-
+    /**
+     *
+     * @param removeDateTime
+     * @param tel
+     * @return
+     */
     public Table removeReservation(LocalDateTime removeDateTime, int tel){
         for (Table t : tableList) {
             Iterator<Map.Entry<LocalDateTime, Reservation>>
@@ -224,6 +327,13 @@ public class Restaurant {
         return null;
     }
 
+    /**
+     * returns Table object if reservation found according to the dateTimeToCheck and tel
+     * else returns null
+     * @param dateTimeToCheck reservation timing
+     * @param tel reservation telephone number
+     * @return
+     */
     public Table getTableFromReservationHashMap(LocalDateTime dateTimeToCheck, int tel){
         for (Table t : tableList){
             if (t.getReservations().containsKey(dateTimeToCheck) &&
@@ -236,7 +346,7 @@ public class Restaurant {
 
 
     /**
-     * @return returns string that contains each table and its respective status and capacity
+     * @return string that contains each table and its respective status and capacity
      * as well as the total number of free, occupied and reserved tables.
      */
     public String toString(){
@@ -270,38 +380,6 @@ public class Restaurant {
 
     }
 
-    public Table getTableFromTableNum(int tableNum){
-        for (Table t: tableList){
-            if (t.getTableNum()==tableNum){
-                return t;
-            }
-        }
-        return null;
-    }
 
-    public void addStaff(int ID) throws IOException {
-        this.staffList.add(new Staff(ID));
-        BufferedWriter bw = new BufferedWriter(
-                new FileWriter("./textfiles/staff.txt", false)
-        );
-
-        for (Staff staff: staffList){
-            bw.write(staff.getStaffID()+"\n");
-        }
-        bw.close();
-    }
-
-    public ArrayList<Staff> getStaffList(){
-        return this.staffList;
-    }
-
-    public Staff getStaffFromID(int ID){
-        for(Staff s: staffList){
-            if(ID == s.getStaffID()){
-                return s;
-            }
-        }
-        return null;
-    }
 }
 
