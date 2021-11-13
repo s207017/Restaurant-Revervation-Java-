@@ -1,6 +1,7 @@
 package Restaurant;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -288,6 +289,10 @@ public class Restaurant {
             bw.write(staff.getStaffID()+"\n");
         }
         bw.close();
+    }
+
+    public ArrayList<Staff> getStaffList(){
+        return this.staffList;
     }
 
     public Staff getStaffFromID(int ID){
