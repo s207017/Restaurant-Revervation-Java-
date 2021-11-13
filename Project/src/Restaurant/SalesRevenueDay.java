@@ -37,8 +37,8 @@ public class SalesRevenueDay {
      * Creates report for the period
      * @param transHistAll ArrayList of TransHistDay that this sales report will subset based on its date
      */
-    public void createReport(ArrayList<TransHistDay> transHistAll){
-        this.date = GetPeriod.getDate();
+    public void createReport(ArrayList<TransHistDay> transHistAll,LocalDateTime date){
+        this.date = date;
         for(TransHistDay x: transHistAll){//Find specific date
             if(x.getDate().truncatedTo(ChronoUnit.DAYS).isEqual(date.truncatedTo(ChronoUnit.DAYS))) { //truncate time component of LocalDateTime
                 transHist.add(x); // Add the matching entry to the local arraylist of days of transhist
@@ -131,17 +131,19 @@ class SalesRevenuePeriod extends SalesRevenueDay{
      * Add all dates to the local transHist
      * @param transHistAll ArrayList of TransHistDay that this sales report will subset based on its date
      */
-    public void createReport(ArrayList<TransHistDay> transHistAll){
-        do{
-            System.out.println("-ENTERING START DATE OF REPORT-");
-            this.date = GetPeriod.getDate();
-            System.out.println("-ENTERING END DATE OF REPORT-");
-            this.endDate = GetPeriod.getDate();
-            if (endDate.isBefore(date)) {
-                System.out.printf("End date (%s) is before start date (%s), please try again\n", endDate, date);
-            }
-        }while(endDate.isBefore(date) && endDate.isEqual(date));
+    public void createReport(ArrayList<TransHistDay> transHistAll,LocalDateTime startDate,LocalDateTime endDate){
+//        do{
+//            System.out.println("-ENTERING START DATE OF REPORT-");
+//            this.date = GetPeriod.getDate();
+//            System.out.println("-ENTERING END DATE OF REPORT-");
+//            this.endDate = GetPeriod.getDate();
+//            if (endDate.isBefore(date)) {
+//                System.out.printf("End date (%s) is before start date (%s), please try again\n", endDate, date);
+//            }
+//        }while(endDate.isBefore(date) && endDate.isEqual(date));
         //add to transHist
+        this.date = startDate;
+        this.endDate = endDate;
         for(TransHistDay x: transHistAll){//Narrow down to intended dates
             if((date.isBefore(x.getDate()) && endDate.isAfter(x.getDate()))
                     || date.isEqual(x.getDate())
