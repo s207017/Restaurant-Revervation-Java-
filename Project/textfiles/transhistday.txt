@@ -1,62 +1,147 @@
 new-record
 2021-10-10T18:18:29.111941800
-pizza
-1
-10.0
-pasta
-5
-60.0
-popcorn
-2
-10.0
+Gardein Fish & Chips
+8
+16.00
+Meatless Meatballs Arabiatta
+10
+14.0
+Sweet Potato Fries
+15
+6.0
 new-record
 2021-11-10T18:18:29.111941800
-pizza
-9
-10.0
-pasta
+Gardein Fish & Chips
+8
+16.00
+Meatless Meatballs Arabiatta
 10
-12.0
-popcorn
+14.0
+Sweet Potato Fries
 2
-1.0
+6.0
+Ratatouille Soup
+12
+8.0
+Matcha latte
+20
+5.0
+Meat-lovers' paradise
+5
+24.00
+Ice cream
+20
+4.50
 new-record
 2021-11-11T21:06:51.402029900
 Gardein Crab Cake
-3
+8
 10.0
-Happy Meal
-2
+Ratatouille Soup
+15
+8.0
+Omni Kimchi Fried Rice
+12
+16.0
+Meatless Meatballs
+8
 10.0
-Happy Meal
-5
-10.0
-Sad Meal
-1
-2.0
-Happy Meal
-2
-10.0
-Sad Meal
-2
-2.0
-Happy Meal
-1
-10.0
-Sad Meal
-3
-2.0
-Happy Meal
-4
-10.0
+White Choco Frappe
+20
+7.0
+Chocolate lava cake
+15
+8.0
+Sticky Date Pudding
+12
+9.0
+Vegetarian's heaven
+8
+22.50
 new-record
 2021-11-12T14:25:34.149436100
-Happy Meal
-3
+Gardein Crab Cake
+8
 10.0
+Ratatouille Soup
+15
+8.0
+Omni Kimchi Fried Rice
+12
+16.0
+Meatless Meatballs
+8
+10.0
+White Choco Frappe
+20
+7.0
+Chocolate lava cake
+15
+8.0
 new-record
 2021-11-13T01:58:39.325496800
-Sad Meal
-1
-2.0
+Gardein Fish & Chips
+8
+16.00
+Meatless Meatballs Arabiatta
+10
+14.0
+Sweet Potato Fries
+15
+6.0
+new-record
+2021-12-23T14:25:34.149436100
+CHRISTMAS OFFER: Potatoes
+30
+7.0
+CHRISTMAS OFFER: Tree Cheese
+20
+8.0
+Unicorn Milkshake
+10
+10.0
+Gardein Crab Cake
+8
+10.0
+Ratatouille Soup
+15
+8.0
+Omni Kimchi Fried Rice
+12
+16.0
+Meatless Meatballs
+8
+10.0
+White Choco Frappe
+20
+7.0
+Chocolate lava cake
+15
+8.0
+Sticky Date Pudding
+12
+9.0
+new-record
+2021-12-24T21:06:51.402029900
+CHRISTMAS OFFER: Potatoes
+30
+7.0
+CHRISTMAS OFFER: Tree Cheese
+20
+8.0
+Meatless Meatballs
+8
+10.0
+White Choco Frappe
+20
+7.0
+Chocolate lava cake
+15
+8.0
+Sticky Date Pudding
+12
+9.0
+Vegetarian's heaven
+8
+22.50
 last-record
