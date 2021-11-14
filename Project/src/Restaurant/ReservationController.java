@@ -113,6 +113,7 @@ public class ReservationController {
                 System.out.print(t.getReservations().get(reservationDateTime).toString());
                 //System.out.print("Table number booked: %d\n",); print the table booked?
                 System.out.println("-".repeat(40));
+                r.writeReservationsToTextFile();
                 break;
             }
         }
@@ -244,7 +245,7 @@ public class ReservationController {
 
     }
 
-    public void removeReservationBooking() throws InterruptedException {
+    public void removeReservationBooking() throws InterruptedException, IOException {
         //this is the check to ensure there are any reservations to begin with
         int count=0;
         for (Table t: r.getTableList()){
