@@ -367,7 +367,7 @@ public class MenuController {
                     "$ " + String.format("%,.2f", tempTotalPrice));
             do {
                 System.out.print("Enter the discount rate: ");
-                discountRate = GetInput.getDouble();   //TO BE MODIFIED TO GETDOUBLE(0,100)
+                discountRate = GetInput.getDoubleFromRange(0,100);
                 finalPrice = tempTotalPrice * ((100 - discountRate) / 100);
                 System.out.println("The new price is: " + String.format("%,.2f", finalPrice));
                 System.out.println("Would you like to proceed with this pricing? Y/N ");

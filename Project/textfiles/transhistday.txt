@@ -59,4 +59,12 @@ new-record
 Sad Meal
 1
 2.0
+new-record
+2021-11-14T22:58:19.008185500
+Rainbowl
+1
+17.0
+Vegetarian's heaven
+1
+22.5
 last-record
