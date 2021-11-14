@@ -58,7 +58,7 @@ public class MembershipController {
             memberShip.updateMembershipText();
             System.out.println("Member removed!");
         } else {
-            System.out.println("No member record found. Cannot be added");
+            System.out.println("No member record found. Cannot be removed");
         }
     }
 }

@@ -1,28 +1,36 @@
 Rainbowl
 101
-17
+17.0
 Cherry tomatoes, kidney beans, corn kernels, quinoa, avocado, kale, blueberries
 Omni Kimchi Fried Rice
 102
-16
+16.0
 OmniMeat luncheon, kimchi, egg, nori, sesame seeds
 Gardein Fish & Chips
 103
-16
+16.0
 Bardein fishless fillet, smashed peas, fries and homemade tartar sauce
 Rendang Burger
 104
-15
+15.0
 Moving mountain patty, rendang sauce, quinoa, lettuce
 Omni Luncheon Aglio Olio
 105
-14
+14.0
 OmniMeat luncheon, Bird's Eye Chili, garlic, italian parsley
 Meatless Meatballs Arabiatta
 106
-14
+14.0
 OmniMeat and Beyond meat meatballs, spicy tomato sauce, italian parsley
-Vege Lovers Pizza
+CHRISTMAS SPECIAL: Mystery Pizza
 107
-13
-Grilled zucchini, eggplant, bell pepper, balsamic glazed cherry tomatoes, Daiya mozzarella cheese, tomato sauce
+23.0
+Order it to find out more!
+CHRISTMAS SPECIAL: Baked Ham With Brown Sugar Glaze
+108
+20.0
+This is the only Christmas gift you even need
+CHRISTMAS SPECIAL: Perfect Prime Rib
+109
+23.0
+An absolute staple at any holiday table

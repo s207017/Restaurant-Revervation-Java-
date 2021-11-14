@@ -31,7 +31,7 @@ title __RESTAURANT's Class Diagram__\n
   
 
   namespace Restaurant {
-    class Restaurant.GetPeriod {
+    abstract class Restaurant.GetPeriod {
         {static} - datesInMonth : int[]
         {static} - datesInMonthLeap : int[]
         {static} + getDate()
@@ -44,7 +44,7 @@ title __RESTAURANT's Class Diagram__\n
     class Restaurant.MainUI {
         {static} + getOption()
         {static} + main()
-        {static} + pressAnyKeyToContinue()
+        {static} + pressEnterToContinue()
         {static} + printAppOptions()
     }
   }
@@ -87,7 +87,6 @@ title __RESTAURANT's Class Diagram__\n
         - mainCourseItems : ArrayList<MenuItem>
         - setPackageItems : ArrayList<SetPackage>
         - sideItems : ArrayList<MenuItem>
-        + IDExists()
         + Menu()
         + checkIfNameExists()
         + createNewMenuItem()
@@ -107,7 +106,7 @@ title __RESTAURANT's Class Diagram__\n
         + printSetPackage()
         + printSide()
         + removeMenuItem()
-        + updateMenuItembool()
+        + updateMenuItem()
         + updateMenuToFile()
         + updateSetPackageFile()
     }
@@ -120,11 +119,10 @@ title __RESTAURANT's Class Diagram__\n
         + createNewMenuItemUI()
         + createSetPackageUI()
         + printChangeTypes()
-        + printExistingMenu()
+        + printMenu()
         + printMenuTypes()
         + printOptionsMenuItems()
         + printOptionsSetPackages()
-        + printUpdatedMenu()
         + removeMenuItemUI()
         + removeSetPackageUI()
         + updateMenuItemUI()
@@ -148,6 +146,15 @@ title __RESTAURANT's Class Diagram__\n
         + setItemID()
         + setItemName()
         + setPrice()
+    }
+  }
+  
+
+  namespace Restaurant {
+    class Restaurant.MiscController {
+        + MiscController()
+        + addStaff()
+        + addTable()
     }
   }
   
@@ -186,7 +193,6 @@ title __RESTAURANT's Class Diagram__\n
         + checkTableOrder()
         + printAddRemove()
         + removeItemsFromOrder()
-        + viewOrder()
     }
   }
   
@@ -200,8 +206,6 @@ title __RESTAURANT's Class Diagram__\n
         + getItem()
         + getQuantityCompleted()
         + getQuantityOrdered()
-        + orderCompleted()
-        + setQuantityCompleted()
         + subtractQuantityOrdered()
     }
   }
@@ -292,6 +296,7 @@ title __RESTAURANT's Class Diagram__\n
         + getAvailableTables()
         + getMenu()
         + getStaffFromID()
+        + getStaffList()
         + getTableFromReservationHashMap()
         + getTableFromTableNum()
         + getTableList()
@@ -305,12 +310,12 @@ title __RESTAURANT's Class Diagram__\n
   
 
   namespace Restaurant {
-    class Restaurant.SalesRevenueReport {
-        - endDate : LocalDateTime
-        - startDate : LocalDateTime
-        - summaryList : ArrayList<TransHistItem>
-        - transHist : ArrayList<TransHistDay>
-        + SalesRevenueReport()
+    class Restaurant.SalesRevenueDay {
+        # date : LocalDateTime
+        # summaryList : ArrayList<TransHistItem>
+        # transHist : ArrayList<TransHistDay>
+        + SalesRevenueDay()
+        + createReport()
         + generateReport()
         + itemExists()
         + printReport()
@@ -319,10 +324,18 @@ title __RESTAURANT's Class Diagram__\n
   
 
   namespace Restaurant {
+    class Restaurant.SalesRevenuePeriod {
+        - endDate : LocalDateTime
+        + SalesRevenuePeriod()
+        + createReport()
+        + printReport()
+    }
+  }
+  
+
+  namespace Restaurant {
     class Restaurant.SalesRevenueReportController {
         + SalesRevenueReportController()
-        + createDaySalesReport()
-        + createPeriodSalesReport()
         + printSalesRevenueReport()
     }
   }
@@ -396,7 +409,6 @@ title __RESTAURANT's Class Diagram__\n
   namespace Restaurant {
     class Restaurant.TableAvailabilityController {
         + TableAvailabilityController()
-        + askForPax()
         + assignTable()
         + assignTable()
         + checkTableAvailability()
@@ -436,6 +448,7 @@ title __RESTAURANT's Class Diagram__\n
   Restaurant.CashPayment -up-|> Restaurant.Payment
   Restaurant.MembershipController o-- Restaurant.Membership : memberShip
   Restaurant.MenuController o-- Restaurant.Menu : menu
+  Restaurant.MiscController o-- Restaurant.Restaurant : r
   Restaurant.OrderController o-- Restaurant.Menu : menu
   Restaurant.OrderController o-- Restaurant.Restaurant : restaurant
   Restaurant.OrderItem o-- Restaurant.MenuItem : item
@@ -447,6 +460,7 @@ title __RESTAURANT's Class Diagram__\n
   Restaurant.Receipt o-- Restaurant.Payment : payment
   Restaurant.ReservationController o-- Restaurant.Restaurant : r
   Restaurant.Restaurant o-- Restaurant.Menu : menu
+  Restaurant.SalesRevenuePeriod -up-|> Restaurant.SalesRevenueDay
   Restaurant.SalesRevenueReportController o-- Restaurant.Restaurant : restaurant
   Restaurant.SetPackage -up-|> Restaurant.MenuItem
   Restaurant.Table o-- Restaurant.Order : order
