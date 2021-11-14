@@ -1,28 +1,21 @@
-Happy Meal
+Meat-lovers' paradise
 501
-10.0
-Puts a smile on your face
-101
-201
-3.0
-Sad Meal
+24.0
+Comes with a savoury beef burger, and a meat ball side
+104
+203
+5.0
+Vegetarian's heaven
 502
-2.0
-Saddie
-102
-202
-10.0
-PPPP
-503
-24.75
-test
-103
-204
-1.5
-newtest
-504
-42.300000000000004
-es
+22.5
+A set for vegetarians
 101
-201
-20.0
+202
+7.0
+CHRISTMAS SPECIAL
+503
+30.0
+CHRISTMAS SPECIAL package meal
+109
+205
+10.0
