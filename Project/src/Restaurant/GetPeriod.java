@@ -9,7 +9,7 @@ import java.util.Scanner;
  * abstract class
  * contains static methods to get specific inputs from the customer
  */
-public abstract class GetPeriod {
+public class GetPeriod {
     /**
      * array of 31 days for leap years
      */

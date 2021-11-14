@@ -309,7 +309,7 @@ public class Restaurant {
      * @param tel
      * @return
      */
-    public Table removeReservation(LocalDateTime removeDateTime, int tel){
+    public Table removeReservation(LocalDateTime removeDateTime, int tel) throws IOException {
         for (Table t : tableList) {
             Iterator<Map.Entry<LocalDateTime, Reservation>>
                     iterator = t.getReservations().entrySet().iterator();
@@ -319,6 +319,7 @@ public class Restaurant {
                 if (removeDateTime.isEqual(entry.getKey()) &&
                         entry.getValue().getTel() == (tel)) {
                     iterator.remove();
+                    writeReservationsToTextFile();
                     return t;
                 }
             }
